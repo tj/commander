@@ -110,25 +110,20 @@ module Commander
 		    @user_command.options.each { |option| parser.on(*option) } 
 		    parser.parse! @user_args
 		  rescue => e
-		    abort e
+		    debug_abort e, e
 	    end
 		end
 		
 		def default_options(parser)
 		  parser.on('--help', 'View this help documentation.') { puts "TODO --help" }
-		  parser.on('--trace', 'View exceptions and tracing information.') { @options[:trace] = true }
 		end
 		
 		def exec_command
-		  
+		  @user_command.invoke :when_called_handler, @user_args
 		end
 		
 		def debug_abort(msg, exception = nil)
-		  p @options[:trace]
-		  case @options[:trace]
-	      when true then abort "#{msg}\n\nError: #{exception}\n\nTrace:#{trace}"
-        else abort msg
-      end
+		  abort msg
 		end
 		
 		def valid_version(version)

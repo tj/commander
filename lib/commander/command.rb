@@ -2,7 +2,8 @@
 module Commander
 	class Command 
 		
-		attr_reader :description, :syntax, :examples, :options, :command, :when_called
+		attr_reader :description, :syntax, :examples, :options, :command
+		attr_reader :when_called_handler
 		
 		def initialize(command)
 			@command, @options, @examples = command, [], []
@@ -25,8 +26,11 @@ module Commander
 		end
 		
 		def when_called(&block)
-		  @when_called = block
+		  @when_called_handler = block
 		end
-		alias :when_invoked :when_called
+		
+		def invoke(proc_sym, *args)
+		  self.send(proc_sym).call *args
+		end
 	end
 end
