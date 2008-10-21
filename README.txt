@@ -22,6 +22,8 @@
 == TODO:
 
   * abstract files
+  * determine command name from $0 ??
+  * why do rubygems usually have gem/version.rb etc? understand conventions
   * Use own option parser... or extend OptionParser
   * OpenStruct so that c.options can be stored for .when_called
   * default options --help, --version, --debug, --trace, etc
