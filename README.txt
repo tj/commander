@@ -1,26 +1,38 @@
 = commander
-
-* FIX (url)
+ 
+  Open source sub-command framework.
 
 == DESCRIPTION:
 
-FIX (describe your package)
+  Commander is a small framework for creating a sub-command utility. 
+  For example a sub command would be 'git add' or 'git rm', where 'add' and
+  'rm' are sub commands.
 
-== FEATURES/PROBLEMS:
+== FEATURES:
 
-* FIX (list of features or problems)
+  * Sub commands
+  * Auto-generated help documentation
+  * Simple syntax and implementation
+  * Extensible help generators
 
-== SYNOPSIS:
+== KNOWN ISSUES:
+  
+  * none
 
-  FIX (code sample of usage)
+== TODO:
 
-== REQUIREMENTS:
+  * abstract files
+  * Use own option parser... or extend OptionParser
+  * OpenStruct so that c.options can be stored for .when_called
+  * default options --help, --version, --debug, --trace, etc
+  * default arg help COMMAND, equiv to COMMAND --help?
+  * allow subcommands to utilize debug, trace, version etc...?
+  * allow help with commander_init :help_generator => Commander::HelpGenerator::Default
+  * taint input, or tainted already?
 
-* FIX (list of requirements)
+== CONVENTIONS:
 
-== INSTALL:
-
-* FIX (sudo gem install, anything else)
+  *
 
 == LICENSE:
 

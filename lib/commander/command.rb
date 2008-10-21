@@ -3,7 +3,7 @@ module Commander
 	class Command 
 		
 		attr_reader :description, :syntax, :examples, :options, :command
-		attr_reader :when_called_handler
+		attr_reader :when_called_handler, :manual
 		
 		def initialize(command)
 			@command, @options, @examples = command, [], []
@@ -15,6 +15,10 @@ module Commander
 		
 		def set_description(text)
 			@description = text
+		end
+		
+		def set_manual(text)
+		  @manual = text
 		end
 		
 		def add_example(description, code)
@@ -30,7 +34,7 @@ module Commander
 		end
 		
 		def invoke(proc_sym, *args)
-		  self.send(proc_sym).call *args
+		  send(proc_sym).call *args
 		end
 	end
 end
