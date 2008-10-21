@@ -30,10 +30,6 @@
   * allow help with commander_init :help_generator => Commander::HelpGenerator::Default
   * refactor
 
-== CONVENTIONS:
-
-  *
-
 == LICENSE:
 
 (The MIT License)
