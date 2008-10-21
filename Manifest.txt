@@ -2,6 +2,6 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/commander
 lib/commander.rb
 test/test_commander.rb
+spec/commander.rb

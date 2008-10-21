@@ -5,8 +5,29 @@ require 'hoe'
 require './lib/commander.rb'
 
 Hoe.new('commander', Commander::VERSION) do |p|
-  # p.rubyforge_name = 'commanderx' # if different than lowercase project name
-  # p.developer('FIX', 'FIX@example.com')
+  p.developer('TJ Holowaychuk', 'tj@vision-media.ca')
+end
+
+desc 'Build and install gem.'
+task :build => [:remove, :install_gem] do
+  sh "clear"
+end
+
+desc 'Remove build data.'
+task :remove => [:clean] do
+  sh "clear"
+end
+
+desc 'Run rspec suite.'
+task :spec do
+  sh "clear"
+  sh "spec ./spec/commander.rb"
+end
+
+desc 'Run rspec suite with specdoc format.'
+task :specd do
+  sh "clear"
+  sh "spec ./spec/commander.rb --format specdoc"
 end
 
 # vim: syntax=Ruby
