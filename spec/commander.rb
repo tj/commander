@@ -4,7 +4,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../lib/commander')
 # TODO: how to use class << self and @@ properly...
 # TODO: how have getters and setters..?
 # TODO: hook into exec to run init_commander?
-# TODO: allow sub commands? create module, etc
+# TODO: allow sub-sub commands? create module, etc
+# TODO: abstract spec
 
 describe Commander do
 	

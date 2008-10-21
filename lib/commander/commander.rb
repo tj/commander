@@ -134,7 +134,9 @@ module Commander
 		  begin
 		    @info[:help_generator].new self
 	    rescue => e
-	      debug_abort "Failed to create help generator.", e
+	      # TODO: remove #{e} implement --debug
+	      # TODO: abstract debug_abort to user_interaction, global rescue?
+	      debug_abort "Failed to create help generator #{e}.", e
       end
 		end
 		
@@ -163,17 +165,17 @@ module Commander
     #
     #     Short program description here.
     #
-    #     Options:
+    #     OPTIONS:
     #
     #         -h, --help       Display this help information.
     #
-    #     Sub-commands:
+    #     SUB-COMMANDS:
     #
     #         com1             Description of com1.
     #         com2             Description of com2.
     #         com3             Description of com3.
     #
-    #     Sub-command details:
+    #     SUB-COMMAND DETAILS:
     #
     #         com1
     #           Manual or short description of com1.
@@ -196,55 +198,63 @@ module Commander
       attr_reader :manager
       
       def initialize(manager)
+        # TODO: rspec tests for help generators
+        @manager = manager
         render
       end
       
       # -----------------------------------------------------------
 
-        private
+        protected
 
       # -----------------------------------------------------------
       
-      def render
-        output = render_header
-        output += render_syntax
-        output += render_description
-        output += render_options
-        output += render_examples
-        output += render_footer
+      def render 
+        # TODO: puts before %w ??
+        %w[ header options commands footer ].each do |meth|
+          output ||= '' and output += send("render_#{meth}")
+        end
         puts output and exit
       end
       
       def render_header
-        
-      end
-      
-      def render_syntax
-        
+        "\n#{@manager.info[:name]}\n"
+        "\n#{@manager.info[:description]}\n" unless @manager.info[:description].nil?
       end
       
       def render_options
-        
+        # TODO: finish
+        ""
       end
       
-      def render_option
-        
+      def render_option(option)
+        # TODO: finish
       end
       
-      def render_description
-        
+      def render_commands
+        @manager.commands.collect { |command| render_command(command) }.join "\n"  
       end
       
-      def render_examples
-        
+      def render_command(command)
+        output = "         #{command.command}"
+        output += "\n\n           Options:\n"
+        output += "\n\n           Examples:\n"
+        output += render_examples command
+        output
       end
       
-      def render_example
-        
+      def render_examples(command)
+        command.examples.collect { |example| render_example(example) }.join "\n" 
+      end
+      
+      def render_example(example)
+        output = "\n               # #{example[:description]}\n"
+        output = "\n               #{example[:code]}\n"
+        output       
       end
       
       def render_footer
-        
+        "\n"
       end
     end
   end

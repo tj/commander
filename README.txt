@@ -28,7 +28,7 @@
   * default arg help COMMAND, equiv to COMMAND --help?
   * allow subcommands to utilize debug, trace, version etc...?
   * allow help with commander_init :help_generator => Commander::HelpGenerator::Default
-  * taint input, or tainted already?
+  * refactor
 
 == CONVENTIONS:
 
