@@ -36,14 +36,14 @@ describe Commander do
 	end
 	
 	it "should inialize and set the version" do
-		get_option(:version).should == '1.3.2'
-		get_option(:major).should == 1
-		get_option(:minor).should == 3
-		get_option(:tiny).should == 2
+		get_info(:version).should == '1.3.2'
+		get_info(:major).should == 1
+		get_info(:minor).should == 3
+		get_info(:tiny).should == 2
 	end
 	
 	it "should set program name" do
-		get_option(:name).should == 'My Program'
+		get_info(:name).should == 'My Program'
 	end
 end
 
