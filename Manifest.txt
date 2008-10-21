@@ -10,4 +10,5 @@ lib/commander/help_generators.rb
 lib/commander/help_generators/default.rb
 lib/commander/interaction.rb
 lib/commander/manager.rb
+lib/commander/version.rb
 spec/commander.rb

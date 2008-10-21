@@ -1,4 +1,5 @@
 
+require 'commander/version'
 require 'commander/interaction'
 require 'commander/command'
 require 'commander/manager'
@@ -6,11 +7,6 @@ require 'commander/help_generators'
 require 'optparse'
 
 module Commander
-  
-  MAJOR = 1
-  MINOR = 0
-  TINY = 0
-  VERSION = [MAJOR, MINOR, TINY].join('.')
   	
 	def init_commander(options = {})
 		Commander::Manager.instance options
