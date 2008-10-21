@@ -119,6 +119,7 @@ module Commander
 		  begin
 		    @global_option_parser = OptionParser.new
 		    @global_option_parser.on('--help', 'View this help documentation.') { generate_help }
+		    @global_option_parser.on('--version', 'View version information.') { puts "Version #{@info[:version]}" and exit }
 		    @global_option_parser.parse! @user_args
 	    rescue => e
 	      debug_abort e, e
