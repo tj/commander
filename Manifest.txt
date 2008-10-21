@@ -6,5 +6,8 @@ bin/commander
 lib/commander.rb
 lib/commander/command.rb
 lib/commander/commander.rb
-lib/commander/user_interaction.rb
+lib/commander/help_generators.rb
+lib/commander/help_generators/default.rb
+lib/commander/interaction.rb
+lib/commander/manager.rb
 spec/commander.rb
