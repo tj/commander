@@ -1,9 +1,7 @@
 
 require 'commander'
 
-stdin = ''
-args = 'init'
-init_commander :name => 'Commander', :version => Commander::VERSION, :description => 'Commander utility program.', :argv => args, :stdin => stdin
+init_commander :name => 'Commander', :version => Commander::VERSION, :description => 'Commander utility program.'
 
 command :init do |c|
 	c.set_syntax 'commander init <filepath>'
@@ -14,9 +12,6 @@ command :init do |c|
 		 ask_for_list "List:"
 		 ask "Continue?"
 		 confirm "Sure you want to delete?"
-		 
-		 p stdin
-		 p args
 	end
 end
 

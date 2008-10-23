@@ -31,7 +31,7 @@ module Commander
     end
     
     def stdin
-      Commander::Manager.instance.options[:stdin] || STDIN
+      Commander::Manager.instance.info[:stdin] || STDIN
     end
   end
 end

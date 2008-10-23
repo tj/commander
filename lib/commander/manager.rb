@@ -27,7 +27,13 @@ module Commander
 		end
 		
 		def get_command(command)
-			@commands[command]
+			@commands[command.to_sym]
+		end
+		
+		def execute_command(command)
+		  abort "Invalid command #{command}." if not valid_command? command
+		  @user_args.shift
+		  get_command(command).invoke(:when_called_proc, @user_args) 
 		end
 		
 		def each
@@ -35,8 +41,9 @@ module Commander
 		end
 		
 		def include?(command)
-			!@commands[command].nil?
+			!@commands[command.to_sym].nil? unless command.nil?
 		end
+		alias :valid_command? :include?
 		
 		def empty?
 			@commands.empty?
@@ -58,20 +65,28 @@ module Commander
 		def debug_abort(msg, exception = nil)
 		  abort msg
 		end
-		
-		def run
-		  @command_options[:help] = true if @user_args[0] == 'help'
-		end
 				
-		# -----------------------------------------------------------
-
-		  protected
-
-		# -----------------------------------------------------------
-		
 		def init_version
 		  raise "Your program must have a version tuple ('x.x.x')." unless valid_version?(@info[:version])
 		  @info[:major], @info[:minor], @info[:tiny] = parse_version(@info[:version])
+		end
+		
+		def run
+		  abort "Invalid arguments." if @user_args.empty?
+		  @command_options[:help] = true and @user_args.shift if @user_args[0] == 'help'
+	    case 
+        when (@command_options[:help] and @user_args.empty?) then abort "Supply a command to view its help."
+        when @command_options[:help] then output_command_help @user_args[0]
+        else execute_command @user_args[0]
+      end
+		end
+		
+		def output_help
+		  p "Global help."
+		end
+		
+		def output_command_help(command)
+		  p "Help for #{command} command."
 		end
 	end
 end
