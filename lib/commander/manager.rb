@@ -59,16 +59,15 @@ module Commander
 		  abort msg
 		end
 		
+		def run
+		  @command_options[:help] = true if @user_args[0] == 'help'
+		end
+				
 		# -----------------------------------------------------------
 
 		  protected
 
 		# -----------------------------------------------------------
-		
-		def run
-		  p @info
-		  p @user_args
-		end
 		
 		def init_version
 		  raise "Your program must have a version tuple ('x.x.x')." unless valid_version?(@info[:version])
