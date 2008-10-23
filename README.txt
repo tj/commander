@@ -28,7 +28,8 @@
   * OpenStruct so that c.options can be stored for .when_called
   * default options --help, --version, --debug, --trace, etc
   * default arg help COMMAND, equiv to COMMAND --help?
-  * allow subcommands to utilize debug, trace, version etc...?
+  * allow subcommands like 'drupal create module' instead of 'drupal create_module'
+  * allow copyright info
   * allow help with commander_init :help_generator => Commander::HelpGenerator::Default
   * refactor
 

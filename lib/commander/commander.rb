@@ -28,7 +28,7 @@ module Commander
 		Commander::Manager.instance.include? command
 	end
 	
-	def get_info(option)
+	def info(option)
 		Commander::Manager.instance.info[option]
 	end
 end

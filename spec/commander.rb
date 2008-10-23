@@ -1,6 +1,4 @@
 
-require File.expand_path(File.dirname(__FILE__) + '/../lib/commander')
-
 # TODO: how to use class << self and @@ properly...
 # TODO: how have getters and setters..?
 # TODO: hook into exec to run init_commander?
@@ -37,14 +35,14 @@ describe Commander do
 	end
 	
 	it "should inialize and set the version" do
-		get_info(:version).should == '1.3.2'
-		get_info(:major).should == 1
-		get_info(:minor).should == 3
-		get_info(:tiny).should == 2
+		info(:version).should == '1.3.2'
+		info(:major).should == 1
+		info(:minor).should == 3
+		info(:tiny).should == 2
 	end
 	
 	it "should set program name" do
-		get_info(:name).should == 'My Program'
+		info(:name).should == 'My Program'
 	end
 end
 
