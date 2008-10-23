@@ -1,6 +1,0 @@
-
-=== 1.0.0 / 2008-10-21
-
-* 1 Major Enhancement:
-
-  * Initial release :)
