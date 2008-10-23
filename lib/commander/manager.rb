@@ -4,18 +4,22 @@ module Commander
 		
 		include Enumerable
 		
-		attr_reader :options, :option_parser, :commands, :info
+		attr_reader :command_options, :commands, :info
 		attr_reader :user_command, :user_args
 		
 		def self.instance(options = {})
 			@@instance ||= Commander::Manager.new options
 		end
 		
+		def self.kill_instance!
+		  @@instance = nil
+		end
+		
 		def initialize(options)
-			@info, @options = options, {}
-			@user_args = @options[:argv] || ARGV.dup
+			@info, @command_options = options, {}
+			@user_args = @info[:argv] || ARGV.dup
 			init_version
-			#at_exit { run_command }
+			at_exit { run }
 		end
 		
 		def add_command(command)
@@ -44,11 +48,11 @@ module Commander
 		alias :size :length
 		
 		def valid_version?(version)
-			version.split('.').length == 3
+			version.split('.').length == 3 if version.is_a? String
 		end
 		
 		def parse_version(version)
-		  version.split('.').collect { |v| v.to_i } 
+		  version.split('.').collect { |v| v.to_i } if version.is_a? String
 		end
 		
 		def debug_abort(msg, exception = nil)
@@ -61,8 +65,14 @@ module Commander
 
 		# -----------------------------------------------------------
 		
+		def run
+		  p @info
+		  p @user_args
+		end
+		
 		def init_version
-		  @info[:major], @info[:minor], @info[:tiny] = parse_version(@info[:version]) if valid_version?(@info[:version])
+		  raise "Your program must have a version tuple ('x.x.x')." unless valid_version?(@info[:version])
+		  @info[:major], @info[:minor], @info[:tiny] = parse_version(@info[:version])
 		end
 	end
 end

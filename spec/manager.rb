@@ -1,7 +1,9 @@
 
 describe Commander::Manager do
   before :each do
-    @manager = Commander::Manager.instance
+    Commander::Manager.kill_instance!
+    init_commander :version => '0.0.1', :argv => 'help'
+    @manager = Commander::Manager.instance 
   end
   
   it "should parse version numbers" do
