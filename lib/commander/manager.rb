@@ -1,9 +1,7 @@
 
 module Commander
 	class Manager
-		
-		include Enumerable
-		
+				
 		attr_reader :command_options, :commands, :info
 		attr_reader :user_command, :user_args
 		

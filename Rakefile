@@ -21,13 +21,13 @@ end
 desc 'Run rspec suite.'
 task :spec do
   sh "clear"
-  sh "spec ./spec/all.rb"
+  sh "spec ./spec/all_spec.rb"
 end
 
 desc 'Run rspec suite with specdoc format.'
 task :specd do
   sh "clear"
-  sh "spec ./spec/all.rb --format specdoc"
+  sh "spec ./spec/all_spec.rb --format specdoc"
 end
 
 # vim: syntax=Ruby

@@ -24,24 +24,6 @@ module Commander
     #         com2             Description of com2.
     #         com3             Description of com3.
     #
-    #     SUB-COMMAND DETAILS:
-    #
-    #         com1
-    #           Manual or short description of com1.
-    #
-    #           Options:
-    #
-    #           -c, --core          Set core value.
-    #           -r, --recursive     Set core value.
-    #         
-    #           Examples:
-    #            
-    #              # Description of example here.
-    #              example code
-    #
-    #              # Description of example 2 here.
-    #              example code 2
-    #
     class Default
       
       attr_reader :manager
@@ -59,67 +41,65 @@ module Commander
       # -----------------------------------------------------------
       
       def render 
+        # TODO: store in ~/.commander and output using 'less'
         # TODO: support coloring
-        # TODO: store and output using 'less'
         say(render_command(@command)) if @command
         say(render_global) unless @command
       end
       
       def render_global
-        %w[ name description command_list commands footer ].collect { |v| send("render_#{v}") }.join
+        %w[ name description command_list footer ].collect { |v| send("render_#{v}") }.join
       end
       
       def render_name
         o = head 'name'
-        o += row 4, @manager.info[:name]
+        o += row 6, @manager.info[:name]
         o += "\n"
         o
       end
       
       def render_description
         o = head 'description'
-        o += row 4, @manager.info[:description] unless @manager.info[:description].nil?
+        o += row 6, @manager.info[:description] unless @manager.info[:description].nil?
         o += "\n"
         o
-      end
-      
-      def render_options
-        # TODO: finish
-        ""
-      end
-      
-      def render_option(option)
-        # TODO: finish
       end
       
       def render_command_list
         o = head 'sub-commands'
-        o += @manager.commands.collect { |c, command| row(4, c.to_s, command.description) }.join
-        o += "\n"
-        o
-      end
-      
-      def render_commands
-        o = head 'sub-command details'
-        o += @manager.commands.collect { |c, command| render_command(command) }.join
+        o += @manager.commands.collect { |c, command| row(6, c.to_s, command.description) }.join
         o += "\n"
         o
       end
       
       def render_command(command)
-        o = row 4, command.command
-        o += row 4, command.description
-        o += "\n" + row(6, 'Examples:') unless command.examples.empty?
+        o = head 'name'
+        o += row 6, "#{@manager.info[:name]}-#{command.command}"
+        o += "\n"
+        
+        o += head 'description'
+        o += row 6, command.description
+        o += "\n"
+        
+        o += head('examples') unless command.examples.empty?
         o += render_command_examples command
         o += "\n"
+        
+        o += head('options') unless command.options.empty?
+        o += render_command_options command
+        o += "\n\n"
         o
+      end
+      
+      def render_command_options(command)
+        command.options.collect { |option| row(6, option.join(',  '))  }.join
       end
       
       def render_command_examples(command)
         command.examples.collect do |example|
-          o = "\n"
-          o += row 8, "# #{example[:description]}"
-          o += row 8, "#{example[:code]}"
+          o = row 6, "# #{example[:description]}"
+          o += row 6, "#{example[:code]}"
+          o += "\n"
         end.join 
       end
             

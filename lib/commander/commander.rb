@@ -15,7 +15,7 @@ module Commander
 	def add_command(command, &block)
 		_command = command
 		command = Commander::Command.new(_command)
-		command.instance_eval &block
+		yield command
 		Commander::Manager.instance.add_command command
 	end
 	alias :command :add_command
