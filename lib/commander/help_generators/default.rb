@@ -48,7 +48,7 @@ module Commander
       end
       
       def render_global
-        %w[ name description command_list footer ].collect { |v| send("render_#{v}") }.join
+        %w[ name description command_list copyright ].collect { |v| send("render_#{v}") }.join
       end
       
       def render_name
@@ -103,8 +103,8 @@ module Commander
         end.join 
       end
             
-      def render_footer
-        "\n"
+      def render_copyright
+        @manager.info[:copyright].nil? ? "\n" : head('copyright') + row(6, @manager.info[:copyright]) + "\n\n";
       end
       
       def head(text)

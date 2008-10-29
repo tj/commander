@@ -10,8 +10,8 @@
 
 == FEATURES:
 
-  * Sub commands
-  * Auto-generated help documentation
+  * Sub-commands
+  * Auto-generated help documentation globally and per sub-command
   * Simple syntax and implementation
   * Extensible help generators for various output formats
 
@@ -21,13 +21,8 @@
 
 == TODO:
 
-  * Use own option parser... or extend OptionParser to pull values
-  * OpenStruct so that c.options can be stored for .when_called
   * default options --help, --version, --debug, --trace, etc
-  * default arg help COMMAND, equiv to COMMAND --help?
-  * allow subcommands like 'drupal create module' instead of 'drupal create_module'
-  * allow copyright info
-  * allow help with commander_init :help_generator => Commander::HelpGenerator::Default
+  * allow copyright info in help generation
   * refactor
 
 == LICENSE:
