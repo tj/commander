@@ -36,14 +36,10 @@ module Commander
 		  @user_command.invoke(:when_called_proc, @user_args) 
 		end
 		
-		def each
-			@commands.each { |command| yield command }	
-		end
-		
-		def include?(command)
+		def valid_command?(command)
 			!@commands[command.to_sym].nil? unless command.nil?
 		end
-		alias :valid_command? :include?
+		alias :include? :valid_command?
 		
 		def empty?
 			@commands.empty?

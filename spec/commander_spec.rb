@@ -9,14 +9,14 @@ describe Commander do
 	
 	before :each do
 		init_commander :version => '1.3.2', :name => 'My Program'
-		add_command :test_command do |c|
-			c.set_syntax 'test_command [options]'
-			c.set_description 'Just a test command.'
-			c.add_option '-h', '--help', 'View help information.'
-			c.add_option '--version', 'View program version.'
-			c.add_option '-v', '--verbose', 'Verbose output.'
-			c.add_example 'View help', 'test_command --help'
-			c.add_example 'View version', 'test_command --version'
+		add_command :test_command do
+			set_syntax 'test_command [options]'
+			set_description 'Just a test command.'
+			add_option '-h', '--help', 'View help information.'
+			add_option '--version', 'View program version.'
+			add_option '-v', '--verbose', 'Verbose output.'
+			add_example 'View help', 'test_command --help'
+			add_example 'View version', 'test_command --version'
 		end
 		@manager = Commander::Manager.instance
 	end

@@ -7,3 +7,4 @@ class Object
   include Commander
   include Commander::Interaction
 end
+

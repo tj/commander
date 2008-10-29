@@ -6,9 +6,13 @@ module Commander
     #
     # Example formatting:
     #   
-    #     Program/command Name
+    #     NAME:
+    #     
+    #         Program name.
     #
-    #     Short program description here.
+    #     DESCRIPTION:
+    #
+    #         Short program description here.
     #
     #     OPTIONS:
     #
@@ -44,7 +48,7 @@ module Commander
       
       def initialize(manager)
         @manager = manager
-        @command = @manager.user_command || false
+        @command = @manager.user_command
         render
       end
       
@@ -55,14 +59,28 @@ module Commander
       # -----------------------------------------------------------
       
       def render 
-        say "Doc for #{@command.command}" if @command
-        say "Global doc" unless @command
-        exit
+        # TODO: support coloring
+        # TODO: store and output using 'less'
+        say(render_command(@command)) if @command
+        say(render_global) unless @command
       end
       
-      def render_header
-        "\n#{@manager.info[:name]}\n"
-        "\n#{@manager.info[:description]}\n" unless @manager.info[:description].nil?
+      def render_global
+        %w[ name description command_list commands footer ].collect { |v| send("render_#{v}") }.join
+      end
+      
+      def render_name
+        o = head 'name'
+        o += row 4, @manager.info[:name]
+        o += "\n"
+        o
+      end
+      
+      def render_description
+        o = head 'description'
+        o += row 4, @manager.info[:description] unless @manager.info[:description].nil?
+        o += "\n"
+        o
       end
       
       def render_options
@@ -74,31 +92,56 @@ module Commander
         # TODO: finish
       end
       
+      def render_command_list
+        o = head 'sub-commands'
+        o += @manager.commands.collect { |c, command| row(4, c.to_s, command.description) }.join
+        o += "\n"
+        o
+      end
+      
       def render_commands
-        @manager.commands.collect { |command| render_command(command) }.join "\n"  
+        o = head 'sub-command details'
+        o += @manager.commands.collect { |c, command| render_command(command) }.join
+        o += "\n"
+        o
       end
       
       def render_command(command)
-        output = "         #{command.command}"
-        output += "\n\n           Options:\n"
-        output += "\n\n           Examples:\n"
-        output += render_examples command
-        output
+        o = row 4, command.command
+        o += row 4, command.description
+        o += "\n" + row(6, 'Examples:') unless command.examples.empty?
+        o += render_command_examples command
+        o += "\n"
+        o
       end
       
-      def render_examples(command)
-        command.examples.collect { |example| render_example(example) }.join "\n" 
+      def render_command_examples(command)
+        command.examples.collect do |example|
+          o = "\n"
+          o += row 8, "# #{example[:description]}"
+          o += row 8, "#{example[:code]}"
+        end.join 
       end
-      
-      def render_example(example)
-        output = "\n               # #{example[:description]}\n"
-        output = "\n               #{example[:code]}\n"
-        output       
-      end
-      
+            
       def render_footer
         "\n"
       end
+      
+      def head(text)
+        "\n  #{text.upcase}:\n"
+      end
+      
+      def row(lpad, *args)
+        "\n" + (' ' * lpad) + args.collect { |a| a.to_s.ljust(15, ' ') }.join 
+      end
     end
+  end
+end
+
+class Hash
+  def collect(&block)
+    o = []
+    self.each_pair { |k, v| o << block.call(k, v)} 
+    o
   end
 end

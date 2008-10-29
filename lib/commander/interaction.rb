@@ -22,7 +22,6 @@ module Commander
     def ask(msg)
       say msg
       value = stdin.gets.gsub /\n/, ''
-      puts
       value
     end
     
