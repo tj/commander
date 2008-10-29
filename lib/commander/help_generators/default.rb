@@ -99,8 +99,7 @@ module Commander
         command.examples.collect do |example|
           o = row 6, "# #{example[:description]}"
           o += row 6, "#{example[:code]}"
-          o += "\n"
-        end.join 
+        end.join "\n"
       end
             
       def render_copyright

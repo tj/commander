@@ -21,6 +21,8 @@
 
 == TODO:
 
+  * add / test support for sub-command and global options
+  * add 'help' in the list of sub-commands
   * default options --help, --version, --debug, --trace, etc
   * allow copyright info in help generation
   * refactor

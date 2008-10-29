@@ -8,23 +8,12 @@ init_commander :name => 'Commander',
 command :init do |c|
 	c.syntax = 'commander init <filepath>'
 	c.description = 'Initialize an empty file with a commander skeleton.'
-	c.example 'Apply commander to a file.', 'commander init ./bin/my_executable'
+	c.example 'Apply commander to a blank file.', 'commander init ./bin/my_executable'
 	c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
-	c.option('-v', '--verbose', 'Do something verbosely') { puts "I am recursive." } 
+	c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." } 
 	c.when_called do |args|
 		 ask_for_list "List:"
 		 ask "Continue?"
 		 confirm "Sure you want to delete?"
 	end
-end
-
-command :dummy do |c|
-  c.syntax = 'commander dummy'
-  c.description = 'Just a dummy command.'
-  c.example 'test', 'Just a simple test.'
-  c.example 'another', 'Just another simple irrelevant test.'
-  c.example 'asdf', 'fasdf asdf sdf.'
-  c.when_called do |args|
-    say 'Dummy'
-  end
 end
