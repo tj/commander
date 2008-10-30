@@ -22,6 +22,7 @@
 == TODO:
 
   * add / test support for sub-command and global options
+  * create / save command documentation to /usr/local/commander?
   * add 'help' in the list of sub-commands
   * default options --help, --version, --debug, --trace, etc
   * allow copyright info in help generation
