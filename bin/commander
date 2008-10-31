@@ -10,29 +10,43 @@ init_commander(
 command :init do |c|
 	c.syntax = 'commander init <filepath>'
 	c.description = 'Initialize an empty file with a commander skeleton.'
-	c.example 'Apply commander to a blank file.', 'commander init ./bin/my_executable'
-	c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
-	c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." } 
+	c.example 'Create a new file with a commander skeleton.', 'commander init ./bin/my_executable'
 	c.when_called do |args|
-		 ask_for_list "List:"
-		 ask "Continue?"
-		 confirm "Sure you want to delete?"
-	end
+	  abort "Provide a filepath." if args.empty?
+		name = ask 'What is your programs machine name?'
+		description = ask 'Describe your program:'
+		commands = ask_for_list 'List the sub-commands you wish to create:'
+		begin
+		  filepath = args.shift
+      File.open(filepath, 'w') do |f|
+        f.write <<-CODE
+         
+require 'commander'
+
+init_commander(
+    :name => '#{name.capitalize}', 
+    :version => #{name.capitalize}::VERSION, 
+    :description => '#{description}'
+  )
+  
+CODE
+        commands.each do |command|
+          f.write <<-CODE
+command :#{command} do |c|
+  c.syntax = ''
+  c.description = ''
+  c.example 'description', 'code'
+  c.when_called do |args|
+    # Do something
+  end
 end
 
-command :test do |c|
-  c.syntax = 'commander test'
-  c.when_called do |args|
-    p args
-  end
-end
- 
-command :hey do |c|
-  c.syntax = 'commander hey'
-	c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
-	c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." }
-	c.option('--file FILE', 'Something with a file') { |v| puts v }
-  c.when_called do |args|
-    p args
-  end
+CODE
+        end
+       end
+       puts "Created commander skeleton at '#{filepath}'."
+		 rescue Exception => e
+       abort e
+		 end
+	end
 end
