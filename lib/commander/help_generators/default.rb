@@ -68,6 +68,7 @@ module Commander
       def render_command_list
         o = head 'sub-commands'
         o += @manager.commands.collect { |c, command| row(6, c.to_s, command.description) }.join
+        o += row 6, "help", "Display this help information, or help for the trailing sub-command."
         o += "\n"
         o
       end

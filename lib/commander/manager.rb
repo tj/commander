@@ -77,7 +77,6 @@ module Commander
 		end
 		
 		def set_user_command
-		  # TODO: recursve sub-sub commands
 		  @user_command = get_command(@user_args[0]) unless @user_args.empty?
 		  @user_args.shift
 		end
