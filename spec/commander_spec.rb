@@ -1,10 +1,4 @@
 
-# TODO: how to use class << self and @@ properly...
-# TODO: how have getters and setters..?
-# TODO: hook into exec to run init_commander?
-# TODO: allow sub-sub commands? create module, etc
-# TODO: abstract spec
-
 describe Commander do
 	
 	before :each do
