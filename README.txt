@@ -14,6 +14,7 @@
   * Auto-generated help documentation globally and per sub-command
   * Simple syntax and implementation
   * Extensible help generators for various output formats
+  * Use the 'commander' command to initialize a commander driven program
   
 == USAGE:
 
