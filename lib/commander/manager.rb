@@ -1,10 +1,27 @@
 
+
 module Commander
 	class Manager
 				
 		attr_reader :command_options, :commands, :info
 		attr_reader :user_command, :user_args
 		
+		# Initialize commander singleton.
+    #
+    # == Keys:
+    #
+    #  * name (required)
+    #  * version (required)
+    #  * description
+    #
+    # == Examples:
+    #    
+    #   init_commander(
+    #     :name => 'Commander', 
+    #     :version => Commander::VERSION, 
+    #     :description => 'Commander utility program.'
+    #   )
+    #
 		def self.instance(options = {})
 			@@instance ||= Commander::Manager.new options
 		end
@@ -31,6 +48,14 @@ module Commander
 		
 		def execute_command
 		  abort "Invalid command." if not @user_command
+		  unless @user_command.options.empty?
+		    opts = OptionParser.new
+		    @user_command.options.each { |option| opts.on(*option[:args], &option[:proc]) }
+		    opts.parse! @user_args 
+	    end
+    rescue OptionParser::MissingArgument => e
+      debug_abort e
+    else
 		  @user_command.invoke(:when_called_proc, @user_args) 
 		end
 		

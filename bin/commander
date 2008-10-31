@@ -1,9 +1,11 @@
 
 require 'commander'
 
-init_commander :name => 'Commander', 
-  :version => Commander::VERSION, 
-  :description => 'Commander utility program.'
+init_commander(
+    :name => 'Commander', 
+    :version => Commander::VERSION, 
+    :description => 'Commander utility program.'
+  )
 
 command :init do |c|
 	c.syntax = 'commander init <filepath>'
@@ -16,4 +18,21 @@ command :init do |c|
 		 ask "Continue?"
 		 confirm "Sure you want to delete?"
 	end
+end
+
+command :test do |c|
+  c.syntax = 'commander test'
+  c.when_called do |args|
+    p args
+  end
+end
+ 
+command :hey do |c|
+  c.syntax = 'commander hey'
+	c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
+	c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." }
+	c.option('--file FILE', 'Something with a file') { |v| puts v }
+  c.when_called do |args|
+    p args
+  end
 end

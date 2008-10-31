@@ -9,14 +9,20 @@ module Commander
 			@command, @options, @examples = command, [], []
 		end
 		
-		def example(description, code)
+		# Adds an example in the help documentation of this sub-command. 
+		def example(description, code) 
 			@examples << { :description => description, :code => code }
 		end
 		
-		def option(*args)
-			@options << args
+		# Adds an option or 'flag'. These are parsed with +OptionParser+
+		# so please view its documentation for help.
+		def option(*args, &block)
+			@options << { :args => args, :proc => block }
 		end
 		
+		# This proc is called when the sub-command is invoked. 
+		# The proc has instant access to all methods found in 
+		# interaction.rb
 		def when_called(&block)
 		  @when_called_proc = block
 		end

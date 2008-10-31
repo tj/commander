@@ -14,6 +14,28 @@
   * Auto-generated help documentation globally and per sub-command
   * Simple syntax and implementation
   * Extensible help generators for various output formats
+  
+== USAGE:
+
+  require 'commander'
+  
+  init_commander(
+      :name => 'Commander', 
+      :version => Commander::VERSION, 
+      :description => 'Commander utility program.'
+    )
+  
+  command :init do |c|
+  	c.syntax = 'commander init <filepath>'
+  	c.description = 'Initialize an empty file with a commander skeleton.'
+  	c.example 'Apply commander to a blank file.', 'commander init ./bin/my_executable'
+  	c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
+  	c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." } 
+  	c.when_called do |args|
+  		 list = ask_for_list "List:"
+  		 do_something if confirm "Sure you want to delete?"
+  	end
+  end
 
 == KNOWN ISSUES:
   
@@ -23,9 +45,8 @@
 
   * add / test support for sub-command and global options
   * create / save command documentation to /usr/local/commander?
-  * add 'help' in the list of sub-commands
+  * support command-line coloring
   * default options --help, --version, --debug, --trace, etc
-  * allow copyright info in help generation
   * refactor
 
 == LICENSE:

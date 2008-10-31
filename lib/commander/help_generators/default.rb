@@ -6,23 +6,23 @@ module Commander
     #
     # Example formatting:
     #   
-    #     NAME:
-    #     
-    #         Program name.
-    #
-    #     DESCRIPTION:
-    #
-    #         Short program description here.
-    #
-    #     OPTIONS:
-    #
-    #         -h, --help       Display this help information.
-    #
-    #     SUB-COMMANDS:
-    #
-    #         com1             Description of com1.
-    #         com2             Description of com2.
-    #         com3             Description of com3.
+    #   NAME:
+    #   
+    #       Commander-init 
+    #   
+    #   DESCRIPTION:
+    #   
+    #       Initialize an empty file with a commander skeleton.
+    #   
+    #   EXAMPLES:
+    #   
+    #       # Apply commander to a blank file.
+    #       commander init ./bin/my_executable
+    #   
+    #   OPTIONS:
+    #   
+    #       -r,  --recursive,  Do something recursively
+    #       -v,  --verbose,  Do something verbosely
     #
     class Default
       
@@ -41,8 +41,6 @@ module Commander
       # -----------------------------------------------------------
       
       def render 
-        # TODO: store in ~/.commander and output using 'less'
-        # TODO: support coloring
         say(render_command(@command)) if @command
         say(render_global) unless @command
       end
@@ -93,7 +91,7 @@ module Commander
       end
       
       def render_command_options(command)
-        command.options.collect { |option| row(6, option.join(',  '))  }.join
+        command.options.collect { |option| row(6, option[:args].join(',  '))  }.join
       end
       
       def render_command_examples(command)
