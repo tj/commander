@@ -43,10 +43,7 @@
 
 == TODO:
 
-  * add / test support for sub-command and global options
-  * create / save command documentation to /usr/local/commander?
-  * support command-line coloring
-  * default options --help, --version, --debug, --trace, etc
+  * add support for global options
   * refactor
 
 == LICENSE:

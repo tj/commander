@@ -1,6 +1,4 @@
 
-=== 1.0.0 / 2008-10-21
+=== 1.0.0 / 2008-10-31
 
-* 1 Major Enhancement:
-
-  * Initial release :)
+  * Initial release
