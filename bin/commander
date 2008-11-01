@@ -21,7 +21,9 @@ command :init do |c|
 		  filepath = args.shift
       File.open(filepath, 'w') do |f|
         f.write <<-CODE
-         
+#!/usr/bin/env ruby
+
+require 'rubygems'
 require 'commander'
 
 init_commander(
