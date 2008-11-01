@@ -1,4 +1,11 @@
 
+=== 1.0.1 / 2008-10-31
+
+* 2 Minor Enhancements:
+
+  * Added shebang line to commander init
+  * Added require 'rubygems' 
+
 === 1.0.0 / 2008-10-31
 
   * Initial release
