@@ -1,4 +1,10 @@
 
+=== 1.0.3 / 2008-11-01
+
+* 1 Bug Fix:
+
+  * Typo causing the gem to fail build on github
+
 === 1.0.2 / 2008-11-01
 
 * 1 Minor Enhancements:
