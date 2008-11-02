@@ -27,15 +27,15 @@
     )
   
   command :init do |c|
-  	c.syntax = 'commander init <filepath>'
-  	c.description = 'Initialize an empty file with a commander skeleton.'
-  	c.example 'Apply commander to a blank file.', 'commander init ./bin/my_executable'
-  	c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
-  	c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." } 
-  	c.when_called do |args|
-  		 list = ask_for_list "List:"
-  		 do_something if confirm "Sure you want to delete?"
-  	end
+    c.syntax = 'commander init <filepath>'
+    c.description = 'Initialize an empty file with a commander skeleton.'
+    c.example 'Apply commander to a blank file.', 'commander init ./bin/my_executable'
+    c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
+    c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." } 
+    c.when_called do |args|
+       list = ask_for_list "List:"
+       do_something if confirm "Sure you want to delete?"
+    end
   end
 
 == KNOWN ISSUES:
