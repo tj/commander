@@ -1,7 +1,7 @@
 G
 em::Specification.new do |s|
   s.name = %q{commander}
-  s.version = "1.0.1"
+  s.version = "1.0.2"
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
   s.date = %q{2008-11-01}
