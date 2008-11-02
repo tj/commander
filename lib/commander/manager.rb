@@ -13,6 +13,7 @@ module Commander
     #  * name (required)
     #  * version (required)
     #  * description
+    #  * copyright
     #
     # == Examples:
     #    
