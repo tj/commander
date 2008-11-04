@@ -1,6 +1,9 @@
 
-
 module Commander
+  
+  # = Manager
+  #
+  # Controls management and invocation of sub-commands.
 	class Manager
 				
 		attr_reader :command_options, :commands, :info
@@ -92,6 +95,7 @@ module Commander
 		end
 		
 		def run
+		  parse_options!
 		  abort "Invalid arguments." if @user_args.empty?
 		  @command_options[:help] = true and @user_args.shift if @user_args[0] == 'help'
 		  set_user_command
@@ -102,6 +106,13 @@ module Commander
       end
 		end
 		
+		def parse_options!
+		  opts = OptionParser.new
+		  opts.on('--help') { output_help; exit }
+		  opts.on('--version') { output_version; exit }
+		  opts.parse! @user_args rescue nil
+		end
+		
 		def set_user_command
 		  @user_command = get_command(@user_args[0]) unless @user_args.empty?
 		  @user_args.shift
@@ -109,6 +120,10 @@ module Commander
 		
 		def output_help
 		  @info[:help_generator].new self
+		end
+		
+		def output_version
+		  puts "#{@info[:name]} #{@info[:version]}"
 		end
 	end
 end
