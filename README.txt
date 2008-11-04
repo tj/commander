@@ -44,7 +44,6 @@
 
 == TODO:
 
-  * add support for global options
   * refactor
 
 == LICENSE:

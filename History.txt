@@ -1,4 +1,10 @@
 
+=== 1.0.4 / 2008-11-04
+
+* 1 Minor Enhancements:
+
+  * Added support for --help and --version flags
+
 === 1.0.3 / 2008-11-01
 
 * 1 Bug Fix:
