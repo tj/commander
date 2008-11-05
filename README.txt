@@ -44,6 +44,9 @@
 
 == TODO:
 
+  * utilize less command
+  * more / better documentation
+  * help generator options (such as large option description etc)
   * refactor
 
 == LICENSE:
