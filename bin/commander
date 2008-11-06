@@ -17,7 +17,7 @@ command :init do |c|
 	  puts
 		name = ask 'What is your programs machine name?'
 		description = ask 'Describe your program:'
-		commands = ask_for_list 'List the sub-commands you wish to create:'
+		commands = ask 'List the sub-commands you wish to create:', Array
 		begin
 		  filepath = args.shift
       File.open(filepath, 'w') do |f|

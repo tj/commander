@@ -1,9 +1,9 @@
 
 require 'commander/version'
-require 'commander/interaction'
 require 'commander/command'
 require 'commander/manager'
 require 'commander/help_generators'
+require 'commander/core_ext/array'
 require 'optparse'
 
 module Commander
