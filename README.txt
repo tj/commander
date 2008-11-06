@@ -44,6 +44,17 @@
 
 == TODO:
 
+unless defined?(ActionController)
+  begin
+    $:.unshift "#{File.dirname(__FILE__)}/../../actionpack/lib"
+    require 'action_controller'
+  rescue LoadError
+    require 'rubygems'
+    gem 'actionpack', '>= 1.12.5'
+  end
+end
+
+  * utilize singleton mixin
   * utilize less command
   * more / better documentation
   * help generator options (such as large option description etc)

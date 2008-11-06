@@ -1,10 +1,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{commander}
-  s.version = "1.0.4"
+  s.version = "1.1.0"
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2008-11-01}
+  s.date = %q{2008-11-06}
   s.default_executable = %q{commander}
   s.description = %q{Commander is a small framework for creating a sub-command utility.  For example a sub command would be 'git add' or 'git rm', where 'add' and 'rm' are sub commands.}
   s.email = ["tj@vision-media.ca"]
@@ -24,11 +24,16 @@ Gem::Specification.new do |s|
     s.specification_version = 2
 
     if current_version >= 3 then
+      s.add_runtime_dependency(%q<highline>, [">= 1.5.0"])
       s.add_development_dependency(%q<hoe>, [">= 1.8.2"])
     else
+      s.add_dependency(%q<highline>, [">= 1.5.0"])
       s.add_dependency(%q<hoe>, [">= 1.8.2"])
     end
   else
+    s.add_dependency(%q<highline>, [">= 1.5.0"])
     s.add_dependency(%q<hoe>, [">= 1.8.2"])
   end
 end
+
+

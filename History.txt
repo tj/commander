@@ -1,4 +1,10 @@
 
+=== 1.1.0 / 2008-11-06
+
+* 1 Major Enhancements:
+
+  * Added dependency for Highline gem, which replaces Commander's user interaction lib
+
 === 1.0.4 / 2008-11-04
 
 * 1 Minor Enhancements:

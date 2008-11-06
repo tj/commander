@@ -6,6 +6,7 @@ require './lib/commander.rb'
 
 Hoe.new('commander', Commander::VERSION) do |p|
   p.developer('TJ Holowaychuk', 'tj@vision-media.ca')
+  p.extra_deps << ['highline', '>= 1.5.0']
 end
 
 desc 'Build and install gem.'
