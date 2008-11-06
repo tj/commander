@@ -1,34 +1,41 @@
 
+=== 1.2.0 / 2008-11-06
+
+  * 2 Major Enhancements:
+
+    * Added paging ability (similar to 'less')
+    * Added coloring to default help generator
+
 === 1.1.0 / 2008-11-06
 
-* 1 Major Enhancements:
+  * 1 Major Enhancements:
 
-  * Added dependency for Highline gem, which replaces Commander's user interaction lib
+    * Added dependency for Highline gem, which replaces Commander's user interaction lib
 
 === 1.0.4 / 2008-11-04
 
-* 1 Minor Enhancements:
+  * 1 Minor Enhancements:
 
-  * Added support for --help and --version flags
+    * Added support for --help and --version flags
 
 === 1.0.3 / 2008-11-01
 
-* 1 Bug Fix:
+  * 1 Bug Fix:
 
-  * Typo causing the gem to fail build on github
+    * Typo causing the gem to fail build on github
 
 === 1.0.2 / 2008-11-01
 
-* 1 Minor Enhancements:
+  * 1 Minor Enhancements:
 
-  * Added gemspec for github
+    * Added gemspec for github
 
 === 1.0.1 / 2008-10-31
 
-* 2 Minor Enhancements:
+  * 2 Minor Enhancements:
 
-  * Added shebang line to commander init
-  * Added require 'rubygems' 
+    * Added shebang line to commander init
+    * Added require 'rubygems' 
 
 === 1.0.0 / 2008-10-31
 
