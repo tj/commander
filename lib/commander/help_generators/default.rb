@@ -29,6 +29,7 @@ module Commander
       attr_reader :manager
       
       def initialize(manager)
+        $terminal.page_at = 22
         @manager = manager
         @command = @manager.user_command
         render
