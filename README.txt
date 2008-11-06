@@ -15,6 +15,7 @@
   * Simple syntax and implementation
   * Extensible help generators for various output formats
   * Use the 'commander' command to initialize a commander driven program
+  * Dependent on highline for terminal interaction (ask, choose, etc)
   
 == USAGE:
 
@@ -33,8 +34,8 @@
     c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
     c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." } 
     c.when_called do |args|
-       list = ask_for_list "List:"
-       do_something if confirm "Sure you want to delete?"
+       list = ask 'List some items:', Array
+       # Do something with list
     end
   end
 
