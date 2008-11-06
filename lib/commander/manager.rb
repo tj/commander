@@ -36,7 +36,7 @@ module Commander
 		
 		def initialize(options)
 			@info, @command_options = options, {}
-			@user_args = @info[:argv] || ARGV.dup
+			@user_args = ARGV.dup
 			@info[:help_generator] ||= Commander::HelpGenerators::Default
 			init_version
 			at_exit { run }
