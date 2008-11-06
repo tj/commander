@@ -106,7 +106,7 @@ module Commander
       end
       
       def head(text)
-        "\n  #{text.upcase}:\n"
+        "\n  <%= color('#{text.upcase}', BOLD) %>:\n"
       end
       
       def row(lpad, *args)
