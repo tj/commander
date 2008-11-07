@@ -51,7 +51,7 @@ module Commander
 		end
 		
 		def execute_command
-		  abort "Invalid command." if not @user_command
+		  abort "Invalid command." unless @user_command
 		  unless @user_command.options.empty?
 		    opts = OptionParser.new
 		    @user_command.options.each { |option| opts.on(*option[:args], &option[:proc]) }

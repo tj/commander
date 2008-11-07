@@ -42,6 +42,7 @@
 
 == TODO:
 
+  * get github to build properly!!!
   * look at newgem gem and copy the whole 'create   ./path' verbose listing conventions
   * do testing for these apps like highline does with mock IO
   * look at highline examples and change commander commands to work without new-lines etc
