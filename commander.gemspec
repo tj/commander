@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
   s.files = ["History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/commander", "lib/commander.rb", "lib/commander/command.rb", "lib/commander/commander.rb", "lib/commander/help_generators.rb", "lib/commander/help_generators/default.rb", "lib/commander/manager.rb", "lib/commander/version.rb", "spec/all_spec.rb", "spec/commander_spec.rb", "spec/manager_spec.rb"]
   s.has_rdoc = true
-  s.homepage = %q{  Open source sub-command framework.}
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{commander}

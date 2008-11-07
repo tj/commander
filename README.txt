@@ -1,6 +1,3 @@
-= commander
- 
-  Open source sub-command framework.
 
 == DESCRIPTION:
 
