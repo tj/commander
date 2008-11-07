@@ -1,4 +1,10 @@
 
+=== 1.2.2 / 2008-11-06
+
+  * 1 Bug Fix:
+
+    * Forgot to add array.rb
+
 === 1.2.0 / 2008-11-06
 
   * 2 Major Enhancements:
