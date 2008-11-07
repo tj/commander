@@ -58,8 +58,9 @@ module Commander
       end
       
       def render_description
+        return if @manager.info[:description].nil?
         o = head 'description'
-        o += row 6, @manager.info[:description] unless @manager.info[:description].nil?
+        o += row 6, @manager.info[:description]
         o += "\n"
         o
       end
@@ -79,6 +80,10 @@ module Commander
         
         o += head 'description'
         o += row 6, command.description
+        o += "\n"
+        
+        o += head 'synopsis'
+        o += row 6, command.syntax
         o += "\n"
         
         o += head('examples') unless command.examples.empty?
