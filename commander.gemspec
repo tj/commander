@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.authors = ["TJ Holowaychuk"]
   s.date = %q{2008-11-06}
   s.default_executable = %q{commander}
-  s.description = %q{Commander is a small framework for creating a sub-command utility.  For example a sub command would be 'git add' or 'git rm', where 'add' and 'rm' are sub commands.}
+  s.description = %q{Commander is a small framework for creating a sub-command utility. For example a sub command would be 'git add' or 'git rm', where 'add' and 'rm' are sub commands.}
   s.email = ["tj@vision-media.ca"]
   s.executables = ["commander"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
