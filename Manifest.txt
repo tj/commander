@@ -5,7 +5,10 @@ Rakefile
 bin/commander
 commander.gemspec
 lib/commander.rb
+lib/commander/core_ext.rb
+lib/commander/core_ext/array.rb
 lib/commander/import.rb
+lib/commander/runner.rb
 lib/commander/version.rb
 spec/all_spec.rb
 spec/commander_spec.rb
