@@ -1,9 +1,7 @@
 
-$:.unshift(File.expand_path(File.dirname(__FILE__)))
+$:.unshift File.expand_path(File.dirname(__FILE__))
 
-require 'commander/commander'
+require 'rubygems'
 require 'highline/import'
- 
-class Object
-  include Commander
-end
+require 'commander/version'
+require 'commander/import'
