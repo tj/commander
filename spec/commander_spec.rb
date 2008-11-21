@@ -14,7 +14,7 @@ describe Commander do
 	end
 	
 	it "should invoke #when_called with arguments properly" do
-	  get_command(:test).call([1,2]).should eql("test 12")
+	  get_command(:test).call([1, 2]).should eql("test 12")
 	end
 	
 	it "should locate command within arbitrary arguments passed" do
@@ -36,6 +36,18 @@ describe Commander do
    new_command_runner '--help'
    lambda { command_runner.active_command }.should raise_error(Commander::Runner::InvalidCommandError)
  end
+ 
+ it "should add options to previously created commands" do
+   get_command(:test).option("--recursive") {}
+   get_command(:test).options.length.should eql(3)
+ end
+ 
+ it "should invoke command option procs" do
+   recursive = false
+   get_command(:test).option("--recursive") { recursive = true }
+   get_command(:test).run ['--recursive']
+   recursive.should be_true
+ end
 		
 end
 
@@ -44,7 +56,7 @@ def create_test_command
     c.syntax = "test [options] <file>"
     c.description = "test description"
     c.example "description", "code"
-    c.option("-h", "--help") {}
+    c.option("-t", "--trace") {}
     c.option("-v", "--verbose") {}
     c.when_called do |args|
       "test %s" % args.join

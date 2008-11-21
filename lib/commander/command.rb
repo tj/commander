@@ -1,4 +1,6 @@
 
+require 'optparse'
+
 module Commander
   class Command
     
@@ -77,6 +79,29 @@ module Commander
     
     def when_called(&block)
       @when_called_proc = block
+    end
+    
+    ##
+    # Run the command with +args+.
+    #
+    # * parses options, call option blocks
+    # * invokes when_called proc
+    #
+    
+    def run(args = [])
+      call parse_options_and_call_procs(args)
+    end
+    
+    ##
+    # Parses options and calls associated procs
+    # returning the arguments left.
+    
+    def parse_options_and_call_procs(args = [])
+      return args if args.empty?
+      opts = OptionParser.new
+      @options.each { |o| opts.on(*o[:args], &o[:proc]) }
+      opts.parse! args
+      args
     end
     
     ##
