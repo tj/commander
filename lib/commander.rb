@@ -9,7 +9,4 @@ require 'commander/command'
 require 'commander/help_formatters'
 require 'commander/import'
 
-unless $halt_commander
-  $command_runner = Commander::Runner.new
-  $command_runner.run
-end
+$command_runner = Commander::Runner.new

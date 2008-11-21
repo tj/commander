@@ -29,14 +29,14 @@ module Commander
     # Run the command parsing and execution process immediately.
     
     def run!
-      p @options
+      # Programs require this metadata to run / document properly
+      %w[ name version description ].each { |k| ensure_program_key_set k }
+      # Run help command when a user uses --help switch
+      get_command(:help).run(@args) if options[:help]
     end
     
-    ##
-    # Run at exit.
-    
-    def run #:nodoc:
-      at_exit { run! } 
+    def ensure_program_key_set(key)
+      raise Error, "Program #{key} required (use #program method)" unless @program[key]
     end
     
     ##
@@ -138,7 +138,16 @@ module Commander
     # essentially the same as using the --help switch.
     
     def create_default_commands
-      
+      command :help do |c|
+        c.syntax = "command help"
+        c.description = "Displays help global or sub-command help information."
+        c.example "Display global help", "command help"
+        c.example "Display help for 'sub-command'", "command help sub-command"
+        c.when_called do |args|
+          puts 'help was called'
+          p args
+        end
+      end
     end
             
     ##

@@ -5,7 +5,9 @@ describe Commander::HelpFormatter do
     input, output = new_command_runner '--help'
     program :help_formatter, Commander::HelpFormatter::Base
     command_runner.run!
-    output.should eql("Implement global help here")
+    output.string.should eql("Implement global help here")
+    # FIXME: some strange issue with rspec and command.call
+    # is exiting...
   end
   
 end

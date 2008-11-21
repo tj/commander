@@ -14,6 +14,11 @@ describe Commander do
 	  program(:description).should eql("just a test.")
 	end
 	
+  it "should raise an error when crutial program info is not set" do
+    program :name, nil
+    lambda { run! }.should raise_error(Commander::Runner::Error)
+  end
+  	
 	it "should get command instances using #get_command" do
 	  get_command(:test).name.should eql(:test)
 	end
