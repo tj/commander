@@ -45,7 +45,6 @@
   * redo README
   * README.rdoc
   * auto run! at_exit
-  * import highline
   * help generator options (such as large option description etc)
   * help generators should use erb
   * clean up option handling, passing |args, options| as Struct
