@@ -4,6 +4,9 @@ require 'optparse'
 module Commander
   class Runner
     
+    class Error < StandardError; end
+    class InvalidCommandError < Error; end
+    
     attr_reader :commands, :options
     
     ##
@@ -18,6 +21,7 @@ module Commander
     def initialize(input = $stdin, output = $stdout, args = ARGV)
       @input, @output, @args = input, output, args
       @commands, @options = {}, { :help => false }
+      parse_global_options
     end
     
     ##
@@ -55,7 +59,11 @@ module Commander
     # Get a command object if available or nil.
     
     def get_command(name)
-      @commands[name] || nil
+      if @commands[name] 
+        @commands[name]
+      else
+        raise InvalidCommandError, "Invalid command '#{name || "nil"}'", caller
+      end
     end
     
     ##
@@ -71,7 +79,15 @@ module Commander
     #
     
     def active_command
-      get_command(parse_global_options.shift.to_sym) rescue nil
+      # TODO: re-raise any runner errors
+      get_command command_name_from_args
+    end
+    
+    ##
+    # Attemps to locate command from @args, otherwise nil.
+    
+    def command_name_from_args 
+      @args.find { |arg| arg.match /^[a-z_0-9]+$/i }.to_sym rescue nil
     end
     
     ##
@@ -79,25 +95,18 @@ module Commander
     #
     # These options are used by commander itself 
     # as well as allowing your program to specify 
-    # global commands such as '--trace'.
+    # global commands such as '--verbose'.
     #
     # TODO: allow 'option' method for global program
     #
-    # === Returns:
-    #    
-    # +@args+ duplicate parsed of global options
-    #
     
     def parse_global_options
-      args = @args.dup
       opts = OptionParser.new
       opts.on("--help") { @options[:help] = true }
-      opts.parse! args
+      opts.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 
       # parsed by our sub commands.
-    ensure 
-      args
     end
     
   end
