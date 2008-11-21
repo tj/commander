@@ -20,8 +20,34 @@ module Commander
     
     def initialize(input = $stdin, output = $stdout, args = ARGV)
       @input, @output, @args = input, output, args
-      @commands, @options = {}, { :help => false }
+      @commands, @program, @options = {}, {}, { :help => false }
       parse_global_options
+    end
+    
+    ##
+    # Assign program information.
+    #
+    # === Examples:
+    #    
+    #    # Set data
+    #    program :name, 'Commander'
+    #    program :version, Commander::VERSION
+    #    program :description, 'Commander utility program.'
+    #
+    #    # Get data
+    #    program :name # => 'Commander'
+    #
+    # === Keys:
+    #
+    # * :name:           (required) Program name
+    # * :version:        (required) Program version triple, ex: '0.0.1'
+    # * :description:    (required) Program description
+    # * :help_formatter: Defaults to Commander::HelpFormatter::Terminal
+    #
+    
+    def program(key, value = nil)
+      @program[key] = value unless value.nil?
+      @program[key] if value.nil?
     end
     
     ##

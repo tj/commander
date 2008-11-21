@@ -5,6 +5,15 @@ describe Commander do
 	  create_test_command
 	end
 	
+	it "should set program information using #program" do
+	  program :name, "test"
+	  program :version, "1.2.3"
+	  program :description, "just a test."
+	  program(:name).should eql("test")
+	  program(:version).should eql("1.2.3")
+	  program(:description).should eql("just a test.")
+	end
+	
 	it "should get command instances using #get_command" do
 	  get_command(:test).name.should eql(:test)
 	end
@@ -57,22 +66,3 @@ describe Commander do
  end
 
 end
-
-def create_test_command
-  command :test do |c|
-    c.syntax = "test [options] <file>"
-    c.description = "test description"
-    c.example "description", "code"
-    c.option("-t", "--trace") {}
-    c.option("-v", "--verbose") {}
-    c.when_called do |args|
-      "test %s" % args.join
-    end
-  end
-end
-
-def new_command_runner(*args)
-  $command_runner = Commander::Runner.new $stdin, $stdout, args
-  create_test_command
-end
-

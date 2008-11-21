@@ -2,9 +2,9 @@
 
 require 'commander'
 
-program :name => 'Commander'
-program :version => Commander::VERSION
-program :description => 'Commander utility program.'
+program :name, 'Commander'
+program :version, Commander::VERSION
+program :description, 'Commander utility program.'
 
 command :init do |c|
 	c.syntax = 'commander init <filepath>'
