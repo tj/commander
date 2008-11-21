@@ -142,8 +142,7 @@ module Commander
         c.example "Display global help", "command help"
         c.example "Display help for 'sub-command'", "command help sub-command"
         c.when_called do |args|
-          puts 'help was called'
-          p args
+          # TODO: finish formatter invocation
         end
       end
     end
