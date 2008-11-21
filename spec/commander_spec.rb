@@ -50,14 +50,12 @@ describe Commander do
  end
  
  it "should call the when_called proc when #run" do
-   results = nil
-   get_command(:test).when_called do |args|
-     results = args.join(' ')
-   end
+   result = nil
+   get_command(:test).when_called { |args| result = args.join(' ') }  
    get_command(:test).run ['--trace', 'just', 'some', 'args']
-   results.should eql("just some args")
+   result.should eql("just some args")
  end
-		
+
 end
 
 def create_test_command
