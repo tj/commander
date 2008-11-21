@@ -1,17 +1,18 @@
 
 Gem::Specification.new do |s|
   s.name = %q{commander}
-  s.version = "1.2.2"
+  s.version = "2.0.0"
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2008-11-06}
+  s.date = %q{2008-11-21}
   s.default_executable = %q{commander}
-  s.description = %q{Commander is a small framework for creating a sub-command utility. For example a sub command would be 'git add' or 'git rm', where 'add' and 'rm' are sub commands.}
+  s.description = %q{Commander is a small framework for creating a sub-command utility.  For example a sub command would be 'git add' or 'git rm', where 'add' and 'rm' are sub commands.}
   s.email = ["tj@vision-media.ca"]
   s.executables = ["commander"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
-  s.files = ["History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/commander", "lib/commander.rb", "lib/commander/command.rb", "lib/commander/commander.rb", "lib/commander/help_generators.rb", "lib/commander/help_generators/default.rb", "lib/commander/manager.rb", "lib/commander/version.rb", "spec/all_spec.rb", "spec/commander_spec.rb", "spec/manager_spec.rb"]
+  s.files = ["History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/commander", "commander.gemspec", "lib/commander.rb", "lib/commander/command.rb", "lib/commander/core_ext.rb", "lib/commander/core_ext/array.rb", "lib/commander/help_formatters.rb", "lib/commander/help_formatters/base.rb", "lib/commander/help_formatters/terminal.rb", "lib/commander/import.rb", "lib/commander/runner.rb", "lib/commander/version.rb", "spec/all_spec.rb", "spec/commander_spec.rb", "spec/help_formatter_spec.rb", "spec/spec_helper.rb"]
   s.has_rdoc = true
+  s.homepage = %q{  Commander is a small framework for creating a sub-command utility. }
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{commander}
