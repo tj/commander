@@ -29,14 +29,13 @@ module Commander
     # Run the command parsing and execution process immediately.
     
     def run!
-      # Programs require this metadata to run / document properly
-      %w[ name version description ].each { |k| ensure_program_key_set k }
-      # Run help command when a user uses --help switch
-      get_command(:help).run(@args) if options[:help]
-    end
-    
-    def ensure_program_key_set(key)
-      raise Error, "Program #{key} required (use #program method)" unless @program[key]
+      %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
+      case 
+      when options[:help]; get_command(:help).run args_without_command 
+      else active_command.run args_without_command
+      end
+    rescue InvalidCommandError
+      @output.puts "Invalid command. Use --help for more information"
     end
     
     ##
@@ -120,7 +119,6 @@ module Commander
     #
     
     def active_command
-      # TODO: re-raise any runner errors
       get_command command_name_from_args
     end
     
@@ -169,5 +167,13 @@ module Commander
       # parsed by our sub commands.
     end
     
+    def ensure_program_key_set(key)
+      raise Error, "Program #{key} required (use #program method)" unless @program[key]
+    end
+    
+    def args_without_command
+      @_args_without_command ||= lambda { args = @args.dup; args.shift; args }.call
+    end
+        
   end
 end

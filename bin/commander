@@ -53,3 +53,5 @@ CODE
 		 end
 	end
 end
+
+run!

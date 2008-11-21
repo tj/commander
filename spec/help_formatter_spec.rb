@@ -6,8 +6,7 @@ describe Commander::HelpFormatter do
     program :help_formatter, Commander::HelpFormatter::Base
     command_runner.run!
     output.string.should eql("Implement global help here")
-    # FIXME: some strange issue with rspec and command.call
-    # is exiting...
+    # FIXME: issue with OptionParser taking control of --help switch...
   end
   
 end
