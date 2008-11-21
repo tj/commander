@@ -42,11 +42,20 @@ describe Commander do
    get_command(:test).options.length.should eql(3)
  end
  
- it "should invoke command option procs" do
+ it "should call command option procs" do
    recursive = false
    get_command(:test).option("--recursive") { recursive = true }
    get_command(:test).run ['--recursive']
    recursive.should be_true
+ end
+ 
+ it "should call the when_called proc when #run" do
+   results = nil
+   get_command(:test).when_called do |args|
+     results = args.join(' ')
+   end
+   get_command(:test).run ['--trace', 'just', 'some', 'args']
+   results.should eql("just some args")
  end
 		
 end
