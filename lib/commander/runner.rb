@@ -21,7 +21,22 @@ module Commander
     def initialize(input = $stdin, output = $stdout, args = ARGV)
       @input, @output, @args = input, output, args
       @commands, @program, @options = {}, {}, { :help => false }
-      parse_global_options
+      parse_global_options # TODO: move to run! so globals can be added... causes an error with @args though
+      create_default_commands
+    end
+    
+    ##
+    # Run the command parsing and execution process immediately.
+    
+    def run!
+      p @options
+    end
+    
+    ##
+    # Run at exit.
+    
+    def run #:nodoc:
+      at_exit { run! } 
     end
     
     ##
@@ -116,6 +131,16 @@ module Commander
       @args.find { |arg| arg.match /^[a-z_0-9]+$/i }.to_sym rescue nil
     end
     
+    private
+    
+    ##
+    # Creates default commands such as 'help' which is 
+    # essentially the same as using the --help switch.
+    
+    def create_default_commands
+      
+    end
+            
     ##
     # Parse global command options.
     #

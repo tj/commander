@@ -1,4 +1,6 @@
 
+require 'stringio'
+
 def create_test_command
   command :test do |c|
     c.syntax = "test [options] <file>"
@@ -13,6 +15,9 @@ def create_test_command
 end
 
 def new_command_runner(*args)
-  $command_runner = Commander::Runner.new $stdin, $stdout, args
+  input = StringIO.new
+  output = StringIO.new
+  $command_runner = Commander::Runner.new input, output, args
   create_test_command
+  [input, output]
 end
