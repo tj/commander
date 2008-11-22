@@ -4,14 +4,14 @@ require 'optparse'
 module Commander
   class Command
     
-    attr_reader :name, :examples, :options, :when_called_proc
+    attr_reader :name, :examples, :options
     attr_accessor :syntax, :description
         
     ##
     # Initialize new command with specified +name+.
     
     def initialize(name)
-      @name, @examples, @options = name, [], []
+      @name, @examples, @options, @when_called = name, [], [], {}
     end
     
     ##
@@ -77,8 +77,18 @@ module Commander
     #    end
     #
     
-    def when_called(&block)
-      @when_called_proc = block
+    def when_called(*args, &block)
+      unless args.empty?
+        case args.first
+        when Class
+          @when_called[:class] = args.shift
+          @when_called[:method] = args.shift
+        else
+          @when_called[:object] = args.shift
+          @when_called[:method] = args.shift
+        end
+      end
+      @when_called[:proc] = block if block_given?
     end
     
     ##
@@ -108,7 +118,15 @@ module Commander
     # Call the commands when_called block with +args+.
     
     def call(*args)
-      @when_called_proc.call(*args)
+      h = @when_called
+      case 
+      when h[:class]
+        h[:class].new.send h[:method], *args
+      when h[:object]
+        h[:object].send h[:method], *args
+      when h[:proc]
+        h[:proc].call *args
+      end
     end
   end
 end

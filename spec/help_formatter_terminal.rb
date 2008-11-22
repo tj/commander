@@ -1,4 +1,4 @@
-
+__END__
 describe Commander::HelpFormatter::Terminal do
   
   it "should format global help correctly" do

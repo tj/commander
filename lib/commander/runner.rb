@@ -3,9 +3,9 @@ require 'optparse'
 
 module Commander
   class Runner
-    
-    class Error < StandardError; end
-    class InvalidCommandError < Error; end
+
+    class CommandError < StandardError; end
+    class InvalidCommandError < CommandError; end
     
     attr_reader :commands, :options
     
@@ -176,7 +176,7 @@ module Commander
     end
     
     def ensure_program_key_set(key)
-      raise Error, "Program #{key} required (use #program method)" if @program[key].empty?
+      raise CommandError, "Program #{key} required (use #program method)" if @program[key].empty?
     end
     
     def args_without_command

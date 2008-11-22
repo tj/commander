@@ -47,9 +47,12 @@
   * auto run! at_exit
   * fix ERB whitespace... -%> ??
   * coloring via highline
+  * allow options to take a block OR populate a struct.. passed with |args, options| ?
+  * allow when_called Class[, method]
+  * allow when_called object, method
   * help generator options (such as large option description etc)
   * help generators should use erb
-  * clean up option handling, passing |args, options| as Struct
+  * refactor rspec with mocks etc
 
 == LICENSE:
 

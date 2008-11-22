@@ -17,7 +17,7 @@ describe Commander do
   it "should raise an error when crutial program info is not set" do
     new_command_runner '--help'
 	  program :name, ''
-    lambda { run! }.should raise_error(Commander::Runner::Error)
+    lambda { run! }.should raise_error(Commander::Runner::CommandError)
   end
   	
 	it "should get command instances using #get_command" do
@@ -64,11 +64,27 @@ describe Commander do
    recursive.should be_true
  end
  
- it "should call the when_called proc when #run" do
+ it "should call the #when_called proc when #run" do
    result = nil
    get_command(:test).when_called { |args| result = args.join(' ') }  
    get_command(:test).run ['--trace', 'just', 'some', 'args']
    result.should eql("just some args")
+ end
+ 
+ it "should initialize and call object when a class is passed to #when_called" do
+  class HandleWhenCalled
+    def arbitrary_method(*args) args.join('-') end 
+  end
+  get_command(:test).when_called HandleWhenCalled, :arbitrary_method
+  get_command(:test).call("hello", "world").should eql("hello-world")
+ end
+ 
+ it "should call object when passed to #when_called " do
+   class HandleWhenCalled 
+     def arbitrary_method(*args) args.join('-') end 
+   end
+   get_command(:test).when_called HandleWhenCalled.new, :arbitrary_method
+   get_command(:test).call("hello", "world").should eql("hello-world")
  end
 
 end
