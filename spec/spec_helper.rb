@@ -1,4 +1,5 @@
 
+require File.expand_path(File.dirname(__FILE__) + '/../lib/commander')
 require 'stringio'
 
 def create_test_command
