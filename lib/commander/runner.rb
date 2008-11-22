@@ -150,8 +150,8 @@ module Commander
         c.example "Display help for 'sub-command'", "command help sub-command"
         c.when_called do |args|
           gen = help_formatter
-          @output.print(gen.render) if args.empty?
-          @output.print(gen.render_command args.shift) unless args.empty?
+          @output.print gen.render if args.empty?
+          @output.print gen.render_command(get_command(args.shift.to_sym)) unless args.empty?
         end
       end
     end

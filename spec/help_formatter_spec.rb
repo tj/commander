@@ -6,8 +6,13 @@ describe Commander::HelpFormatter do
     program :help_formatter, Commander::HelpFormatter::Base
     command_runner.run!
     output.string.should eql("Implement global help here")
-    # FIXME: issue with OptionParser taking control of --help switch...
-    # TODO: test with --help as well 
   end
   
+  it "should display command help" do
+    input, output = new_command_runner 'help', 'test'
+    program :help_formatter, Commander::HelpFormatter::Base
+    command_runner.run!
+    output.string.should eql("Implement help for test here")
+  end
+    
 end
