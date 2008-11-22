@@ -16,8 +16,7 @@ describe Commander do
 	
   it "should raise an error when crutial program info is not set" do
     new_command_runner '--help'
-	  program :version, "1.2.3"
-	  program :description, "just a test."
+	  program :name, ''
     lambda { run! }.should raise_error(Commander::Runner::Error)
   end
   	

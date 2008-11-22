@@ -7,11 +7,11 @@ module Commander
         @runner = runner
       end
       
-      def render_help
+      def render
         "Implement global help here"
       end
       
-      def render_command_help(command)
+      def render_command(command)
         "Implement help for #{command.name} here"
       end
       

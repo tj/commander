@@ -20,7 +20,8 @@ module Commander
     
     def initialize(input = $stdin, output = $stdout, args = ARGV)
       @input, @output, @args = input, output, args
-      @commands, @program, @options = {}, {}, { :help => false }
+      @commands, @options = {}, { :help => false }
+      @program = { :help_formatter => Commander::HelpFormatter::Terminal }
       parse_global_options # TODO: move to run! so globals can be added... causes an error with @args though
       create_default_commands
     end
@@ -83,8 +84,7 @@ module Commander
     #
     
     def command(name, &block)
-      command = Commander::Command.new name
-      command.instance_eval &block
+      command = Commander::Command.new(name) and yield command
       add_command command
     end
     
@@ -129,6 +129,13 @@ module Commander
       @args.find { |arg| arg.match /^[a-z_0-9]+$/i }.to_sym rescue nil
     end
     
+    ##
+    # Help formatter instance.
+    
+    def help_formatter
+      @_help_formatter ||= @program[:help_formatter].new self
+    end
+        
     private
     
     ##
@@ -142,7 +149,9 @@ module Commander
         c.example "Display global help", "command help"
         c.example "Display help for 'sub-command'", "command help sub-command"
         c.when_called do |args|
-          # TODO: finish formatter invocation
+          gen = help_formatter
+          @output.print(gen.render) if args.empty?
+          @output.print(gen.render_command args.shift) unless args.empty?
         end
       end
     end
@@ -167,7 +176,7 @@ module Commander
     end
     
     def ensure_program_key_set(key)
-      raise Error, "Program #{key} required (use #program method)" unless @program[key]
+      raise Error, "Program #{key} required (use #program method)" if @program[key].empty?
     end
     
     def args_without_command

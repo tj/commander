@@ -18,6 +18,9 @@ def new_command_runner(*args)
   input = StringIO.new
   output = StringIO.new
   $command_runner = Commander::Runner.new input, output, args
+  program :name, "test"
+  program :version, "1.2.3"
+  program :description, "something"
   create_test_command
   [input, output]
 end
