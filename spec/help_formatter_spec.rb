@@ -1,4 +1,6 @@
 
+require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+
 describe Commander::HelpFormatter do
   
   it "should display global help using help command" do
