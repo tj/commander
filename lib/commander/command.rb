@@ -27,10 +27,10 @@ module Commander
     #    end
     #
     
-    def example(description, code)
+    def example(description, command)
       @examples << {
         :description => description,
-        :code => code,
+        :command => command,
       }
     end
     

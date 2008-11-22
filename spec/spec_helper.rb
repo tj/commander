@@ -5,9 +5,10 @@ def create_test_command
   command :test do |c|
     c.syntax = "test [options] <file>"
     c.description = "test description"
-    c.example "description", "code"
-    c.option("-t", "--trace") {}
-    c.option("-v", "--verbose") {}
+    c.example "description", "command"
+    c.example "description 2", "command 2"
+    c.option("-t", "--trace", "trace description") {}
+    c.option("-v", "--verbose", "verbose description") {}
     c.when_called do |args|
       "test %s" % args.join
     end

@@ -1,0 +1,26 @@
+
+  NAME:
+  
+    <%= @name %>
+  
+  DESCRIPTION:
+  
+    <%= @description %>
+  
+  SYNOPSIS:
+  
+    <%= @syntax %>
+
+<% unless @examples.empty? %>
+  EXAMPLES:
+  <% @examples.each do |example| %>  
+    # <%= example[:description] %>
+    <%= example[:command] %>
+  <% end %>
+<% end %> 
+<% unless @options.empty? %>
+  OPTIONS:
+  <% @options.each do |option| %>
+    <%= option[:args].join(', ') %>
+  <% end %>
+<% end %>
