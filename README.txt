@@ -1,64 +1,62 @@
 
-== DESCRIPTION:
+= Commander
 
-  Commander is a small framework for creating a sub-command utility. 
-  For example a sub command would be 'git add' or 'git rm', where 'add' and
-  'rm' are sub commands.
+Small, intuative gem for creating executables. Commander is generally used
+for sub-command driven programs, although support for unary executables do
+and will continue to be supported. 
 
-== FEATURES:
+== Example:
 
-  * Sub-commands
-  * Auto-generated help documentation globally and per sub-command
-  * Simple syntax and implementation
-  * Extensible help generators for various output formats
-  * Use the 'commander' command to initialize a commander driven program
-  * Dependent on highline for terminal interaction (ask, choose, etc)
+   require 'rubygems'
+   require 'commander'
+
+   program :name, 'Foo Bar'
+   program :version, '1.0.0'
+   program :description, 'Stupid command that prints foo or bar.'
+
+   command :foo do |c|
+     c.syntax = "foobar [options] foo"
+     c.description = "Display foo"
+     c.when_called do |args|
+       say 'foo'
+     end
+   end
+
+   command :bar do |c|
+   ...
+
+== Features:
+
+* Easier than baking cookies
+* Parses options using OptionParser
+* Imports the highline gem for interacting with the terminal
+* Auto-generates help documentation via pluggable help formatters
+* Adds additional user interaction functionality
+
+== Known Issues:
   
-== USAGE:
+* none
 
-  require 'commander'
-  
-  init_commander(
-      :name => 'Commander', 
-      :version => Commander::VERSION, 
-      :description => 'Commander utility program.'
-    )
-  
-  command :init do |c|
-    c.syntax = 'commander init <filepath>'
-    c.description = 'Initialize an empty file with a commander skeleton.'
-    c.example 'Apply commander to a blank file.', 'commander init ./bin/my_executable'
-    c.option('-r', '--recursive', 'Do something recursively') { puts "I am recursive." } 
-    c.option('-v', '--verbose', 'Do something verbosely') { puts "I am verbose." } 
-    c.when_called do |args|
-       list = ask 'List some items:', Array
-       # Do something with list
-    end
-  end
+== Todo:
 
-== KNOWN ISSUES:
-  
-  * none
-
-== TODO:
-
-  * redo README
-  * README.rdoc
-  * auto run! at_exit
-  * fix ERB whitespace... -%> ??
-  * coloring via highline
-  * allow options to take a block OR populate a struct.. passed with |args, options| ?
-  * allow when_called Class[, method]
-  * allow when_called object, method
-  * help generator options (such as large option description etc)
-  * help generators should use erb
-  * refactor rspec with mocks etc
+* redo README
+* README.rdoc
+* auto run! at_exit
+* fix ERB whitespace... -%> ??
+* enforce command description and syntax or make optional in ERB
+* coloring via highline
+* allow options to take a block OR populate a struct.. passed with |args, options| ?
+* help generator options (such as large option description etc)
+* help generators should use erb
+* refactor rspec with mocks etc
+* increase support for programs without sub-commands
+* clean up documentation, tm conventions
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2008 FIX
+Copyright (c) 2008 TJ Holowaychuk <tj@vision-media.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

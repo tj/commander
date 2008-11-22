@@ -5,7 +5,7 @@ require 'commander'
 program :name, 'Commander'
 program :version, Commander::VERSION
 program :description, 'Commander utility program.'
-# TODO: test multiple args in block params.. <file> <dir> |file, dir| not |args|
+# TODO: refactor this crap...
 command :init do |c|
 	c.syntax = 'commander init <file>'
 	c.description = 'Initialize an empty file with a commander skeleton.'

@@ -109,10 +109,6 @@ module Commander
     ##
     # Get active command within arguments passed to this runner.
     #
-    # === Returns:
-    #    
-    # Commander::Command object or nil
-    #
     # === See:
     #
     # * Commander::Runner#parse_global_options
