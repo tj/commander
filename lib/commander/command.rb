@@ -109,8 +109,6 @@ module Commander
     
     def call(*args)
       @when_called_proc.call(*args)
-    rescue NoMethodError
-      raise "Command #{name} requires #when_called block to be called"
     end
   end
 end

@@ -145,7 +145,7 @@ module Commander
     def create_default_commands
       command :help do |c|
         c.syntax = "command help"
-        c.description = "Displays help global or sub-command help information."
+        c.description = "Displays help global or sub-command help information"
         c.example "Display global help", "command help"
         c.example "Display help for 'sub-command'", "command help sub-command"
         c.when_called do |args|

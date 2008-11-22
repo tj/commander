@@ -1,0 +1,12 @@
+  NAME:
+
+    <%= program :name %>
+
+  DESCRIPTION:
+
+    <%= program :description %>
+
+  SUB-COMMANDS:
+<% @commands.each_pair do |name, command| %>
+    <%= command.name %>       <%= command.description %><% end %>
+
