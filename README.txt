@@ -46,6 +46,7 @@
   * README.rdoc
   * auto run! at_exit
   * fix ERB whitespace... -%> ??
+  * coloring via highline
   * help generator options (such as large option description etc)
   * help generators should use erb
   * clean up option handling, passing |args, options| as Struct

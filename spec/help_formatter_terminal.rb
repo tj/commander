@@ -5,7 +5,7 @@ describe Commander::HelpFormatter::Terminal do
     input, output = new_command_runner 'help'
     command_runner.run!
     output.string.should == <<-OUTPUT
-
+  
   NAME:
 
     test
