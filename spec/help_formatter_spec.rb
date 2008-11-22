@@ -5,14 +5,14 @@ describe Commander::HelpFormatter do
     input, output = new_command_runner 'help'
     program :help_formatter, Commander::HelpFormatter::Base
     command_runner.run!
-    output.string.should eql("Implement global help here")
+    output.string.should eql("Implement global help here\n")
   end
   
   it "should display command help" do
     input, output = new_command_runner 'help', 'test'
     program :help_formatter, Commander::HelpFormatter::Base
     command_runner.run!
-    output.string.should eql("Implement help for test here")
+    output.string.should eql("Implement help for test here\n")
   end
   
   it "should display invalid command message when help sub-command does not exist" do
