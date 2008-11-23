@@ -92,15 +92,13 @@ are some quick examples for how to utilize highline in your command(s):
 
 == Todo:
 
-* auto run! at_exit
-* highline quick examples / additional user interaction methods
-* proxy highline output to clean things up? left justify looks gross..
-* add command machine-name to help docs
-* global --version switch
+* additional user interaction methods
+* display global options...
 * less (highline page_and_wrap)
 * increase support for programs without sub-commands
 * allow options to take a block OR populate a struct.. passed with |args, options| ?
 
+* add command machine-name to help docs
 * fix ERB whitespace.. its being retarted...
 * set up regular rake tasks properly... and reformat rspec (view other conventions)
 * refactor rspec with mocks etc

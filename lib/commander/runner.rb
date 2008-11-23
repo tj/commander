@@ -20,7 +20,7 @@ module Commander
     
     def initialize(input = $stdin, output = $stdout, args = ARGV)
       @input, @output, @args = input, output, args
-      @commands, @options = {}, { :help => false }
+      @commands, @options = {}, { :help => false, :version => false }
       @program = { :help_formatter => Commander::HelpFormatter::Terminal }
       parse_global_options # TODO: move to run! so globals can be added... causes an error with @args though
       create_default_commands
@@ -32,6 +32,7 @@ module Commander
     def run!
       %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
       case 
+      when options[:version]; @output.puts "#{@program[:name]} #{@program[:version]}" 
       when options[:help]; get_command(:help).run args_without_command 
       else active_command.run args_without_command
       end
@@ -165,6 +166,7 @@ module Commander
     def parse_global_options
       opts = OptionParser.new
       opts.on("--help") { @options[:help] = true }
+      opts.on("--version") { @options[:version] = true }
       opts.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 
