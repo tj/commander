@@ -11,3 +11,6 @@ require 'commander/help_formatters'
 require 'commander/import'
 
 $command_runner = Commander::Runner.new
+
+# Auto-execute command runner.
+at_exit { $command_runner.run! rescue nil } 

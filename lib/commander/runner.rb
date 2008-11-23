@@ -170,12 +170,12 @@ module Commander
       # Ignore invalid options since options will be further 
       # parsed by our sub commands.
     end
-    
-    def ensure_program_key_set(key)
-      raise CommandError, "Program #{key} required (use #program method)" if @program[key].empty?
+        
+    def ensure_program_key_set(key) #:nodoc:
+      raise CommandError, "Program #{key} required (use #program method)" if (@program[key].nil? || @program[key].empty?)
     end
     
-    def args_without_command
+    def args_without_command #:nodoc:
       @_args_without_command ||= lambda { args = @args.dup; args.shift; args }.call
     end
         
