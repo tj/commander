@@ -1,13 +1,14 @@
 
-  NAME:
+
+  <%= color "NAME", :bold %>:
 
     <%= program :name %>
 
-  DESCRIPTION:
+  <%= color "DESCRIPTION", :bold %>:
 
     <%= program :description %>
 
-  SUB-COMMANDS:
+  <%= color "SUB-COMMANDS", :bold %>:
 
 <% @commands.each_pair do |name, command| %>
     <%= command.name %>        <%= command.description %>

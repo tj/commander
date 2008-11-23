@@ -9,6 +9,7 @@ module Commander
   # The default formatter is Commander::HelpFormatter::Terminal.
   
   module HelpFormatter
+    
     class Base 
       
       ##

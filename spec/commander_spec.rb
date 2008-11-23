@@ -38,6 +38,16 @@ describe Commander do
 	  get_command(:test).call([1, 2]).should eql("test 12")
 	end
 	
+	it "should distinguish between switches and descriptions passed to #option" do
+	  get_command(:test).options[0][:description].should eql("trace description")
+	  get_command(:test).options[0][:switches].should eql(["-t", "--trace"])
+	  get_command(:test).options[1][:description].should eql("verbose description")
+	  get_command(:test).options[1][:switches].should eql(["--verbose"])
+	  get_command(:test).option "--test"
+	  get_command(:test).options[2][:description].should be_nil
+	  get_command(:test).options[2][:switches].should eql(["--test"])
+	end
+	
 	it "should locate command within arbitrary arguments passed" do
 	  new_command_runner '--help', '--arbitrary', 'test'
 	  command_runner.command_name_from_args.should eql(:test)

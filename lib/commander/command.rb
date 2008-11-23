@@ -38,7 +38,11 @@ module Commander
     # Add an option.
     #
     # Options are parsed via OptionParser so view it
-    # for additional usage documentation.
+    # for additional usage documentation. This method 
+    # also parses the arguments passed in order to determine
+    # which were switches, and which were descriptions for the
+    # option which can later be used within help formatters
+    # using option[:switches] and option[:description].
     #
     # === Examples:
     #    
@@ -53,9 +57,12 @@ module Commander
     #
     
     def option(*args, &block)
+      switches, description = seperate_switches_from_description args
       @options << {
         :args => args,
         :proc => block,
+        :switches => switches,
+        :description => description,
       }
     end
     
@@ -128,5 +135,15 @@ module Commander
         h[:proc].call *args
       end
     end
+    
+    private 
+    
+    # TODO: refactor this goodness
+    def seperate_switches_from_description(args) #:nodoc:
+      switches = args.find_all { |a| a.index('-') == 0 } 
+      description = args.last unless args.last.index('-') == 0
+      [switches, description]
+    end
+    
   end
 end

@@ -39,23 +39,15 @@ and will continue to be supported.
 
 == Todo:
 
-* README.rdoc
 * auto run! at_exit
-* fix ERB whitespace... -%> ??
-* enforce command description and syntax or make optional in ERB
+* fix ERB whitespace.. its being retarted...
+* less
 * set up regular rake tasks properly... and reformat rspec (view other conventions)
-* coloring via highline
 * allow options to take a block OR populate a struct.. passed with |args, options| ?
-* help generator options (such as large option description etc)
-* help generators should use erb
 * refactor rspec with mocks etc
 * increase support for programs without sub-commands
-* clean up documentation, tm conventions
-
-format options like:
-
- -h, --help      Description
-     --verbose   Description
+* clean up documentation, tm convention
+* convert to echoe
 
 == LICENSE:
 
