@@ -8,6 +8,7 @@ lib/commander.rb
 lib/commander/command.rb
 lib/commander/core_ext.rb
 lib/commander/core_ext/array.rb
+lib/commander/core_ext/kernel.rb
 lib/commander/core_ext/object.rb
 lib/commander/help_formatters.rb
 lib/commander/help_formatters/base.rb
@@ -20,5 +21,5 @@ lib/commander/version.rb
 spec/all_spec.rb
 spec/commander_spec.rb
 spec/help_formatter_spec.rb
-spec/help_formatter_terminal.rb
 spec/spec_helper.rb
+ 
