@@ -1,9 +1,13 @@
 
 = Commander
 
-Small, intuative gem for creating executables. Commander is generally used
-for sub-command driven programs, although support for unary executables do
-and will continue to be supported. 
+Small, intuative gem for creating executables. Commander
+bridges the gap between other terminal related libraries
+you know and love (OptionParser, HighLine).
+
+Commander is generally used for sub-command driven programs, 
+although support for unary executables do and will continue to 
+be supported. 
 
 == Example:
 
@@ -93,13 +97,12 @@ are some quick examples for how to utilize highline in your command(s):
 == Todo:
 
 * additional user interaction methods
-* display global options...
-* less (highline page_and_wrap)
-* increase support for programs without sub-commands
 * allow options to take a block OR populate a struct.. passed with |args, options| ?
 
+* utilize highline page_and_wrap
 * add command machine-name to help docs
 * global options... change runner implementations as well as displaying in terminal formatter
+* example docs for singular commands
 * fix ERB whitespace.. its being retarted...
 * set up regular rake tasks properly... and reformat rspec (view other conventions)
 * refactor rspec with mocks etc

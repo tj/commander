@@ -17,8 +17,7 @@ command :init do |c|
 		description = ask 'Describe your program: '
 		commands = ask 'List the sub-commands you wish to create: ', Array
 		begin
-		  filepath = args.shift
-      File.open(filepath, 'w') do |f|
+      File.open(args.shift, 'w') do |f|
         f.write <<-CODE
 #!/usr/bin/env ruby
 
