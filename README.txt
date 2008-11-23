@@ -40,14 +40,15 @@ and will continue to be supported.
 == Todo:
 
 * auto run! at_exit
-* fix ERB whitespace.. its being retarted...
 * less
-* set up regular rake tasks properly... and reformat rspec (view other conventions)
-* allow options to take a block OR populate a struct.. passed with |args, options| ?
-* refactor rspec with mocks etc
 * increase support for programs without sub-commands
+* allow options to take a block OR populate a struct.. passed with |args, options| ?
+
+* fix ERB whitespace.. its being retarted...
+* set up regular rake tasks properly... and reformat rspec (view other conventions)
+* refactor rspec with mocks etc
 * clean up documentation, tm convention
-* convert to echoe
+* convert to echoe / README.rdoc
 
 == LICENSE:
 
