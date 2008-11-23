@@ -96,9 +96,11 @@ are some quick examples for how to utilize highline in your command(s):
 
 == Todo:
 
-* additional user interaction methods
+* get user interaction module working... 
 * allow options to take a block OR populate a struct.. passed with |args, options| ?
+* check other todos/fixmes
 
+* output options in a better format
 * utilize highline page_and_wrap
 * add command machine-name to help docs
 * global options... change runner implementations as well as displaying in terminal formatter
