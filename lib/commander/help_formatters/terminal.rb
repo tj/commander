@@ -18,7 +18,7 @@ module Commander
       end
       
       def render_command(command)
-        puts template(:command_help).result command.get_binding
+        template(:command_help).result command.get_binding
       end
       
       def template(name)

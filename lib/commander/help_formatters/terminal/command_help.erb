@@ -1,17 +1,16 @@
 
-
   <%= color "NAME", :bold %>:
-  
+
     <%= @name %>
 
 <% if @description %>
   <%= color "DESCRIPTION", :bold %>:
-  
+
     <%= @description %>
 <% end %> 
 <% if @syntax %>
   <%= color "SYNOPSIS", :bold %>:
-  
+
     <%= @syntax %>
 
 <% end %>
@@ -24,6 +23,6 @@
 <% unless @options.empty? %>
   <%= color "OPTIONS", :bold %>:<% @options.each do |option| %>
 
-    <%= option[:switches].join ', ' %>      
+    <%= option[:switches].join ', ' %> 
         <%= option[:description] %><% end %>
 <% end %>
