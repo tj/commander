@@ -1,21 +1,21 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
 require 'commander'
 
 program :name, 'Commander'
-program :version, Commander::VERSION
+program :version, Commander::VERSION::STRING
 program :description, 'Commander utility program.'
-# TODO: refactor this crap...
+
 command :init do |c|
 	c.syntax = 'commander init <file>'
-	c.description = 'Initialize an empty file with a commander skeleton.'
-	c.example 'Create a new file with a commander skeleton.', 'commander init ./bin/my_executable'
+	c.description = 'Initialize an empty file with a commander template.'
+	c.example 'Create a new file with a commander template.', 'commander init ./bin/my_executable'
 	c.when_called do |args|
 	  abort "Provide a filepath." if args.empty?
-	  puts
-		name = ask 'What is your programs machine name?'
-		description = ask 'Describe your program:'
-		commands = ask 'List the sub-commands you wish to create:', Array
+		name = ask 'Machine name of program: '
+		description = ask 'Describe your program: '
+		commands = ask 'List the sub-commands you wish to create: ', Array
 		begin
 		  filepath = args.shift
       File.open(filepath, 'w') do |f|
@@ -25,12 +25,10 @@ command :init do |c|
 require 'rubygems'
 require 'commander'
 
-init_commander(
-    :name => '#{name.capitalize}', 
-    :version => #{name.capitalize}::VERSION, 
-    :description => '#{description}'
-  )
-  
+program :name, '#{name.capitalize}'
+program :version, #{name.capitalize}::VERSION::STRING
+program :description, '#{description}.'
+ 
 CODE
         commands.each do |command|
           f.write <<-CODE
@@ -46,8 +44,7 @@ end
 CODE
         end
        end
-       say "Created commander skeleton at '#{filepath}'."
-       puts
+       say "Initialized template in #{filepath}"
 		 rescue Exception => e
        abort e
 		 end

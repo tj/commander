@@ -140,10 +140,10 @@ module Commander
     
     def create_default_commands
       command :help do |c|
-        c.syntax = "command help"
-        c.description = "Displays help global or sub-command help information"
+        c.syntax = "command help <sub_command>"
+        c.description = "Displays global or sub-command help information"
         c.example "Display global help", "command help"
-        c.example "Display help for 'sub-command'", "command help sub-command"
+        c.example "Display help for 'foo'", "command help foo"
         c.when_called do |args|
           gen = help_formatter
           @output.puts gen.render if args.empty?
