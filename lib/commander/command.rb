@@ -60,7 +60,7 @@ module Commander
       switches, description = seperate_switches_from_description args
       @options << {
         :args => args,
-        :proc => block,
+        :proc => block_given? ? block : populate_options,
         :switches => switches,
         :description => description,
       }
@@ -116,7 +116,7 @@ module Commander
     def parse_options_and_call_procs(args = [])
       return args if args.empty?
       opts = OptionParser.new
-      @options.each { |o| opts.on(*o[:args], &o[:proc]) }
+      @options.each { |o| p opts.on(*o[:args], &o[:proc]) }
       opts.parse! args
       args
     end
@@ -138,11 +138,17 @@ module Commander
     
     private 
     
-    # TODO: refactor this goodness
     def seperate_switches_from_description(args) #:nodoc:
+      # TODO: refactor this goodness
       switches = args.find_all { |a| a.index('-') == 0 } 
       description = args.last unless args.last.index('-') == 0
       [switches, description]
+    end
+    
+    def populate_options #:nodoc:
+      Proc.new do |*args|
+        p args
+      end
     end
     
   end

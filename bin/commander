@@ -13,6 +13,9 @@ command :init do |c|
 	c.example 'Create a new file with a commander template.', 'commander init ./bin/my_executable'
 	c.when_called do |args|
 	  abort "Provide a filepath." if args.empty?
+	  p password
+	  p password "Whats your password?  "
+	  p password "Whats your password?  ", false
 		name = ask 'Machine name of program: '
 		description = ask 'Describe your program: '
 		commands = ask 'List the sub-commands you wish to create: ', Array

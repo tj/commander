@@ -87,6 +87,29 @@ describe Commander do
    result.should eql("just some args")
  end
  
+ it "should pass options to #when_called proc" do
+   options = nil
+   # TODO: proxy / gather all results using a proc UNLESS a proc is specified...
+   # TODO: seperate these tests...
+   get_command(:test).when_called { |args, opts| options = opts }  
+   get_command(:test).run ['--trace', 'just', 'some', 'args']
+   options.trace.should be_true
+ end
+ 
+ it "should pass options to #when_called proc using toggle and arg syntax" do
+   options = nil
+   get_command(:test).when_called { |args, opts| options = opts }  
+   get_command(:test).option "--[no-]toggle"
+   get_command(:test).option "--manditory ARG"
+   get_command(:test).option "--optional [ARG]"
+   get_command(:test).option "--list x,y,z", Array
+   get_command(:test).run ['--no-toggle', '--manditory foo', '--optional bar', '--list 1,2,3']
+   options.toggle.should be_false
+   options.manditory.should eql("foo")
+   options.optional.should eql("foo")
+   options.list.should eql([1,2,3])
+ end
+  
  it "should initialize and call object when a class is passed to #when_called" do
   class HandleWhenCalled
     def arbitrary_method(*args) args.join('-') end 
