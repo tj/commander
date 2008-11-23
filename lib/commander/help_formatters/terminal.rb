@@ -13,8 +13,7 @@ module Commander
     class Terminal < Base
       
       def render
-        # TODO: pre-process options, add switches and description keys based on ^-
-        puts template(:help).result @runner.get_binding
+        template(:help).result @runner.get_binding
       end
       
       def render_command(command)
