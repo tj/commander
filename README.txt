@@ -99,6 +99,7 @@ are some quick examples for how to utilize highline in your command(s):
 * allow options to take a block OR populate a struct.. passed with |args, options| ?
 
 * add command machine-name to help docs
+* global options... change runner implementations as well as displaying in terminal formatter
 * fix ERB whitespace.. its being retarted...
 * set up regular rake tasks properly... and reformat rspec (view other conventions)
 * refactor rspec with mocks etc
