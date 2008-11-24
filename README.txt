@@ -3,9 +3,7 @@
 
 Small, intuative gem for creating executables. Commander
 bridges the gap between other terminal related libraries
-you know and love (OptionParser, HighLine). Although Commander is 
-generally used for sub-command driven programs, although support 
-for unary executables do and will continue to be supported.
+you know and love (OptionParser, HighLine).
 
 == Features:
 
@@ -115,6 +113,7 @@ simplify common tasks using the following methods:
 
 == Todo:
 
+* Dynamically generate padding for help.erb command list
 * Add classify to commander exec
 * Add program :author
 * Add program :copyright

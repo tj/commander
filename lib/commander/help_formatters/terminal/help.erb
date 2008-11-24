@@ -10,6 +10,6 @@
   <%= color "SUB-COMMANDS", :bold %>:
 
 <% @commands.each_pair do |name, command| %>
-    <%= command.name %>        <%= command.description %>
+    <%= "%-14s %s" % [command.name, command.description] %>
 <% end %>
 
