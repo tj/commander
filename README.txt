@@ -114,6 +114,7 @@ simplify common tasks using the following methods:
 
 == Todo:
 
+* Add classify to commander exec
 * Add program :author
 * Add program :copyright
 * Add global options... change runner implementations as well as displaying in terminal formatter

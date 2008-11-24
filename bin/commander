@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'commander'
 
-program :name, 'Commander'
+program :name, 'commander'
 program :version, Commander::VERSION::STRING
 program :description, 'Commander utility program.'
 
@@ -17,14 +17,15 @@ command :init do |c|
 		description = ask 'Describe your program: '
 		commands = ask 'List the sub-commands you wish to create: ', Array
 		begin
-      File.open(args.shift, 'w') do |f|
+      File.open(args.first, 'w') do |f|
         f.write <<-CODE
 #!/usr/bin/env ruby
 
 require 'rubygems'
 require 'commander'
+require '#{name}'
 
-program :name, '#{name.capitalize}'
+program :name, '#{name}'
 program :version, #{name.capitalize}::VERSION::STRING
 program :description, '#{description}.'
  
@@ -35,7 +36,7 @@ command :#{command} do |c|
   c.syntax = ''
   c.description = ''
   c.example 'description', 'code'
-  c.when_called do |args|
+  c.when_called do |args, options|
     # Do something
   end
 end
@@ -43,7 +44,7 @@ end
 CODE
         end
        end
-       say "Initialized template in #{filepath}"
+       say "Initialized template in #{args.first}"
 		 rescue Exception => e
        abort e
 		 end
