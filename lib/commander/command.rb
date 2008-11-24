@@ -48,14 +48,16 @@ module Commander
     #    --[with]-feature    options.feature        # => bool
     #    --large-switch      options.large_switch   # => bool
     #    --file FILE         options.file           # => file passed
-    #    --list 1,2,3        options.list           # => array
+    #    --list words        options.list           # => array
     #
     # === Examples:
     #    
     #    command :something do |c|
-    #      c.option '--recursive'
-    #      c.option '--file FILE'
-    #      c.option('--info') { puts "handle with block" }
+    #      c.option '--recursive', 'Do something recursively'
+    #      c.option '--file FILE', 'Specify a file'
+    #      c.option('--info', 'Display info') { puts "handle with block" }
+    #      c.option '--[no]-feature', 'With or without feature'
+    #      c.option '--list files', Array, 'List the files specified'
     #
     #      c.when_called do |args, options|
     #        do_something_recursively if options.recursive
