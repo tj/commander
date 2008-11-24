@@ -1,3 +1,9 @@
+
+=== 2.0.1 / 2008-11-24
+
+* Fixed new line after command options
+* Fixed padding for command list
+
 === 2.0.0 / 2008-11-24
 
 * Rewrite of entire gem
