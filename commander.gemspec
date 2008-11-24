@@ -5,15 +5,15 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2008-11-22}
+  s.date = %q{2008-11-24}
   s.default_executable = %q{commander}
   s.description = %q{}
   s.email = ["tj@vision-media.ca"]
   s.executables = ["commander"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
-  s.files = ["History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/commander", "commander.gemspec", "lib/commander.rb", "lib/commander/command.rb", "lib/commander/core_ext.rb", "lib/commander/core_ext/array.rb", "lib/commander/core_ext/kernel.rb", "lib/commander/core_ext/object.rb", "lib/commander/help_formatters.rb", "lib/commander/help_formatters/base.rb", "lib/commander/help_formatters/terminal.rb", "lib/commander/help_formatters/terminal/command_help.erb", "lib/commander/help_formatters/terminal/help.erb", "lib/commander/import.rb", "lib/commander/runner.rb", "lib/commander/version.rb", "spec/all_spec.rb", "spec/commander_spec.rb", "spec/help_formatter_spec.rb", "spec/spec_helper.rb", " "]
+  s.files = ["History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/commander", "commander.gemspec", "lib/commander.rb", "lib/commander/command.rb", "lib/commander/core_ext.rb", "lib/commander/core_ext/array.rb", "lib/commander/core_ext/kernel.rb", "lib/commander/core_ext/object.rb", "lib/commander/help_formatters.rb", "lib/commander/help_formatters/base.rb", "lib/commander/help_formatters/terminal.rb", "lib/commander/help_formatters/terminal/command_help.erb", "lib/commander/help_formatters/terminal/help.erb", "lib/commander/import.rb", "lib/commander/runner.rb", "lib/commander/user_interaction.rb", "lib/commander/version.rb", "spec/all_spec.rb", "spec/commander_spec.rb", "spec/help_formatter_spec.rb", "spec/spec_helper.rb"]
   s.has_rdoc = true
-  s.homepage = %q{Small, intuative gem for creating executables. Commander is generally used}
+  s.homepage = %q{Small, intuative gem for creating executables. Commander}
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{commander}
