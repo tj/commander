@@ -15,6 +15,7 @@ for unary executables do and will continue to be supported.
 * Auto-generates help documentation via pluggable help formatters
 * Adds additional user interaction functionality
 * Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
+* Use the 'commander' command to initialize a commander driven program
 
 == Example:
 
