@@ -114,16 +114,17 @@ simplify common tasks using the following methods:
 == Todo:
 
 * Dynamically generate padding for help.erb command list
+* Add handling of invalid options at the command level / output error when --file ARG, ARG is missing..
+* Add handling of options before command (command [options] sub-command)
+* Test multi-line example descriptions... indent them
 * Add classify to commander exec
-* Add program :author
 * Add program :copyright
 * Add global options... change runner implementations as well as displaying in terminal formatter
 * Add example docs for singular commands
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
-* Change; output options in a better format
 * Add highline page_and_wrap
-* Add command machine-name to help docs
 * Fix ERB whitespace.. its being retarted...
+* Change; output options in a better format
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; set up regular rake tasks properly... and reformat rspec (view other conventions)
 * Change; refactor rspec with mocks/stubs etc

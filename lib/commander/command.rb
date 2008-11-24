@@ -175,8 +175,8 @@ module Commander
     
     def seperate_switches_from_description(args) #:nodoc:
       # TODO: refactor this goodness
-      switches = args.find_all { |a| a.index('-') == 0 } 
-      description = args.last unless args.last.index('-') == 0
+      switches = args.find_all { |a| a.index('-') == 0 if a.is_a? String } 
+      description = args.last unless !args.last.is_a? String or args.last.index('-') == 0
       [switches, description]
     end
     

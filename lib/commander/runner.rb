@@ -55,10 +55,10 @@ module Commander
     #
     # === Keys:
     #
-    # * :name:           (required) Program name
-    # * :version:        (required) Program version triple, ex: '0.0.1'
-    # * :description:    (required) Program description
-    # * :help_formatter: Defaults to Commander::HelpFormatter::Terminal
+    #    :name            (required) Program name
+    #    :version         (required) Program version triple, ex: '0.0.1'
+    #    :description     (required) Program description
+    #    :help_formatter  Defaults to Commander::HelpFormatter::Terminal
     #
     
     def program(key, value = nil)

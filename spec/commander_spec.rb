@@ -96,26 +96,47 @@ describe Commander do
    result.should eql("just some args")
  end
  
- it "should pass options to #when_called proc" do
+ it "should handle boolean options" do
    opts = nil
    get_command(:test).when_called { |args, options| opts = options }  
    get_command(:test).run ['--trace', 'foo', 'bar']
    opts.trace.should be_true
  end
  
-#it "should pass toggle options to #when_called proc" do
-#  options = nil
-#  get_command(:test).when_called { |args, opts| options = opts }  
-#  get_command(:test).option "--[no-]toggle"
-#  get_command(:test).option "--manditory ARG"
-#  get_command(:test).option("--optional [ARG]"){ |v| puts "TEst #{v}"}
-#  get_command(:test).option "--list x,y,z", Array
-#  get_command(:test).run ['--no-toggle', '--manditory foo', '--optional bar', '--list 1,2,3']
-#  options.toggle.should be_false
-#  options.manditory.should eql("foo")
-#  options.optional.should eql("foo")
-#  options.list.should eql([1,2,3])
-#end
+ it "should handle toggle options" do
+   options = nil
+   get_command(:test).when_called { |args, opts| options = opts }  
+   get_command(:test).option "--[no-]toggle"
+   get_command(:test).run ['--no-toggle']
+   options.toggle.should be_false
+ end
+ 
+ it "should handle manditory arg options" do
+   options = nil
+   get_command(:test).when_called { |args, opts| options = opts }  
+   get_command(:test).option "--manditory ARG"
+   get_command(:test).run ['--manditory', "foo"]
+   options.manditory.should eql("foo")
+   lambda { get_command(:test).run ['--manditory'] }.should raise_error(OptionParser::MissingArgument)
+ end  
+ 
+ it "should handle optional arg options" do
+   options = nil
+   get_command(:test).when_called { |args, opts| options = opts }  
+   get_command(:test).option "--optional [ARG]"
+   get_command(:test).run ['--optional', "foo"]
+   options.optional.should eql("foo") 
+   get_command(:test).run ['--optional']
+   options.optiona.should be_nil  
+ end
+ 
+ it "should handle list options" do
+   options = nil
+   get_command(:test).when_called { |args, opts| options = opts }  
+   get_command(:test).option "--list words", Array
+   get_command(:test).run ['--list', "im,a,list"]
+   options.list.should eql(["im", "a", "list"]) 
+ end
   
  it "should initialize and call object when a class is passed to #when_called" do
   class HandleWhenCalled
