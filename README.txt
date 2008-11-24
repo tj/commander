@@ -96,7 +96,8 @@ are some quick examples for how to utilize highline in your command(s):
 
 == Todo:
 
-* allow options to take a block OR populate a struct.. passed with |args, options| ?
+* reverse |options, args| so args can be |options, file, dir| etc..
+* update docs from ^^^^ change
 * check other todos/fixmes
 
 * output options in a better format

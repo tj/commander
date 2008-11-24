@@ -11,7 +11,7 @@ def create_test_command
     c.example "description 2", "command 2"
     c.option "-t", "--trace", "trace description"
     c.option "--verbose", "verbose description"
-    c.when_called do |args|
+    c.when_called do |args, options|
       "test %s" % args.join
     end
   end

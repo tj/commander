@@ -5,14 +5,15 @@ require 'ostruct'
 module Commander
   class Command
     
-    attr_reader :name, :examples, :options, :proxied_options
+    attr_reader :name, :examples, :options, :proxy_options
     attr_accessor :syntax, :description
         
     ##
     # Initialize new command with specified +name+.
     
     def initialize(name)
-      @name, @examples, @options, @when_called = name, [], [], {}
+      @name, @examples, @when_called = name, [], {}
+      @options, @proxy_options = [], []
     end
     
     ##
@@ -24,7 +25,7 @@ module Commander
     # === Examples:
     #    
     #    command :something do |c|
-    #      c.example "Should do something", "ruby my_command something"
+    #      c.example "Should do something", "my_command something"
     #    end
     #
     
@@ -127,15 +128,12 @@ module Commander
     ##
     # Call the commands when_called block with +args+.
     
-    def call(*args)
+    def call(args = [])
       h = @when_called
       case 
-      when h[:class]
-        h[:class].new.send h[:method], *args
-      when h[:object]
-        h[:object].send h[:method], *args
-      when h[:proc]
-        h[:proc].call *args
+      when h[:class]: h[:class].new.send(h[:method], args, proxy_option_struct)
+      when h[:object]: h[:object].send(h[:method], args, proxy_option_struct)
+      when h[:proc]: h[:proc].call args, proxy_option_struct
       end
     end
     
@@ -151,10 +149,16 @@ module Commander
     # * --list of, things  # => :list
     
     def sym_from_switch(switch)
-      switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym
+      switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
     end
     
     private 
+    
+    def proxy_option_struct #:nodoc:
+      options = OpenStruct.new
+      @proxy_options.each { |o| options.send("#{o[:method]}=", o[:value]) } 
+      options
+    end
     
     def seperate_switches_from_description(args) #:nodoc:
       # TODO: refactor this goodness
@@ -168,8 +172,11 @@ module Commander
     # is not specifically supplied to #option.
     
     def populate_options_to_when_called(switches) #:nodoc:
-      Proc.new do |*args|
-        switches.last
+      Proc.new do |args|
+        @proxy_options << {
+          :method => sym_from_switch(switches.last),
+          :value => args,
+        }
       end 
     end
     

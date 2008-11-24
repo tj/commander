@@ -145,7 +145,7 @@ module Commander
         c.description = "Displays global or sub-command help information"
         c.example "Display global help", "command help"
         c.example "Display help for 'foo'", "command help foo"
-        c.when_called do |args|
+        c.when_called do |args, options|
           gen = help_formatter
           @output.puts gen.render if args.empty?
           @output.puts gen.render_command(get_command(args.shift.to_sym)) unless args.empty?

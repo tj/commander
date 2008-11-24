@@ -91,16 +91,16 @@ describe Commander do
  
  it "should call the #when_called proc when #run" do
    result = nil
-   get_command(:test).when_called { |args| result = args.join(' ') }  
+   get_command(:test).when_called { |args, options| result = args.join(' ') }  
    get_command(:test).run ['--trace', 'just', 'some', 'args']
    result.should eql("just some args")
  end
  
  it "should pass options to #when_called proc" do
-   options = nil
-   get_command(:test).when_called { |args, opts| options = opts }  
+   opts = nil
+   get_command(:test).when_called { |args, options| opts = options }  
    get_command(:test).run ['--trace', 'foo', 'bar']
-   #options.trace.should be_true
+   opts.trace.should be_true
  end
  
 #it "should pass toggle options to #when_called proc" do
@@ -119,18 +119,18 @@ describe Commander do
   
  it "should initialize and call object when a class is passed to #when_called" do
   class HandleWhenCalled
-    def arbitrary_method(*args) args.join('-') end 
+    def arbitrary_method(args, options) args.join('-') end 
   end
   get_command(:test).when_called HandleWhenCalled, :arbitrary_method
-  get_command(:test).call("hello", "world").should eql("hello-world")
+  get_command(:test).call(["hello", "world"]).should eql("hello-world")
  end
  
  it "should call object when passed to #when_called " do
    class HandleWhenCalled 
-     def arbitrary_method(*args) args.join('-') end 
+     def arbitrary_method(args, options) args.join('-') end 
    end
    get_command(:test).when_called HandleWhenCalled.new, :arbitrary_method
-   get_command(:test).call("hello", "world").should eql("hello-world")
+   get_command(:test).call(["hello", "world"]).should eql("hello-world")
  end
 
 end
