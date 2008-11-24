@@ -97,7 +97,7 @@ are some quick examples for how to utilize highline in your command(s):
      end
    end
 
-== HighLine Additions
+== HighLine Additions:
 
 In addition to highline's fantastic choice of methods we will continue to
 simplify common tasks using the following methods:
