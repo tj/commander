@@ -64,7 +64,7 @@ describe Commander do
    get_command(:test).sym_from_switch("--[no]-feature").should eql(:feature)
    get_command(:test).sym_from_switch("--[no]-feature ARG").should eql(:feature)
    get_command(:test).sym_from_switch("--file [ARG]").should eql(:file)
-   get_command(:test).sym_from_switch("--colors blue,green").should eql(:colors)
+   get_command(:test).sym_from_switch("--colors colors").should eql(:colors)
  end
  
  it "should resolve active command from invalid options passed" do

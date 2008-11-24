@@ -113,6 +113,7 @@ simplify common tasks using the following methods:
 
 == Todo:
 
+* other scripts using _param_ for params... im usin +param+ ?... whats the convention... 
 * Dynamically generate padding for help.erb command list
 * Add handling of invalid options at the command level / output error when --file ARG, ARG is missing..
 * Add handling of options before command (command [options] sub-command)
