@@ -9,8 +9,8 @@ def create_test_command
     c.description = "test description"
     c.example "description", "command"
     c.example "description 2", "command 2"
-    c.option("-t", "--trace", "trace description") {}
-    c.option("--verbose", "verbose description") {}
+    c.option "-t", "--trace", "trace description"
+    c.option "--verbose", "verbose description"
     c.when_called do |args|
       "test %s" % args.join
     end

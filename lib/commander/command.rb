@@ -1,10 +1,11 @@
 
 require 'optparse'
+require 'ostruct'
 
 module Commander
   class Command
     
-    attr_reader :name, :examples, :options
+    attr_reader :name, :examples, :options, :proxied_options
     attr_accessor :syntax, :description
         
     ##
@@ -58,9 +59,10 @@ module Commander
     
     def option(*args, &block)
       switches, description = seperate_switches_from_description args
+      proc = block_given? ? block : populate_options_to_when_called(switches)
       @options << {
         :args => args,
-        :proc => block_given? ? block : populate_options,
+        :proc => proc,
         :switches => switches,
         :description => description,
       }
@@ -85,17 +87,18 @@ module Commander
     #
     
     def when_called(*args, &block)
+      h = @when_called
       unless args.empty?
         case args.first
         when Class
-          @when_called[:class] = args.shift
-          @when_called[:method] = args.shift
+          h[:class] = args.shift
+          h[:method] = args.shift
         else
-          @when_called[:object] = args.shift
-          @when_called[:method] = args.shift
+          h[:object] = args.shift
+          h[:method] = args.shift
         end
       end
-      @when_called[:proc] = block if block_given?
+      h[:proc] = block if block_given?
     end
     
     ##
@@ -116,7 +119,7 @@ module Commander
     def parse_options_and_call_procs(args = [])
       return args if args.empty?
       opts = OptionParser.new
-      @options.each { |o| p opts.on(*o[:args], &o[:proc]) }
+      @options.each { |o| opts.on(*o[:args], &o[:proc]) }
       opts.parse! args
       args
     end
@@ -136,6 +139,21 @@ module Commander
       end
     end
     
+    ##
+    # Attempts to generate a method name symbol from +switch+.
+    # For example:
+    # 
+    # * -h                 # => :h
+    # * --trace            # => :trace
+    # * --some-switch      # => :some_switch
+    # * --[with]-feature   # => :feature
+    # * --file FILE        # => :file
+    # * --list of, things  # => :list
+    
+    def sym_from_switch(switch)
+      switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym
+    end
+    
     private 
     
     def seperate_switches_from_description(args) #:nodoc:
@@ -145,10 +163,14 @@ module Commander
       [switches, description]
     end
     
-    def populate_options #:nodoc:
+    ##
+    # Pass option values to the when_called proc when a block
+    # is not specifically supplied to #option.
+    
+    def populate_options_to_when_called(switches) #:nodoc:
       Proc.new do |*args|
-        p args
-      end
+        switches.last
+      end 
     end
     
   end

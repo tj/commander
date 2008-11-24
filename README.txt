@@ -96,7 +96,6 @@ are some quick examples for how to utilize highline in your command(s):
 
 == Todo:
 
-* get user interaction module working... 
 * allow options to take a block OR populate a struct.. passed with |args, options| ?
 * check other todos/fixmes
 
