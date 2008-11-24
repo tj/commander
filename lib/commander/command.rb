@@ -40,22 +40,35 @@ module Commander
     # Add an option.
     #
     # Options are parsed via OptionParser so view it
-    # for additional usage documentation. This method 
-    # also parses the arguments passed in order to determine
-    # which were switches, and which were descriptions for the
-    # option which can later be used within help formatters
-    # using option[:switches] and option[:description].
+    # for additional usage documentation. A block may optionally be
+    # passed to handle the option, otherwise the +options+ struct seen below 
+    # contains the results of this option. This handles common formats such as:
+    #
+    #    -h, --help          options.help           # => bool
+    #    --[with]-feature    options.feature        # => bool
+    #    --large-switch      options.large_switch   # => bool
+    #    --file FILE         options.file           # => file passed
+    #    --list 1,2,3        options.list           # => array
     #
     # === Examples:
     #    
     #    command :something do |c|
-    #      options = { :recursive => false }
-    #      c.option('--recursive') { options[:recursive] => true }
+    #      c.option '--recursive'
+    #      c.option '--file FILE'
+    #      c.option('--info') { puts "handle with block" }
     #
-    #      c.when_called do |args|
-    #        do_something_recursively if options[:recursive]
+    #      c.when_called do |args, options|
+    #        do_something_recursively if options.recursive
+    #        do_something_with_file options.file if options.file
     #      end 
     #    end
+    #
+    # === Help Formatters:
+    #
+    # This method also parses the arguments passed in order to determine
+    # which were switches, and which were descriptions for the
+    # option which can later be used within help formatters
+    # using option[:switches] and option[:description].
     #
     
     def option(*args, &block)
@@ -81,7 +94,7 @@ module Commander
     # === Examples:
     #    
     #    command :something do |c|
-    #      c.when_called do |args|
+    #      c.when_called do |args, options|
     #        # do something
     #      end 
     #    end
@@ -141,12 +154,12 @@ module Commander
     # Attempts to generate a method name symbol from +switch+.
     # For example:
     # 
-    # * -h                 # => :h
-    # * --trace            # => :trace
-    # * --some-switch      # => :some_switch
-    # * --[with]-feature   # => :feature
-    # * --file FILE        # => :file
-    # * --list of, things  # => :list
+    #   -h                 # => :h
+    #   --trace            # => :trace
+    #   --some-switch      # => :some_switch
+    #   --[with]-feature   # => :feature
+    #   --file FILE        # => :file
+    #   --list of, things  # => :list
     
     def sym_from_switch(switch)
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil

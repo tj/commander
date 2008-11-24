@@ -22,7 +22,7 @@ module Commander
       @input, @output, @args = input, output, args
       @commands, @options = {}, { :help => false, :version => false }
       @program = { :help_formatter => Commander::HelpFormatter::Terminal }
-      parse_global_options # TODO: move to run! so globals can be added... causes an error with @args though
+      parse_global_options # TODO: move to run! so globals can be added...
       create_default_commands
     end
     

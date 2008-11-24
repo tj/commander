@@ -3,13 +3,22 @@
 
 Small, intuative gem for creating executables. Commander
 bridges the gap between other terminal related libraries
-you know and love (OptionParser, HighLine).
+you know and love (OptionParser, HighLine). Although Commander is 
+generally used for sub-command driven programs, although support 
+for unary executables do and will continue to be supported.
 
-Commander is generally used for sub-command driven programs, 
-although support for unary executables do and will continue to 
-be supported. 
+== Features:
+
+* Easier than baking cookies
+* Parses options using OptionParser
+* Imports the highline gem for interacting with the terminal
+* Auto-generates help documentation via pluggable help formatters
+* Adds additional user interaction functionality
+* Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
 
 == Example:
+
+For more option examples view the Commander::Command#option method
 
    require 'rubygems'
    require 'commander'
@@ -19,34 +28,32 @@ be supported.
    program :description, 'Stupid command that prints foo or bar.'
 
    command :foo do |c|
-     c.syntax = "foobar [options] foo"
+     c.syntax = "foobar foo"
      c.description = "Display foo"
-     c.when_called do |args|
+     c.when_called do |args, options|
        say 'foo'
      end
    end
 
    command :bar do |c|
-   ...
+     c.syntax = "foobar [options] bar"
+     c.description = "Display bar with optional prefix"
+     c.option "--prefix STRING"
+     c.when_called do |args, options|
+       say "#{options.prefix} bar"
+     end
+   end
 
-== Features:
-
-* Easier than baking cookies
-* Parses options using OptionParser
-* Imports the highline gem for interacting with the terminal
-* Auto-generates help documentation via pluggable help formatters
-* Adds additional user interaction functionality
-
-== Highline:
+== HighLine:
 
 As mentioned above the highline gem is imported into 'global scope', below
 are some quick examples for how to utilize highline in your command(s):
    
-   # As for password masked with '*' character
-   ask("Enter your password:  ") { |q| q.echo = "*" }
+   # Ask for password masked with '*' character
+   ask("Password:  ") { |q| q.echo = "*" }
   
    # Ask for password 
-   p ask("Enter your password:  ") { |q| q.echo = false }
+   p ask("Password:  ") { |q| q.echo = false }
 
    # Ask if the user agrees (yes or no)
    agree("Do something?")
@@ -90,27 +97,37 @@ are some quick examples for how to utilize highline in your command(s):
      end
    end
 
+== HighLine Additions
+
+In addition to highline's fantastic choice of methods we will continue to
+simplify common tasks using the following methods:
+
+   # Ask for password 
+   password
+   
+   # Ask for password with specific message and mask
+   password "Enter your password please:", '-'
+
 == Known Issues:
   
 * none
 
 == Todo:
 
-* reverse |options, args| so args can be |options, file, dir| etc..
-* update docs from ^^^^ change
-* check other todos/fixmes
-
-* output options in a better format
-* utilize highline page_and_wrap
-* add command machine-name to help docs
-* global options... change runner implementations as well as displaying in terminal formatter
-* example docs for singular commands
-* fix ERB whitespace.. its being retarted...
-* set up regular rake tasks properly... and reformat rspec (view other conventions)
-* refactor rspec with mocks etc
-* clean up documentation, tm convention
-* convert to echoe / README.rdoc
-* public help docs
+* Add program :author
+* Add program :copyright
+* Add global options... change runner implementations as well as displaying in terminal formatter
+* Add example docs for singular commands
+* Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
+* Change; output options in a better format
+* Add highline page_and_wrap
+* Add command machine-name to help docs
+* Fix ERB whitespace.. its being retarted...
+* Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
+* Change; set up regular rake tasks properly... and reformat rspec (view other conventions)
+* Change; refactor rspec with mocks/stubs etc
+* Change; convert to echoe / README.rdoc
+* Publish help docs
 
 == LICENSE:
 
