@@ -1,3 +1,8 @@
+=== 2.0.0 / 2008-11-24
+
+* Rewrite of entire gem
+* Added auto-parsing and struct population of options
+* Added better documentation
 
 === 1.2.2 / 2008-11-06
 
