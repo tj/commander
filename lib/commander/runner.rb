@@ -37,7 +37,11 @@ module Commander
       else active_command.run args_without_command
       end
     rescue InvalidCommandError
-      @output.puts "Invalid command. Use --help for more information"
+      @output.puts "invalid command. Use --help for more information"
+    rescue OptionParser::InvalidOption, 
+      OptionParser::InvalidArgument,
+      OptionParser::MissingArgument => e
+      @output.puts e
     end
     
     ##

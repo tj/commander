@@ -25,7 +25,19 @@ describe Commander do
 	  program :name, ''
     lambda { run! }.should raise_error(Commander::Runner::CommandError)
   end
-  	
+  
+  it "should output invalid option message when invalid options passed to command" do
+    input, output = new_command_runner 'test', '--invalid-option'
+    run!
+    output.string.should eql("invalid option: --invalid-option\n")
+  end
+  
+  it "should output invalid command message when help sub-command does not exist" do
+    input, output = new_command_runner 'help', 'does_not_exist'
+    command_runner.run!
+    output.string.should eql("invalid command. Use --help for more information\n")
+  end
+      	
 	it "should get command instances using #get_command" do
 	  get_command(:test).name.should eql(:test)
 	end
