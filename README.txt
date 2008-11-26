@@ -115,7 +115,6 @@ simplify common tasks using the following methods:
 
 * other scripts using _param_ for params... im usin +param+ ?... whats the convention... 
 * Dynamically generate padding for help.erb command list
-* Add handling of invalid options at the command level / output error when --file ARG, ARG is missing..
 * Add handling of options before command (command [options] sub-command)
 * Test multi-line example descriptions... indent them
 * Add classify to commander exec
@@ -127,6 +126,7 @@ simplify common tasks using the following methods:
 * Fix ERB whitespace.. its being retarted...
 * Change; output options in a better format
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
+* Change; seperate spec suites.. describe with more granularity
 * Change; set up regular rake tasks properly... and reformat rspec (view other conventions)
 * Change; refactor rspec with mocks/stubs etc
 * Change; convert to echoe / README.rdoc
