@@ -96,7 +96,7 @@ are some quick examples for how to utilize highline in your command(s):
      end
    end
 
-== HighLine Additions:
+== HighLine & Interaction Additions:
 
 In addition to highline's fantastic choice of methods we will continue to
 simplify common tasks using the following methods:
@@ -107,12 +107,25 @@ simplify common tasks using the following methods:
    # Ask for password with specific message and mask
    password "Enter your password please:", '-'
 
+   # Simple progress bar (Commander::UI::ProgressBar)
+   uris = %w[ 
+     http://vision-media.ca 
+     http://google.com 
+     http://yahoo.com
+     ]
+   progress uris do |uri|
+     res = open uri
+     # Do something with response
+   end
+
 == Known Issues:
   
 * none
 
 == Todo:
 
+* format progress bar ETA / elapsed better
+* Rakefile bitching about rubygems...?
 * other scripts using _param_ for params... im usin +param+ ?... whats the convention... 
 * Dynamically generate padding for help.erb command list
 * Add handling of options before command (command [options] sub-command)
@@ -120,12 +133,12 @@ simplify common tasks using the following methods:
 * Add classify to commander exec
 * Add program :copyright
 * Add global options... change runner implementations as well as displaying in terminal formatter
-* Add example docs for singular commands
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add highline page_and_wrap
 * Fix ERB whitespace.. its being retarted...
 * Change; output options in a better format
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
+* Change; refactor spec suites with nested describes?
 * Change; seperate spec suites.. describe with more granularity
 * Change; set up regular rake tasks properly... and reformat rspec (view other conventions)
 * Change; refactor rspec with mocks/stubs etc

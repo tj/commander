@@ -2,7 +2,9 @@
 require 'forwardable'
 
 ##
-# Make HighLine#colo globally accessable.
+# Make the following methods globally accessable:
+#
+# * HighLine#color
 
 module Kernel
   extend Forwardable

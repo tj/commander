@@ -1,7 +1,7 @@
 
 class Object
   
-  include Commander::UserInteraction
+  include Commander::UI
   
   ##
   # Used with ERB in Commander::HelpFormatter::Base.
