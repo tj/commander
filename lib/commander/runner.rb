@@ -181,7 +181,7 @@ module Commander
       raise CommandError, "Program #{key} required (use #program method)" if (@program[key].nil? || @program[key].empty?)
     end
     
-    def args_without_command #:nodoc:
+    def args_without_command #:nodoc: 
       @_args_without_command ||= @args.dup.delete_first_match(active_command.name.to_s) 
     end
         

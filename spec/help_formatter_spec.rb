@@ -1,6 +1,4 @@
 
-require 'spec_helper'
-
 describe Commander::HelpFormatter do
   
   it "should display global help using help command" do

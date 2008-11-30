@@ -1,6 +1,6 @@
 
-$:.unshift File.expand_path(File.dirname(__FILE__))
-require File.expand_path(File.dirname(__FILE__) + '/../lib/commander')
+$:.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+require 'commander'
 require 'stringio'
 
 def create_test_command

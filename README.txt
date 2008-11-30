@@ -125,6 +125,9 @@ simplify common tasks using the following methods:
 
 == Todo:
 
+* Add spec.opts / spec/rake/spectask ?.. with --color
+* 'Import' FileUtils / add method_message per method
+* Add sh method like rake (system?)
 * global command options not working now that options can be specified before commands..
 * format progress bar ETA / elapsed better
 * Dynamically generate padding for help.erb command list

@@ -1,6 +1,4 @@
 
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
-
 describe Commander do
   
 	before :each do
@@ -25,18 +23,6 @@ describe Commander do
 	  program :name, ''
     lambda { run! }.should raise_error(Commander::Runner::CommandError)
   end
-  
-  it "should output invalid option message when invalid options passed to command" do
-    input, output = new_command_runner 'test', '--invalid-option'
-    run!
-    output.string.should eql("invalid option: --invalid-option\n")
-  end
-  
-  it "should output invalid command message when help sub-command does not exist" do
-    input, output = new_command_runner 'help', 'does_not_exist'
-    command_runner.run!
-    output.string.should eql("invalid command. Use --help for more information\n")
-  end
       	
 	it "should get command instances using #get_command" do
 	  get_command(:test).name.should eql(:test)
@@ -49,7 +35,29 @@ describe Commander do
 	it "should invoke #when_called with arguments properly" do
 	  get_command(:test).call([1, 2]).should eql("test 12")
 	end
-	
+
+  it "should output invalid option message when invalid options passed to command" do
+    input, output = new_command_runner 'test', '--invalid-option'
+    run!
+    output.string.should eql("invalid option: --invalid-option\n")
+  end
+  
+  it "should output invalid command message when help sub-command does not exist" do
+    input, output = new_command_runner 'help', 'does_not_exist'
+    command_runner.run!
+    output.string.should eql("invalid command. Use --help for more information\n")
+  end
+
+ 	it "should locate command within arbitrary arguments passed" do
+ 	  new_command_runner '--help', '--arbitrary', 'test'
+ 	  command_runner.command_name_from_args.should eql(:test)
+ 	end
+
+  it "should resolve active command from global options passed" do
+    new_command_runner '--help', 'test'
+    command_runner.active_command.should be_instance_of(Commander::Command)
+  end
+    	
 	it "should distinguish between switches and descriptions passed to #option" do
 	  get_command(:test).options[0][:description].should eql("trace description")
 	  get_command(:test).options[0][:switches].should eql(["-t", "--trace"])
@@ -59,26 +67,16 @@ describe Commander do
 	  get_command(:test).options[2][:description].should be_nil
 	  get_command(:test).options[2][:switches].should eql(["--test"])
 	end
-	
-	it "should locate command within arbitrary arguments passed" do
-	  new_command_runner '--help', '--arbitrary', 'test'
-	  command_runner.command_name_from_args.should eql(:test)
-	end
-	
- it "should resolve active command from global options passed" do
-   new_command_runner '--help', 'test'
-   command_runner.active_command.should be_instance_of(Commander::Command)
- end
- 
- it "should generate a symbol from switches" do
-   get_command(:test).sym_from_switch("--trace").should eql(:trace)
-   get_command(:test).sym_from_switch("--foo-bar").should eql(:foo_bar)
-   get_command(:test).sym_from_switch("--[no]-feature").should eql(:feature)
-   get_command(:test).sym_from_switch("--[no]-feature ARG").should eql(:feature)
-   get_command(:test).sym_from_switch("--file [ARG]").should eql(:file)
-   get_command(:test).sym_from_switch("--colors colors").should eql(:colors)
- end
- 
+
+  it "should generate a symbol from switches" do
+    get_command(:test).sym_from_switch("--trace").should eql(:trace)
+    get_command(:test).sym_from_switch("--foo-bar").should eql(:foo_bar)
+    get_command(:test).sym_from_switch("--[no]-feature").should eql(:feature)
+    get_command(:test).sym_from_switch("--[no]-feature ARG").should eql(:feature)
+    get_command(:test).sym_from_switch("--file [ARG]").should eql(:file)
+    get_command(:test).sym_from_switch("--colors colors").should eql(:colors)
+  end
+  	
  it "should resolve active command from invalid options passed" do
    new_command_runner '--help', 'test', '--arbitrary'
    command_runner.active_command.should be_instance_of(Commander::Command)
