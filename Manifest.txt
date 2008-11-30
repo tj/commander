@@ -8,6 +8,7 @@ lib/commander.rb
 lib/commander/command.rb
 lib/commander/core_ext.rb
 lib/commander/core_ext/array.rb
+lib/commander/core_ext/enumerable.rb
 lib/commander/core_ext/kernel.rb
 lib/commander/core_ext/object.rb
 lib/commander/core_ext/string.rb

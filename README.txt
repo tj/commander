@@ -126,17 +126,16 @@ simplify common tasks using the following methods:
 == Todo:
 
 * format progress bar ETA / elapsed better
-* Rakefile bitching about rubygems...?
-* other scripts using _param_ for params... im usin +param+ ?... whats the convention... 
 * Dynamically generate padding for help.erb command list
 * Add handling of options before command (command [options] sub-command)
 * Test multi-line example descriptions... indent them
 * Add classify to commander exec
 * Add program :copyright
-* Add global options... change runner implementations as well as displaying in terminal formatter
+* Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add highline page_and_wrap
 * Fix ERB whitespace.. its being retarted...
+* Fix errors raised at_exit are not written to stderr
 * Change; output options in a better format
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; refactor spec suites with nested describes?

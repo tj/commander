@@ -165,5 +165,23 @@ describe Commander do
    get_command(:test).when_called HandleWhenCalled.new, :arbitrary_method
    get_command(:test).call(["hello", "world"]).should eql("hello-world")
  end
+ 
+ it "should populate options when passed before command name" do
+   options = nil
+   new_command_runner '--foo', 'test', 'some', 'args'
+   get_command(:test).option "--foo"
+   get_command(:test).when_called { |args, opts| options = opts }
+   command_runner.run!
+   options.foo.should be_true 
+ end
+ 
+ it "should populate options when passed after command name" do
+   options = nil
+   new_command_runner 'test', '--foo', 'some', 'args'
+   get_command(:test).option "--foo"
+   get_command(:test).when_called { |args, opts| options = opts }
+   command_runner.run!
+   options.foo.should be_true 
+ end
 
 end
