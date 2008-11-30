@@ -14,6 +14,7 @@ you know and love (OptionParser, HighLine).
 * Adds additional user interaction functionality
 * Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
 * Use the 'commander' command to initialize a commander driven program
+* Highly customizable progress bar formatting
 
 == Example:
 
