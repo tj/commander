@@ -23,6 +23,7 @@ module Commander
       @commands, @options = {}, { :help => false, :version => false }
       @program = { :help_formatter => Commander::HelpFormatter::Terminal }
       create_default_commands
+      parse_global_options
     end
     
     ##
@@ -30,7 +31,6 @@ module Commander
     
     def run!
       %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
-      parse_global_options
       case 
       when options[:version]; @output.puts "#{@program[:name]} #{@program[:version]}" 
       when options[:help]; get_command(:help).run args_without_command 
@@ -182,8 +182,7 @@ module Commander
     end
     
     def args_without_command #:nodoc:
-      command_removed = true
-      @_args_without_command ||= @args.delete_first_match(active_command.name.to_s) 
+      @_args_without_command ||= @args.dup.delete_first_match(active_command.name.to_s) 
     end
         
   end

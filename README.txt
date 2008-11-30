@@ -125,10 +125,9 @@ simplify common tasks using the following methods:
 
 == Todo:
 
+* global command options not working now that options can be specified before commands..
 * format progress bar ETA / elapsed better
 * Dynamically generate padding for help.erb command list
-* Add handling of options before command (command [options] sub-command)
-* Test multi-line example descriptions... indent them
 * Add classify to commander exec
 * Add program :copyright
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
