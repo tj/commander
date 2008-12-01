@@ -33,9 +33,9 @@ CODE
         commands.each do |command|
           f.write <<-CODE
 command :#{command} do |c|
-  c.syntax = ''
-  c.description = ''
-  c.example 'description', 'code'
+  c.syntax = ""
+  c.description = ""
+  c.example "description", "code"
   c.when_called do |args, options|
     # Do something
   end

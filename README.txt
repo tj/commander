@@ -140,6 +140,7 @@ global usage.
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add highline page_and_wrap (less)
+* Add global --options switch for loading options from a filepath
 * Fix ERB whitespace.. its being retarted...
 * Fix errors raised at_exit are not written to stderr
 * Change; format progress bar ETA / elapsed better\
