@@ -1,4 +1,11 @@
 
+=== 2.1.0 / 2008-12-01
+
+* Added progress bar
+* Added auto-inclusion of FileUtils module
+* Added stdout logging method
+* Fixed issue with options placed before sub-command
+
 === 2.0.1 / 2008-11-24
 
 * Fixed new line after command options

@@ -154,7 +154,7 @@ module Commander
           if args.empty?
             @output.puts gen.render 
           else
-            @output.puts gen.render_command get_command(args.shift.to_sym)
+            @output.puts gen.render_command(get_command(args.shift.to_sym))
           end
         end
       end

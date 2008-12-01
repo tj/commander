@@ -14,7 +14,7 @@ module Commander
     ##
     # Format used within #log.
     
-    LOG_FORMAT = "%13s  %s"
+    LOG_FORMAT = "%15s  %s"
     
     ##
     # Ask the user for a password. Specify a custom
@@ -35,7 +35,7 @@ module Commander
     #
     
     def log(action, *args)
-      puts LOG_FORMAT % [action, *args]
+      say LOG_FORMAT % [action, *args]
     end
     
     ##

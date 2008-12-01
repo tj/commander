@@ -119,6 +119,14 @@ simplify common tasks using the following methods:
      # Do something with response
    end
 
+  # 'Log' action to stdout
+  log "create", "path/to/file.rb"
+
+== FileUtils:
+
+The FileUtils module is automatically included within the main object for
+global usage.
+
 == Known Issues:
   
 * none
@@ -126,20 +134,17 @@ simplify common tasks using the following methods:
 == Todo:
 
 * Add spec.opts / spec/rake/spectask ?.. with --color
-* 'Import' FileUtils / add method_message per method
-* Add sh method like rake (system?)
-* global command options not working now that options can be specified before commands..
-* format progress bar ETA / elapsed better
-* Dynamically generate padding for help.erb command list
+* Add; dynamically generate padding for help.erb command list
 * Add classify to commander exec
 * Add program :copyright
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
-* Add highline page_and_wrap
+* Add highline page_and_wrap (less)
 * Fix ERB whitespace.. its being retarted...
 * Fix errors raised at_exit are not written to stderr
+* Change; format progress bar ETA / elapsed better\
 * Change; make Commander::UI.log conditionally output
-* Change; conditional wrapping of FileUtils
+* Change; conditional wrapping of FileUtils (require 'commander/fileutils')
 * Change; output options in a better format
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; refactor spec suites with nested describes?
