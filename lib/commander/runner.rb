@@ -33,7 +33,7 @@ module Commander
       %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
       case 
       when options[:version]; @output.puts "#{@program[:name]} #{@program[:version]}" 
-      when options[:help]; get_command(:help).run args_without_command 
+      when options[:help]; get_command(:help).run
       else active_command.run args_without_command
       end
     rescue InvalidCommandError
@@ -151,8 +151,11 @@ module Commander
         c.example "Display help for 'foo'", "command help foo"
         c.when_called do |args, options|
           gen = help_formatter
-          @output.puts gen.render if args.empty?
-          @output.puts gen.render_command(get_command(args.shift.to_sym)) unless args.empty?
+          if args.empty?
+            @output.puts gen.render 
+          else
+            @output.puts gen.render_command get_command(args.shift.to_sym)
+          end
         end
       end
     end
