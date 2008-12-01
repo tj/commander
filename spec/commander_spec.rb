@@ -23,6 +23,13 @@ describe Commander do
 	  program :name, ''
     lambda { run! }.should raise_error(Commander::Runner::CommandError)
   end
+  
+  it "should output program version using --version switch" do
+    intput, output = new_command_runner '--version'
+    program :help_formatter, Commander::HelpFormatter::Base
+    command_runner.run!
+    output.string.should eql("test 1.2.3\n")
+  end
       	
 	it "should get command instances using #get_command" do
 	  get_command(:test).name.should eql(:test)
