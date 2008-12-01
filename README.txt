@@ -138,6 +138,8 @@ simplify common tasks using the following methods:
 * Add highline page_and_wrap
 * Fix ERB whitespace.. its being retarted...
 * Fix errors raised at_exit are not written to stderr
+* Change; make Commander::UI.log conditionally output
+* Change; conditional wrapping of FileUtils
 * Change; output options in a better format
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; refactor spec suites with nested describes?

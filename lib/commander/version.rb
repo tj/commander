@@ -1,10 +1,7 @@
 
 module Commander
   module VERSION #:nodoc:
-    MAJOR = 2
-    MINOR = 0
-    TINY = 1
-
+    MAJOR, MINOR, TINY = [2, 0, 1]
     STRING = [MAJOR, MINOR, TINY].join '.'
   end
 end

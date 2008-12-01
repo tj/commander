@@ -12,12 +12,30 @@ module Commander
   module UI
     
     ##
+    # Format used within #log.
+    
+    LOG_FORMAT = "%13s  %s"
+    
+    ##
     # Ask the user for a password. Specify a custom
     # +msg+ other than 'Password: ' or override the 
     # default +mask+ of '*'.
     
     def password(msg = "Password: ", mask = '*')
       ask(msg) { |q| q.echo = mask }
+    end
+    
+    ##
+    # 'Log' an _action_ to the terminal. This is typically used
+    # for verbose output regarding actions performed. For example:
+    #
+    #   create  path/to/file.rb
+    #   remove  path/to/old_file.rb
+    #   remove  path/to/old_file2.rb
+    #
+    
+    def log(action, *args)
+      puts LOG_FORMAT % [action, *args]
     end
     
     ##
