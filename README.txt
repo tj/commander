@@ -105,7 +105,7 @@ simplify common tasks using the following methods:
    # Ask for password 
    password
    
-   # Ask for password with specific message and mask
+   # Ask for password with specific message and mask character
    password "Enter your password please:", '-'
 
    # Simple progress bar (Commander::UI::ProgressBar)

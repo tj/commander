@@ -8,10 +8,9 @@ module Commander
     # = Terminal
     #
     # Outputs help in a terminal friendly format,
-    # utilizing coloring via the highline gem.
+    # utilizing asni formatting via the highline gem.
     
     class Terminal < Base
-      
       def render
         template(:help).result @runner.get_binding
       end
@@ -23,7 +22,6 @@ module Commander
       def template(name)
         ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/terminal/#{name}.erb"), nil, "<>")
       end
-      
     end
   end
 end
