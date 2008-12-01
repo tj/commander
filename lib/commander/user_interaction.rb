@@ -22,7 +22,9 @@ module Commander
     # default +mask+ of '*'.
     
     def password(msg = "Password: ", mask = '*')
-      ask(msg) { |q| q.echo = mask }
+      pass = ask(msg) { |q| q.echo = mask }
+      pass = password msg, mask if pass.empty?
+      pass
     end
     
     ##
@@ -35,7 +37,7 @@ module Commander
     #
     
     def log(action, *args)
-      say LOG_FORMAT % [action, *args]
+      say LOG_FORMAT % [action, args.join(' ')]
     end
     
     ##
