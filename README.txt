@@ -133,6 +133,7 @@ global usage.
 
 == Todo:
 
+* Override abort()?
 * Add spec.opts / spec/rake/spectask ?.. with --color
 * Add; dynamically generate padding for help.erb command list
 * Add classify to commander exec

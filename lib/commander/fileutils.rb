@@ -9,8 +9,12 @@ module FileUtils
     Commander::UI.log "remove", *args
   end
   
-  after :touch, :cp, :cp_r, :mkdir, :mkdir_p do |*args|
+  after :touch :mkdir, :mkdir_p do |*args|
     Commander::UI.log "create", *args
+  end
+  
+  after :cp, :cp_r do |*args|
+    Commander::UI.log "copy", *args
   end
   
   after :mv do |src, dest, options|
