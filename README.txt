@@ -18,7 +18,9 @@ you know and love (OptionParser, HighLine).
 
 == Example:
 
-For more option examples view the Commander::Command#option method
+For more option examples view the Commander::Command#option method. Also
+an important feature to note is that when_called may be a class to instantiate,
+as well as an object, specifying a method to call, so view the RDoc for more information.
 
    require 'rubygems'
    require 'commander'
@@ -31,8 +33,8 @@ For more option examples view the Commander::Command#option method
      c.syntax = "foobar foo"
      c.description = "Display foo"
      c.when_called do |args, options|
-       say 'foo'
-     end
+       say "foo"
+		 end
    end
 
    command :bar do |c|
@@ -133,7 +135,11 @@ global usage.
 
 == Todo:
 
-* Override abort()?
+* Wrap rescue around app, global --trace option to view stacktrace
+* Add optional arbitrary help 'blocks' for AUTHOR, etc
+* Fix cause of several Dir#[] calls..
+* Use autoload 
+* Add optional large_description, short_description, (description, summary|teaser)
 * Add spec.opts / spec/rake/spectask ?.. with --color
 * Add; dynamically generate padding for help.erb command list
 * Add classify to commander exec
@@ -142,8 +148,21 @@ global usage.
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add highline page_and_wrap (less)
 * Add global --options switch for loading options from a filepath
+
+* Create command-alias branch ...
+		drupal module_create MODULE
+		drupal module create MODULE
+		
+		alias_command "module create", :module_create
+		alias_command "create module", :module_create, ["--verbose"]
+		
+		command :create_module do |c|
+		  c.alias "module create" ....
+		end
+
+* Refactor / style code
 * Fix ERB whitespace.. its being retarted...
-* Fix errors raised at_exit are not written to stderr
+* Fix errors raised at_exit are not written to stderr; (try exit after run!)
 * Change; format progress bar ETA / elapsed better\
 * Change; make Commander::UI.log conditionally output
 * Change; conditional wrapping of FileUtils (require 'commander/fileutils')
