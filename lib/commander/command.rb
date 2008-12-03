@@ -87,19 +87,25 @@ module Commander
     ##
     # Handle execution of command.
     #
-    # This is the only method required for a sub command
-    # to function properly, as it is called when a user
-    # invokes the sub command via the command-line.
-    #
-    # An array of +args+ are passed to the block.
+    # An array of +args+ are passed to the handler, as well as an OpenStruct
+    # containing option values (populated regardless of them being declared).
+    # The handler may be a class, object, or block (see examples below).
     #
     # === Examples:
     #    
-    #    command :something do |c|
-    #      c.when_called do |args, options|
+    #     # Simple block handling
+    #     c.when_called do |args, options|
     #        # do something
-    #      end 
-    #    end
+    #     end 
+    #
+    #     # Create inst of Something and pass args / options
+    #     c.when_called MyLib::Command::Something
+    #
+    #     # Create inst of Something and use arbitrary method
+    #      c.when_called MyLib::Command::Something, :some_method
+    #
+    #     # Pass an object to handle callback (requires method symbol)
+    #     c.when_called SomeObject, :some_method
     #
     
     def when_called(*args, &block)
@@ -146,9 +152,14 @@ module Commander
     def call(args = [])
       h = @when_called
       case 
-      when h[:class]: h[:class].new.send(h[:method], args, proxy_option_struct)
-      when h[:object]: h[:object].send(h[:method], args, proxy_option_struct)
-      when h[:proc]: h[:proc].call args, proxy_option_struct
+      when h[:class]
+        if h[:method].nil?
+          h[:class].new args, proxy_option_struct
+        else
+          h[:class].new.send h[:method], args, proxy_option_struct
+        end
+      when h[:object] : h[:object].send(h[:method], args, proxy_option_struct)
+      when h[:proc] : h[:proc].call args, proxy_option_struct
       end
     end
     

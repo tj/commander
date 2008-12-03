@@ -19,6 +19,11 @@ task :remove => [:clean] do
   sh "clear"
 end
 
+desc 'Build and open docs in safari for viewing'
+task :read_docs => [:docs] do
+  sh "open -a safari doc/index.html"
+end
+
 desc 'Run rspec suite.'
 task :spec do
   sh "clear"
