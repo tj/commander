@@ -135,45 +135,44 @@ global usage.
 
 == Todo:
 
-* Wrap rescue around app, global --trace option to view stacktrace
+* Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
+* Add classify to commander exec
+* Add global --options switch for loading options from a filepath
+* Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
+* Add highline page_and_wrap (less)
 * Add optional arbitrary help 'blocks' for AUTHOR, etc
-* Fix cause of several Dir#[] calls..
-* Use autoload 
 * Add optional large_description, short_description, (description, summary|teaser)
+* Add program :copyright
 * Add spec.opts / spec/rake/spectask ?.. with --color
 * Add; dynamically generate padding for help.erb command list
-* Add classify to commander exec
-* Add program :copyright
-* Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
-* Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
-* Add highline page_and_wrap (less)
-* Add global --options switch for loading options from a filepath
+* Fix cause of several Dir#[] calls..
+* Use autoload 
+* Wrap rescue around app, global --trace option to view stacktrace
 
 * Create command-alias branch ...
-		drupal module_create MODULE
-		drupal module create MODULE
-		
-		alias_command "module create", :module_create
-		alias_command "create module", :module_create, ["--verbose"]
-		
-		command :create_module do |c|
-		  c.alias "module create" ....
-		end
 
-* Refactor / style code
-* Fix ERB whitespace.. its being retarted...
-* Fix errors raised at_exit are not written to stderr; (try exit after run!)
-* Change; format progress bar ETA / elapsed better\
-* Change; make Commander::UI.log conditionally output
+  drupal module_create MODULE
+  drupal module create MODULE
+  
+  alias_command "module create", :module_create
+  alias_command "create module", :module_create, ["--verbose"]
+  
+  command :create_module do |c|
+    c.alias "module create" ....
+  end
+
 * Change; conditional wrapping of FileUtils (require 'commander/fileutils')
+* Change; convert to echoe / README.rdoc
+* Change; format progress bar ETA / elapsed better
 * Change; output options in a better format
+* Change; refactor rspec with mocks/stubs etc
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
-* Change; refactor spec suites with nested describes?
 * Change; seperate spec suites.. describe with more granularity
 * Change; set up regular rake tasks properly... and reformat rspec (view other conventions)
-* Change; refactor rspec with mocks/stubs etc
-* Change; convert to echoe / README.rdoc
+* Fix ERB whitespace.. its being retarted... (use '-' mode?)
+* Fix errors raised at_exit are not written to stderr; (try exit after run!)
 * Publish help docs
+
 
 == LICENSE:
 

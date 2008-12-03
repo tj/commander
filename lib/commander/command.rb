@@ -33,7 +33,7 @@ module Commander
       @examples << {
         :description => description,
         :command => command,
-      }
+      } 
     end
     
     ##
