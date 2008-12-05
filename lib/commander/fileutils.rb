@@ -10,7 +10,6 @@ module VerboseFileUtils
     
   def self.log action, *methods
     methods.each do |meth|
-      # FIXME: get Commander::UI.log working from VerboseFileUtils
       define_method meth do |*args|
         Commander::UI.log "#{action}", *args
         super

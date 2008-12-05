@@ -127,14 +127,15 @@ simplify common tasks using the following methods:
 == FileUtils:
 
 The VerboseFileUtils module is automatically included within the main object for
-global usage. These will output 'log' messages like:
+global usage. These will output 'log' messages such as:
 
   remove  doc
   create  path
   create  path/to/file.rb
+    move  path/to/something path/to/destination
   
-If you do not wish to use FileUtils in a verbose manor simply include FileUtils
-or call the FileUtil module methods directly.
+If you do not wish to use FileUtils in a verbose manor simply call FileUtil's
+methods directly.
 
 == Known Issues:
   
@@ -142,21 +143,24 @@ or call the FileUtil module methods directly.
 
 == Todo:
 
-* Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
-* Add classify to commander exec
-* Add global --options switch for loading options from a filepath
-* Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
-* Add highline page_and_wrap (less)
-* Add optional arbitrary help 'blocks' for AUTHOR, etc
+* Change; set up regular rake tasks properly... and reformat rspec (view other conventions) /tasks dir etc
+* Fix ERB whitespace.. its being retarted... (use '-' mode?)
+* Use autoload 
 * Add optional large_description, short_description, (description, summary|teaser)
-* Add program :copyright
+* Add highline page_and_wrap (less)
+* Fix errors raised at_exit are not written to stderr; (try exit after run!)
+* Wrap rescue around app, global --trace option to view stacktrace .. document use Exceptions.. uncaught.. not abort
+
+* Add optional arbitrary help 'blocks' for AUTHOR, etc
+* Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
+* Add global --options switch for loading options from a filepath
+* Add classify to commander exec
+* Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add spec.opts / spec/rake/spectask ?.. with --color
 * Add; dynamically generate padding for help.erb command list
 * Fix cause of several Dir#[] calls..
-* Use autoload 
-* Wrap rescue around app, global --trace option to view stacktrace .. document use Exceptions.. uncaught.. not abort
 
-* Create command-alias branch ...
+* Create command-alias branch (route?)...
 
   drupal module_create MODULE
   drupal module create MODULE
@@ -168,16 +172,11 @@ or call the FileUtil module methods directly.
     c.alias "module create" ....
   end
 
-* Change; conditional wrapping of FileUtils (require 'commander/fileutils')
 * Change; convert to echoe / README.rdoc
-* Change; format progress bar ETA / elapsed better
 * Change; output options in a better format
+* Change; seperate spec suites.. describe with more granularity
 * Change; refactor rspec with mocks/stubs etc
 * Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
-* Change; seperate spec suites.. describe with more granularity
-* Change; set up regular rake tasks properly... and reformat rspec (view other conventions)
-* Fix ERB whitespace.. its being retarted... (use '-' mode?)
-* Fix errors raised at_exit are not written to stderr; (try exit after run!)
 * Publish help docs
 
 
