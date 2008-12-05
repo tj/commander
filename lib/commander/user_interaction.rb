@@ -21,7 +21,7 @@ module Commander
     # +msg+ other than 'Password: ' or override the 
     # default +mask+ of '*'.
     
-    def password(msg = "Password: ", mask = '*')
+    def password msg = "Password: ", mask = '*'
       pass = ask(msg) { |q| q.echo = mask }
       pass = password msg, mask if pass.empty?
       pass
@@ -36,7 +36,7 @@ module Commander
     #   remove  path/to/old_file2.rb
     #
     
-    def log(action, *args)
+    def log action, *args
       say LOG_FORMAT % [action, args.join(' ')]
     end
     
@@ -108,7 +108,7 @@ module Commander
       #    :time_remaining
       #
 
-      def initialize(total, options = {})
+      def initialize total, options = {}
         @total, @options, @current, @start = total, options, 0, Time.now
         @options = {
           :title => "Progress",
@@ -162,7 +162,7 @@ module Commander
       # Increment progress. Optionally pass _tokens_ which
       # can be displayed in the output format.
 
-      def increment(tokens = {})
+      def increment tokens = {}
         @current += 1
         @options[:tokens].merge! tokens if tokens.is_a? Hash
         show
@@ -190,7 +190,7 @@ module Commander
       #
       # * Kernel#progress
 
-      def self.progress(enum, options = {}, &block)
+      def self.progress enum, options = {}, &block
         threads = []
         bar = ProgressBar.new enum.length, options
         enum.each { |v| bar.inc yield(v) } 

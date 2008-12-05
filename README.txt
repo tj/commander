@@ -142,7 +142,6 @@ or call the FileUtil module methods directly.
 
 == Todo:
 
-* view refactor / clean up stying / remove requiring of deps... just use require
 * view RakeFileUtils
 * change auto complete key from esc to command + space ?
 * Change included FileUtils to VerboseFileUtils... iterate meths and super to module ancestor chain (document disabling by include FileUtils)

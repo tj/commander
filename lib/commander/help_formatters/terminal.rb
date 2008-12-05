@@ -15,11 +15,11 @@ module Commander
         template(:help).result @runner.get_binding
       end
       
-      def render_command(command)
+      def render_command command
         template(:command_help).result command.get_binding
       end
       
-      def template(name)
+      def template name
         ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/terminal/#{name}.erb"), nil, "<>")
       end
     end

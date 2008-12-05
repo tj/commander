@@ -10,7 +10,7 @@ class Array
   #   list = ask 'Favorite cookies:', Array
   #
   
-  def self.parse(string)
+  def self.parse string
     string.split
   end
   

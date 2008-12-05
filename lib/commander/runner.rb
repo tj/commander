@@ -18,7 +18,7 @@ module Commander
     # +args+ parameters to aid in mock terminal usage etc.
     #
     
-    def initialize(input = $stdin, output = $stdout, args = ARGV)
+    def initialize input = $stdin, output = $stdout, args = ARGV
       @input, @output, @args = input, output, args
       @commands, @options = {}, { :help => false, :version => false }
       @program = { :help_formatter => Commander::HelpFormatter::Terminal }
@@ -65,7 +65,7 @@ module Commander
     #    :help_formatter  Defaults to Commander::HelpFormatter::Terminal
     #
     
-    def program(key, value = nil)
+    def program key, value = nil
       @program[key] = value unless value.nil?
       @program[key] if value.nil?
     end
@@ -88,7 +88,7 @@ module Commander
     # * Commander::Runner#add_command
     #
     
-    def command(name, &block)
+    def command name, &block
       command = Commander::Command.new(name) and yield command
       add_command command
     end
@@ -96,14 +96,14 @@ module Commander
     ##
     # Add a command object to this runner.
     
-    def add_command(command)
+    def add_command command
       @commands[command.name] = command
     end
     
     ##
     # Get a command object if available or nil.
     
-    def get_command(name)
+    def get_command name
       if @commands[name] 
         @commands[name]
       else
@@ -180,7 +180,7 @@ module Commander
       # parsed by our sub commands.
     end
         
-    def ensure_program_key_set(key) #:nodoc:
+    def ensure_program_key_set key #:nodoc:
       raise CommandError, "Program #{key} required (use #program method)" if (@program[key].nil? || @program[key].empty?)
     end
     

@@ -15,7 +15,7 @@ module Commander
       ##
       # Access the current command runner via +@runner+.
 
-      def initialize(runner)
+      def initialize runner
         @runner = runner
       end
       
@@ -29,7 +29,7 @@ module Commander
       ##
       # Renders +command+ specific help.
       
-      def render_command(command)
+      def render_command command
         "Implement help for #{command.name} here"
       end
       

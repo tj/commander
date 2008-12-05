@@ -11,7 +11,7 @@ module Commander
     ##
     # Initialize new command with specified +name+.
     
-    def initialize(name)
+    def initialize name
       @name, @examples, @when_called = name, [], {}
       @options, @proxy_options = [], []
     end
@@ -29,7 +29,7 @@ module Commander
     #    end
     #
     
-    def example(description, command)
+    def example description, command 
       @examples << {
         :description => description,
         :command => command,
@@ -73,7 +73,7 @@ module Commander
     # using option[:switches] and option[:description].
     #
     
-    def option(*args, &block)
+    def option *args, &block
       switches, description = seperate_switches_from_description args
       proc = block_given? ? block : populate_options_to_when_called(switches)
       @options << {
@@ -108,7 +108,7 @@ module Commander
     #     c.when_called SomeObject, :some_method
     #
     
-    def when_called(*args, &block)
+    def when_called *args, &block
       h = @when_called
       unless args.empty?
         case args.first
@@ -130,7 +130,7 @@ module Commander
     # * invokes when_called proc
     #
     
-    def run(args = [])
+    def run args = [] 
       call parse_options_and_call_procs(args)
     end
     
@@ -138,7 +138,7 @@ module Commander
     # Parses options and calls associated procs
     # returning the arguments left.
     
-    def parse_options_and_call_procs(args = [])
+    def parse_options_and_call_procs args = [] 
       return args if args.empty?
       opts = OptionParser.new
       @options.each { |o| opts.on(*o[:args], &o[:proc]) }
@@ -149,7 +149,7 @@ module Commander
     ##
     # Call the commands when_called block with +args+.
     
-    def call(args = [])
+    def call args = [] 
       h = @when_called
       case 
       when h[:class]
@@ -174,7 +174,7 @@ module Commander
     #   --file FILE        # => :file
     #   --list of, things  # => :list
     
-    def sym_from_switch(switch)
+    def sym_from_switch switch
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
     end
     
@@ -186,7 +186,7 @@ module Commander
       options
     end
     
-    def seperate_switches_from_description(args) #:nodoc:
+    def seperate_switches_from_description args #:nodoc:
       # TODO: refactor this goodness
       switches = args.find_all { |a| a.index('-') == 0 if a.is_a? String } 
       description = args.last unless !args.last.is_a? String or args.last.index('-') == 0
@@ -197,7 +197,7 @@ module Commander
     # Pass option values to the when_called proc when a block
     # is not specifically supplied to #option.
     
-    def populate_options_to_when_called(switches) #:nodoc:
+    def populate_options_to_when_called switches #:nodoc:
       Proc.new do |args|
         @proxy_options << {
           :method => sym_from_switch(switches.last),
