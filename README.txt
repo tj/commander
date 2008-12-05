@@ -9,12 +9,12 @@ you know and love (OptionParser, HighLine).
 
 * Easier than baking cookies
 * Parses options using OptionParser
-* Imports the highline gem for interacting with the terminal
-* Auto-generates help documentation via pluggable help formatters
-* Adds additional user interaction functionality
 * Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
-* Use the 'commander' command to initialize a commander driven program
-* Highly customizable progress bar formatting
+* Auto-generates help documentation via pluggable help formatters
+* Imports the highline gem for interacting with the terminal
+* Adds additional user interaction functionality
+* Highly customizable progress bar with intuative, simple usage
+* Use the 'commander' executable to initialize a commander driven program
 
 == Example:
 
@@ -126,8 +126,15 @@ simplify common tasks using the following methods:
 
 == FileUtils:
 
-The FileUtils module is automatically included within the main object for
-global usage.
+The VerboseFileUtils module is automatically included within the main object for
+global usage. These will output 'log' messages like:
+
+  remove  doc
+  create  path
+  create  path/to/file.rb
+  
+If you do not wish to use FileUtils in a verbose manor simply include FileUtils
+or call the FileUtil module methods directly.
 
 == Known Issues:
   
@@ -135,6 +142,10 @@ global usage.
 
 == Todo:
 
+* view refactor / clean up stying / remove requiring of deps... just use require
+* view RakeFileUtils
+* change auto complete key from esc to command + space ?
+* Change included FileUtils to VerboseFileUtils... iterate meths and super to module ancestor chain (document disabling by include FileUtils)
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add classify to commander exec
 * Add global --options switch for loading options from a filepath
@@ -147,7 +158,7 @@ global usage.
 * Add; dynamically generate padding for help.erb command list
 * Fix cause of several Dir#[] calls..
 * Use autoload 
-* Wrap rescue around app, global --trace option to view stacktrace
+* Wrap rescue around app, global --trace option to view stacktrace .. document use Exceptions.. uncaught.. not abort
 
 * Create command-alias branch ...
 

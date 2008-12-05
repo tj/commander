@@ -1,38 +1,31 @@
 
 require 'fileutils'
 
-module FileUtils
+module VerboseFileUtils
   
-  extend Wrapable
+  include FileUtils
   
-  after :rm, :rm_r, :rm_rf, :rmdir do |*args|
-    Commander::UI.log "remove", *args
+  ##
+  # Wrap _methods_ with _action_ log message.
+    
+  def self.log(action, *methods)
+    methods.each do |meth|
+      # FIXME: get Commander::UI.log working from VerboseFileUtils
+      define_method meth do |*args|
+        Commander::UI.log "#{action}", *args
+        super
+      end
+    end
   end
   
-  after :touch, :mkdir, :mkdir_p do |*args|
-    Commander::UI.log "create", *args
-  end
-  
-  after :cp, :cp_r do |*args|
-    Commander::UI.log "copy", *args
-  end
-  
-  after :mv do |src, dest, options|
-    Commander::UI.log "remove", src, options
-    Commander::UI.log "create", dest, options
-  end
-  
-  after :cd do |*args|
-    Commander::UI.log "change", *args
-  end
-  
-  after :ln, :ln_s do |*args|
-    Commander::UI.log "link", *args
-  end
-  
-  after :install do |*args|
-    Commander::U.log "install", *args
-  end
+  log "remove", :rm, :rm_r, :rm_rf, :rmdir
+  log "create", :touch, :mkdir, :mkdir_p
+  log "copy", :cp, :cp_r
+  log "move", :mv
+  log "change", :cd
+  log "link", :ln, :ln_s
+  log "install", :install
+
 end
 
-include FileUtils
+include VerboseFileUtils

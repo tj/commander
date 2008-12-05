@@ -9,6 +9,7 @@ require "forwardable"
 # * Commander::Runner#command
 # * Commander::Runner#commands
 # * Commander::Runner#program
+# * Commander::UI::ProgressBar#progress
 
 module Kernel
   extend Forwardable

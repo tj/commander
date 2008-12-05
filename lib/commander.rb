@@ -27,7 +27,6 @@ require 'rubygems'
 require 'highline/import'
 require 'commander/version'
 require 'commander/user_interaction'
-require 'commander/wrapable'
 require 'commander/fileutils'
 require 'commander/core_ext'
 require 'commander/runner'
@@ -37,5 +36,5 @@ require 'commander/import'
 
 $command_runner = Commander::Runner.new
 
-# Auto-execute command runner.
+# Auto-execute command runner
 at_exit { $command_runner.run! rescue nil } 
