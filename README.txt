@@ -142,9 +142,6 @@ or call the FileUtil module methods directly.
 
 == Todo:
 
-* view RakeFileUtils
-* change auto complete key from esc to command + space ?
-* Change included FileUtils to VerboseFileUtils... iterate meths and super to module ancestor chain (document disabling by include FileUtils)
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add classify to commander exec
 * Add global --options switch for loading options from a filepath
