@@ -57,6 +57,8 @@ module Commander
     #    program :name, 'Commander'
     #    program :version, Commander::VERSION
     #    program :description, 'Commander utility program.'
+    #    program :help, 'Copyright', '2008 TJ Holowaychuk'
+    #    program :help, 'Anything', 'You want'
     #
     #    # Get data
     #    program :name # => 'Commander'
@@ -67,11 +69,17 @@ module Commander
     #    :version         (required) Program version triple, ex: '0.0.1'
     #    :description     (required) Program description
     #    :help_formatter  Defaults to Commander::HelpFormatter::Terminal
+    #    :help            Allows addition of arbitrary global help blocks
     #
     
-    def program key, value = nil
-      @program[key] = value unless value.nil?
-      @program[key] if value.nil?
+    def program key, *args
+      if key == :help and !args.empty?
+        @program[:help] ||= {}
+        @program[:help][args.first] = args[1]
+      else
+        @program[key] = *args unless args.empty?
+        @program[key] if args.empty?
+      end
     end
     
     ##

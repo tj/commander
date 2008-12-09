@@ -152,7 +152,6 @@ methods directly.
 * Add global --options switch for loading options from a filepath
 * Add classify to commander exec
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
-* Add spec.opts / spec/rake/spectask ?.. with --color
 * Add; dynamically generate padding for help.erb command list
 
 

@@ -11,4 +11,11 @@
 <% @commands.each_pair do |name, command| %>
     <%= "%-14s %s" % [command.name, command.summary] -%>
 <% end %>
+<% if program :help -%>
+  <% program(:help).each_pair do |title, body| %>
+  <%= color title.to_s.upcase, :bold %>:
+	
+    <%= body %>
+  <% end %>
+<% end -%>
 

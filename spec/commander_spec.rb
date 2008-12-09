@@ -18,6 +18,11 @@ describe Commander do
 	  program(:description).should eql("just a test.")
 	end
 	
+	it "should allow arbitrary blocks of global help documentation" do
+	  program :help, 'Copyright', 'TJ Holowaychuk'
+	  program(:help)['Copyright'].should eql('TJ Holowaychuk')
+	end
+	
   it "should raise an error when crutial program info is not set" do
     new_command_runner '--help'
 	  program :name, ''
