@@ -3,6 +3,10 @@ require 'optparse'
 
 module Commander
   class Runner
+    
+    #--
+    # Exceptions
+    #++
 
     class CommandError < StandardError; end
     class InvalidCommandError < CommandError; end
@@ -41,7 +45,7 @@ module Commander
     rescue OptionParser::InvalidOption, 
       OptionParser::InvalidArgument,
       OptionParser::MissingArgument => e
-      @output.puts e
+      @output.puts e 
     end
     
     ##

@@ -144,10 +144,8 @@ methods directly.
 == Todo:
 
 * Fix excessive Dir#[] calls
-* Change; set up regular rake tasks properly... and reformat rspec (view other conventions) /tasks dir etc
+* Add global --trace
 * Add highline page_and_wrap (less)
-* Fix errors raised at_exit are not written to stderr; (try exit after run!)
-* Wrap rescue around app, global --trace option to view stacktrace .. document use Exceptions.. uncaught.. not abort
 
 * Add optional arbitrary help 'blocks' for AUTHOR, etc
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
@@ -170,11 +168,9 @@ methods directly.
     c.alias "module create" ....
   end
 
-* Change; convert to echoe / README.rdoc
+* Change; consider reversing |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; output options in a better format
-* Change; seperate spec suites.. describe with more granularity
-* Change; refactor rspec with mocks/stubs etc
-* Change; reverse |options, args| so args can be |options, file, dir| etc.. adjust doc
+* Change; refactor specs (stubs / helpers etc) and rake tasks... no more hoe
 * Publish help docs
 
 
