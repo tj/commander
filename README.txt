@@ -143,22 +143,19 @@ methods directly.
 
 == Todo:
 
-* use #gem instead?...
 * Fix excessive Dir#[] calls due to rubygems, http://rubyforge.org/tracker/index.php?func=detail&aid=23170&group_id=126&atid=575
 * Add global --trace
 * Add highline page_and_wrap (less)
-* Add optional arbitrary help blocks for commands
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add global --options switch for loading options from a filepath
-* Add classify to commander exec
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
-
-
-* Create command-alias branch (route?)...
+* Create command-alias branch...
 
   drupal module_create MODULE
   drupal module create MODULE
+
+  alias_command alias, command, args (options etc)
   
   alias_command "module create", :module_create
   alias_command "create module", :module_create, ["--verbose"]
@@ -171,7 +168,6 @@ methods directly.
 * Change; output options in a better format
 * Change; refactor specs (stubs / helpers etc) and rake tasks... no more hoe
 * Publish help docs
-
 
 == LICENSE:
 

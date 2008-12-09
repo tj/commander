@@ -26,18 +26,19 @@ require 'commander'
 require '#{name}'
 
 program :name, '#{name}'
-program :version, #{name.capitalize}::VERSION::STRING
+program :version, #{name.camelcase}::VERSION::STRING
 program :description, '#{description}.'
  
 CODE
         commands.each do |command|
           f.write <<-CODE
 command :#{command} do |c|
-  c.syntax = ""
-  c.description = ""
-  c.example "description", "code"
+  c.syntax = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-swith', 'Some switch that does something'
   c.when_called do |args, options|
-    # Do something
+    # Do something or c.when_called #{name.camelcase}::Commands::#{command.camelcase}
   end
 end
 
