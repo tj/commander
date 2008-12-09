@@ -31,7 +31,7 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
 
    command :foo do |c|
      c.syntax = "foobar foo"
-     c.description = "Display foo"
+     c.description = "Displays foo"
      c.when_called do |args, options|
        say "foo"
 		 end
@@ -145,7 +145,6 @@ methods directly.
 
 * Fix excessive Dir#[] calls
 * Change; set up regular rake tasks properly... and reformat rspec (view other conventions) /tasks dir etc
-* Add optional large_description, short_description, (description, summary|teaser)
 * Add highline page_and_wrap (less)
 * Fix errors raised at_exit are not written to stderr; (try exit after run!)
 * Wrap rescue around app, global --trace option to view stacktrace .. document use Exceptions.. uncaught.. not abort

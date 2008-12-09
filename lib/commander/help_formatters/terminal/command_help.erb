@@ -3,12 +3,10 @@
 
     <%= @name %>
 
-<% if @description -%>
   <%= color "DESCRIPTION", :bold %>:
 
-    <%= @description -%>
+    <%= @description || @summary || 'No description.' -%>
 
-<% end -%>
 
 <% if @syntax -%>
   <%= color "SYNOPSIS", :bold %>:

@@ -6,7 +6,7 @@ module Commander
   class Command
     
     attr_reader :name, :examples, :options, :proxy_options
-    attr_accessor :syntax, :description
+    attr_accessor :syntax, :description, :summary
         
     ##
     # Initialize new command with specified +name+.
@@ -15,6 +15,13 @@ module Commander
       @name, @examples, @when_called = name, [], {}
       @options, @proxy_options = [], []
     end
+    
+    #--
+    # Description aliases
+    #++
+    
+    alias :long_description= :description=
+    alias :short_description= :summary=
     
     ##
     # Add a usage example for this command.
