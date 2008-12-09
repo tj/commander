@@ -36,7 +36,7 @@ command :#{command} do |c|
   c.syntax = ''
   c.description = ''
   c.example 'description', 'command example'
-  c.option '--some-swith', 'Some switch that does something'
+  c.option '--some-switch', 'Some switch that does something'
   c.when_called do |args, options|
     # Do something or c.when_called #{name.camelcase}::Commands::#{command.camelcase}
   end
