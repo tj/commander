@@ -143,16 +143,16 @@ methods directly.
 
 == Todo:
 
-* Fix excessive Dir#[] calls
+* use #gem instead?...
+* Fix excessive Dir#[] calls due to rubygems, http://rubyforge.org/tracker/index.php?func=detail&aid=23170&group_id=126&atid=575
 * Add global --trace
 * Add highline page_and_wrap (less)
-
-* Add optional arbitrary help 'blocks' for AUTHOR, etc
+* Add optional arbitrary help blocks for commands
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add global --options switch for loading options from a filepath
 * Add classify to commander exec
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
-* Add; dynamically generate padding for help.erb command list
+* Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
 
 
 * Create command-alias branch (route?)...
