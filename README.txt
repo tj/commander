@@ -35,7 +35,7 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
      c.description = "Displays foo"
      c.when_called do |args, options|
        say "foo"
-		 end
+     end
    end
 
    command :bar do |c|
