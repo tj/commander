@@ -36,8 +36,8 @@ module Commander
     def run!
       %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
       case 
-      when options[:version]; @output.puts "#{@program[:name]} #{@program[:version]}" 
-      when options[:help]; get_command(:help).run
+      when options[:version] : @output.puts "#{@program[:name]} #{@program[:version]}" 
+      when options[:help] : get_command(:help).run
       else active_command.run args_without_command
       end
     rescue InvalidCommandError
