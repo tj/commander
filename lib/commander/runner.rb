@@ -19,7 +19,7 @@ module Commander
     # The command runner essentially manages execution
     # of a commander program. For testing and arbitrary
     # purposes we can specify _input_, _output_, and 
-    # +args+ parameters to aid in mock terminal usage etc.
+    # _args_ parameters to aid in mock terminal usage etc.
     #
     
     def initialize input = $stdin, output = $stdout, args = ARGV
