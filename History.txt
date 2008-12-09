@@ -1,4 +1,11 @@
 
+=== 2.2.0 / 2008-12-09
+
+* Additional documentation
+* Added support for arbitrary help 'blocks' using program :help, 'Your block', 'Your blocks contents'
+* Added support for description, summary, short_description, and large_description, which are displaying conditionally within help docs
+* Allowing uncaught exceptions to reach stderr, for debugging purposes
+
 === 2.1.1 / 2008-12-01
 
 * Changed #password, now requires that the user must enter a non-empty? value

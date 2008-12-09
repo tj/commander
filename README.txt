@@ -1,9 +1,10 @@
 
 = Commander
 
-Small, intuative gem for creating executables. Commander
-bridges the gap between other terminal related libraries
-you know and love (OptionParser, HighLine).
+The complete solution for Ruby command-line executables. 
+Commander bridges the gap between other terminal related libraries
+you know and love (OptionParser, HighLine), while providing many new
+features such.
 
 == Features:
 
