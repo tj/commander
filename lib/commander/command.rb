@@ -9,7 +9,7 @@ module Commander
     attr_accessor :syntax, :description, :summary
         
     ##
-    # Initialize new command with specified +name+.
+    # Initialize new command with specified _name_.
     
     def initialize name
       @name, @examples, @when_called = name, [], {}
@@ -48,7 +48,7 @@ module Commander
     #
     # Options are parsed via OptionParser so view it
     # for additional usage documentation. A block may optionally be
-    # passed to handle the option, otherwise the +options+ struct seen below 
+    # passed to handle the option, otherwise the _options_ struct seen below 
     # contains the results of this option. This handles common formats such as:
     #
     #    -h, --help          options.help           # => bool
@@ -94,7 +94,7 @@ module Commander
     ##
     # Handle execution of command.
     #
-    # An array of +args+ are passed to the handler, as well as an OpenStruct
+    # An array of _args_ are passed to the handler, as well as an OpenStruct
     # containing option values (populated regardless of them being declared).
     # The handler may be a class, object, or block (see examples below).
     #
@@ -131,7 +131,7 @@ module Commander
     end
     
     ##
-    # Run the command with +args+.
+    # Run the command with _args_.
     #
     # * parses options, call option blocks
     # * invokes when_called proc
@@ -154,7 +154,7 @@ module Commander
     end
     
     ##
-    # Call the commands when_called block with +args+.
+    # Call the commands when_called block with _args_.
     
     def call args = [] 
       h = @when_called
@@ -171,7 +171,7 @@ module Commander
     end
     
     ##
-    # Attempts to generate a method name symbol from +switch+.
+    # Attempts to generate a method name symbol from _switch_.
     # For example:
     # 
     #   -h                 # => :h

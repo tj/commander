@@ -18,7 +18,7 @@ module Commander
     #
     # The command runner essentially manages execution
     # of a commander program. For testing and arbitrary
-    # purposes we can specify +input+, +output+, and 
+    # purposes we can specify _input_, _output_, and 
     # +args+ parameters to aid in mock terminal usage etc.
     #
     

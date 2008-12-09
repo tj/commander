@@ -18,7 +18,7 @@ module Commander
     
     ##
     # Ask the user for a password. Specify a custom
-    # +msg+ other than 'Password: ' or override the 
+    # _msg_ other than 'Password: ' or override the 
     # default +mask+ of '*'.
     
     def password msg = "Password: ", mask = '*'
