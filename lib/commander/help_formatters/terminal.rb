@@ -20,7 +20,7 @@ module Commander
       end
       
       def template name
-        ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/terminal/#{name}.erb"), nil, "<>")
+        ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/terminal/#{name}.erb"), nil, "-")
       end
     end
   end

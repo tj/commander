@@ -143,9 +143,8 @@ methods directly.
 
 == Todo:
 
+* Fix excessive Dir#[] calls
 * Change; set up regular rake tasks properly... and reformat rspec (view other conventions) /tasks dir etc
-* Fix ERB whitespace.. its being retarted... (use '-' mode?)
-* Use autoload 
 * Add optional large_description, short_description, (description, summary|teaser)
 * Add highline page_and_wrap (less)
 * Fix errors raised at_exit are not written to stderr; (try exit after run!)
@@ -158,7 +157,7 @@ methods directly.
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add spec.opts / spec/rake/spectask ?.. with --color
 * Add; dynamically generate padding for help.erb command list
-* Fix cause of several Dir#[] calls..
+
 
 * Create command-alias branch (route?)...
 

@@ -3,27 +3,34 @@
 
     <%= @name %>
 
-<% if @description %>
+<% if @description -%>
   <%= color "DESCRIPTION", :bold %>:
 
-    <%= @description %>
-<% end %> 
-<% if @syntax %>
+    <%= @description -%>
+
+<% end -%>
+
+<% if @syntax -%>
   <%= color "SYNOPSIS", :bold %>:
 
-    <%= @syntax %>
+    <%= @syntax -%>
 
-<% end %>
-<% unless @examples.empty? %>
-  <%= color "EXAMPLES", :bold %>:<% @examples.each do |example| %>
+<% end -%>
+
+<% unless @examples.empty? -%>
+  <%= color "EXAMPLES", :bold %>:
+	<% @examples.each do |example| -%>
 
     # <%= example[:description] %>
-    <%= example[:command] %><% end %>
-<% end %> 
-<% unless @options.empty? %>
-  <%= color "OPTIONS", :bold %>:<% @options.each do |option| %>
+    <%= example[:command] %>
+	<% end -%>
+<% end -%>
+
+<% unless @options.empty? -%>
+  <%= color "OPTIONS", :bold %>:
+	<% @options.each do |option| -%>
 
     <%= option[:switches].join ', ' %> 
-        <%= option[:description] %><% end %>
-<% end %>
-
+        <%= option[:description] %>
+	<% end -%>
+<% end -%>
