@@ -3,6 +3,7 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
+Todo.txt
 bin/commander
 commander.gemspec
 lib/commander.rb
