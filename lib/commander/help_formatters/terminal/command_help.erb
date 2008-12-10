@@ -7,15 +7,15 @@
 
     <%= @description || @summary || 'No description.' -%>
 
-
 <% if @syntax -%>
+
   <%= color "SYNOPSIS", :bold %>:
 
     <%= @syntax -%>
 
 <% end -%>
-
 <% unless @examples.empty? -%>
+
   <%= color "EXAMPLES", :bold %>:
 	<% @examples.each do |example| -%>
 
@@ -23,8 +23,8 @@
     <%= example[:command] %>
 	<% end -%>
 <% end -%>
-
 <% unless @options.empty? -%>
+
   <%= color "OPTIONS", :bold %>:
 	<% @options.each do |option| -%>
 
@@ -32,3 +32,4 @@
         <%= option[:description] %>
 	<% end -%>
 <% end -%>
+
