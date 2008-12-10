@@ -15,8 +15,7 @@ class String
   # Replace _hash_ keys with associated values.
   
   def tokenize hash
-    self.d
-    up.tokenize! hash
+    self.dup.tokenize! hash
   end
   
   ##
