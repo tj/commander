@@ -1,4 +1,9 @@
 
+=== 2.2.1 / 2008-12-09
+
+* Fixed typo in String#tokenize, preventing progress bar from working
+* Fixed some small formatting issues with help output
+
 === 2.2.0 / 2008-12-09
 
 * Additional documentation

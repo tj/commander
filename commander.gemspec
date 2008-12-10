@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{commander}
-  s.version = "2.2.0"
+  s.version = "2.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.description = %q{}
   s.email = ["tj@vision-media.ca"]
   s.executables = ["commander"]
-  s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]
-  s.files = [".gitignore", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/commander", "commander.gemspec", "lib/commander.rb", "lib/commander/command.rb", "lib/commander/core_ext.rb", "lib/commander/core_ext/array.rb", "lib/commander/core_ext/enumerable.rb", "lib/commander/core_ext/kernel.rb", "lib/commander/core_ext/object.rb", "lib/commander/core_ext/string.rb", "lib/commander/fileutils.rb", "lib/commander/help_formatters.rb", "lib/commander/help_formatters/base.rb", "lib/commander/help_formatters/terminal.rb", "lib/commander/help_formatters/terminal/command_help.erb", "lib/commander/help_formatters/terminal/help.erb", "lib/commander/import.rb", "lib/commander/runner.rb", "lib/commander/user_interaction.rb", "lib/commander/version.rb", "spec/all_spec.rb", "spec/commander_spec.rb", "spec/help_formatter_spec.rb", "spec/spec_helper.rb"]
+  s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt", "Todo.txt"]
+  s.files = [".gitignore", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "Todo.txt", "bin/commander", "commander.gemspec", "lib/commander.rb", "lib/commander/command.rb", "lib/commander/core_ext.rb", "lib/commander/core_ext/array.rb", "lib/commander/core_ext/enumerable.rb", "lib/commander/core_ext/kernel.rb", "lib/commander/core_ext/object.rb", "lib/commander/core_ext/string.rb", "lib/commander/fileutils.rb", "lib/commander/help_formatters.rb", "lib/commander/help_formatters/base.rb", "lib/commander/help_formatters/terminal.rb", "lib/commander/help_formatters/terminal/command_help.erb", "lib/commander/help_formatters/terminal/help.erb", "lib/commander/import.rb", "lib/commander/runner.rb", "lib/commander/user_interaction.rb", "lib/commander/version.rb", "spec/all_spec.rb", "spec/commander_spec.rb", "spec/help_formatter_spec.rb", "spec/spec_helper.rb"]
   s.has_rdoc = true
   s.homepage = %q{The complete solution for Ruby command-line executables. }
   s.rdoc_options = ["--main", "README.txt"]
