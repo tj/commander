@@ -1,6 +1,12 @@
 
+* progress bar thread safe?
+* Try -- --arg -arg ---argaggar, literal args using -- 
+* Can I just assign progress = Commander::UI::ProgressBar constant
+* Document with #:yields: whatever
 * Release to RubyForge as well
 * Fix excessive Dir#[] calls due to rubygems, http://rubyforge.org/tracker/index.php?func=detail&aid=23170&group_id=126&atid=575
+* Unify VerboseFileUtils output with other UI methods
+* Have VerboseFileUtils only output basename ? 
 * Add global --trace
 * Add highline page_and_wrap (less)
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
@@ -10,6 +16,7 @@
 * Change; consider reversing |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; output options in a better format
 * Change; refactor specs (stubs / helpers etc) and rake tasks... no more hoe
+* Publish rdoc
 * Create command-alias branch...
 
   drupal module_create MODULE
