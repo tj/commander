@@ -35,6 +35,8 @@ module Commander
     #   remove  path/to/old_file.rb
     #   remove  path/to/old_file2.rb
     #
+    # To alter this format simply change the Commander::UI::LOG_FORMAT
+    # constant to whatever you like.
     
     def log action, *args
       say LOG_FORMAT % [action, args.join(' ')]
