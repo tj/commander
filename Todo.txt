@@ -1,8 +1,11 @@
 
+* Fix make log format wider again
+* Fix .summary for Help command
+* Fix .description not showing when no summary is present
+* Trap INT, remove it from css gem
+* Wrap text so that it fits all the time and does not look silly (relative to terminal window)
+* autoload
 * progress bar thread safe?
-* Try -- --arg -arg ---argaggar, literal args using -- 
-* Can I just assign progress = Commander::UI::ProgressBar constant
-* Document with #:yields: whatever
 * Release to RubyForge as well
 * Fix excessive Dir#[] calls due to rubygems, http://rubyforge.org/tracker/index.php?func=detail&aid=23170&group_id=126&atid=575
 * Unify VerboseFileUtils output with other UI methods
