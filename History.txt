@@ -1,4 +1,12 @@
 
+=== 2.3.0 / 2008-12-16
+
+* Removed input, output in favour of HighLines $terminal
+* Autoloading terminal formatter since it may not always be used
+* Added wrapping of text with 10 padding, defaults to 80
+* Added friendly interruption message by default, overridable with trap or int_message
+* Fixed description now showing as summary when no summary is available
+
 === 2.2.1 / 2008-12-09
 
 * Fixed typo in String#tokenize, preventing progress bar from working
