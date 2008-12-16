@@ -2,6 +2,9 @@
 describe Commander do
   
 	before :each do
+    @input = StringIO.new
+    @output = StringIO.new
+    $terminal = HighLine.new @input, @output
 	  create_test_command
 	end
 	
@@ -30,10 +33,10 @@ describe Commander do
   end
   
   it "should output program version using --version switch" do
-    intput, output = new_command_runner '--version'
+    new_command_runner '--version'
     program :help_formatter, Commander::HelpFormatter::Base
     command_runner.run!
-    output.string.should eql("test 1.2.3\n")
+    @output.string.should eql("test 1.2.3\n")
   end
       	
 	it "should get command instances using #get_command" do
@@ -49,15 +52,15 @@ describe Commander do
 	end
 
   it "should output invalid option message when invalid options passed to command" do
-    input, output = new_command_runner 'test', '--invalid-option'
+    new_command_runner 'test', '--invalid-option'
     run!
-    output.string.should eql("invalid option: --invalid-option\n")
+    @output.string.should eql("invalid option: --invalid-option\n")
   end
   
   it "should output invalid command message when help sub-command does not exist" do
-    input, output = new_command_runner 'help', 'does_not_exist'
+    new_command_runner 'help', 'does_not_exist'
     command_runner.run!
-    output.string.should eql("invalid command. Use --help for more information\n")
+    @output.string.should eql("invalid command. Use --help for more information\n")
   end
 
  	it "should locate command within arbitrary arguments passed" do
@@ -89,119 +92,119 @@ describe Commander do
     get_command(:test).sym_from_switch("--colors colors").should eql(:colors)
   end
   	
- it "should resolve active command from invalid options passed" do
-   new_command_runner '--help', 'test', '--arbitrary'
-   command_runner.active_command.should be_instance_of(Commander::Command)
- end
- 
- it "should raise invalid command error when the command is not found in the arguments passed"do
-   new_command_runner '--help'
-   lambda { command_runner.active_command }.should raise_error(Commander::Runner::InvalidCommandError)
- end
- 
- it "should add options to previously created commands" do
-   get_command(:test).option("--recursive") {}
-   get_command(:test).options.length.should eql(3)
- end
- 
- it "should call command option procs" do
-   recursive = false
-   get_command(:test).option("--recursive") { recursive = true }
-   get_command(:test).run ['--recursive']
-   recursive.should be_true
- end
- 
- it "should call the #when_called proc when #run" do
-   result = nil
-   get_command(:test).when_called { |args, options| result = args.join(' ') }  
-   get_command(:test).run ['--trace', 'just', 'some', 'args']
-   result.should eql("just some args")
- end
- 
- it "should handle boolean options" do
-   opts = nil
-   get_command(:test).when_called { |args, options| opts = options }  
-   get_command(:test).run ['--trace', 'foo', 'bar']
-   opts.trace.should be_true
- end
- 
- it "should handle toggle options" do
-   options = nil
-   get_command(:test).when_called { |args, opts| options = opts }  
-   get_command(:test).option "--[no-]toggle"
-   get_command(:test).run ['--no-toggle']
-   options.toggle.should be_false
- end
- 
- it "should handle manditory arg options" do
-   options = nil
-   get_command(:test).when_called { |args, opts| options = opts }  
-   get_command(:test).option "--manditory ARG"
-   get_command(:test).run ['--manditory', "foo"]
-   options.manditory.should eql("foo")
-   lambda { get_command(:test).run ['--manditory'] }.should raise_error(OptionParser::MissingArgument)
- end  
- 
- it "should handle optional arg options" do
-   options = nil
-   get_command(:test).when_called { |args, opts| options = opts }  
-   get_command(:test).option "--optional [ARG]"
-   get_command(:test).run ['--optional', "foo"]
-   options.optional.should eql("foo") 
-   get_command(:test).run ['--optional']
-   options.optiona.should be_nil  
- end
- 
- it "should handle list options" do
-   options = nil
-   get_command(:test).when_called { |args, opts| options = opts }  
-   get_command(:test).option "--list words", Array
-   get_command(:test).run ['--list', "im,a,list"]
-   options.list.should eql(["im", "a", "list"]) 
- end
- 
- it "should initialize and call object when a class is passed to #when_called" do
-  $_when_called_value = nil
-  class HandleWhenCalled1
-    def initialize(args, options) $_when_called_value = args.join('-') end 
+  it "should resolve active command from invalid options passed" do
+    new_command_runner '--help', 'test', '--arbitrary'
+    command_runner.active_command.should be_instance_of(Commander::Command)
   end
-  get_command(:test).when_called HandleWhenCalled1
-  get_command(:test).call(["hello", "world"])
-  $_when_called_value.should eql("hello-world")
- end
   
- it "should initialize and call object when a class is passed to #when_called with an arbitrary method" do
-  class HandleWhenCalled2
-    def arbitrary_method(args, options) args.join('-') end 
+  it "should raise invalid command error when the command is not found in the arguments passed"do
+    new_command_runner '--help'
+    lambda { command_runner.active_command }.should raise_error(Commander::Runner::InvalidCommandError)
   end
-  get_command(:test).when_called HandleWhenCalled2, :arbitrary_method
-  get_command(:test).call(["hello", "world"]).should eql("hello-world")
- end
- 
- it "should call object when passed to #when_called " do
-   class HandleWhenCalled3
+  
+  it "should add options to previously created commands" do
+    get_command(:test).option("--recursive") {}
+    get_command(:test).options.length.should eql(3)
+  end
+  
+  it "should call command option procs" do
+    recursive = false
+    get_command(:test).option("--recursive") { recursive = true }
+    get_command(:test).run ['--recursive']
+    recursive.should be_true
+  end
+  
+  it "should call the #when_called proc when #run" do
+    result = nil
+    get_command(:test).when_called { |args, options| result = args.join(' ') }  
+    get_command(:test).run ['--trace', 'just', 'some', 'args']
+    result.should eql("just some args")
+  end
+  
+  it "should handle boolean options" do
+    opts = nil
+    get_command(:test).when_called { |args, options| opts = options }  
+    get_command(:test).run ['--trace', 'foo', 'bar']
+    opts.trace.should be_true
+  end
+  
+  it "should handle toggle options" do
+    options = nil
+    get_command(:test).when_called { |args, opts| options = opts }  
+    get_command(:test).option "--[no-]toggle"
+    get_command(:test).run ['--no-toggle']
+    options.toggle.should be_false
+  end
+  
+  it "should handle manditory arg options" do
+    options = nil
+    get_command(:test).when_called { |args, opts| options = opts }  
+    get_command(:test).option "--manditory ARG"
+    get_command(:test).run ['--manditory', "foo"]
+    options.manditory.should eql("foo")
+    lambda { get_command(:test).run ['--manditory'] }.should raise_error(OptionParser::MissingArgument)
+  end  
+  
+  it "should handle optional arg options" do
+    options = nil
+    get_command(:test).when_called { |args, opts| options = opts }  
+    get_command(:test).option "--optional [ARG]"
+    get_command(:test).run ['--optional', "foo"]
+    options.optional.should eql("foo") 
+    get_command(:test).run ['--optional']
+    options.optiona.should be_nil  
+  end
+  
+  it "should handle list options" do
+    options = nil
+    get_command(:test).when_called { |args, opts| options = opts }  
+    get_command(:test).option "--list words", Array
+    get_command(:test).run ['--list', "im,a,list"]
+    options.list.should eql(["im", "a", "list"]) 
+  end
+  
+  it "should initialize and call object when a class is passed to #when_called" do
+   $_when_called_value = nil
+   class HandleWhenCalled1
+     def initialize(args, options) $_when_called_value = args.join('-') end 
+   end
+   get_command(:test).when_called HandleWhenCalled1
+   get_command(:test).call(["hello", "world"])
+   $_when_called_value.should eql("hello-world")
+  end
+   
+  it "should initialize and call object when a class is passed to #when_called with an arbitrary method" do
+   class HandleWhenCalled2
      def arbitrary_method(args, options) args.join('-') end 
    end
-   get_command(:test).when_called HandleWhenCalled3.new, :arbitrary_method
+   get_command(:test).when_called HandleWhenCalled2, :arbitrary_method
    get_command(:test).call(["hello", "world"]).should eql("hello-world")
- end
- 
- it "should populate options when passed before command name" do
-   options = nil
-   new_command_runner '--foo', 'test', 'some', 'args'
-   get_command(:test).option "--foo"
-   get_command(:test).when_called { |args, opts| options = opts }
-   command_runner.run!
-   options.foo.should be_true 
- end
- 
- it "should populate options when passed after command name" do
-   options = nil
-   new_command_runner 'test', '--foo', 'some', 'args'
-   get_command(:test).option "--foo"
-   get_command(:test).when_called { |args, opts| options = opts }
-   command_runner.run!
-   options.foo.should be_true 
- end
+  end
+  
+  it "should call object when passed to #when_called " do
+    class HandleWhenCalled3
+      def arbitrary_method(args, options) args.join('-') end 
+    end
+    get_command(:test).when_called HandleWhenCalled3.new, :arbitrary_method
+    get_command(:test).call(["hello", "world"]).should eql("hello-world")
+  end
+  
+  it "should populate options when passed before command name" do
+    options = nil
+    new_command_runner '--foo', 'test', 'some', 'args'
+    get_command(:test).option "--foo"
+    get_command(:test).when_called { |args, opts| options = opts }
+    command_runner.run!
+    options.foo.should be_true 
+  end
+  
+  it "should populate options when passed after command name" do
+    options = nil
+    new_command_runner 'test', '--foo', 'some', 'args'
+    get_command(:test).option "--foo"
+    get_command(:test).when_called { |args, opts| options = opts }
+    command_runner.run!
+    options.foo.should be_true 
+  end
 
 end

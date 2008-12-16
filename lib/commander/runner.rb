@@ -3,7 +3,7 @@ require 'optparse'
 
 module Commander
   class Runner
-    
+
     #--
     # Exceptions
     #++
@@ -11,21 +11,27 @@ module Commander
     class CommandError < StandardError; end
     class InvalidCommandError < CommandError; end
     
-    attr_reader :commands, :options
+    ##
+    # Commands within the runner.
+    
+    attr_reader :commands
+    
+    ##
+    # Global options.
+    
+    attr_reader :options
     
     ##
     # Initialize a new command runner.
-    #
-    # The command runner essentially manages execution
-    # of a commander program. For testing and arbitrary
-    # purposes we can specify _input_, _output_, and 
-    # _args_ parameters to aid in mock terminal usage etc.
-    #
     
-    def initialize input = $stdin, output = $stdout, args = ARGV
-      @input, @output, @args = input, output, args
-      @commands, @options = {}, { :help => false, :version => false }
-      @program = { :help_formatter => Commander::HelpFormatter::Terminal }
+    def initialize args = ARGV
+      @args = args
+      @commands = {}
+      @options = Hash.new false
+      @program = { 
+        :help_formatter => Commander::HelpFormatter::Terminal,
+        :int_message => "\nProcess interrupted",
+      }
       create_default_commands
       parse_global_options
     end
@@ -36,16 +42,16 @@ module Commander
     def run!
       %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
       case 
-      when options[:version] : @output.puts "#{@program[:name]} #{@program[:version]}" 
+      when options[:version] : $terminal.say "#{@program[:name]} #{@program[:version]}" 
       when options[:help] : get_command(:help).run
       else active_command.run args_without_command
       end
     rescue InvalidCommandError
-      @output.puts "invalid command. Use --help for more information"
+      $terminal.say "invalid command. Use --help for more information"
     rescue OptionParser::InvalidOption, 
       OptionParser::InvalidArgument,
       OptionParser::MissingArgument => e
-      @output.puts e 
+      $terminal.say e
     end
     
     ##
@@ -167,9 +173,9 @@ module Commander
         c.when_called do |args, options|
           gen = help_formatter
           if args.empty?
-            @output.say gen.render 
+            $terminal.say gen.render 
           else
-            @output.say gen.render_command(get_command(args.shift.to_sym))
+            $terminal.say gen.render_command(get_command(args.shift.to_sym))
           end
         end
       end
