@@ -59,6 +59,7 @@ module Commander
     #    program :description, 'Commander utility program.'
     #    program :help, 'Copyright', '2008 TJ Holowaychuk'
     #    program :help, 'Anything', 'You want'
+    #    program :int_message 'Bye bye!'
     #
     #    # Get data
     #    program :name # => 'Commander'
@@ -70,6 +71,7 @@ module Commander
     #    :description     (required) Program description
     #    :help_formatter  Defaults to Commander::HelpFormatter::Terminal
     #    :help            Allows addition of arbitrary global help blocks
+    #    :int_message     Message to display when interrupted (CTRL + C)
     #
     
     def program key, *args
@@ -165,9 +167,9 @@ module Commander
         c.when_called do |args, options|
           gen = help_formatter
           if args.empty?
-            @output.puts gen.render 
+            @output.say gen.render 
           else
-            @output.puts gen.render_command(get_command(args.shift.to_sym))
+            @output.say gen.render_command(get_command(args.shift.to_sym))
           end
         end
       end

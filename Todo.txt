@@ -1,5 +1,4 @@
 
-* Trap INT, remove it from css gem
 * Wrap text so that it fits all the time and does not look silly (relative to terminal window)
 * autoload
 * progress bar thread safe?
@@ -13,6 +12,7 @@
 * Add global --options switch for loading options from a filepath
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
+* Add; allow usage of strings instead of symbols for command names
 * Change; consider reversing |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; output options in a better format
 * Change; refactor specs (stubs / helpers etc) and rake tasks... no more hoe
