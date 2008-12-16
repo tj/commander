@@ -3,7 +3,7 @@ require 'optparse'
 
 module Commander
   class Runner
-
+    
     #--
     # Exceptions
     #++
@@ -26,8 +26,7 @@ module Commander
     
     def initialize args = ARGV
       @args = args
-      @commands = {}
-      @options = Hash.new false
+      @commands, @options = {}, {}
       @program = { 
         :help_formatter => Commander::HelpFormatter::Terminal,
         :int_message => "\nProcess interrupted",

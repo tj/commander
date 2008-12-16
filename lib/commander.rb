@@ -41,7 +41,7 @@ $terminal.wrap_at = HighLine::SystemExtensions.terminal_size.first - 10 rescue 8
 
 # Display friendly interruption message
 trap 'INT' do 
-  say program :int_message
+  say program(:int_message)
   exit
 end
 
