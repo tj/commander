@@ -36,5 +36,11 @@ require 'commander/import'
 
 $command_runner = Commander::Runner.new
 
+# Display friendly interruption message
+trap 'INT' do 
+  say program(:int_message) ||"\nProcess interrupted"
+  exit
+end
+
 # Auto-execute command runner
 at_exit { $command_runner.run! } 

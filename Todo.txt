@@ -1,5 +1,4 @@
 
-* Fix .description not showing when no summary is present
 * Trap INT, remove it from css gem
 * Wrap text so that it fits all the time and does not look silly (relative to terminal window)
 * autoload
