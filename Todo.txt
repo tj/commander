@@ -1,5 +1,4 @@
 
-* Fix make log format wider again
 * Fix .summary for Help command
 * Fix .description not showing when no summary is present
 * Trap INT, remove it from css gem

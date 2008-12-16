@@ -9,7 +9,7 @@
 
   <%= color "SUB-COMMANDS", :bold %>:
 <% @commands.each_pair do |name, command| %>
-    <%= "%-14s %s" % [command.name, command.summary] -%>
+    <%= "%-14s %s" % [command.name, command.summary || command.description] -%>
 <% end %>
 <% if program :help -%>
   <% program(:help).each_pair do |title, body| %>
