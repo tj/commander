@@ -9,7 +9,8 @@ program :description, 'Commander utility program.'
 
 command :init do |c|
 	c.syntax = 'commander init <file>'
-	c.description = 'Initialize an empty file with a commander template.'
+	c.summary = 'Initialize a commander template'
+	c.description = 'Initialize an empty file with a commander template, allowing extremely quick creation of commader executables.'
 	c.example 'Create a new file with a commander template.', 'commander init ./bin/my_executable'
 	c.when_called do |args, options|
 	  abort "Provide a filepath." if args.empty?
