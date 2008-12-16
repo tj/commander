@@ -14,7 +14,7 @@ module Commander
     ##
     # Format used within #log.
     
-    LOG_FORMAT = "%8s  %s"
+    LOG_FORMAT = "%15s  %s"
     
     ##
     # Ask the user for a password. Specify a custom
