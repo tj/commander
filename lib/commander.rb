@@ -37,9 +37,7 @@ require 'commander/import'
 $command_runner = Commander::Runner.new
 
 # Highline terminal settings
-p HighLine::SystemExtensions.terminal_size
 $terminal.wrap_at = HighLine::SystemExtensions.terminal_size.first - 10 rescue 80
-$terminal.page_at = nil
 
 # Display friendly interruption message
 trap 'INT' do 

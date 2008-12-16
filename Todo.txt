@@ -1,5 +1,4 @@
 
-* Wrap text so that it fits all the time and does not look silly (relative to terminal window)
 * autoload
 * progress bar thread safe?
 * Release to RubyForge as well
