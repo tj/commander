@@ -1,3 +1,6 @@
 
 require 'commander/help_formatters/base'
-require 'commander/help_formatters/terminal'
+
+module Commander::HelpFormatter
+  autoload :Terminal, 'commander/help_formatters/terminal'
+end

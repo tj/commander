@@ -1,12 +1,10 @@
 
-* autoload
-* progress bar thread safe?
 * Release to RubyForge as well
 * Fix excessive Dir#[] calls due to rubygems, http://rubyforge.org/tracker/index.php?func=detail&aid=23170&group_id=126&atid=575
 * Unify VerboseFileUtils output with other UI methods
 * Have VerboseFileUtils only output basename ? 
 * Add global --trace
-* Add highline page_and_wrap (less)
+* Add highline paging ... clean it up
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add global --options switch for loading options from a filepath
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
