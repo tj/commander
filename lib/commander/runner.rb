@@ -150,7 +150,7 @@ module Commander
     # command names. 
     
     def command_name_from_args
-      @args.delete_switches.inject do |name, arg|
+      @args.dup.delete_switches.inject do |name, arg|
         return name if command_exists? name
         name << " #{arg}"
       end
@@ -211,7 +211,7 @@ module Commander
       raise CommandError, "Program #{key} required (use #program method)" if (@program[key].nil? || @program[key].empty?)
     end
     
-    def args_without_command #:nodoc: 
+    def args_without_command #:nodoc:
       @args.dup.join(' ').sub(/^#{active_command.name}/, '').split
     end
         

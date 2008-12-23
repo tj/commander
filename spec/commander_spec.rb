@@ -209,10 +209,11 @@ describe Commander do
   
   it "should allow multi-word strings as command names to be called correctly" do
     new_command_runner 'foo', 'bar', 'something', 'else', '--whatever'
-    command 'foo bar' do |c|
-      c.when_called do |args, opts|
-        "foo bar %s" % args.join('-')
-      end
+     command 'foo bar' do |c|
+       c.option '--whatever'
+       c.when_called do |args, opts|
+         "foo bar %s" % args.join('-')
+       end
     end
     command_runner.run!
     @output.string.should eql('foo bar something-else')
