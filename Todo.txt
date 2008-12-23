@@ -1,5 +1,6 @@
 
 * Release to RubyForge as well
+* RDoc
 * Fix excessive Dir#[] calls due to rubygems, http://rubyforge.org/tracker/index.php?func=detail&aid=23170&group_id=126&atid=575
 * Change; Have VerboseFileUtils only output basename ? 
 * Add global --trace
@@ -9,8 +10,8 @@
 * Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
 * Add; allow usage of strings instead of symbols for command names
+* Add; display global options with global help
 * Change; consider reversing |options, args| so args can be |options, file, dir| etc.. adjust doc
-* Change; output options in a better format
 * Change; refactor specs (stubs / helpers etc) and rake tasks... no more hoe
 * Publish rdoc
 * Create command-alias branch...
