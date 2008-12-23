@@ -56,6 +56,7 @@ module Commander
     #    --large-switch      options.large_switch   # => bool
     #    --file FILE         options.file           # => file passed
     #    --list words        options.list           # => array
+    #    --date [DATE]       options.date           # => date or nil when optional argument not set
     #
     # === Examples:
     #    
