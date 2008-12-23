@@ -7,7 +7,6 @@
 * Add highline paging ... clean it up
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add global --options switch for loading options from a filepath
-* Add ask_for_CLASS where CLASS becomes Date, Time, Array, etc
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
 * Add; allow usage of strings instead of symbols for command names
 * Add; display global options with global help

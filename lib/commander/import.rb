@@ -19,4 +19,10 @@ module Kernel
   def command_runner #:nodoc:
     $command_runner
   end
+  
+  def method_missing meth, *args, &block
+    if meth.to_s =~ /^ask_for_([\w]+)/
+      $terminal.ask args.first, eval($1.camelcase)
+    end
+  end
 end

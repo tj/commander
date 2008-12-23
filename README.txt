@@ -111,6 +111,10 @@ simplify common tasks using the following methods:
    # Ask for password with specific message and mask character
    password "Enter your password please:", '-'
 
+   # Ask for CLASS, which may be any valid class responding to #parse. Date, Time, Array, etc
+   names = ask_for_array 'Names: '
+   bday = ask_for_date 'Birthday?: '
+
    # Simple progress bar (Commander::UI::ProgressBar)
    uris = %w[ 
      http://vision-media.ca 
