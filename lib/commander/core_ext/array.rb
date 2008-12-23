@@ -14,4 +14,11 @@ class Array
     string.split
   end
   
+  ##
+  # Delete switches such as -h or --help.
+  
+  def delete_switches
+    self.delete_if { |v| v.to_s =~ /^-/ } 
+  end
+  
 end

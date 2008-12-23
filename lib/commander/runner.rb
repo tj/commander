@@ -123,7 +123,14 @@ module Commander
     # Get a command object if available or nil.
     
     def get_command name
-      @commands[name] or raise InvalidCommandError, "Invalid command '#{name || "nil"}'", caller
+      @commands[name.to_s] or raise InvalidCommandError, "Invalid command '#{name || "nil"}'", caller
+    end
+    
+    ##
+    # Check if a command exists.
+    
+    def command_exists? name
+      @commands[name.to_s]
     end
     
     ##
@@ -139,10 +146,13 @@ module Commander
     end
     
     ##
-    # Attemps to locate command from @args, otherwise nil.
+    # Attemps to locate command from @args.
     
-    def command_name_from_args 
-      @args.find { |arg| arg.match /^[a-z_0-9]+$/i }.to_sym rescue nil
+    def command_name_from_args
+      @args.delete_switches.inject do |name, arg|
+        return name if command_exists? name
+        name << " #{arg}"
+      end
     end
     
     ##

@@ -12,7 +12,7 @@ module Commander
     # Initialize new command with specified _name_.
     
     def initialize name
-      @name, @examples, @when_called = name, [], {}
+      @name, @examples, @when_called = name.to_s, [], {}
       @options, @proxy_options = [], []
     end
     
@@ -183,6 +183,10 @@ module Commander
     
     def sym_from_switch switch
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
+    end
+    
+    def inspect #:nodoc:
+      "#<Command:#{@name}>"
     end
     
     private 

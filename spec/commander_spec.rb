@@ -40,7 +40,7 @@ describe Commander do
   end
       	
 	it "should get command instances using #get_command" do
-	  get_command(:test).name.should eql(:test)
+	  get_command(:test).name.should eql('test')
 	end
 	
 	it "should assign options" do
@@ -53,7 +53,7 @@ describe Commander do
 
   it "should output invalid option message when invalid options passed to command" do
     new_command_runner 'test', '--invalid-option'
-    run!
+    command_runner.run!
     @output.string.should eql("invalid option: --invalid-option\n")
   end
   
@@ -65,7 +65,7 @@ describe Commander do
 
  	it "should locate command within arbitrary arguments passed" do
  	  new_command_runner '--help', '--arbitrary', 'test'
- 	  command_runner.command_name_from_args.should eql(:test)
+ 	  command_runner.command_name_from_args.should eql('test')
  	end
 
   it "should resolve active command from global options passed" do
@@ -207,13 +207,15 @@ describe Commander do
     options.foo.should be_true 
   end
   
-  it "should allow multi-word strings as command names" do
+  it "should allow multi-word strings as command names to be called correctly" do
+    new_command_runner 'foo', 'bar', 'something', 'else', '--whatever'
     command 'foo bar' do |c|
       c.when_called do |args, opts|
         "foo bar %s" % args.join('-')
       end
     end
-    get_command('foo bar').name.should eql('foo bar')
+    command_runner.run!
+    @output.string.should eql('foo bar something-else')
   end
 
 end
