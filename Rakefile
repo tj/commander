@@ -1,39 +1,12 @@
-# -*- ruby -*-
 
-require 'rubygems'
-require 'hoe'
-require './lib/commander.rb'
+%w( rubygems rake echoe ./lib/commander.rb ).each { |lib| require lib }
 
-Hoe.new('commander', Commander::VERSION::STRING) do |p|
-  p.developer('TJ Holowaychuk', 'tj@vision-media.ca')
-  p.extra_deps << ['highline', '>= 1.5.0']
+Echoe.new("commander", Commander::VERSION::STRING) do |p|
+  p.author = "TJ Holowaychuk"
+  p.email = "tj@vision-media.ca"
+  p.summary = "The complete solution for Ruby command-line executables"
+  p.url = "http://github.com/visionmedia/commander"
+  p.runtime_dependencies = ["highline >=1.5.0"]
 end
 
-desc 'Build and install gem.'
-task :build => [:remove, :install_gem] do
-  sh "clear"
-end
-
-desc 'Remove build data.'
-task :remove => [:clean] do
-  sh "clear"
-end
-
-desc 'Build and open docs in safari for viewing'
-task :read_docs => [:docs] do
-  sh "open -a safari doc/index.html"
-end
-
-desc 'Run rspec suite.'
-task :spec do
-  sh "clear"
-  sh "spec ./spec/all_spec.rb --color"
-end
-
-desc 'Run rspec suite with specdoc format.'
-task :specd do
-  sh "clear"
-  sh "spec ./spec/all_spec.rb --format specdoc --color"
-end
-
-# vim: syntax=Ruby
+Dir['tasks/**/*.rake'].sort.each { |lib| load lib }
