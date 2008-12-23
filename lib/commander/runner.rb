@@ -142,11 +142,12 @@ module Commander
     #
     
     def active_command
-      get_command command_name_from_args
+      @_active_command ||= get_command(command_name_from_args)
     end
     
     ##
-    # Attemps to locate command from @args.
+    # Attemps to locate command from @args. Supports multi-word
+    # command names. 
     
     def command_name_from_args
       @args.delete_switches.inject do |name, arg|
@@ -211,7 +212,7 @@ module Commander
     end
     
     def args_without_command #:nodoc: 
-      @_args_without_command ||= @args.dup.delete_first_match(active_command.name.to_s) 
+      @args.dup.join(' ').sub(/^#{active_command.name}/, '').split
     end
         
   end
