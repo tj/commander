@@ -123,11 +123,7 @@ module Commander
     # Get a command object if available or nil.
     
     def get_command name
-      if @commands[name] 
-        @commands[name]
-      else
-        raise InvalidCommandError, "Invalid command '#{name || "nil"}'", caller
-      end
+      @commands[name] or raise InvalidCommandError, "Invalid command '#{name || "nil"}'", caller
     end
     
     ##

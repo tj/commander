@@ -206,5 +206,14 @@ describe Commander do
     command_runner.run!
     options.foo.should be_true 
   end
+  
+  it "should allow multi-word strings as command names" do
+    command 'foo bar' do |c|
+      c.when_called do |args, opts|
+        "foo bar %s" % args.join('-')
+      end
+    end
+    get_command('foo bar').name.should eql('foo bar')
+  end
 
 end
