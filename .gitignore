@@ -2,3 +2,5 @@ old
 pkg
 doc
 test
+.DS_Store
+*.cache

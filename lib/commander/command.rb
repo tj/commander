@@ -79,6 +79,14 @@ module Commander
     # option which can later be used within help formatters
     # using option[:switches] and option[:description].
     #
+    # === Input Parsing:
+    #
+    # Since Commander utilizes OptionParser you can pre-parser and evaluate
+    # option arguments. Simply require 'optparse/time', or 'optparse/date', etc.
+    #
+    #   c.option '--time TIME', Time
+    #   c.option '--date [DATE]', Date
+    #
     
     def option *args, &block
       switches, description = seperate_switches_from_description args
