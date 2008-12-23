@@ -18,7 +18,7 @@ class Array
   # Delete switches such as -h or --help.
   
   def delete_switches
-    self.delete_if { |v| v.to_s =~ /^-/ } 
+    self.dup.delete_if { |v| v.to_s =~ /^-/ } 
   end
   
 end

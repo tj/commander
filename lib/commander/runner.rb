@@ -150,7 +150,7 @@ module Commander
     # command names. 
     
     def command_name_from_args
-      @args.dup.delete_switches.inject do |name, arg|
+      @args.delete_switches.inject do |name, arg|
         return name if command_exists? name
         name << " #{arg}"
       end
@@ -212,7 +212,7 @@ module Commander
     end
     
     def args_without_command #:nodoc:
-      @args.dup.join(' ').sub(/^#{active_command.name}/, '').split
+      @args.join(' ').sub(/^[\s]*#{active_command.name}/, '').split
     end
         
   end
