@@ -14,20 +14,6 @@
 * Change; consider reversing |options, args| so args can be |options, file, dir| etc.. adjust doc
 * Change; refactor specs (stubs / helpers etc) and rake tasks... no more hoe
 * Publish rdoc
-* Create command-alias branch...
-
-  drupal module_create MODULE
-  drupal module create MODULE
-
-  alias_command alias, command, args (options etc)
-  
-  alias_command "module create", :module_create
-  alias_command "create module", :module_create, ["--verbose"]
-  
-  command :create_module do |c|
-    c.alias "module create" ....
-  end
-
 * Add more accepted classes that would be useful, document adding of optparse/time etc
 
 OptionParser.accept(Date) do |s,|
