@@ -1,4 +1,5 @@
 bin/commander
+commander.gemspec
 History.rdoc
 lib/commander/command.rb
 lib/commander/core_ext/array.rb
@@ -17,9 +18,9 @@ lib/commander/runner.rb
 lib/commander/user_interaction.rb
 lib/commander/version.rb
 lib/commander.rb
+Manifest
 Rakefile
 README.rdoc
-spec/all_spec.rb
 spec/commander_spec.rb
 spec/help_formatter_spec.rb
 spec/spec_helper.rb
@@ -30,4 +31,3 @@ test/fileutils.rb
 test/progress.rb
 test/ui.rb
 Todo.rdoc
-Manifest
