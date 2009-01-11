@@ -1,4 +1,9 @@
 
+=== 2.4.0 / 2009-01-11
+
+* Added ask_for_CLASS, which may be any class name such as ask_for_date, ask_for_array, etc
+* Changed doc to *.rdoc for pretty markup on github
+
 === 2.3.0 / 2008-12-16
 
 * Removed input, output in favour of HighLines $terminal
