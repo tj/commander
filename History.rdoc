@@ -1,5 +1,5 @@
 
-=== 2.4.0 / 2009-01-11
+=== 2.4.1 / 2009-01-11
 
 * Added ask_for_CLASS, which may be any class name such as ask_for_date, ask_for_array, etc
 * Changed doc to *.rdoc for pretty markup on github
