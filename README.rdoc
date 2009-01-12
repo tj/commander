@@ -143,6 +143,11 @@ global usage. These will output 'log' messages such as:
 If you do not wish to use FileUtils in a verbose manor simply call FileUtil's
 methods directly.
 
+== ASCII Tables
+
+For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at
+http://github.com/visionmedia/terminal-table
+
 == Known Issues:
   
 * none

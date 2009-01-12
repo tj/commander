@@ -1,4 +1,8 @@
 
+=== 2.4.2 / 2009-01-12
+
+* Github! build me!
+
 === 2.4.1 / 2009-01-11
 
 * Added ask_for_CLASS, which may be any class name such as ask_for_date, ask_for_array, etc
