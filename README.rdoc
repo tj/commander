@@ -57,12 +57,12 @@ are some quick examples for how to utilize highline in your command(s):
    ask("Password:  ") { |q| q.echo = "*" }
   
    # Ask for password 
-   p ask("Password:  ") { |q| q.echo = false }
+   ask("Password:  ") { |q| q.echo = false }
 
    # Ask if the user agrees (yes or no)
    agree("Do something?")
 
-   # Asks on a single line (note the space after ':'
+   # Asks on a single line (note the space after ':')
    ask("Name: ")
 
    # Asks with new line after "Description:"
