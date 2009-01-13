@@ -1,6 +1,5 @@
 
 * Release to RubyForge as well
-* Fix excessive Dir#[] calls due to rubygems, http://rubyforge.org/tracker/index.php?func=detail&aid=23170&group_id=126&atid=575
 * Change; Have VerboseFileUtils only output basename ? 
 * Add highline paging ... clean it up
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
