@@ -6,6 +6,6 @@
 * Add global --options switch for loading options from a filepath
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
 * Add; display global options with global help
-* Change; consider reversing |options, args| so args can be |options, file, dir| etc.. adjust doc
+* Change; consider reversing |options, args| so args make use of ruby block param defaults |options, file, dir = SOME_DIR| etc.. adjust doc
 * Change; refactor specs
 * Publish rdoc
