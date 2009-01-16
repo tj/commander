@@ -149,16 +149,11 @@ module Commander
     # command names. 
     
     def command_name_from_args
-      # @_command_name_form_args
-      # if @args.join.include? 'foobarsomething'
-      #   require 'ruby-debug'
-      #   debugger
-      # end
+      p @args
       args = @args.delete_switches
       name = args.shift
       args.each { |arg| name << " #{args.shift}" unless command_exists? name } 
       p @args
-      p name
       name
     end
     
