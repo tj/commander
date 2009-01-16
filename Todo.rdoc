@@ -1,14 +1,12 @@
 
 * fix der/runner.rb:155:in `<<': can't modify
-* refactor tokenize ... regexp.new not needed
-* Fix multi-word commands
-* Release to RubyForge as well
 * Change; Have VerboseFileUtils only output basename ? 
+* Change; refactor specs
+* Release to RubyForge as well
 * Add highline paging ... clean it up
 * Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
 * Add global --options switch for loading options from a filepath
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
 * Add; display global options with global help
 * Change; consider reversing |options, args| so args make use of ruby block param defaults |options, file, dir = SOME_DIR| etc.. adjust doc
-* Change; refactor specs
 * Publish rdoc

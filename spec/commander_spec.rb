@@ -221,5 +221,21 @@ describe Commander do
     arguments.should eql(['i', 'like', 'bar'])
     options.i_like.should eql('cookies')
   end
+  
+  it "should allow multi-word strings as command names to be called correctly, with options before command name" do
+    arguments = nil
+    options = nil
+    new_command_runner '--something', 'foo', 'bar', 'random_arg'
+    command 'foo bar' do |c|
+      c.option '--something'
+      c.when_called { |args, opts| arguments, options = args, opts } 
+    end
+    command_runner.command_name_from_args.should eql('foo bar')
+    command_runner.args_without_command.should eql(['--something', 'random_arg'])
+    command_runner.run!
+    arguments.should eql(['random_arg'])
+    options.something.should be_true
+  end
+
 
 end
