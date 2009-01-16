@@ -22,6 +22,7 @@ Manifest
 Rakefile
 README.rdoc
 spec/commander_spec.rb
+spec/core_ext_spec.rb
 spec/help_formatter_spec.rb
 spec/spec_helper.rb
 tasks/docs.rake
