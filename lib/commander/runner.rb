@@ -40,16 +40,16 @@ module Commander
     def run!
       %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
       case 
-      when options[:version] : terminal.say "#{@program[:name]} #{@program[:version]}" 
+      when options[:version] : $terminal.say "#{@program[:name]} #{@program[:version]}" 
       when options[:help] : get_command(:help).run
       else active_command.run args_without_command
       end
     rescue InvalidCommandError
-      terminal.say "invalid command. Use --help for more information"
+      $terminal.say "invalid command. Use --help for more information"
     rescue OptionParser::InvalidOption, 
       OptionParser::InvalidArgument,
       OptionParser::MissingArgument => e
-      terminal.say e
+      $terminal.say e
     end
     
     ##
@@ -185,9 +185,9 @@ module Commander
         c.when_called do |args, options|
           gen = help_formatter
           if args.empty?
-            terminal.say gen.render 
+            $terminal.say gen.render 
           else
-            terminal.say gen.render_command(get_command(args.shift.to_sym))
+            $terminal.say gen.render_command(get_command(args.shift.to_sym))
           end
         end
       end
@@ -218,10 +218,6 @@ module Commander
         
     def ensure_program_key_set key 
       raise CommandError, "Program #{key} required (use #program method)" if (@program[key].nil? || @program[key].empty?)
-    end
-    
-    def terminal #:nodoc:
-      $terminal
     end
     
   end
