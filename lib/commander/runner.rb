@@ -149,11 +149,9 @@ module Commander
     # command names. 
     
     def command_name_from_args
-      p @args
       args = @args.delete_switches
       name = args.shift
-      args.each { |arg| name << " #{args.shift}" unless command_exists? name } 
-      p @args
+      args.each { |arg| name += " #{args.shift}" unless command_exists? name }
       name
     end
     
