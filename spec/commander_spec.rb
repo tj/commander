@@ -210,11 +210,13 @@ describe Commander do
   it "should allow multi-word strings as command names to be called correctly" do
     arguments = nil
     options = nil
-    new_command_runner 'foo', 'bar', 'i', 'like', '--i-like', 'cookies', 'bar'
-    command 'foo bar' do |c|
+    new_command_runner 'foo', 'bar', 'something', 'i', 'like', '--i-like', 'cookies', 'bar'
+    command 'foo bar something' do |c|
       c.option '--i-like WHAT'
       c.when_called { |args, opts| arguments, options = args, opts } 
     end
+    command_runner.command_name_from_args.should eql('foo bar something')
+    command_runner.args_without_command.should eql(['i', 'like', '--i-like', 'cookies', 'bar'])
     command_runner.run!
     arguments.should eql(['i', 'like', 'bar'])
     options.i_like.should eql('cookies')

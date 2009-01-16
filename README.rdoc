@@ -148,6 +148,12 @@ methods directly.
 For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at
 http://github.com/visionmedia/terminal-table
 
+   +----------+-------+----+--------+-----------------------+
+   | Terminal | Table | Is | Wicked | Awesome               |
+   +----------+-------+----+--------+-----------------------+
+   |          |       |    |        | get it while its hot! |
+   +----------+-------+----+--------+-----------------------+
+
 == Known Issues:
   
 * none

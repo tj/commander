@@ -26,8 +26,7 @@ module Commander
     
     def initialize args = ARGV
       @args = args
-      @commands, @options = {}, {}
-      @program = { 
+      @commands, @options, @program = {}, {}, { 
         :help_formatter => Commander::HelpFormatter::Terminal,
         :int_message => "\nProcess interrupted",
       }
@@ -123,7 +122,7 @@ module Commander
     # Get a command object if available or nil.
     
     def get_command name
-      @commands[name.to_s] or raise InvalidCommandError, "Invalid command '#{name || "nil"}'", caller
+      @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
     end
     
     ##
@@ -150,10 +149,17 @@ module Commander
     # command names. 
     
     def command_name_from_args
-      @args.delete_switches.inject do |name, arg|
-        return name if command_exists? name
-        name << " #{arg}"
-      end
+      # @_command_name_form_args
+      # if @args.join.include? 'foobarsomething'
+      #   require 'ruby-debug'
+      #   debugger
+      # end
+      args = @args.delete_switches
+      name = args.shift
+      args.each { |arg| name << " #{args.shift}" unless command_exists? name } 
+      p @args
+      p name
+      name
     end
     
     ##
@@ -162,7 +168,14 @@ module Commander
     def help_formatter
       @_help_formatter ||= @program[:help_formatter].new self
     end
-        
+    
+    ##
+    # Return arguments without the command name.
+    
+    def args_without_command
+      @args.dup.join(' ').sub(command_name_from_args, '').split
+    end
+            
     private
     
     ##
@@ -206,14 +219,13 @@ module Commander
       # Ignore invalid options since options will be further 
       # parsed by our sub commands.
     end
+    
+    ##
+    # Raises a CommandError when the program +key+ is not present, or is empty.
         
-    def ensure_program_key_set key #:nodoc:
+    def ensure_program_key_set key 
       raise CommandError, "Program #{key} required (use #program method)" if (@program[key].nil? || @program[key].empty?)
     end
     
-    def args_without_command #:nodoc:
-      @args.join(' ').sub(/^[\s]*#{active_command.name}/, '').split
-    end
-        
   end
 end

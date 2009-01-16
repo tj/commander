@@ -1,4 +1,7 @@
 
+* fix der/runner.rb:155:in `<<': can't modify
+* refactor tokenize ... regexp.new not needed
+* Fix multi-word commands
 * Release to RubyForge as well
 * Change; Have VerboseFileUtils only output basename ? 
 * Add highline paging ... clean it up
