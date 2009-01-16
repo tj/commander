@@ -5,8 +5,7 @@ class String
   # Replace +hash+ keys with associated values. Mutative.
   
   def tokenize! hash
-    hash.each_pair { |k, v| gsub! /:#{k}/, v }
-    self
+    hash.inject(self) { |s, (k, v)| s.gsub! /:#{k}/, v }
   end
     
   ##
