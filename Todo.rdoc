@@ -1,5 +1,4 @@
 
-* fix der/runner.rb:155:in `<<': can't modify
 * Change; Have VerboseFileUtils only output basename ? 
 * Change; refactor specs
 * Release to RubyForge as well

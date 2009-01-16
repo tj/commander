@@ -1,4 +1,8 @@
 
+=== 2.4.3 / 2009-01-15
+
+* Fixed bug in command_name_from_args, preventing multi-word commands
+
 === 2.4.2 / 2009-01-12
 
 * Github! build me!

@@ -28,7 +28,7 @@ require '#{name}'
 
 program :name, '#{name}'
 program :version, #{name.camelcase}::VERSION::STRING
-program :description, '#{description}.'
+program :description, '#{description}'
  
 CODE
         commands.each do |command|
