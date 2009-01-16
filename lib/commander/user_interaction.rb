@@ -193,10 +193,10 @@ module Commander
       # * Kernel#progress
 
       def self.progress enum, options = {}, &block
-        threads = []
         bar = ProgressBar.new enum.length, options
         enum.each { |v| bar.inc yield(v) } 
       end
+      
     end
   end
 end
