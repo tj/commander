@@ -187,7 +187,7 @@ module Commander
           if args.empty?
             $terminal.say gen.render 
           else
-            $terminal.say gen.render_command(get_command(args.shift.to_sym))
+            $terminal.say gen.render_command(get_command(args.join(' ')))
           end
         end
       end

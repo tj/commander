@@ -1,4 +1,8 @@
 
+=== 2.4.4 / 2009-01-15
+
+* Fixed bug which was not allowing multi-word commands to view help
+
 === 2.4.3 / 2009-01-15
 
 * Fixed bug in command_name_from_args, preventing multi-word commands
