@@ -1,5 +1,7 @@
 
 * Add optional command to be executed when none is specified
+* Add aliasing of commands / args / options
+* Non-greedy matching of command name
 * Change; Have VerboseFileUtils only output basename ? 
 * Change; refactor specs
 * Release to RubyForge as well
