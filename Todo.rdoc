@@ -1,5 +1,5 @@
 
-* Fix optparse string parsing...
+* Fix issue with having command name in the args list, #args_without_command
 * Add optional command to be executed when none is specified
 * Add aliasing of commands / args / options
 * Non-greedy matching of command name

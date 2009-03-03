@@ -1,4 +1,9 @@
 
+=== 2.4.5 / 2009-03-03
+
+* Fixed bug which was not allowing switch arguments which are strings
+  such as --eval 'something here'
+
 === 2.4.4 / 2009-01-15
 
 * Fixed bug which was not allowing multi-word commands to view help
