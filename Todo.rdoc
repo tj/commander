@@ -1,4 +1,5 @@
 
+* Fix optparse string parsing...
 * Add optional command to be executed when none is specified
 * Add aliasing of commands / args / options
 * Non-greedy matching of command name

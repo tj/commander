@@ -166,7 +166,7 @@ module Commander
     # Return arguments without the command name.
     
     def args_without_command
-      @args.dup.join(' ').sub(command_name_from_args, '').split
+      @args.dup - command_name_from_args.split
     end
             
     private
