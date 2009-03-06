@@ -1,4 +1,10 @@
 
+=== 2.5.5 / 2009-03-06
+
+* Replaced Commander::VERSION::STRING with Commander::VERSION (for release gem)
+* Refactored progress bar
+* Fixed String#tokenize
+
 === 2.4.5 / 2009-03-03
 
 * Fixed bug which was not allowing switch arguments which are strings
