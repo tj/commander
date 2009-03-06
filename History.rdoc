@@ -1,5 +1,5 @@
 
-=== 2.5.5 / 2009-03-06
+=== 2.5.6 / 2009-03-06
 
 * Replaced Commander::VERSION::STRING with Commander::VERSION (for release gem)
 * Refactored progress bar
