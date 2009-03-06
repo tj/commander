@@ -175,9 +175,10 @@ module Commander
         unless finished?
           erase_line
           if completed?
-            print @complete_message.tokenize(generate_tokens) << "\n" if @complete_message.is_a? String
+            puts @complete_message.tokenize(generate_tokens) if @complete_message.is_a? String
           else
             print @format.tokenize(generate_tokens)
+            $stdout.flush
           end
         end
       end
@@ -186,7 +187,7 @@ module Commander
       # Weither or not the operation is complete, and we have finished.
       
       def finished?
-        @steps >= (@total_steps + 1)
+        @step == @total_steps + 1
       end
 
       ##
@@ -195,7 +196,6 @@ module Commander
       def completed?
         @step == @total_steps
       end
-      alias :finished? :completed?
 
       ##
       # Increment progress. Optionally pass _tokens_ which
@@ -230,7 +230,7 @@ module Commander
 
       def self.progress arr, options = {}, &block
         bar = ProgressBar.new arr.length, options
-        arr.each { |v| bar.increment yield(v) } 
+        arr.each { |v| bar.increment yield(v) }
       end
       
     end
