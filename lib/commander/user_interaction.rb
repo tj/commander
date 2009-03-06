@@ -119,10 +119,9 @@ module Commander
           :incomplete_char => ".",
           :complete_message => "Process complete",
           :format => ":title |:progress_bar| :percent_complete% complete ",
-          :output => $stderr, 
+          :output => $stdout, 
           :tokens => {},
         }.merge! options
-        show
       end
 
       ##

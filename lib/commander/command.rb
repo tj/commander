@@ -52,10 +52,10 @@ module Commander
     # contains the results of this option. This handles common formats such as:
     #
     #    -h, --help          options.help           # => bool
-    #    --[with]-feature    options.feature        # => bool
+    #    --[no-]feature      options.feature        # => bool
     #    --large-switch      options.large_switch   # => bool
     #    --file FILE         options.file           # => file passed
-    #    --list words        options.list           # => array
+    #    --list WORDS        options.list           # => array
     #    --date [DATE]       options.date           # => date or nil when optional argument not set
     #
     # === Examples:
@@ -64,8 +64,8 @@ module Commander
     #      c.option '--recursive', 'Do something recursively'
     #      c.option '--file FILE', 'Specify a file'
     #      c.option('--info', 'Display info') { puts "handle with block" }
-    #      c.option '--[no]-feature', 'With or without feature'
-    #      c.option '--list files', Array, 'List the files specified'
+    #      c.option '--[no-]feature', 'With or without feature'
+    #      c.option '--list FILES', Array, 'List the files specified'
     #
     #      c.when_called do |args, options|
     #        do_something_recursively if options.recursive
@@ -195,7 +195,7 @@ module Commander
     end
     
     def inspect #:nodoc:
-      "#<Command:#{@name}>"
+      "#<Commander::Command:#{@name}>"
     end
     
     private 
