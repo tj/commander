@@ -47,13 +47,14 @@ module Commander
     #
     # Terminal progress bar utility. In its most basic form
     # requires that the developer specifies when the bar should
-    # be incremented:
+    # be incremented. Note that a hash of tokens may be passed to
+    # #increment, (or returned when using Kernel#progress).
     #
-    #    uris = %w[ 
+    #    uris = %w( 
     #      http://vision-media.ca
     #      http://yahoo.com
     #      http://google.com
-    #      ]
+    #      )
     #
     #    bar = Commander::UI::ProgressBar.new uris.length, options
     #    threads = []
@@ -61,9 +62,9 @@ module Commander
     #      threads << Thread.new do
     #        begin
     #          res = open uri
-    #          bar.inc :uri => uri
+    #          bar.increment :uri => uri
     #        rescue Exception => e
-    #          bar.inc :uri => "#{uri} failed"
+    #          bar.increment :uri => "#{uri} failed"
     #        end
     #      end
     #    end
@@ -96,10 +97,9 @@ module Commander
       #    :title 
       #    :percent_complete
       #    :progress_bar
-      #    :current
-      #    :remaining
-      #    :total
-      #    :output
+      #    :step
+      #    :steps_remaining
+      #    :total_steps
       #    :time_elapsed
       #    :time_remaining
       #
@@ -142,6 +142,13 @@ module Commander
       def steps_remaining
         @total_steps - @step
       end
+      
+      ##
+      # Formatted progress bar.
+      
+      def progress_bar
+        (@progress_str * (@width * percent_complete / 100)).ljust @width, @incomplete_str
+      end
 
       ##
       # Output the progress bar.
@@ -152,10 +159,10 @@ module Commander
           tokens = {
             :title => @title,
             :percent_complete => percent_complete,
-            :progress_bar => (@progress_char * (@width * percent_complete / 100)).ljust(@width, @incomplete_char), 
-            :current => @step,
-            :remaining => steps_remaining,
-            :total => @total_steps, 
+            :progress_bar => progress_bar, 
+            :step => @step,
+            :steps_remaining => steps_remaining,
+            :total_steps => @total_steps, 
             :time_elapsed => "%0.2fs" % time_elapsed,
             :time_remaining => "%0.2fs" % time_remaining,
           }.merge! @tokens
@@ -191,7 +198,6 @@ module Commander
         @tokens.merge! tokens if tokens.is_a? Hash
         show
       end
-      alias :inc :increment
 
       ##
       # Erase previous terminal line.
@@ -205,7 +211,7 @@ module Commander
       #
       # === Example:
       #
-      #    uris = %[ http://vision-media.ca http://google.com ]
+      #    uris = %w( http://vision-media.ca http://google.com )
       #    ProgressBar.progress uris, :format => "Remaining: :time_remaining" do |uri|
       #      res = open uri
       #    end
@@ -216,7 +222,7 @@ module Commander
 
       def self.progress arr, options = {}, &block
         bar = ProgressBar.new arr.length, options
-        arr.each { |v| bar.inc yield(v) } 
+        arr.each { |v| bar.increment yield(v) } 
       end
       
     end
