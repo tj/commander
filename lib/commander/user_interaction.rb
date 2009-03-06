@@ -69,16 +69,10 @@ module Commander
     #    end
     #    threads.each { |t| t.join }
     #
-    # The Kernel method #progress is also available, below are
-    # single and multi-threaded examples:
+    # The Kernel method #progress is also available:
     #
     #    progress uris, :width => 10 do |uri|
     #      res = open uri
-    #    end
-    #    
-    #    threads = uris.collect { |uri| Thread.new { res = open uri } } 
-    #    progress threads, :progress_char => '-' do |thread|
-    #      thread.join
     #    end
     #
 
@@ -91,8 +85,8 @@ module Commander
       #    
       #    :title              Title, defaults to "Progress"
       #    :width              Width of :progress_bar
-      #    :progress_char      Progress character, defaults to "="
-      #    :incomplete_char    Incomplete bar character, defaults to '.'
+      #    :progress_str       Progress string, defaults to "="
+      #    :incomplete_str     Incomplete bar string, defaults to '.'
       #    :format             Defaults to ":title |:progress_bar| :percent_complete% complete "
       #    :tokens             Additional tokens replaced within the format string
       #    :complete_message   Defaults to "Process complete"
@@ -111,51 +105,80 @@ module Commander
       #
 
       def initialize total, options = {}
-        @total, @options, @current, @start = total, options, 0, Time.now
-        @options = {
-          :title => "Progress",
-          :width => 25,
-          :progress_char => "=",
-          :incomplete_char => ".",
-          :complete_message => "Process complete",
-          :format => ":title |:progress_bar| :percent_complete% complete ",
-          :output => $stdout, 
-          :tokens => {},
-        }.merge! options
+        @total_steps, @step, @start_time = total, 0, Time.now
+        @title = options.fetch :title, 'Progress'
+        @width = options.fetch :title, 25
+        @progress_str = options.fetch :progress_str, '='
+        @incomplete_str = options.fetch :incomplete_str, '.'
+        @complete_message = options.fetch :complete_message, 'Process complete'
+        @format = options.fetch :format, ':title |:progress_bar| :percent_complete% complete '
+        @tokens = options.fetch :tokens, {}
+      end
+      
+      ##
+      # Completion percentage.
+      
+      def percent_complete
+        @step * 100 / @total_steps
+      end
+      
+      ##
+      # Time that has elapsed since the operation started.
+      
+      def time_elapsed
+        Time.now - @start_time
+      end
+      
+      ##
+      # Estimated time remaining.
+      
+      def time_remaining
+        (time_elapsed / @step) * steps_remaining
+      end
+      
+      ##
+      # Number of steps left.
+      
+      def steps_remaining
+        @total_steps - @step
       end
 
       ##
       # Output the progress bar.
 
       def show
-        unless @current >= (@total + 1)
+        unless finished?
           erase_line
-          percent = (@current * 100) / @total
-          elapsed = Time.now - @start
-          remaining = @total - @current
           tokens = {
-            :title => @options[:title],
-            :percent_complete => percent,
-            :progress_bar => (@options[:progress_char] * (@options[:width] * percent / 100)).ljust(@options[:width], @options[:incomplete_char]), 
-            :current => @current,
-            :remaining => remaining,
-            :total => @total, 
-            :time_elapsed => "%0.2fs" % [elapsed],
-            :time_remaining => "%0.2fs" % [(elapsed / @current) * remaining],
-          }.merge! @options[:tokens]
+            :title => @title,
+            :percent_complete => percent_complete,
+            :progress_bar => (@progress_char * (@width * percent_complete / 100)).ljust(@width, @incomplete_char), 
+            :current => @step,
+            :remaining => steps_remaining,
+            :total => @total_steps, 
+            :time_elapsed => "%0.2fs" % time_elapsed,
+            :time_remaining => "%0.2fs" % time_remaining,
+          }.merge! @tokens
           if completed?
-            @options[:output].print @options[:complete_message].tokenize(tokens) << "\n" if @options[:complete_message].is_a? String
+            print @complete_message.tokenize(tokens) << "\n" if @complete_message.is_a? String
           else
-            @options[:output].print @options[:format].tokenize(tokens)
+            print @format.tokenize(tokens)
           end
         end
+      end
+      
+      ##
+      # Weither or not the operation is complete, and we have finished.
+      
+      def finished?
+        @steps >= (@total_steps + 1)
       end
 
       ##
       # Weither or not the operation has completed.
 
       def completed?
-        @current == @total
+        @step == @total_steps
       end
       alias :finished? :completed?
 
@@ -164,8 +187,8 @@ module Commander
       # can be displayed in the output format.
 
       def increment tokens = {}
-        @current += 1
-        @options[:tokens].merge! tokens if tokens.is_a? Hash
+        @step += 1
+        @tokens.merge! tokens if tokens.is_a? Hash
         show
       end
       alias :inc :increment
@@ -174,11 +197,11 @@ module Commander
       # Erase previous terminal line.
 
       def erase_line
-        @options[:output].print "\r\e[K"
+        print "\r\e[K"
       end
 
       ##
-      # Output progress while iterating _enum_.
+      # Output progress while iterating _arr_.
       #
       # === Example:
       #
@@ -191,9 +214,9 @@ module Commander
       #
       # * Kernel#progress
 
-      def self.progress enum, options = {}, &block
-        bar = ProgressBar.new enum.length, options
-        enum.each { |v| bar.inc yield(v) } 
+      def self.progress arr, options = {}, &block
+        bar = ProgressBar.new arr.length, options
+        arr.each { |v| bar.inc yield(v) } 
       end
       
     end
