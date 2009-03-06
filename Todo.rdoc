@@ -1,5 +1,5 @@
 
-* Fix progressbar ... refactor it, and add to release gem refactor spec for ext too
+* Fix stupid #program error output 
 * mixins like c.use Commander::TraceOption ? ...
 * add configuration management like release gem
 * test bool switches --[no-]-foo ... document

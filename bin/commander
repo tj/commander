@@ -4,7 +4,7 @@ require 'rubygems'
 require 'commander'
 
 program :name, 'commander'
-program :version, Commander::VERSION::STRING
+program :version, Commander::VERSION
 program :description, 'Commander utility program.'
 
 command :init do |c|
@@ -27,7 +27,7 @@ require 'commander'
 require '#{name}'
 
 program :name, '#{name}'
-program :version, #{name.camelcase}::VERSION::STRING
+program :version, #{name.camelcase}::VERSION
 program :description, '#{description}'
  
 CODE
