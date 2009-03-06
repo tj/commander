@@ -4,14 +4,15 @@ class String
   ##
   # Replace +hash+ keys with associated values. Mutative.
   
-  def tokenize! hash
-    hash.inject(self) { |s, (k, v)| s.gsub! /:#{k}/, v }
+  def tokenize! hash = {}
+    hash.each { |k, v| gsub! /:#{k}/, v.to_s }
+    self
   end
     
   ##
   # Replace +hash+ keys with associated values.
   
-  def tokenize hash
+  def tokenize hash = {}
     self.dup.tokenize! hash
   end
   
