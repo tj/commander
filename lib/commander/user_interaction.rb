@@ -107,7 +107,7 @@ module Commander
       def initialize total, options = {}
         @total_steps, @step, @start_time = total, 0, Time.now
         @title = options.fetch :title, 'Progress'
-        @width = options.fetch :title, 25
+        @width = options.fetch :width, 25
         @progress_str = options.fetch :progress_str, '='
         @incomplete_str = options.fetch :incomplete_str, '.'
         @complete_message = options.fetch :complete_message, 'Process complete'
