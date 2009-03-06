@@ -149,27 +149,35 @@ module Commander
       def progress_bar
         (@progress_str * (@width * percent_complete / 100)).ljust @width, @incomplete_str
       end
+      
+      ##
+      # Generates tokens for this step.
+      
+      def generate_tokens
+        {
+          :title => @title,
+          :percent_complete => percent_complete,
+          :progress_bar => progress_bar, 
+          :step => @step,
+          :steps_remaining => steps_remaining,
+          :total_steps => @total_steps, 
+          :time_elapsed => "%0.2fs" % time_elapsed,
+          :time_remaining => "%0.2fs" % time_remaining,
+        }.
+        merge! @tokens
+      end
 
       ##
       # Output the progress bar.
 
       def show
+        # TODO: shift steps stack instead
         unless finished?
           erase_line
-          tokens = {
-            :title => @title,
-            :percent_complete => percent_complete,
-            :progress_bar => progress_bar, 
-            :step => @step,
-            :steps_remaining => steps_remaining,
-            :total_steps => @total_steps, 
-            :time_elapsed => "%0.2fs" % time_elapsed,
-            :time_remaining => "%0.2fs" % time_remaining,
-          }.merge! @tokens
           if completed?
-            print @complete_message.tokenize(tokens) << "\n" if @complete_message.is_a? String
+            print @complete_message.tokenize(generate_tokens) << "\n" if @complete_message.is_a? String
           else
-            print @format.tokenize(tokens)
+            print @format.tokenize(generate_tokens)
           end
         end
       end
