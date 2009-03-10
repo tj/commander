@@ -1,8 +1,9 @@
 !!!
 %html
   %head
-    %title Project - Tagline
+    %title Commander - Complete solution for Ruby command-line executables
     %link{ :rel => 'stylesheet', :href => 'style.css' }
+    %link{ :rel => 'stylesheet', :href => 'lightr.css' }
   %body
     %a{ :href => PROJECT_URL }
       %img#ribbon{ :src => 'http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', :alt => 'Fork me on GitHub' }
@@ -14,11 +15,30 @@
       %a{ :href => PROJECT_URL }
         %img{ :src => 'http://github.com/images/modules/download/tar.png' }
 
-    = title 'Project', 'tagline'
+    = title 'Commander', ''
  
     %p
-      Description and body
- 
+      The complete solution for Ruby command-line executables. 
+      Commander bridges the gap between other terminal related libraries
+      you know and love (OptionParser, HighLine), while providing many new
+      features, all packed in one simple, elegant API. 
+
+    %h2 Features
+
+    %ul
+      %li Easier than baking cookies
+      %li Parses options using OptionParser
+      %li Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
+      %li Auto-generates help documentation via pluggable help formatters
+      %li Imports the highline gem for interacting with the terminal
+      %li Adds additional user interaction functionality
+      %li Highly customizable progress bar with intuative, simple usage
+      %li Multi-word sub-command support
+      %li Use the 'commander' executable to initialize a commander driven program
+
+    %h2 Examples
+    %code.highlight= example('example-1.rb')
+
     .footer
       this mini site brought to you by : 
       %a{ :href => project_url('visionmedia', 'mini') } visionmedia/mini

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Commander - Complete solution for Ruby command-line executables</title>
+    <link href='style.css' rel='stylesheet' />
+    <link href='lightr.css' rel='stylesheet' />
+  </head>
+  <body>
+    <a href='http://github.com/visionmedia/commnder'>
+      <img alt='Fork me on GitHub' id='ribbon' src='http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' />
+    </a>
+  </body>
+  <div id='container'>
+    <div id='download'>
+      <a href='http://github.com/visionmedia/commnder'>
+        <img src='http://github.com/images/modules/download/zip.png' />
+      </a>
+      <a href='http://github.com/visionmedia/commnder'>
+        <img src='http://github.com/images/modules/download/tar.png' />
+      </a>
+    </div>
+    <h1>Commander <em></em></h1>
+    <p>
+      The complete solution for Ruby command-line executables.
+      Commander bridges the gap between other terminal related libraries
+      you know and love (OptionParser, HighLine), while providing many new
+      features, all packed in one simple, elegant API.
+    </p>
+    <h2>Features</h2>
+    <ul>
+      <li>Easier than baking cookies</li>
+      <li>Parses options using OptionParser</li>
+      <li>Auto-populates struct with options ( no more { |v| options[:recursive] = v } )</li>
+      <li>Auto-generates help documentation via pluggable help formatters</li>
+      <li>Imports the highline gem for interacting with the terminal</li>
+      <li>Adds additional user interaction functionality</li>
+      <li>Highly customizable progress bar with intuative, simple usage</li>
+      <li>Multi-word sub-command support</li>
+      <li>Use the 'commander' executable to initialize a commander driven program</li>
+    </ul>
+    <h2>Examples</h2>
+    <code class='highlight'>
+      require 'rubygems'
+      require 'commander'
+      
+      program :name, 'Foo Bar'
+      program :version, '1.0.0'
+      program :description, 'Stupid command that prints foo or bar.'
+      
+      command :foo do |c|
+        c.syntax = "foobar foo"
+        c.description = "Displays foo"
+        c.when_called do |args, options|
+          say "foo"
+        end
+      end
+      
+      command :bar do |c|
+        c.syntax = "foobar [options] bar"
+        c.description = "Display bar with optional prefix"
+        c.option "--prefix STRING"
+        c.when_called do |args, options|
+          say "#{options.prefix} bar"
+        end
+      end
+    </code>
+    <div class='footer'>
+      this mini site brought to you by :
+      <a href='http://github.com/visionmedia/mini'>visionmedia/mini</a>
+    </div>
+  </div>
+</html>
