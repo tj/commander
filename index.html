@@ -38,7 +38,7 @@
       <li>Multi-word sub-command support</li>
       <li>Use the 'commander' executable to initialize a commander driven program</li>
     </ul>
-    <h2>Examples</h2>
+    <h2>Example</h2>
     <code class='highlight'>
       require <span class="string">'rubygems'</span>
       require <span class="string">'commander'</span>
@@ -63,6 +63,77 @@
           say <span class="string">&quot;#{options.prefix} bar&quot;</span>
         <span class="keyword">end
       </span><span class="keyword">end</span>
+    </code>
+    <h2>User Interaction</h2>
+    <code class='highlight'>
+      <span class="keyword"># Ask for password masked with '*' character
+      </span>ask(<span class="string">&quot;Password:  &quot;</span>) { |q| q.echo = <span class="string">&quot;*&quot;</span> }
+      
+      <span class="keyword"># Ask for password 
+      </span>ask(<span class="string">&quot;Password:  &quot;</span>) { |q| q.echo = false }
+      
+      <span class="keyword"># Ask if the user agrees (yes or no)
+      </span>agree(<span class="string">&quot;Do something?&quot;</span>)
+      
+      <span class="string"># Asks on a single line (note the space after ':')
+      </span>ask(<span class="string">&quot;Name: &quot;</span>)
+      
+      <span class="string"># Asks with new line after &quot;Description:&quot;
+      </span>ask(<span class="string">&quot;Description:&quot;</span>)
+      
+      <span class="comment"># Calls Date#parse to parse the date string passed
+      </span>ask(<span class="string">&quot;Birthday? &quot;</span>, <span class="constant">Date</span>)
+      
+      <span class="keyword"># Ensures Integer is within the range specified
+      </span>ask(<span class="string">&quot;Age? &quot;</span>, <span class="constant">Integer</span>) { |q| q.<span class="keyword">in </span>= <span class="number">0</span>..<span class="number">105</span> }
+      
+      <span class="keyword"># Asks for a list of strings, converts to array
+      </span>ask(<span class="string">&quot;Fav colors?&quot;</span>, <span class="constant">Array</span>)
+      
+      <span class="keyword"># Ask for password 
+      </span>password
+      
+      <span class="keyword"># Ask for password with specific message and mask character
+      </span>password <span class="string">&quot;Enter your password please:&quot;</span>, <span class="string">'-'</span>
+      
+      <span class="keyword"># Ask for CLASS, which may be any valid class responding to #parse. Date, Time, Array, etc
+      </span>names = ask_for_array <span class="string">'Names: '</span>
+      bday = ask_for_date <span class="string">'Birthday?: '</span>
+      
+      <span class="string"># 'Log' action to stdout
+      </span>log <span class="string">&quot;create&quot;</span>, <span class="string">&quot;path/to/file.rb&quot;</span>
+      
+      <span class="symbol"># Simple progress bar (Commander::UI::ProgressBar)
+      </span>uris = %w( vision-media.ca google.com yahoo.com )
+      progress uris <span class="keyword">do </span>|uri|
+       res = open <span class="string">&quot;http://#{uri}&quot;</span>
+       <span class="comment"># Do something with response
+      </span><span class="keyword">end
+      </span>
+      <span class="keyword"># Provide a menu for users to choose from
+      </span>choose <span class="keyword">do </span>|menu|
+        menu.index = <span class="symbol">:letter</span>
+        menu.index_suffix = <span class="string">&quot;) &quot;</span>
+        menu.prompt = <span class="string">&quot;Please choose your favorite programming language?  &quot;</span>
+        menu.choice <span class="symbol">:ruby</span> <span class="keyword">do </span>say(<span class="string">&quot;Good choice!&quot;</span>) <span class="keyword">end
+      </span>  menu.choices(<span class="symbol">:python</span>, <span class="symbol">:perl</span>) <span class="keyword">do </span>say(<span class="string">&quot;Not from around here, are you?&quot;</span>) <span class="keyword">end
+      </span><span class="keyword">end
+      </span>
+      <span class="comment"># Custom shell
+      </span>loop <span class="keyword">do
+      </span>  choose <span class="keyword">do </span>|menu|
+          menu.layout = <span class="symbol">:menu_only</span>
+          menu.shell = <span class="keyword">true
+      </span>    menu.choice(<span class="symbol">:load</span>, <span class="string">&quot;Load a file.&quot;</span>) <span class="keyword">do </span>|command, details|
+            say(<span class="string">&quot;Loading file with options:  #{details}...&quot;</span>)
+          <span class="keyword">end
+      </span>    menu.choice(<span class="symbol">:save</span>, <span class="string">&quot;Save a file.&quot;</span>) <span class="keyword">do </span>|command, details|
+            say(<span class="string">&quot;Saving file with options:  #{details}...&quot;</span>)
+          <span class="keyword">end
+      </span>    menu.choice(<span class="symbol">:quit</span>, <span class="string">&quot;Exit program.&quot;</span>) { exit }
+        <span class="keyword">end
+      </span><span class="keyword">end
+      </span>
     </code>
     <div class='footer'>
       this mini site brought to you by :

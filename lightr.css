@@ -13,3 +13,11 @@ code.highlight {
     color: #E00404; }
   code.highlight .string {
     color: #07BB1C; }
+  code.highlight .number {
+    color: #07BB1C; }
+  code.highlight .comment {
+    color: #686868; }
+  code.highlight .constant {
+    color: #00AFE4; }
+  code.highlight .self {
+    color: #00AFE4; }
