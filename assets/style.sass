@@ -1,0 +1,77 @@
+ 
+=transitions
+  :-webkit-transition-property opacity, -webkit-transform, color, background-color, padding
+  :-webkit-transition-duration 0.2s
+  :-webkit-transition-timing-function ease-out
+ 
+body
+  :margin 30px 0
+  :font-family "Helvetica"
+  :font-size 14px
+  :line-height 1.5
+  :color black
+  
+a img
+  :border none !important
+  
+a
+  :text-decoration none
+  :font-weight bold
+  :color black
+  
+  &:hover
+    :color #0091FF
+    
+ul li a
+  +transitions
+  
+  &:hover
+    :padding 0 8px
+  
+h1
+  :padding 80px 0 10px
+  :font-size 50px
+  
+  em 
+    :font-style normal
+    :font-size 15px
+    
+h2
+  :margin 40px 0 15px 0
+  :padding-top 20px
+  :border 0
+  :border-top 1px solid #aaa
+  :font-size 20px
+  
+pre
+  :display block
+  :padding 15px 20px
+  :background black
+  :font-family "Bitstream Vera Sans Mono"
+  :white-space pre
+  :color white
+  
+.footer
+  :padding-top 30px
+  :text-align center
+  :font-style italic
+ 
+#ribbon
+  :position absolute
+  :top 0
+  :right 0
+ 
+#container
+  :margin 0 auto
+  :width 700px
+  
+#download
+  :float right
+ 
+  a img
+    +transitions
+   
+    &:hover
+      :z-index 10
+      :-webkit-transform translate(10px, -10px) scale(1.05)
+      :opacity 0.65

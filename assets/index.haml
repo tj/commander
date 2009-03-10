@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %title Project - Tagline
+    %link{ :rel => 'stylesheet', :href => 'style.css' }
+  %body
+    %a{ :href => PROJECT_URL }
+      %img#ribbon{ :src => 'http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', :alt => 'Fork me on GitHub' }
+ 
+  #container
+    #download
+      %a{ :href => PROJECT_URL }
+        %img{ :src => 'http://github.com/images/modules/download/zip.png' }
+      %a{ :href => PROJECT_URL }
+        %img{ :src => 'http://github.com/images/modules/download/tar.png' }
+
+    = title 'Project', 'tagline'
+ 
+    %p
+      Description and body
+ 
+    .footer
+      this mini site brought to you by : 
+      %a{ :href => project_url('visionmedia', 'mini') } visionmedia/mini
