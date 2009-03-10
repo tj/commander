@@ -1,0 +1,15 @@
+code.highlight {
+  display: block;
+  padding: 0;
+  background: white;
+  border: 1px solid #CECECE;
+  font-family: "Bitstream Vera Sans Mono";
+  font-size: 12px;
+  white-space: pre;
+  color: #2E2E2E; }
+  code.highlight .keyword {
+    font-weight: bold; }
+  code.highlight .symbol {
+    color: #E00404; }
+  code.highlight .string {
+    color: #07BB1C; }

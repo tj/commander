@@ -1,6 +1,16 @@
 
+require 'rubygems'
+require 'lightr'
+
 def example file
   File.read "assets/examples/#{file}"
+end
+
+def highlight file, type
+  case type
+  when :ruby ; Lightr::Ruby.parse(example(file))
+  else
+  end
 end
 
 def title title, subheading

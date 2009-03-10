@@ -40,29 +40,29 @@
     </ul>
     <h2>Examples</h2>
     <code class='highlight'>
-      require 'rubygems'
-      require 'commander'
+      require <span class="string">'rubygems'</span>
+      require <span class="string">'commander'</span>
       
-      program :name, 'Foo Bar'
-      program :version, '1.0.0'
-      program :description, 'Stupid command that prints foo or bar.'
+      program <span class="symbol">:name</span>, <span class="string">'Foo Bar'</span>
+      program <span class="symbol">:version</span>, <span class="string">'1.0.0'</span>
+      program <span class="symbol">:description</span>, <span class="keyword">'Stupid command that prints foo or bar.'</span>
       
-      command :foo do |c|
-        c.syntax = "foobar foo"
-        c.description = "Displays foo"
-        c.when_called do |args, options|
-          say "foo"
-        end
-      end
-      
-      command :bar do |c|
-        c.syntax = "foobar [options] bar"
-        c.description = "Display bar with optional prefix"
-        c.option "--prefix STRING"
-        c.when_called do |args, options|
-          say "#{options.prefix} bar"
-        end
-      end
+      comm<span class="keyword">and </span><span class="symbol">:foo</span> <span class="keyword">do </span>|c|
+        c.syntax = <span class="string">&quot;foobar foo&quot;</span>
+        c.description = <span class="string">&quot;Displays foo&quot;</span>
+        c.when_called <span class="keyword">do </span>|args, options|
+          say <span class="string">&quot;foo&quot;</span>
+        <span class="keyword">end
+      </span><span class="keyword">end
+      </span>
+      comm<span class="keyword">and </span><span class="symbol">:bar</span> <span class="keyword">do </span>|c|
+        c.syntax = <span class="string">&quot;foobar [options] bar&quot;</span>
+        c.description = <span class="string">&quot;Display bar with optional prefix&quot;</span>
+        c.option <span class="string">&quot;--prefix STRING&quot;</span>
+        c.when_called <span class="keyword">do </span>|args, options|
+          say <span class="string">&quot;#{options.prefix} bar&quot;</span>
+        <span class="keyword">end
+      </span><span class="keyword">end</span>
     </code>
     <div class='footer'>
       this mini site brought to you by :
