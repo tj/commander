@@ -87,41 +87,6 @@ describe Commander do
     end
   end
   	
-  it "should handle toggle options" do
-    options = nil
-    get_command(:test).when_called { |args, opts| options = opts }  
-    get_command(:test).option "--[no-]toggle"
-    get_command(:test).run  '--no-toggle' 
-    options.toggle.should be_false
-  end
-  
-  it "should handle manditory arg options" do
-    options = nil
-    get_command(:test).when_called { |args, opts| options = opts }  
-    get_command(:test).option "--manditory ARG"
-    get_command(:test).run  '--manditory', "foo" 
-    options.manditory.should eql("foo")
-    lambda { get_command(:test).run '--manditory' }.should raise_error(OptionParser::MissingArgument)
-  end  
-  
-  it "should handle optional arg options" do
-    options = nil
-    get_command(:test).when_called { |args, opts| options = opts }  
-    get_command(:test).option "--optional [ARG]"
-    get_command(:test).run  '--optional', "foo" 
-    options.optional.should eql("foo") 
-    get_command(:test).run  '--optional' 
-    options.optiona.should be_nil  
-  end
-  
-  it "should handle list options" do
-    options = nil
-    get_command(:test).when_called { |args, opts| options = opts }  
-    get_command(:test).option "--list words", Array
-    get_command(:test).run  '--list', "im,a,list"
-    options.list.should eql(["im", "a", "list"]) 
-  end
-  
   it "should initialize and call object when a class is passed to #when_called" do
    $_when_called_value = nil
    class HandleWhenCalled1

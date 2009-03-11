@@ -45,9 +45,35 @@ describe Commander::Command do
       @command.run '--trace', 'just', 'some', 'args'
     end
     
-    it "should call #when_called with options populated" do
-      @command.when_called { |args, options| options.trace.should be_true }  
-      @command.run '--trace', 'just', 'some', 'args'      
+    describe "should populate options with" do
+      it "boolean values" do
+        @command.option '--[no-]toggle'
+        @command.when_called { |_, options| options.toggle.should be_true }  
+        @command.run '--toggle'
+        @command.when_called { |_, options| options.toggle.should be_false }  
+        @command.run '--no-toggle'
+      end
+
+      it "manditory arguments" do
+        @command.option '--file FILE'
+        @command.when_called { |_, options| options.file.should == 'foo' }  
+        @command.run '--file', 'foo'
+        lambda { @command.run '--file' }.should raise_error(OptionParser::MissingArgument)
+      end  
+
+      it "optional arguments" do
+        @command.option '--use-config [file] '
+        @command.when_called { |_, options| options.use_config.should == 'foo' }  
+        @command.run '--use-config', 'foo'
+        @command.when_called { |_, options| options.use_config.should be_nil }  
+        @command.run '--use-config'
+      end
+
+      it "lists" do
+        @command.option '--fav COLORS', Array
+        @command.when_called { |_, options| options.fav.should == ['red', 'green', 'blue'] }  
+        @command.run '--fav', 'red,green,blue'
+      end
     end
   end
   
