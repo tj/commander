@@ -175,10 +175,9 @@ module Commander
         unless finished?
           erase_line
           if completed?
-            puts @complete_message.tokenize(generate_tokens) if @complete_message.is_a? String
+            $terminal.say @complete_message.tokenize(generate_tokens) if @complete_message.is_a? String
           else
-            print @format.tokenize(generate_tokens)
-            $stdout.flush
+            $terminal.say @format.tokenize(generate_tokens) << ' '
           end
         end
       end
@@ -211,7 +210,7 @@ module Commander
       # Erase previous terminal line.
 
       def erase_line
-        print "\r\e[K"
+        $terminal.instance_variable_get('@output').print "\r\e[K"
       end
 
       ##

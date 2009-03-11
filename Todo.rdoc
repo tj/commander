@@ -1,7 +1,6 @@
 
 == Major
 
-* Use $terminal IO stream for progress bar 
 * Fix issue with having command name in the args list, #args_without_command
 * Fix annoying 'Program x required' message
 * Fix bool switches --[no-]-foo ... document
@@ -20,7 +19,7 @@
 * Add aliasing of commands / args / options
 * Add option copying / merging capabilities
 * Change  VerboseFileUtils to output basename only ? 
-* Change; require that users explicitly require 'commander/import'
+* Change; require that users explicitly require 'commander/import' (which in turn will highlight/import as well)
 * Release to RubyForge as well
 * Change; consider reversing |options, args| so args make use of ruby block param defaults with 1.9
   or simply just to expand arg params like so |options, source_dir, dest_dir| ...
