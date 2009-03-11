@@ -20,12 +20,12 @@ module Kernel
     $command_runner
   end
   
-  alias_method :original_method_missing, :method_missing
   def method_missing meth, *args, &block
     if meth.to_s =~ /^ask_for_([\w]+)/
       $terminal.ask args.first, eval($1.camelcase)
     else
-      original_method_missing(meth, *args, &block)
+      super
     end
   end
+  
 end
