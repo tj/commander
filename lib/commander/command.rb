@@ -188,7 +188,7 @@ module Commander
     #   --some-switch      # => :some_switch
     #   --[with]-feature   # => :feature
     #   --file FILE        # => :file
-    #   --list of, things  # => :list
+    #   --list of,things   # => :list
     
     def sym_from_switch switch
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
