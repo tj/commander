@@ -11,43 +11,47 @@ describe Commander do
   describe "#program" do
     it "should set / get program information" do
       program :name, 'test'
-  	  program :version, '1.2.3'
-  	  program :description, 'just a test.'
   	  program(:name).should == 'test'
-  	  program(:version).should == '1.2.3'
-  	  program(:description).should == 'just a test.'
     end
     
     it "should allow arbitrary blocks of global help documentation" do
       program :help, 'Copyright', 'TJ Holowaychuk'
   	  program(:help)['Copyright'].should == 'TJ Holowaychuk'
     end
-  end
-	
-  it "should raise an error when crutial program info is not set" do
-    new_command_runner '--help'
-	  program :name, ''
-    lambda { run! }.should raise_error(Commander::Runner::CommandError)
+    
+    it "should raise an error when required info has not been set" do
+      new_command_runner '--help'
+  	  program :name, ''
+      lambda { run! }.should raise_error(Commander::Runner::CommandError)
+    end
   end
   
-  it "should output program version using --version switch" do
-    new_command_runner '--version'
-    program :help_formatter, Commander::HelpFormatter::Base
-    command_runner.run!
-    @output.string.should eql("test 1.2.3\n")
+  describe "#get_command" do
+  	it "should return a command instance" do
+  	  get_command(:test).should be_instance_of(Commander::Command)
+  	end
+
+  	it "should assign options" do
+  	  get_command(:test).should have(2).options
+  	end
+
+  	it "should invoke #when_called with arguments properly" do
+  	  get_command(:test).call([1, 2]).should == 'test 12'
+  	end
   end
-      	
-	it "should get command instances using #get_command" do
-	  get_command(:test).name.should eql('test')
-	end
-	
-	it "should assign options" do
-	  get_command(:test).options.length.should eql(2)
-	end
-	
-	it "should invoke #when_called with arguments properly" do
-	  get_command(:test).call([1, 2]).should eql("test 12")
-	end
+  
+  describe "switches" do
+    describe "--version" do
+      it "should output program version" do
+        new_command_runner '--version'
+        program :help_formatter, Commander::HelpFormatter::Base
+        command_runner.run!
+        @output.string.should == "test 1.2.3\n"
+      end
+    end
+  end
+  
+
 
   it "should output invalid option message when invalid options passed to command" do
     new_command_runner 'test', '--invalid-option'

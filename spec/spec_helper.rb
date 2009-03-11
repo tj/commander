@@ -18,8 +18,8 @@ end
 
 def new_command_runner *args
   $command_runner = Commander::Runner.new args
-  program :name, "test"
-  program :version, "1.2.3"
-  program :description, "something"
+  program :name, 'test'
+  program :version, '1.2.3'
+  program :description, 'something'
   create_test_command
 end
