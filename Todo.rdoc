@@ -1,24 +1,34 @@
 
+== Major
+
 * Use $terminal IO stream for progress bar 
-* Fix stupid #program error output 
-* mixins like c.use Commander::TraceOption ? ...
-* add configuration management like release gem
-* test bool switches --[no-]-foo ... document
-* Add option defaults when null / revisit OpenStruct population
-* Refactor specs / improve testing
-* Add option copying / merging capabilities
 * Fix issue with having command name in the args list, #args_without_command
-* Add optional command to be executed when none is specified
-* Add aliasing of commands / args / options
+* Fix annoying 'Program x required' message
+* Fix bool switches --[no-]-foo ... document
+* Option defaults when null
+* Refactor specs / improve testing capabilities
 * Non-greedy matching of command name
-* Change; Have VerboseFileUtils only output basename ? 
-* Change; refactor specs
-* Release to RubyForge as well
-* Add regexp matching for command names
-* Add highline paging ... clean it up
-* Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
-* Add global --options switch for loading options from a filepath
+* 1.9.x compatability
+* Publish RDoc on mini page / screencasts
+
+== Minor
+
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
-* Add; display global options with global help
-* Change; consider reversing |options, args| so args make use of ruby block param defaults |options, file, dir = SOME_DIR| etc.. adjust doc
-* Publish rdoc
+* Add optional command to be executed when none is specified
+* Add global options... change runner implementations as well as displaying in terminal formatter, OpenStruct inherit these options?
+* Add highline paging ... clean it up because its ugly
+* Add aliasing of commands / args / options
+* Add option copying / merging capabilities
+* Change  VerboseFileUtils to output basename only ? 
+* Change; require that users explicitly require 'commander/import'
+* Release to RubyForge as well
+* Change; consider reversing |options, args| so args make use of ruby block param defaults with 1.9
+  or simply just to expand arg params like so |options, source_dir, dest_dir| ...
+
+== Brainstorming
+
+* Add global --trace method
+* Add global trapping of INT to end process with less ugly output
+* Add global --options switch for loading options from a filepath
+* Add argument parser / defaults
+* Add regexp matching for command names
