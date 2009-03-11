@@ -14,6 +14,7 @@ def create_test_command
       "test %s" % args.join
     end
   end
+  get_command :test
 end
 
 def new_command_runner *args
