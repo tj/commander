@@ -171,7 +171,6 @@ module Commander
       # Output the progress bar.
 
       def show
-        # TODO: shift steps stack instead
         unless finished?
           erase_line
           if completed?
@@ -210,6 +209,7 @@ module Commander
       # Erase previous terminal line.
 
       def erase_line
+        # highline does not expose the output stream
         $terminal.instance_variable_get('@output').print "\r\e[K"
       end
 
