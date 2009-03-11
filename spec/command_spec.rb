@@ -16,7 +16,7 @@ describe Commander::Command do
     
     it "should allow procs as option handlers" do
       @command.option('--recursive') { |recursive| recursive.should be_true }
-      @command.run ['--recursive']
+      @command.run '--recursive'
     end
   end
     
@@ -42,14 +42,14 @@ describe Commander::Command do
   it "should call the #when_called proc when #run" do
     result = nil
     get_command(:test).when_called { |args, options| result = args.join(' ') }  
-    get_command(:test).run ['--trace', 'just', 'some', 'args']
+    get_command(:test).run  '--trace', 'just', 'some', 'args'
     result.should eql("just some args")
   end
   
   it "should handle boolean options" do
     opts = nil
     get_command(:test).when_called { |args, options| opts = options }  
-    get_command(:test).run ['--trace', 'foo', 'bar']
+    get_command(:test).run '--trace', 'foo', 'bar'
     opts.trace.should be_true
   end
 end

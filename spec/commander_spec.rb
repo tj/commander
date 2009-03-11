@@ -91,7 +91,7 @@ describe Commander do
     options = nil
     get_command(:test).when_called { |args, opts| options = opts }  
     get_command(:test).option "--[no-]toggle"
-    get_command(:test).run ['--no-toggle']
+    get_command(:test).run  '--no-toggle' 
     options.toggle.should be_false
   end
   
@@ -99,18 +99,18 @@ describe Commander do
     options = nil
     get_command(:test).when_called { |args, opts| options = opts }  
     get_command(:test).option "--manditory ARG"
-    get_command(:test).run ['--manditory', "foo"]
+    get_command(:test).run  '--manditory', "foo" 
     options.manditory.should eql("foo")
-    lambda { get_command(:test).run ['--manditory'] }.should raise_error(OptionParser::MissingArgument)
+    lambda { get_command(:test).run '--manditory' }.should raise_error(OptionParser::MissingArgument)
   end  
   
   it "should handle optional arg options" do
     options = nil
     get_command(:test).when_called { |args, opts| options = opts }  
     get_command(:test).option "--optional [ARG]"
-    get_command(:test).run ['--optional', "foo"]
+    get_command(:test).run  '--optional', "foo" 
     options.optional.should eql("foo") 
-    get_command(:test).run ['--optional']
+    get_command(:test).run  '--optional' 
     options.optiona.should be_nil  
   end
   
@@ -118,7 +118,7 @@ describe Commander do
     options = nil
     get_command(:test).when_called { |args, opts| options = opts }  
     get_command(:test).option "--list words", Array
-    get_command(:test).run ['--list', "im,a,list"]
+    get_command(:test).run  '--list', "im,a,list"
     options.list.should eql(["im", "a", "list"]) 
   end
   
@@ -128,7 +128,7 @@ describe Commander do
      def initialize(args, options) $_when_called_value = args.join('-') end 
    end
    get_command(:test).when_called HandleWhenCalled1
-   get_command(:test).call(["hello", "world"])
+   get_command(:test).run "hello", "world"
    $_when_called_value.should eql("hello-world")
   end
    
@@ -137,7 +137,7 @@ describe Commander do
      def arbitrary_method(args, options) args.join('-') end 
    end
    get_command(:test).when_called HandleWhenCalled2, :arbitrary_method
-   get_command(:test).call(["hello", "world"]).should eql("hello-world")
+   get_command(:test).run("hello", "world").should eql("hello-world")
   end
   
   it "should call object when passed to #when_called " do
@@ -145,7 +145,7 @@ describe Commander do
       def arbitrary_method(args, options) args.join('-') end 
     end
     get_command(:test).when_called HandleWhenCalled3.new, :arbitrary_method
-    get_command(:test).call(["hello", "world"]).should eql("hello-world")
+    get_command(:test).run("hello", "world").should eql("hello-world")
   end
   
   it "should populate options when passed before command name" do

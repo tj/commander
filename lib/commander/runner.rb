@@ -42,7 +42,7 @@ module Commander
       case 
       when options[:version] : $terminal.say "#{@program[:name]} #{@program[:version]}" 
       when options[:help] : get_command(:help).run
-      else active_command.run args_without_command
+      else active_command.run *args_without_command
       end
     rescue InvalidCommandError
       $terminal.say "invalid command. Use --help for more information"

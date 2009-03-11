@@ -146,15 +146,15 @@ module Commander
     # * invokes when_called proc
     #
     
-    def run args = [] 
-      call parse_options_and_call_procs(args)
+    def run *args
+      call parse_options_and_call_procs(*args)
     end
     
     ##
-    # Parses options and calls associated procs
-    # returning the arguments left.
+    # Parses options and calls associated procs, 
+    # returning the arguments remaining.
     
-    def parse_options_and_call_procs args = [] 
+    def parse_options_and_call_procs *args
       return args if args.empty?
       opts = OptionParser.new
       @options.each { |o| opts.on(*o[:args], &o[:proc]) }
@@ -165,7 +165,7 @@ module Commander
     ##
     # Call the commands when_called block with _args_.
     
-    def call args = [] 
+    def call args = []
       h = @when_called
       case 
       when h[:class]
@@ -174,8 +174,8 @@ module Commander
         else
           h[:class].new.send h[:method], args, proxy_option_struct
         end
-      when h[:object] : h[:object].send(h[:method], args, proxy_option_struct)
-      when h[:proc] : h[:proc].call args, proxy_option_struct
+      when h[:object] ; h[:object].send h[:method], args, proxy_option_struct 
+      when h[:proc]   ; h[:proc].call args, proxy_option_struct
       end
     end
     
