@@ -40,18 +40,14 @@ describe Commander do
   	end
   end
   
-  describe "switches" do
-    describe "--version" do
-      it "should output program version" do
-        new_command_runner '--version'
-        program :help_formatter, Commander::HelpFormatter::Base
-        command_runner.run!
-        @output.string.should == "test 1.2.3\n"
-      end
+  describe "--version" do
+    it "should output program version" do
+      new_command_runner '--version'
+      program :help_formatter, Commander::HelpFormatter::Base
+      command_runner.run!
+      @output.string.should == "test 1.2.3\n"
     end
   end
-  
-
 
   it "should output invalid option message when invalid options passed to command" do
     new_command_runner 'test', '--invalid-option'
