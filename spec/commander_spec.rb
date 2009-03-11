@@ -8,23 +8,21 @@ describe Commander do
 	  create_test_command
 	end
 	
-	it "should allow access to all commands using #commands" do
-	  commands.length.should eql(2) # our test command as well as help default
-	end
-	
-	it "should set program information using #program" do
-	  program :name, "test"
-	  program :version, "1.2.3"
-	  program :description, "just a test."
-	  program(:name).should eql("test")
-	  program(:version).should eql("1.2.3")
-	  program(:description).should eql("just a test.")
-	end
-	
-	it "should allow arbitrary blocks of global help documentation" do
-	  program :help, 'Copyright', 'TJ Holowaychuk'
-	  program(:help)['Copyright'].should eql('TJ Holowaychuk')
-	end
+  describe "#program" do
+    it "should set / get program information" do
+      program :name, 'test'
+  	  program :version, '1.2.3'
+  	  program :description, 'just a test.'
+  	  program(:name).should == 'test'
+  	  program(:version).should == '1.2.3'
+  	  program(:description).should == 'just a test.'
+    end
+    
+    it "should allow arbitrary blocks of global help documentation" do
+      program :help, 'Copyright', 'TJ Holowaychuk'
+  	  program(:help)['Copyright'].should == 'TJ Holowaychuk'
+    end
+  end
 	
   it "should raise an error when crutial program info is not set" do
     new_command_runner '--help'

@@ -2,7 +2,7 @@
 require "forwardable"
 
 ##
-# Makes the following Commander methods globally available:
+# Makes the following Commander methods globally accessable:
 #
 # * Commander::Runner#add_command
 # * Commander::Runner#get_command
