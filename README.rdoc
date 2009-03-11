@@ -6,7 +6,7 @@ Commander bridges the gap between other terminal related libraries
 you know and love (OptionParser, HighLine), while providing many new
 features, and an elegant API.
 
-== Features:
+== Features
 
 * Easier than baking cookies
 * Parses options using OptionParser
@@ -18,7 +18,7 @@ features, and an elegant API.
 * Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
 * Use the 'commander' executable to initialize a commander driven program
 
-== Example:
+== Example
 
 For more option examples view the Commander::Command#option method. Also
 an important feature to note is that when_called may be a class to instantiate,
@@ -48,7 +48,7 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
      end
    end
 
-== HighLine:
+== HighLine
 
 As mentioned above the highline gem is imported into 'global scope', below
 are some quick examples for how to utilize highline in your command(s):
@@ -101,7 +101,7 @@ are some quick examples for how to utilize highline in your command(s):
      end
    end
 
-== HighLine & Interaction Additions:
+== HighLine & Interaction Additions
 
 In addition to highline's fantastic choice of methods we will continue to
 simplify common tasks using the following methods:
@@ -130,7 +130,7 @@ simplify common tasks using the following methods:
   # 'Log' action to stdout
   log "create", "path/to/file.rb"
 
-== FileUtils:
+== FileUtils
 
 The VerboseFileUtils module is automatically included within the main object for
 global usage. These will output 'log' messages such as:
@@ -154,11 +154,11 @@ http://github.com/visionmedia/terminal-table
    |          |       |    |        | get it while its hot! |
    +----------+-------+----+--------+-----------------------+
 
-== Known Issues:
+== Known Issues
   
 * none
 
-== LICENSE:
+== License
 
 (The MIT License)
 
