@@ -22,4 +22,5 @@ def new_command_runner *args
   program :version, '1.2.3'
   program :description, 'something'
   create_test_command
+  command_runner
 end

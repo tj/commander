@@ -50,14 +50,12 @@ describe Commander do
   end
 
   it "should output invalid option message when invalid options passed to command" do
-    new_command_runner 'test', '--invalid-option'
-    command_runner.run!
-    @output.string.should eql("invalid option: --invalid-option\n")
+    new_command_runner('test', '--invalid-option').run!
+    @output.string.should == "invalid option: --invalid-option\n"
   end
   
   it "should output invalid command message when help sub-command does not exist" do
-    new_command_runner 'help', 'does_not_exist'
-    command_runner.run!
+    new_command_runner('help', 'does_not_exist').run!
     @output.string.should eql("invalid command. Use --help for more information\n")
   end
 
