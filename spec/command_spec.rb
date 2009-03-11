@@ -38,18 +38,17 @@ describe Commander::Command do
       @command.sym_from_switch('--colors colors').should == :colors
     end
   end
-
-  it "should call the #when_called proc when #run" do
-    result = nil
-    get_command(:test).when_called { |args, options| result = args.join(' ') }  
-    get_command(:test).run  '--trace', 'just', 'some', 'args'
-    result.should eql("just some args")
+  
+  describe "#run" do
+    it "should call #when_called with parsed arguments" do
+      @command.when_called { |args, options| args.join(' ').should == 'just some args' }  
+      @command.run '--trace', 'just', 'some', 'args'
+    end
+    
+    it "should call #when_called with options populated" do
+      @command.when_called { |args, options| options.trace.should be_true }  
+      @command.run '--trace', 'just', 'some', 'args'      
+    end
   end
   
-  it "should handle boolean options" do
-    opts = nil
-    get_command(:test).when_called { |args, options| opts = options }  
-    get_command(:test).run '--trace', 'foo', 'bar'
-    opts.trace.should be_true
-  end
 end
