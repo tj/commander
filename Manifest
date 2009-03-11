@@ -24,12 +24,9 @@ README.rdoc
 spec/commander_spec.rb
 spec/core_ext/string_spec.rb
 spec/help_formatter_spec.rb
+spec/import_spec.rb
 spec/spec_helper.rb
 tasks/docs.rake
 tasks/gemspec.rake
 tasks/spec.rake
-test/fileutils.rb
-test/names.rb
-test/progress.rb
-test/ui.rb
 Todo.rdoc

@@ -1,4 +1,9 @@
 
+=== 2.5.7 / 2009-03-11
+
+* Fixed paren warnings in import spec
+* Fixed Kernel#method_missing to preserve its original behavior (Raise errors for missing methods or variables)
+
 === 2.5.6 / 2009-03-06
 
 * Replaced Commander::VERSION::STRING with Commander::VERSION (for release gem)
