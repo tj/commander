@@ -63,25 +63,29 @@ describe Commander do
    	  command('foo bar foo') {}
    	  command_runner.valid_command_names_from('foo', 'bar', 'foo').should == ['foo bar', 'foo bar foo']
     end
+    
+    it "should return empty array when no possible command names exist" do
+   	  command_runner.valid_command_names_from('fake', 'command', 'name').should == []
+    end
   end
   
   describe "#command_name_from_args" do
     it "should locate command within arbitrary arguments passed" do
    	  new_command_runner '--help', '--arbitrary', 'test'
-   	  command_runner.command_name_from_args.should =='test'
+   	  command_runner.command_name_from_args.should == 'test'
     end
     
     it "should support multi-word commands" do
    	  new_command_runner '--help', '--arbitrary', 'some', 'long', 'command', 'foo'
    	  command('some long command') {}
-   	  command_runner.command_name_from_args.should =='some long command'
+   	  command_runner.command_name_from_args.should == 'some long command'
     end
     
     it "should match the longest possible command" do
    	  new_command_runner '--help', '--arbitrary', 'foo', 'bar', 'foo'
    	  command('foo bar') {}
    	  command('foo bar foo') {}
-   	  command_runner.command_name_from_args.should =='foo bar foo'      
+   	  command_runner.command_name_from_args.should == 'foo bar foo'      
     end
   end
   
