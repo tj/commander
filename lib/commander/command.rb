@@ -143,10 +143,10 @@ module Commander
     
     def parse_options_and_call_procs *args
       return args if args.empty?
-      opts = OptionParser.new
-      @options.each { |o| opts.on *o[:args], &o[:proc] }
-      opts.parse! args
-      args
+      @options.inject OptionParser.new do |opts, option| 
+        opts.on *option[:args], &option[:proc]
+        opts
+      end.parse! args
     end
     
     ##
@@ -194,7 +194,7 @@ module Commander
     # collected by the #option_proc.
     
     def proxy_option_struct 
-      @proxy_options.inject Options.new do |options, option, value| 
+      @proxy_options.inject Options.new do |options, option, value|
         options.send :"#{option}=", value
         options
       end
