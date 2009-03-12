@@ -95,6 +95,7 @@ describe Commander::Command do
         @command.option '--interval N', Integer
         @command.when_called { |_, options| options.interval.should == 5 }  
         @command.run '--interval', '5'
+        lambda { @command.run '--interval', 'invalid' }.should raise_error(OptionParser::InvalidArgument)
       end
       
       it "lists" do
