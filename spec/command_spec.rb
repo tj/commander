@@ -2,7 +2,7 @@
 describe Commander::Command do
   
   before :each do
-    create_faux_terminal
+    mock_terminal
     create_test_command
   end
   

@@ -2,7 +2,7 @@
 describe Commander::HelpFormatter do
   
   before :each do
-    create_faux_terminal
+    mock_terminal
   end
   
   def run *args

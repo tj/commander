@@ -2,11 +2,15 @@
 require 'commander'
 require 'stringio'
 
-def create_faux_terminal
+# Mock terminal IO streams so we can spec against them
+
+def mock_terminal
   @input = StringIO.new
   @output = StringIO.new
   $terminal = HighLine.new @input, @output
 end
+
+# Create test command for usage within several specs
 
 def create_test_command
   command :test do |c|
@@ -22,6 +26,8 @@ def create_test_command
   end
   @command = get_command :test
 end
+
+# Create a new global command runner
 
 def new_command_runner *args
   $command_runner = Commander::Runner.new args
