@@ -153,11 +153,21 @@ module Commander
     # Return arguments without the command name.
     
     def args_without_command
-      p @args.dup
-      p command_name_from_args.split  
-      p @args.dup - command_name_from_args.split
-      puts
-      @args.dup - command_name_from_args.split
+      remove_command_name_from @args.dup
+    end
+    
+    ##
+    # Remove command name from +args+ passed, while preserving
+    # any arguments that may have the same name as the command.
+    
+    def remove_command_name_from args
+      removed = []
+      parts = command_name_from_args.split
+      args.delete_if do |arg|
+        if parts.include? arg and !removed.include? arg
+          removed << arg
+        end
+      end
     end
             
     private
