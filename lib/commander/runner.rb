@@ -38,14 +38,14 @@ module Commander
     # Run the command parsing and execution process immediately.
     
     def run!
-      %w[ name version description ].each { |k| ensure_program_key_set k.to_sym }
+      require_program :name, :version, :description
       case 
       when options[:version] : $terminal.say "#{@program[:name]} #{@program[:version]}" 
       when options[:help] : get_command(:help).run
       else active_command.run *args_without_command
       end
     rescue InvalidCommandError
-      $terminal.say "invalid command. Use --help for more information"
+      $terminal.say 'invalid command. Use --help for more information'
     rescue OptionParser::InvalidOption, 
       OptionParser::InvalidArgument,
       OptionParser::MissingArgument => e
@@ -204,8 +204,8 @@ module Commander
     
     def parse_global_options
       opts = OptionParser.new
-      opts.on("--help") { @options[:help] = true }
-      opts.on("--version") { @options[:version] = true }
+      opts.on('--help') { @options[:help] = true }
+      opts.on('--version') { @options[:version] = true }
       opts.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 
@@ -213,10 +213,14 @@ module Commander
     end
     
     ##
-    # Raises a CommandError when the program +key+ is not present, or is empty.
+    # Raises a CommandError when the program any of the +keys+ are not present, or empty.
         
-    def ensure_program_key_set key 
-      raise CommandError, "Program #{key} required (use #program method)" if (@program[key].nil? || @program[key].empty?)
+    def require_program *keys
+      keys.each do |key|
+        if program(key).nil? or program(key).empty?
+          raise CommandError, "Program #{key} required (use #program method)" 
+        end
+      end
     end
     
   end
