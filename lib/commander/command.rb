@@ -190,7 +190,7 @@ module Commander
     #   --file FILE        # => :file
     #   --list of,things   # => :list
     
-    def sym_from_switch switch
+    def switch_to_sym switch
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
     end
     
@@ -220,7 +220,7 @@ module Commander
     def populate_options_to_when_called switches #:nodoc:
       Proc.new do |args|
         @proxy_options << {
-          :method => sym_from_switch(switches.last),
+          :method => switch_to_sym(switches.last),
           :value => args,
         }
       end 

@@ -1,8 +1,6 @@
 
 == Major
 
-* Fix method missing again.. put on Object?
-* Rename sym_from_switch to switch_to_sym
 * Fix issue with having command name in the args list, #args_without_command
 * Fix annoying 'Program x required' message
 * Fix bool switches --[no-]-foo ... document

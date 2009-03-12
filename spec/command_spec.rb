@@ -25,14 +25,14 @@ describe Commander::Command do
   	end
   end
   
-  describe "#sym_from_switch" do
+  describe "#switch_to_sym" do
     it "should return a symbol based on the switch name" do
-      @command.sym_from_switch('--trace').should == :trace
-      @command.sym_from_switch('--foo-bar').should == :foo_bar
-      @command.sym_from_switch('--[no]-feature"').should == :feature
-      @command.sym_from_switch('--[no]-feature ARG').should == :feature
-      @command.sym_from_switch('--file [ARG]').should == :file
-      @command.sym_from_switch('--colors colors').should == :colors
+      @command.switch_to_sym('--trace').should == :trace
+      @command.switch_to_sym('--foo-bar').should == :foo_bar
+      @command.switch_to_sym('--[no]-feature"').should == :feature
+      @command.switch_to_sym('--[no]-feature ARG').should == :feature
+      @command.switch_to_sym('--file [ARG]').should == :file
+      @command.switch_to_sym('--colors colors').should == :colors
     end
   end
   
