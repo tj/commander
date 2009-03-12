@@ -209,6 +209,15 @@ describe Commander do
         command_runner.args_without_command_name.should == ['--trace', 'something', 'my', 'command']
       end.run!
     end
+    
+    it "when using multi-word commands with other commands using the same words" do
+      new_command_runner '--trace', 'my', 'command', 'something', 'my', 'command' do
+        command('my command') {}
+        command('my command something') {}
+        command_runner.command_name_from_args.should == 'my command something'
+        command_runner.args_without_command_name.should == ['--trace', 'my', 'command']
+      end.run!
+    end
   end
   
 end
