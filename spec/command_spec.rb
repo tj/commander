@@ -92,8 +92,11 @@ describe Commander::Command do
         @command.run '--use-config', 'foo'
         @command.when_called { |_, options| options.use_config.should be_nil }  
         @command.run '--use-config'
+        @command.option '--interval N', Integer
+        @command.when_called { |_, options| options.interval.should == 5 }  
+        @command.run '--interval', '5'
       end
-
+      
       it "lists" do
         @command.option '--fav COLORS', Array
         @command.when_called { |_, options| options.fav.should == ['red', 'green', 'blue'] }  
