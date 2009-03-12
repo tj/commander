@@ -211,5 +211,9 @@ module Commander
       end 
     end
     
+    def inspect #:nodoc:
+      "<Commander::Command:#{name}>"
+    end
+    
   end
 end
