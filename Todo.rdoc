@@ -12,6 +12,7 @@
 * Non-greedy matching of command name
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
+* Add compat.rb with warnings if needed if any api changes appear
 
 == Minor
 
