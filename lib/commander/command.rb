@@ -201,6 +201,7 @@ module Commander
     # is not specifically supplied to #option.
     
     def populate_options_to_when_called switches #:nodoc:
+      # TODO: Refactor
       Proc.new do |args|
         @proxy_options << {
           :method => switch_to_sym(switches.last),
