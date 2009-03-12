@@ -15,6 +15,7 @@
 
 == Minor
 
+* Consider global #color method again
 * Change; use stack technique for progress bar instead to clean things up
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
 * Add optional command to be executed when none is specified
