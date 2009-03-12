@@ -126,10 +126,11 @@ module Commander
     #
     
     def when_called *args, &block
+      h = @when_called
       case args.first
-      when nil   ; @when_called[:proc] = block
-      when Class ; @when_called[:class],  @when_called[:method] = *args
-      else         @when_called[:object], @when_called[:method] = *args
+      when nil   ; h[:proc] = block
+      when Class ; h[:class],  h[:method] = *args
+      else         h[:object], h[:method] = *args
       end
     end
     
