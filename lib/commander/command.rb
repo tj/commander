@@ -126,18 +126,11 @@ module Commander
     #
     
     def when_called *args, &block
-      h = @when_called
-      unless args.empty?
-        case args.first
-        when Class
-          h[:class] = args.shift
-          h[:method] = args.shift
-        else
-          h[:object] = args.shift
-          h[:method] = args.shift
-        end
+      case args.first
+      when nil   ; @when_called[:proc] = block
+      when Class ; @when_called[:class],  @when_called[:method] = *args
+      else         @when_called[:object], @when_called[:method] = *args
       end
-      h[:proc] = block if block_given?
     end
     
     ##
