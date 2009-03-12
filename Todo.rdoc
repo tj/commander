@@ -1,7 +1,6 @@
 
 == Major
 
-* Change command with name only to replace get_command
 * Fix issue with having command name in the args list, #args_without_command
 * Fix multi-word creation via commander init
 * Specs / mocking for passing a class to #when_called, to be initialized with or without a method / refactor with matchers etc

@@ -39,7 +39,7 @@ module Commander
       require_program :name, :version, :description
       case 
       when options[:version] : $terminal.say "#{program(:name)} #{program(:version)}" 
-      when options[:help] : get_command(:help).run
+      when options[:help] : command(:help).run
       else active_command.run *args_without_command
       end
     rescue InvalidCommandError
@@ -88,7 +88,9 @@ module Commander
     end
     
     ##
-    # Creates and yields a command instance.
+    # Creates and yields a command instance when a block is passed.
+    # Otherise attempts to return the command, raising InvalidCommandError when
+    # it does not exist.
     #
     # === Examples:
     #    
@@ -100,7 +102,11 @@ module Commander
     #
     
     def command name, &block
-      yield add_command(Commander::Command.new(name))
+      if block
+        yield add_command(Commander::Command.new(name))
+      else
+        @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
+      end
     end
     
     ##
@@ -108,13 +114,6 @@ module Commander
     
     def add_command command
       @commands[command.name] = command
-    end
-    
-    ##
-    # Get a command object if available or raise an InvalidCommandError.
-    
-    def get_command name
-      @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
     end
     
     ##
@@ -128,7 +127,7 @@ module Commander
     # Get active command within arguments passed to this runner.
     
     def active_command
-      @_active_command ||= get_command(command_name_from_args)
+      @_active_command ||= command(command_name_from_args)
     end
     
     ##
@@ -184,7 +183,7 @@ module Commander
           if args.empty?
             $terminal.say help_formatter.render 
           else
-            $terminal.say help_formatter.render_command(get_command(args.join(' ')))
+            $terminal.say help_formatter.render_command(command(args.join(' ')))
           end
         end
       end

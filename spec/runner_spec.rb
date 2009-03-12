@@ -24,18 +24,14 @@ describe Commander do
     end
   end
   
-  describe "#get_command" do
-  	it "should return a command instance" do
-  	  get_command(:test).should be_instance_of(Commander::Command)
+  describe "#command" do
+  	it "should return a command instance when only the name is passed" do
+  	  command(:test).should be_instance_of(Commander::Command)
   	end
-
-  	it "should assign options" do
-  	  get_command(:test).should have(2).options
-  	end
-
-  	it "should invoke #when_called with arguments properly" do
-  	  get_command(:test).call([1, 2]).should == 'test 12'
-  	end
+    
+    it "should raise InvalidCommandError when the command does not exist" do
+      lambda { command(:im_not_real) }.should raise_error(Commander::Runner::InvalidCommandError)
+    end
   end
   
   describe "--version" do
@@ -79,7 +75,7 @@ describe Commander do
       command_runner.active_command.should be_instance_of(Commander::Command)
     end
     
-    it "should raise invalid command error when the command is not found"do
+    it "should raise invalid command error when the command is not found" do
       new_command_runner '--help'
       lambda { command_runner.active_command }.should raise_error(Commander::Runner::InvalidCommandError)
     end

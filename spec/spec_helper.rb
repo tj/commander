@@ -24,7 +24,7 @@ def create_test_command
       "test %s" % args.join
     end
   end
-  @command = get_command :test
+  @command = command :test
 end
 
 # Create a new global command runner

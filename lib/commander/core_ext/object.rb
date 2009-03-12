@@ -5,7 +5,6 @@ require 'forwardable'
 # Delegates the following methods:
 #
 # * Commander::Runner#add_command
-# * Commander::Runner#get_command
 # * Commander::Runner#command
 # * Commander::Runner#commands
 # * Commander::Runner#program
@@ -17,7 +16,7 @@ class Object
   extend Forwardable
   include Commander::UI
   
-  def_delegators :$command_runner, :add_command, :get_command, :command, :program, :run!, :commands
+  def_delegators :$command_runner, :add_command, :command, :program, :run!, :commands
   def_delegators Commander::UI::ProgressBar, :progress
 
   ##
