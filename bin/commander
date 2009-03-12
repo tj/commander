@@ -19,7 +19,7 @@ command :init do |c|
 		commands = ask_for_array 'List the sub-commands you wish to create: '
 		begin
       File.open(file, 'w') do |f|
-        f.write <<-CODE.gsub!(/^ {10}/, '')
+        f.write <<-"...".gsub!(/^ {10}/, '')
           #!/usr/bin/env ruby
           
           require 'rubygems'
@@ -30,9 +30,9 @@ command :init do |c|
           program :version, #{name.camelcase}::VERSION
           program :description, '#{description}'
            
-        CODE
+        ...
         commands.each do |command|
-          f.write <<-CODE.gsub!(/^ {12}/, '')
+          f.write <<-"...".gsub!(/^ {12}/, '')
             command :#{command} do |c|
               c.syntax = ''
               c.summary = ''
@@ -44,7 +44,7 @@ command :init do |c|
               end
             end
 
-        CODE
+          ...
         end
        end
        say "Initialized template in #{file}"
