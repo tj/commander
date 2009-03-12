@@ -135,17 +135,15 @@ module Commander
     # Supports multi-word commands, using the largest possible match.
     
     def command_name_from_args
-      @__command_name_from_args ||= valid_command_names_from(*@args)
+      @__command_name_from_args ||= valid_command_names_from(*@args).last
     end
     
     ##
     # Returns array of valid command names found within +args+.
     
     def valid_command_names_from *args
-      args.delete_switches.inject do |name, arg|
-        return name if command_exists? name
-        name += " #{arg}"
-      end
+      arg_string = args.delete_switches.join ' '
+      commands.keys.map { |key| key if arg_string.include? key }.compact
     end
     
     ##
