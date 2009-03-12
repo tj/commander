@@ -100,11 +100,6 @@ module Commander
     #      end
     #    end
     #
-    # === See:
-    #
-    # * Commander::Command
-    # * Commander::Runner#add_command
-    #
     
     def command name, &block
       command = Commander::Command.new(name) and yield command
@@ -134,10 +129,6 @@ module Commander
     
     ##
     # Get active command within arguments passed to this runner.
-    #
-    # === See:
-    #
-    # * Commander::Runner#parse_global_options
     #
     
     def active_command
