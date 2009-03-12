@@ -124,7 +124,7 @@ module Commander
     #
     
     def when_called *args, &block
-      raise ArgumentError, 'pass an object, class, or block.' if args.empty? and !block
+      raise ArgumentError, 'must pass an object, class, or block.' if args.empty? and !block
       @when_called = block ? [block] : args
     end
     
