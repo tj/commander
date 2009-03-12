@@ -191,9 +191,9 @@ module Commander
     # Creates an Options instance populated with the option values
     # collected by the #option_proc.
     
-    def proxy_option_struct 
-      @proxy_options.inject Options.new do |options, option, value|
-        options.send :"#{option}=", value
+    def proxy_option_struct
+      @proxy_options.inject Options.new do |options, (option, value)|
+        options.send :"#{option}=", value if option
         options
       end
     end
@@ -205,7 +205,7 @@ module Commander
     
     def option_proc switches
       Proc.new do |value|
-        @proxy_options.push switch_to_sym(switches.last), value
+        @proxy_options.push [switch_to_sym(switches.last), value]
       end 
     end
     
