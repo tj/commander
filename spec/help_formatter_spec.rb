@@ -6,9 +6,9 @@ describe Commander::HelpFormatter do
   end
   
   def run *args
-    new_command_runner *args
-    program :help_formatter, Commander::HelpFormatter::Base
-    command_runner.run!    
+    new_command_runner *args do
+      program :help_formatter, Commander::HelpFormatter::Base
+    end.run!    
     @output.string
   end
   
