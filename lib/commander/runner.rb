@@ -104,8 +104,7 @@ module Commander
     #
     
     def command name, &block
-      command = Commander::Command.new(name) and yield command
-      add_command command
+      yield add_command(Commander::Command.new(name))
     end
     
     ##
