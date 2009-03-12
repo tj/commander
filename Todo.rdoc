@@ -7,11 +7,10 @@
 * Fix multi-word creation via commander init
 * Specs / mocking for passing a class to #when_called, to be initialized with or without a method / refactor with matchers etc
 * Option defaults when null
-* Refactor specs / improve testing capabilities
 * Non-greedy matching of command name
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
-* Add compat.rb with warnings if needed if any api changes appear
+* Add compat.rb with warnings of api changes. or just tag at 3.x
 
 == Minor
 
@@ -23,7 +22,6 @@
 * Add highline paging ... clean it up because its ugly
 * Add aliasing of commands / args / options
 * Add option copying / merging capabilities
-* Change  VerboseFileUtils to output basename only ? 
 * Change; require that users explicitly require 'commander/import' (which in turn will highlight/import as well)
 * Release to RubyForge as well
 * Change; consider reversing |options, args| so args make use of ruby block param defaults with 1.9
