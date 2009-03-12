@@ -135,7 +135,7 @@ module Commander
     # Supports multi-word commands, using the largest possible match.
     
     def command_name_from_args
-      @__command_name_from_args ||= (valid_command_names_from(*@args.dup).last || '')
+      @__command_name_from_args ||= valid_command_names_from(*@args.dup).last
     end
     
     ##
