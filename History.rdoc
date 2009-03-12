@@ -1,4 +1,34 @@
 
+=== 3.0.0 / 2009-03-12
+
+* Added sub command help support when using the --help switch
+* #delete_switches is now mutative
+* Added #valid_command_names_from
+* #when_called now raises argument error when neither a block, object, or class is passed
+* Added options#default method and specs
+* Added support for multi-word list parsing in Array#parse
+* Added summary to commander template
+* Added optional block param for #new_command_runner spec helper
+* Added .re (metadata for visionmedia-release gem)
+* Moved delgation of Kernel methods to Object
+* Refactored multi-word command name specs
+* Refactored Object#method_missing; using call chain to implement
+* Refactored all specs
+* Change #color calls in formatters to $terminal#color for now
+* Using highlines $terminal.output for IO stream with the progressbar
+* Replaced #ensure_program_key_set with #require_program, taking an array of keys
+* Renamed #args_without_command to #args_without_command_name
+* Renamed #populate_options_to_when_called to #option_proc
+* Renamed #sym_from_switch to #switch_to_sym
+* Removed #get_command, use #command without supplying a block
+* Removed Command#inspect
+* Removed command description aliases of short_description, long_description. Use description / summary
+* Removed VerboseFileUtils
+* Removed String#camelcase as its not really needed (was only used in commander's executable for creating templates)
+* Removed commander/import for now
+* Removed LOG_FORMAT
+* Removed Kernel ext which only had #color
+
 === 2.5.7 / 2009-03-11
 
 * Fixed paren warnings in import spec
