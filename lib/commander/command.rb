@@ -191,7 +191,9 @@ module Commander
     
     def proxy_option_struct #:nodoc:
       options = Options.new
-      @proxy_options.each { |o| options.send("#{o[:method]}=", o[:value]) } 
+      @proxy_options.each do |option| 
+        options.send :"#{option[:method]}=", option[:value]
+      end
       options
     end
     
