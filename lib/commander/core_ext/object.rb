@@ -33,18 +33,17 @@ class Object
   def command_runner
     $command_runner
   end
-  
-  alias_method :original_method_missing, :method_missing
-  
+    
   ##
-  # Implement #ask_for_CLASS
+  # Implement #ask_for_CLASS.
   
-  def method_missing meth, *args, &block
-    if meth.to_s =~ /^ask_for_([\w]+)/
-      $terminal.ask args.first, eval($1.camelcase)
-    else
-      original_method_missing(meth, *args, &block)
+  include Module.new {
+    def method_missing meth, *args, &block
+      case meth.to_s
+      when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, eval($1.camelcase))
+      else super
+      end
     end
-  end
+  }
 
 end

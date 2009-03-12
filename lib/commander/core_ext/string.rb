@@ -2,7 +2,7 @@
 class String
     
   ##
-  # Replace +hash+ keys with associated values. Mutative.
+  # Replace +hash+ keys with associated values.
   
   def tokenize! hash = {}
     hash.each { |k, v| gsub! /:#{k}/, v.to_s }
