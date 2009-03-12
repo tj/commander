@@ -40,7 +40,7 @@ class Object
   include Module.new {
     def method_missing meth, *args, &block
       case meth.to_s
-      when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, eval($1.camelcase))
+      when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, eval($1.capitalize))
       else super
       end
     end

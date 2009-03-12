@@ -10,6 +10,7 @@
 * Non-greedy matching of command name
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
+* remove exception caller(n)'s
 * Add compat.rb with warnings of api changes. or just tag at 3.x
 
 == Minor

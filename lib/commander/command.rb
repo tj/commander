@@ -35,9 +35,9 @@ module Commander
     #
     # === Examples:
     #    
-    #    command :something do |c|
-    #      c.example "Should do something", "my_command something"
-    #    end
+    #   command :something do |c|
+    #     c.example "Should do something", "my_command something"
+    #   end
     #
     
     def example description, command 
@@ -64,18 +64,18 @@ module Commander
     #
     # === Examples:
     #    
-    #    command :something do |c|
-    #      c.option '--recursive', 'Do something recursively'
-    #      c.option '--file FILE', 'Specify a file'
-    #      c.option('--info', 'Display info') { puts "handle with block" }
-    #      c.option '--[no-]feature', 'With or without feature'
-    #      c.option '--list FILES', Array, 'List the files specified'
-    #
-    #      c.when_called do |args, options|
-    #        do_something_recursively if options.recursive
-    #        do_something_with_file options.file if options.file
-    #      end 
-    #    end
+    #   command :something do |c|
+    #     c.option '--recursive', 'Do something recursively'
+    #     c.option '--file FILE', 'Specify a file'
+    #     c.option('--info', 'Display info') { puts "handle with block" }
+    #     c.option '--[no-]feature', 'With or without feature'
+    #     c.option '--list FILES', Array, 'List the files specified'
+    #   
+    #     c.when_called do |args, options|
+    #       do_something_recursively if options.recursive
+    #       do_something_with_file options.file if options.file
+    #     end 
+    #   end
     #
     # === Help Formatters:
     #
@@ -105,27 +105,24 @@ module Commander
     end
     
     ##
-    # Handle execution of command.
-    #
-    # An array of _args_ are passed to the handler, as well as an OpenStruct
-    # containing option values (populated regardless of them being declared).
-    # The handler may be a class, object, or block (see examples below).
+    # Handle execution of command. The handler may be a class, 
+    # object, or block (see examples below).
     #
     # === Examples:
     #    
-    #     # Simple block handling
-    #     c.when_called do |args, options|
-    #        # do something
-    #     end 
-    #
-    #     # Create inst of Something and pass args / options
-    #     c.when_called MyLib::Command::Something
-    #
-    #     # Create inst of Something and use arbitrary method
-    #      c.when_called MyLib::Command::Something, :some_method
-    #
-    #     # Pass an object to handle callback (requires method symbol)
-    #     c.when_called SomeObject, :some_method
+    #    # Simple block handling
+    #    c.when_called do |args, options|
+    #       # do something
+    #    end 
+    #    
+    #    # Create inst of Something and pass args / options
+    #    c.when_called MyLib::Command::Something
+    #    
+    #    # Create inst of Something and use arbitrary method
+    #     c.when_called MyLib::Command::Something, :some_method
+    #    
+    #    # Pass an object to handle callback (requires method symbol)
+    #    c.when_called SomeObject, :some_method
     #
     
     def when_called *args, &block

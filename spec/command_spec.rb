@@ -5,7 +5,7 @@ describe Commander::Command do
     mock_terminal
     create_test_command
   end
-  
+    
   describe "#option" do
     it "should add options" do
       lambda { @command.option '--recursive' }.should change(@command.options, :length).from(2).to(3)
