@@ -6,6 +6,7 @@
 
 == Minor
 
+* Add optional default command when none is present
 * Fix multi-word command template creation via `commander init`
 * Consider global #color method again
 * Change; use stack technique for progress bar instead to clean things up
