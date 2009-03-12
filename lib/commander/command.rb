@@ -91,7 +91,7 @@ module Commander
     #
     
     def option *args, &block
-      switches, description = seperate_switches_from_description args
+      switches, description = seperate_switches_from_description *args
       proc = block || populate_options_to_when_called(switches)
       @options << {
         :args => args,
@@ -177,20 +177,20 @@ module Commander
     def switch_to_sym switch
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
     end
-    
+
+    def seperate_switches_from_description *args #:nodoc:
+      # TODO: refactor this goodness
+      switches = args.find_all { |a| a.index('-') == 0 if a.is_a? String } 
+      description = args.last unless !args.last.is_a? String or args.last.index('-') == 0
+      [switches, description]
+    end
+        
     private 
     
     def proxy_option_struct #:nodoc:
       options = Options.new
       @proxy_options.each { |o| options.send("#{o[:method]}=", o[:value]) } 
       options
-    end
-    
-    def seperate_switches_from_description args #:nodoc:
-      # TODO: refactor this goodness
-      switches = args.find_all { |a| a.index('-') == 0 if a.is_a? String } 
-      description = args.last unless !args.last.is_a? String or args.last.index('-') == 0
-      [switches, description]
     end
     
     ##

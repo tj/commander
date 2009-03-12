@@ -5,6 +5,14 @@ describe Commander::Command do
     mock_terminal
     create_test_command
   end
+  
+  describe "#seperate_switches_from_description" do
+    it "should seperate switches and description returning both" do
+      switches, description = *@command.seperate_switches_from_description('-h', '--help', 'display help')
+      switches.should == ['-h', '--help']
+      description.should == 'display help'
+    end
+  end
     
   describe "#option" do
     it "should add options" do
