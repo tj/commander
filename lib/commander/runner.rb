@@ -38,7 +38,7 @@ module Commander
     def run!
       require_program :name, :version, :description
       case 
-      when options[:version] : $terminal.say "#{@program[:name]} #{@program[:version]}" 
+      when options[:version] : $terminal.say "#{program(:name)} #{program(:version)}" 
       when options[:help] : get_command(:help).run
       else active_command.run *args_without_command
       end
@@ -147,7 +147,7 @@ module Commander
     # Help formatter instance.
     
     def help_formatter
-      @_help_formatter ||= @program[:help_formatter].new self
+      @_help_formatter ||= program(:help_formatter).new self
     end
     
     ##

@@ -78,7 +78,7 @@ describe Commander do
       new_command_runner '--help', 'test', '--arbitrary'
       command_runner.active_command.should be_instance_of(Commander::Command)
     end
-
+    
     it "should raise invalid command error when the command is not found"do
       new_command_runner '--help'
       lambda { command_runner.active_command }.should raise_error(Commander::Runner::InvalidCommandError)
