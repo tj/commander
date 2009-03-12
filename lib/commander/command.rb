@@ -187,8 +187,6 @@ module Commander
       return switches, description
     end
         
-    private
-    
     ##
     # Creates an Options instance populated with the option values
     # collected by the #option_proc.
