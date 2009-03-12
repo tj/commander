@@ -7,6 +7,17 @@ module Commander
     
     attr_reader :name, :examples, :options, :proxy_options
     attr_accessor :syntax, :description, :summary
+    
+    ##
+    # Options struct.
+    
+    class Options < OpenStruct
+      def default defaults = {}
+        defaults.each do |key, value|
+          send "#{key}=", value if send(key).nil?
+        end
+      end
+    end
         
     ##
     # Initialize new command with specified _name_.
@@ -201,7 +212,7 @@ module Commander
     private 
     
     def proxy_option_struct #:nodoc:
-      options = OpenStruct.new
+      options = Options.new
       @proxy_options.each { |o| options.send("#{o[:method]}=", o[:value]) } 
       options
     end

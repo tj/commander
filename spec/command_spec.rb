@@ -45,14 +45,14 @@ describe Commander::Command do
       
       it "calling the #call method by default when an object is called" do
         object = mock 'Object'
-        object.should_receive(:call).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
+        object.should_receive(:call).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
         @command.when_called object
         @command.run 'foo'        
       end
             
       it "calling an arbitrary method when an object is called" do
         object = mock 'Object'
-        object.should_receive(:foo).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
+        object.should_receive(:foo).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
         @command.when_called object, :foo
         @command.run 'foo'        
       end
@@ -92,6 +92,17 @@ describe Commander::Command do
         @command.option '--fav MOVIES', Array
         @command.when_called { |_, options| options.fav.should == ['super\ bad', 'nightmare'] }  
         @command.run '--fav', 'super\ bad,nightmare'        
+      end
+      
+      it "defaults" do
+        @command.option '--files LIST', Array
+        @command.option '--interval N', Integer
+        @command.when_called do |_, options|
+          options.default :files => ['foo', 'bar'], :interval => 5
+          options.files.should == ['foo', 'bar']
+          options.interval.should == 15
+        end
+        @command.run '--interval', '15'
       end
     end
     
