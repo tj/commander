@@ -40,7 +40,8 @@ module Commander
       case 
       when options[:version] ; $terminal.say "#{program(:name)} #{program(:version)}" 
       when options[:help]    ; command(:help).run(*@args[1..@args.length])
-      else active_command.run *args_without_command
+      else
+        active_command.run *args_without_command_name
       end
     rescue InvalidCommandError
       $terminal.say 'invalid command. Use --help for more information'
@@ -156,7 +157,7 @@ module Commander
     ##
     # Return arguments without the command name.
     
-    def args_without_command
+    def args_without_command_name
       removed = []
       parts = command_name_from_args.split
       @args.dup.delete_if do |arg|

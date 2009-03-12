@@ -152,7 +152,7 @@ describe Commander do
       new_command_runner '--trace', 'my', 'command', 'something', 'foo', 'bar' do
         command('my command') {}
         command_runner.command_name_from_args.should == 'my command'
-        command_runner.args_without_command.should == ['--trace', 'something', 'foo', 'bar']
+        command_runner.args_without_command_name.should == ['--trace', 'something', 'foo', 'bar']
       end.run!
     end
 
@@ -160,7 +160,7 @@ describe Commander do
       new_command_runner '--trace', 'my', 'command', 'something', 'my', 'command' do
         command('my command') {}
         command_runner.command_name_from_args.should == 'my command'
-        command_runner.args_without_command.should == ['--trace', 'something', 'my', 'command']
+        command_runner.args_without_command_name.should == ['--trace', 'something', 'my', 'command']
       end.run!
     end
   end
