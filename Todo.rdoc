@@ -1,6 +1,7 @@
 
 == Major
 
+* Change; delete_switches should be mutative like other delete* methods
 * Non-greedy matching of command name
 * Fix multi-word creation via commander init
 * Specs / mocking for passing a class to #when_called, to be initialized with or without a method / refactor with matchers etc

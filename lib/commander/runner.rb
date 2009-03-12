@@ -132,10 +132,17 @@ module Commander
     
     ##
     # Attemps to locate a command name from within the arguments.
-    # Supports multi-word commands.
+    # Supports multi-word commands, using the largest possible match.
     
     def command_name_from_args
-      @__command_name_from_args ||= @args.delete_switches.inject do |name, arg|
+      @__command_name_from_args ||= valid_command_names_from(*@args)
+    end
+    
+    ##
+    # Returns array of valid command names found within +args+.
+    
+    def valid_command_names_from *args
+      args.delete_switches.inject do |name, arg|
         return name if command_exists? name
         name += " #{arg}"
       end
