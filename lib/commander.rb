@@ -35,4 +35,4 @@ require 'commander/help_formatters'
 $command_runner = Commander::Runner.new
 $terminal.wrap_at = HighLine::SystemExtensions.terminal_size.first - 10 rescue 80
 trap('INT') { abort program(:int_message) }
-at_exit { $command_runner.run! } 
+at_exit { run! } 
