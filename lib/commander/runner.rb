@@ -163,7 +163,7 @@ module Commander
     # Returns hash of program defaults.
     
     def program_defaults
-      return :help_formatter => Commander::HelpFormatter::Terminal, :int_message => "\nProcess interrupted"
+      return :help_formatter => HelpFormatter::Terminal, :int_message => "\nProcess interrupted"
     end
     
     ##
