@@ -127,7 +127,7 @@ module Commander
     # Get active command within arguments passed to this runner.
     
     def active_command
-      @_active_command ||= command(command_name_from_args)
+      @__active_command ||= command(command_name_from_args)
     end
     
     ##
@@ -135,7 +135,7 @@ module Commander
     # Supports multi-word commands.
     
     def command_name_from_args
-      @_command_name_from_args ||= @args.delete_switches.inject do |name, arg|
+      @__command_name_from_args ||= @args.delete_switches.inject do |name, arg|
         return name if command_exists? name
         name += " #{arg}"
       end
@@ -145,7 +145,7 @@ module Commander
     # Help formatter instance.
     
     def help_formatter
-      @_help_formatter ||= program(:help_formatter).new self
+      @__help_formatter ||= program(:help_formatter).new self
     end
     
     ##
