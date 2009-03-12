@@ -87,6 +87,12 @@ describe Commander::Command do
         @command.when_called { |_, options| options.fav.should == ['red', 'green', 'blue'] }  
         @command.run '--fav', 'red,green,blue'
       end
+      
+      it "lists with multi-word items" do
+        @command.option '--fav MOVIES', Array
+        @command.when_called { |_, options| options.fav.should == ['super\ bad', 'nightmare'] }  
+        @command.run '--fav', 'super\ bad,nightmare'        
+      end
     end
     
     describe "function correctly" do

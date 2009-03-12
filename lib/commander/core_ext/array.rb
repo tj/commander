@@ -2,7 +2,9 @@
 class Array 
   
   ##
-  # Split +string+ into an array. 
+  # Split +string+ into an array. Used in
+  # conjunection with Highline's ask, or ask_for_array
+  # methods, which must respond to #parse.
   #
   # === Highline example:
   #  
@@ -11,7 +13,7 @@ class Array
   #
   
   def self.parse string
-    string.split
+    string.scan(/(?:\w|\d|\\ )+/).map{ |value| value.sub('\\', '')  }
   end
   
   ##
