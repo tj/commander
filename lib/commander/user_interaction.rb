@@ -12,16 +12,11 @@ module Commander
   module UI
     
     ##
-    # Format used within #log.
-    
-    LOG_FORMAT = "%15s  %s"
-    
-    ##
     # Ask the user for a password. Specify a custom
     # _msg_ other than 'Password: ' or override the 
     # default +mask+ of '*'.
     
-    def password msg = "Password: ", mask = '*'
+    def password msg = 'Password: ', mask = '*'
       pass = ask(msg) { |q| q.echo = mask }
       pass = password msg, mask if pass.empty?
       pass
@@ -35,11 +30,9 @@ module Commander
     #   remove  path/to/old_file.rb
     #   remove  path/to/old_file2.rb
     #
-    # To alter this format simply change the Commander::UI::LOG_FORMAT
-    # constant to whatever you like.
     
     def log action, *args
-      say LOG_FORMAT % [action, args.join(' ')]
+      say '%15s  %s' % [action, args.join(' ')]
     end
     
     ##

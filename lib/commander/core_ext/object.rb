@@ -4,7 +4,7 @@ class Object
   include Commander::UI
   
   ##
-  # Used with ERB in Commander::HelpFormatter::Base.
+  # Return the current binding.
   
   def get_binding
     binding
