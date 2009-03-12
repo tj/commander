@@ -177,7 +177,7 @@ module Commander
     #   --list of,things   # => :list
     
     def switch_to_sym switch
-      switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
+      switch.scan(/[\-\]](\w+)/).join('_').to_sym rescue nil
     end
     
     ##
