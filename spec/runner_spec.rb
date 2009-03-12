@@ -43,13 +43,27 @@ describe Commander do
     end
   end
   
+  describe "--help" do
+    it "should not output an invalid command message" do
+      new_command_runner('--help').run!
+      @output.string.should_not == "invalid command. Use --help for more information\n"
+    end
+  end
+  
   describe "with invalid options" do
     it "should output an invalid option message" do
       new_command_runner('test', '--invalid-option').run!
       @output.string.should == "invalid option: --invalid-option\n"
     end
   end
-
+  
+  describe "with invalid sub-command passed" do
+    it "should output an invalid command message" do
+      new_command_runner('foo').run!
+      @output.string.should == "invalid command. Use --help for more information\n"
+    end
+  end
+  
   describe "with invalid sub-command passed to help" do
     it "should output an invalid command message" do
       new_command_runner('help', 'does_not_exist').run!
@@ -101,7 +115,7 @@ describe Commander do
     end
     
     it "should raise invalid command error when the command is not found" do
-      new_command_runner '--help'
+      new_command_runner 'foo'
       lambda { command_runner.active_command }.should raise_error(Commander::Runner::InvalidCommandError)
     end
   end
