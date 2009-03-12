@@ -142,6 +142,15 @@ describe Commander::Command do
           end
         end.run!
       end
+      
+      it "should an argument passed is the same name as the command" do
+        new_command_runner 'test', '--trace', 'foo', 'test', 'bar' do
+          @command.when_called do |args, options|
+            args.should == ['foo', 'test', 'bar']
+            options.trace.should be_true
+          end
+        end.run!
+      end
 
       it "should allow multi-word strings as command names to be called correctly" do
         # TODO: refactor
