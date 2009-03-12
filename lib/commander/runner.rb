@@ -66,7 +66,7 @@ module Commander
     #    program :help, 'Copyright', '2008 TJ Holowaychuk'
     #    program :help, 'Anything', 'You want'
     #    program :int_message 'Bye bye!'
-    #
+    #    
     #    # Get data
     #    program :name # => 'Commander'
     #
@@ -86,7 +86,7 @@ module Commander
         @program[:help][args.first] = args[1]
       else
         @program[key] = *args unless args.empty?
-        @program[key] if args.empty?
+        @program[key]
       end
     end
     
