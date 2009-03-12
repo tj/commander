@@ -43,20 +43,6 @@ describe Commander::Command do
         @command.run '--trace', 'just', 'some', 'args'
       end
       
-      it "initializing an object when a class is passed" do
-       klass = Class.new
-       klass.should_receive(:initialize).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
-       @command.when_called klass
-       @command.run 'foo'
-      end
-
-      it "initializing an object when a class is passed, calling an arbitrary method" do
-        klass = Class.new
-        klass.should_receive(:foo).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
-        @command.when_called klass, :foo
-        @command.run 'foo'
-      end
-      
       it "calling the #call method by default when an object is called" do
         object = mock 'Object'
         object.should_receive(:call).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
@@ -100,6 +86,57 @@ describe Commander::Command do
         @command.option '--fav COLORS', Array
         @command.when_called { |_, options| options.fav.should == ['red', 'green', 'blue'] }  
         @command.run '--fav', 'red,green,blue'
+      end
+    end
+    
+    describe "function correctly" do
+      it "when options are passed before the command name" do
+        new_command_runner '--trace', 'test', 'foo', 'bar'
+        @command.when_called do |args, options|
+          args.should == ['foo', 'bar']
+          options.trace.should be_true
+        end
+        command_runner.run!
+      end
+
+      it "when options are passed after the command name" do
+        new_command_runner 'test', '--trace', 'foo', 'bar'
+        @command.when_called do |args, options|
+          args.should == ['foo', 'bar']
+          options.trace.should be_true
+        end
+        command_runner.run!
+      end
+
+      it "should allow multi-word strings as command names to be called correctly" do
+        # TODO: refactor
+        arguments = nil
+        options = nil
+        new_command_runner 'foo', 'bar', 'something', 'i', 'like', '--i-like', 'cookies'
+        command 'foo bar something' do |c|
+          c.option '--i-like WHAT'
+          c.when_called { |args, opts| arguments, options = args, opts } 
+        end
+        command_runner.command_name_from_args.should == 'foo bar something'
+        command_runner.args_without_command.should == ['i', 'like', '--i-like', 'cookies']
+        command_runner.run!
+        arguments.should == ['i', 'like']
+        options.i_like.should == 'cookies'
+      end
+
+      it "should allow multi-word strings as command names to be called correctly, with options before command name" do
+        arguments = nil
+        options = nil
+        new_command_runner '--something', 'foo', 'bar', 'random_arg'
+        command 'foo bar' do |c|
+          c.option '--something'
+          c.when_called { |args, opts| arguments, options = args, opts } 
+        end
+        command_runner.command_name_from_args.should == 'foo bar'
+        command_runner.args_without_command.should == ['--something', 'random_arg']
+        command_runner.run!
+        arguments.should == ['random_arg']
+        options.something.should be_true
       end
     end
   end

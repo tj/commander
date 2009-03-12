@@ -6,6 +6,7 @@
 * Fix issue with having command name in the args list, #args_without_command
 * Fix annoying 'Program x required' message
 * Fix bool switches --[no-]-foo ... document
+* Specs / mocking for passing a class to #when_called, to be initialized with or without a method / refactor with matchers etc
 * Option defaults when null
 * Refactor specs / improve testing capabilities
 * Non-greedy matching of command name
