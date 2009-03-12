@@ -95,7 +95,7 @@ module Commander
     
     def option *args, &block
       switches, description = seperate_switches_from_description args
-      proc = block_given? ? block : populate_options_to_when_called(switches)
+      proc = block || populate_options_to_when_called(switches)
       @options << {
         :args => args,
         :proc => proc,
