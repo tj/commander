@@ -38,3 +38,10 @@ def new_command_runner *args, &block
   yield if block
   command_runner
 end
+
+def run *args
+  new_command_runner *args do
+    program :help_formatter, Commander::HelpFormatter::Base
+  end.run!    
+  @output.string
+end

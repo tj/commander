@@ -54,38 +54,31 @@ describe Commander do
   
   describe "--version" do
     it "should output program version" do
-      new_command_runner '--version' do
-        program :help_formatter, Commander::HelpFormatter::Base
-      end.run!
-      @output.string.should == "test 1.2.3\n"
+      run('--version').should == "test 1.2.3\n"
     end
   end
   
   describe "--help" do
     it "should not output an invalid command message" do
-      new_command_runner('--help').run!
-      @output.string.should_not == "invalid command. Use --help for more information\n"
+      run('--help').should_not == "invalid command. Use --help for more information\n"
     end
   end
   
   describe "with invalid options" do
     it "should output an invalid option message" do
-      new_command_runner('test', '--invalid-option').run!
-      @output.string.should == "invalid option: --invalid-option\n"
+      run('test', '--invalid-option').should == "invalid option: --invalid-option\n"
     end
   end
   
   describe "with invalid sub-command passed" do
     it "should output an invalid command message" do
-      new_command_runner('foo').run!
-      @output.string.should == "invalid command. Use --help for more information\n"
+      run('foo').should == "invalid command. Use --help for more information\n"
     end
   end
   
   describe "with invalid sub-command passed to help" do
     it "should output an invalid command message" do
-      new_command_runner('help', 'does_not_exist').run!
-      @output.string.should == "invalid command. Use --help for more information\n"
+      run('help', 'does_not_exist').should == "invalid command. Use --help for more information\n"
     end
   end
   
