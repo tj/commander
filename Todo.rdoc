@@ -1,10 +1,9 @@
 
 == Major
 
-* Fix issue with having command name in the args list, #args_without_command
+* Non-greedy matching of command name
 * Fix multi-word creation via commander init
 * Specs / mocking for passing a class to #when_called, to be initialized with or without a method / refactor with matchers etc
-* Non-greedy matching of command name
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
 * Add compat.rb with warnings of api changes. or just tag at 3.x
