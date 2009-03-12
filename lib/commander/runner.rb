@@ -22,7 +22,8 @@ module Commander
     attr_reader :options
     
     ##
-    # Initialize a new command runner.
+    # Initialize a new command runner. Optionally
+    # supplying +args+ for mocking, or arbitrary usage.
     
     def initialize args = ARGV
       @args = args
