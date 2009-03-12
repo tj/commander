@@ -1,15 +1,12 @@
 
 == Major
 
-* Non-greedy matching of command name
-* Fix multi-word creation via commander init
-* Specs / mocking for passing a class to #when_called, to be initialized with or without a method / refactor with matchers etc
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
-* Add compat.rb with warnings of api changes. or just tag at 3.x
 
 == Minor
 
+* Fix multi-word command template creation via `commander init`
 * Consider global #color method again
 * Change; use stack technique for progress bar instead to clean things up
 * Add; dynamically generate padding erb templates, command lists, multi-line text bodies etc
