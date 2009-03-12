@@ -64,6 +64,10 @@ describe Commander::Command do
         @command.when_called object, :foo
         @command.run 'foo'        
       end
+      
+      it "should raise an error when no handler is present" do
+        lambda { @command.when_called }.should raise_error(ArgumentError)
+      end
     end
     
     describe "should populate options with" do
