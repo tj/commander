@@ -39,7 +39,7 @@ module Commander
       require_program :name, :version, :description
       case 
       when options[:version] ; $terminal.say "#{program(:name)} #{program(:version)}" 
-      when options[:help]    ; command(:help).run
+      when options[:help]    ; command(:help).run(*@args[1..@args.length])
       else active_command.run *args_without_command
       end
     rescue InvalidCommandError

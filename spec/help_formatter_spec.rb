@@ -23,5 +23,9 @@ describe Commander::HelpFormatter do
   it "should display command help" do
     run('help', 'test').should == "Implement help for test here\n"
   end
+  
+  it "should display command help using --help switch" do
+    run('--help', 'test').should == "Implement help for test here\n"
+  end
       
 end
