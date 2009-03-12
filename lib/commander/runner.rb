@@ -114,14 +114,14 @@ module Commander
     end
     
     ##
-    # Get a command object if available or nil.
+    # Get a command object if available or raise an InvalidCommandError.
     
     def get_command name
       @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
     end
     
     ##
-    # Check if a command exists.
+    # Check if a command +name+ exists.
     
     def command_exists? name
       @commands[name.to_s]
@@ -136,8 +136,8 @@ module Commander
     end
     
     ##
-    # Attemps to locate command from @args. Supports multi-word
-    # command names. 
+    # Attemps to locate a command name from within the arguments.
+    # Supports multi-word commands.
     
     def command_name_from_args
       @_command_name_from_args ||= @args.delete_switches.inject do |name, arg|
