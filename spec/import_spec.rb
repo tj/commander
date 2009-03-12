@@ -1,3 +1,4 @@
+
 describe Kernel do
   
   describe "#method_missing" do

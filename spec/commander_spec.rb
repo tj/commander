@@ -3,7 +3,7 @@ describe Commander do
   
 	before :each do
     create_faux_terminal
-	  @command = create_test_command
+	  create_test_command
 	end
 	
   describe "#program" do
