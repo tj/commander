@@ -19,32 +19,32 @@ command :init do |c|
 		commands = ask_for_array 'List the sub-commands you wish to create: '
 		begin
       File.open(file, 'w') do |f|
-        f.write <<-CODE
-#!/usr/bin/env ruby
-
-require 'rubygems'
-require 'commander'
-require '#{name}'
-
-program :name, '#{name}'
-program :version, #{name.camelcase}::VERSION
-program :description, '#{description}'
- 
-CODE
+        f.write <<-CODE.gsub!(/^ {10}/, '')
+          #!/usr/bin/env ruby
+          
+          require 'rubygems'
+          require 'commander'
+          require '#{name}'
+          
+          program :name, '#{name}'
+          program :version, #{name.camelcase}::VERSION
+          program :description, '#{description}'
+           
+        CODE
         commands.each do |command|
-          f.write <<-CODE
-command :#{command} do |c|
-  c.syntax = ''
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
-  c.when_called do |args, options|
-    # Do something or c.when_called #{name.camelcase}::Commands::#{command.camelcase}
-  end
-end
+          f.write <<-CODE.gsub!(/^ {12}/, '')
+            command :#{command} do |c|
+              c.syntax = ''
+              c.summary = ''
+              c.description = ''
+              c.example 'description', 'command example'
+              c.option '--some-switch', 'Some switch that does something'
+              c.when_called do |args, options|
+                # Do something or c.when_called #{name.camelcase}::Commands::#{command.camelcase}
+              end
+            end
 
-CODE
+        CODE
         end
        end
        say "Initialized template in #{file}"
