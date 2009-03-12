@@ -37,8 +37,8 @@ describe Commander::Command do
     it "should return a symbol based on the switch name" do
       @command.switch_to_sym('--trace').should == :trace
       @command.switch_to_sym('--foo-bar').should == :foo_bar
-      @command.switch_to_sym('--[no]-feature"').should == :feature
-      @command.switch_to_sym('--[no]-feature ARG').should == :feature
+      @command.switch_to_sym('--[no-]feature"').should == :feature
+      @command.switch_to_sym('--[no-]feature ARG').should == :feature
       @command.switch_to_sym('--file [ARG]').should == :file
       @command.switch_to_sym('--colors colors').should == :colors
     end
