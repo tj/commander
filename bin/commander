@@ -35,6 +35,7 @@ CODE
           f.write <<-CODE
 command :#{command} do |c|
   c.syntax = ''
+  c.summary = ''
   c.description = ''
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
