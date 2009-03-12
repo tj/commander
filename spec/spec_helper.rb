@@ -29,11 +29,12 @@ end
 
 # Create a new global command runner
 
-def new_command_runner *args
+def new_command_runner *args, &block
   $command_runner = Commander::Runner.new args
   program :name, 'test'
   program :version, '1.2.3'
   program :description, 'something'
   create_test_command
+  yield if block_given?
   command_runner
 end

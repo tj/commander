@@ -91,21 +91,21 @@ describe Commander::Command do
     
     describe "function correctly" do
       it "when options are passed before the command name" do
-        new_command_runner '--trace', 'test', 'foo', 'bar'
-        @command.when_called do |args, options|
-          args.should == ['foo', 'bar']
-          options.trace.should be_true
-        end
-        command_runner.run!
+        new_command_runner '--trace', 'test', 'foo', 'bar' do
+          @command.when_called do |args, options|
+            args.should == ['foo', 'bar']
+            options.trace.should be_true
+          end
+        end.run!
       end
 
       it "when options are passed after the command name" do
-        new_command_runner 'test', '--trace', 'foo', 'bar'
-        @command.when_called do |args, options|
-          args.should == ['foo', 'bar']
-          options.trace.should be_true
-        end
-        command_runner.run!
+        new_command_runner 'test', '--trace', 'foo', 'bar' do
+          @command.when_called do |args, options|
+            args.should == ['foo', 'bar']
+            options.trace.should be_true
+          end
+        end.run!
       end
 
       it "should allow multi-word strings as command names to be called correctly" do

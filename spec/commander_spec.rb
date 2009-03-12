@@ -40,9 +40,9 @@ describe Commander do
   
   describe "--version" do
     it "should output program version" do
-      new_command_runner '--version'
-      program :help_formatter, Commander::HelpFormatter::Base
-      command_runner.run!
+      new_command_runner '--version' do
+        program :help_formatter, Commander::HelpFormatter::Base
+      end.run!
       @output.string.should == "test 1.2.3\n"
     end
   end
