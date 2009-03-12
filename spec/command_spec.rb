@@ -123,66 +123,6 @@ describe Commander::Command do
         @command.run '--interval', '15'
       end
     end
-    
-    describe "function correctly" do
-      it "when options are passed before the command name" do
-        new_command_runner '--trace', 'test', 'foo', 'bar' do
-          @command.when_called do |args, options|
-            args.should == ['foo', 'bar']
-            options.trace.should be_true
-          end
-        end.run!
-      end
-
-      it "when options are passed after the command name" do
-        new_command_runner 'test', '--trace', 'foo', 'bar' do
-          @command.when_called do |args, options|
-            args.should == ['foo', 'bar']
-            options.trace.should be_true
-          end
-        end.run!
-      end
-      
-      it "should an argument passed is the same name as the command" do
-        new_command_runner 'test', '--trace', 'foo', 'test', 'bar' do
-          @command.when_called do |args, options|
-            args.should == ['foo', 'test', 'bar']
-            options.trace.should be_true
-          end
-        end.run!
-      end
-
-      it "should allow multi-word strings as command names to be called correctly" do
-        # TODO: refactor
-        arguments = nil
-        options = nil
-        new_command_runner 'foo', 'bar', 'something', 'i', 'like', '--i-like', 'cookies'
-        command 'foo bar something' do |c|
-          c.option '--i-like WHAT'
-          c.when_called { |args, opts| arguments, options = args, opts } 
-        end
-        command_runner.command_name_from_args.should == 'foo bar something'
-        command_runner.args_without_command.should == ['i', 'like', '--i-like', 'cookies']
-        command_runner.run!
-        arguments.should == ['i', 'like']
-        options.i_like.should == 'cookies'
-      end
-
-      it "should allow multi-word strings as command names to be called correctly, with options before command name" do
-        arguments = nil
-        options = nil
-        new_command_runner '--something', 'foo', 'bar', 'random_arg'
-        command 'foo bar' do |c|
-          c.option '--something'
-          c.when_called { |args, opts| arguments, options = args, opts } 
-        end
-        command_runner.command_name_from_args.should == 'foo bar'
-        command_runner.args_without_command.should == ['--something', 'random_arg']
-        command_runner.run!
-        arguments.should == ['random_arg']
-        options.something.should be_true
-      end
-    end
   end
   
 end
