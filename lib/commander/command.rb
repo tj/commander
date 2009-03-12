@@ -92,7 +92,7 @@ module Commander
     
     def option *args, &block
       switches, description = seperate_switches_from_description *args
-      proc = block || populate_options_to_when_called(switches)
+      proc = block || option_proc(switches)
       @options << {
         :args => args,
         :proc => proc,
@@ -197,11 +197,11 @@ module Commander
     end
     
     ##
-    # Pass option values to the when_called proc when a block
-    # is not specifically supplied to #option.
+    # Option proxy proc used when a block is not explicitly passed
+    # via the #option method. This allows commander to auto-populate
+    # and work with option values.
     
-    def populate_options_to_when_called switches #:nodoc:
-      # TODO: Refactor
+    def option_proc switches
       Proc.new do |args|
         @proxy_options << {
           :method => switch_to_sym(switches.last),
