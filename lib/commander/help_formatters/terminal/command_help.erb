@@ -17,10 +17,10 @@
 <% unless @examples.empty? -%>
 
   <%= $terminal.color "EXAMPLES", :bold %>:
-	<% @examples.each do |example| -%>
+	<% @examples.each do |description, command| -%>
 
-    # <%= example[:description] %>
-    <%= example[:command] %>
+    # <%= description %>
+    <%= command %>
 	<% end -%>
 <% end -%>
 <% unless @options.empty? -%>

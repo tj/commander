@@ -41,10 +41,7 @@ module Commander
     #
     
     def example description, command 
-      @examples << {
-        :description => description,
-        :command => command,
-      } 
+      @examples << [description, command]
     end
     
     ##
