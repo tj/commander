@@ -1,22 +1,22 @@
 
-  <%= color "NAME", :bold %>:
+  <%= $terminal.color "NAME", :bold %>:
 
     <%= @name %>
 
-  <%= color "DESCRIPTION", :bold %>:
+  <%= $terminal.color "DESCRIPTION", :bold %>:
 
     <%= @description || @summary || 'No description.' -%>
 
 <% if @syntax -%>
 
-  <%= color "SYNOPSIS", :bold %>:
+  <%= $terminal.color "SYNOPSIS", :bold %>:
 
     <%= @syntax -%>
 
 <% end -%>
 <% unless @examples.empty? -%>
 
-  <%= color "EXAMPLES", :bold %>:
+  <%= $terminal.color "EXAMPLES", :bold %>:
 	<% @examples.each do |example| -%>
 
     # <%= example[:description] %>
@@ -25,7 +25,7 @@
 <% end -%>
 <% unless @options.empty? -%>
 
-  <%= color "OPTIONS", :bold %>:
+  <%= $terminal.color "OPTIONS", :bold %>:
 	<% @options.each do |option| -%>
 
     <%= option[:switches].join ', ' %> 

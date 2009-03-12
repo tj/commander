@@ -3,13 +3,6 @@ require 'erb'
 
 module Commander
   module HelpFormatter
-    
-    ##
-    # = Terminal
-    #
-    # Outputs help in a terminal friendly format,
-    # utilizing asni formatting via the highline gem.
-    
     class Terminal < Base
       def render
         template(:help).result @runner.get_binding
@@ -20,7 +13,7 @@ module Commander
       end
       
       def template name
-        ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/terminal/#{name}.erb"), nil, "-")
+        ERB.new(File.read(File.expand_path(File.dirname(__FILE__)) + "/terminal/#{name}.erb"), nil, '-')
       end
     end
   end
