@@ -98,7 +98,9 @@ describe Commander::Command do
         @command.option '--files LIST', Array
         @command.option '--interval N', Integer
         @command.when_called do |_, options|
-          options.default :files => ['foo', 'bar'], :interval => 5
+          options.default \
+            :files => ['foo', 'bar'],
+            :interval => 5
           options.files.should == ['foo', 'bar']
           options.interval.should == 15
         end
