@@ -23,7 +23,7 @@ module Commander
     # Initialize new command with specified +name+.
     
     def initialize name
-      @name, @examples, @when_called = name.to_s, [], {}
+      @name, @examples, @when_called = name.to_s, [], []
       @options, @proxy_options = [], []
     end
     
@@ -126,11 +126,10 @@ module Commander
     #
     
     def when_called *args, &block
-      h = @when_called
-      case args.first
-      when nil   ; h[:proc] = block
-      when Class ; h[:class],  h[:method] = *args
-      else         h[:object], h[:method] = *args
+      unless args.empty?
+        @when_called = args
+      else
+        @when_called = [block]
       end
     end
     
@@ -161,17 +160,14 @@ module Commander
     # Call the commands when_called block with _args_.
     
     def call args = []
-      h = @when_called
-      case 
-      when h[:class]
-        if h[:method].nil?
-          h[:class].new args, proxy_option_struct
-        else
-          h[:class].new.send h[:method], args, proxy_option_struct
-        end
-      when h[:object] ; h[:object].send( h[:method] || :call, args, proxy_option_struct)
-      when h[:proc]   ; h[:proc].call args, proxy_option_struct
-      end
+      object = @when_called.shift
+      meth = @when_called.shift || :call
+      options = proxy_option_struct
+      case object
+      when Proc  ; object.call(args, options)
+      when Class ; meth != :call ? object.new.send(meth, args, options) : object.new(args, options)
+      else         object.send(meth, args, options)
+      end 
     end
     
     ##
