@@ -211,9 +211,7 @@ module Commander
         
     def require_program *keys
       keys.each do |key|
-        if program(key).nil? or program(key).empty?
-          raise CommandError, "Program #{key} required (use #program method)" 
-        end
+        raise CommandError, "program #{key} required" if program(key).nil? or program(key).empty?
       end
     end
     
