@@ -157,7 +157,7 @@ module Commander
     def parse_options_and_call_procs *args
       return args if args.empty?
       opts = OptionParser.new
-      @options.each { |o| opts.on(*o[:args], &o[:proc]) }
+      @options.each { |o| opts.on *o[:args], &o[:proc] }
       opts.parse! args
       args
     end
@@ -174,7 +174,7 @@ module Commander
         else
           h[:class].new.send h[:method], args, proxy_option_struct
         end
-      when h[:object] ; h[:object].send h[:method], args, proxy_option_struct 
+      when h[:object] ; h[:object].send( h[:method] || :call, args, proxy_option_struct)
       when h[:proc]   ; h[:proc].call args, proxy_option_struct
       end
     end

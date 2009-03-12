@@ -85,32 +85,6 @@ describe Commander do
     end
   end
   	
-  it "should initialize and call object when a class is passed to #when_called" do
-   $_when_called_value = nil
-   class HandleWhenCalled1
-     def initialize(args, options) $_when_called_value = args.join('-') end 
-   end
-   get_command(:test).when_called HandleWhenCalled1
-   get_command(:test).run "hello", "world"
-   $_when_called_value.should eql("hello-world")
-  end
-   
-  it "should initialize and call object when a class is passed to #when_called with an arbitrary method" do
-   class HandleWhenCalled2
-     def arbitrary_method(args, options) args.join('-') end 
-   end
-   get_command(:test).when_called HandleWhenCalled2, :arbitrary_method
-   get_command(:test).run("hello", "world").should eql("hello-world")
-  end
-  
-  it "should call object when passed to #when_called " do
-    class HandleWhenCalled3
-      def arbitrary_method(args, options) args.join('-') end 
-    end
-    get_command(:test).when_called HandleWhenCalled3.new, :arbitrary_method
-    get_command(:test).run("hello", "world").should eql("hello-world")
-  end
-  
   it "should populate options when passed before command name" do
     options = nil
     new_command_runner '--foo', 'test', 'some', 'args'

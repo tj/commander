@@ -37,9 +37,39 @@ describe Commander::Command do
   end
   
   describe "#run" do
-    it "should call #when_called with parsed arguments" do
-      @command.when_called { |args, options| args.join(' ').should == 'just some args' }  
-      @command.run '--trace', 'just', 'some', 'args'
+    describe "should invoke #when_called" do
+      it "with arguments parsed" do
+        @command.when_called { |args, options| args.join(' ').should == 'just some args' }  
+        @command.run '--trace', 'just', 'some', 'args'
+      end
+      
+      it "initializing an object when a class is passed" do
+       klass = Class.new
+       klass.should_receive(:initialize).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
+       @command.when_called klass
+       @command.run 'foo'
+      end
+
+      it "initializing an object when a class is passed, calling an arbitrary method" do
+        klass = Class.new
+        klass.should_receive(:foo).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
+        @command.when_called klass, :foo
+        @command.run 'foo'
+      end
+      
+      it "calling the #call method by default when an object is called" do
+        object = mock 'Object'
+        object.should_receive(:call).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
+        @command.when_called object
+        @command.run 'foo'        
+      end
+            
+      it "calling an arbitrary method when an object is called" do
+        object = mock 'Object'
+        object.should_receive(:foo).with(an_instance_of(Array), an_instance_of(OpenStruct)).once
+        @command.when_called object, :foo
+        @command.run 'foo'        
+      end
     end
     
     describe "should populate options with" do
