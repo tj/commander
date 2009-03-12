@@ -13,7 +13,8 @@ class Array
   #
   
   def self.parse string
-    string.scan(/(?:\w|\d|\\ )+/).map{ |value| value.sub('\\', '')  }
+    #string.scan(/(?:[\w\d]|\\ )+/).map{ |value| value.sub('\\', '')  }
+    eval "%w(#{string})"
   end
   
   ##
