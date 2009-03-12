@@ -2,11 +2,8 @@
 describe Commander::Command do
   
   before :each do
-    @input = StringIO.new
-    @output = StringIO.new
-    $terminal = HighLine.new @input, @output
-	  create_test_command
-    @command = get_command :test  
+    create_faux_terminal
+    @command = create_test_command
   end
   
   describe "#option" do

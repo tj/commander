@@ -2,6 +2,12 @@
 require 'commander'
 require 'stringio'
 
+def create_faux_terminal
+  @input = StringIO.new
+  @output = StringIO.new
+  $terminal = HighLine.new @input, @output
+end
+
 def create_test_command
   command :test do |c|
     c.syntax = "test [options] <file>"

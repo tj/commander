@@ -2,9 +2,7 @@
 describe Commander::HelpFormatter do
   
   before :each do
-    @input = StringIO.new
-    @output = StringIO.new
-    $terminal = HighLine.new @input, @output
+    create_faux_terminal
   end
   
   def run *args
