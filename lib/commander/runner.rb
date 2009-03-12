@@ -56,25 +56,25 @@ module Commander
     #
     # === Examples:
     #    
-    #    # Set data
-    #    program :name, 'Commander'
-    #    program :version, Commander::VERSION
-    #    program :description, 'Commander utility program.'
-    #    program :help, 'Copyright', '2008 TJ Holowaychuk'
-    #    program :help, 'Anything', 'You want'
-    #    program :int_message 'Bye bye!'
-    #    
-    #    # Get data
-    #    program :name # => 'Commander'
+    #   # Set data
+    #   program :name, 'Commander'
+    #   program :version, Commander::VERSION
+    #   program :description, 'Commander utility program.'
+    #   program :help, 'Copyright', '2008 TJ Holowaychuk'
+    #   program :help, 'Anything', 'You want'
+    #   program :int_message 'Bye bye!'
+    #   
+    #   # Get data
+    #   program :name # => 'Commander'
     #
     # === Keys:
     #
-    #    :name            (required) Program name
-    #    :version         (required) Program version triple, ex: '0.0.1'
-    #    :description     (required) Program description
-    #    :help_formatter  Defaults to Commander::HelpFormatter::Terminal
-    #    :help            Allows addition of arbitrary global help blocks
-    #    :int_message     Message to display when interrupted (CTRL + C)
+    #   :name            (required) Program name
+    #   :version         (required) Program version triple, ex: '0.0.1'
+    #   :description     (required) Program description
+    #   :help_formatter  Defaults to Commander::HelpFormatter::Terminal
+    #   :help            Allows addition of arbitrary global help blocks
+    #   :int_message     Message to display when interrupted (CTRL + C)
     #
     
     def program key, *args
@@ -92,11 +92,11 @@ module Commander
     #
     # === Examples:
     #    
-    #    command :my_command do |c|
-    #      c.when_called do |args|
-    #        # Code
-    #      end
-    #    end
+    #   command :my_command do |c|
+    #     c.when_called do |args|
+    #       # Code
+    #     end
+    #   end
     #
     
     def command name, &block
@@ -126,7 +126,6 @@ module Commander
     
     ##
     # Get active command within arguments passed to this runner.
-    #
     
     def active_command
       @_active_command ||= get_command(command_name_from_args)
@@ -193,9 +192,6 @@ module Commander
     # These options are used by commander itself 
     # as well as allowing your program to specify 
     # global commands such as '--verbose'.
-    #
-    # TODO: allow 'option' method for global program
-    #
     
     def parse_global_options
       opts = OptionParser.new
