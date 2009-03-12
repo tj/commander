@@ -151,7 +151,7 @@ module Commander
     end
     
     ##
-    # Call the commands when_called block with _args_.
+    # Call the commands when_called block with +args+.
     
     def call args = []
       object = @when_called.shift
@@ -160,7 +160,7 @@ module Commander
       case object
       when Proc  ; object.call(args, options)
       when Class ; meth != :call ? object.new.send(meth, args, options) : object.new(args, options)
-      else         object.send(meth, args, options)
+      else         object.send(meth, args, options) if object
       end 
     end
     

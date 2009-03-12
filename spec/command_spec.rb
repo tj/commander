@@ -46,7 +46,7 @@ describe Commander::Command do
   
   describe "#run" do
     describe "should invoke #when_called" do
-      it "with arguments parsed" do
+      it "with arguments seperated from options" do
         @command.when_called { |args, options| args.join(' ').should == 'just some args' }  
         @command.run '--trace', 'just', 'some', 'args'
       end
