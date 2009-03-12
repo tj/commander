@@ -10,15 +10,15 @@ program :description, 'Commander utility program.'
 command :init do |c|
 	c.syntax = 'commander init <file>'
 	c.summary = 'Initialize a commander template'
-	c.description = 'Initialize an empty file with a commander template, allowing extremely quick creation of commader executables.'
-	c.example 'Create a new file with a commander template.', 'commander init ./bin/my_executable'
+	c.description = 'Initialize an empty <file> with a commander template, allowing extremely quick creation of commader executables.'
+	c.example 'Create a new file with a commander template.', 'commander init bin/my_executable'
 	c.when_called do |args, options|
-	  abort "Provide a filepath." if args.empty?
+	  file = args.shift || abort('file argument required.')
 		name = ask 'Machine name of program: '
 		description = ask 'Describe your program: '
-		commands = ask 'List the sub-commands you wish to create: ', Array
+		commands = ask_for_array 'List the sub-commands you wish to create: '
 		begin
-      File.open(args.first, 'w') do |f|
+      File.open(file, 'w') do |f|
         f.write <<-CODE
 #!/usr/bin/env ruby
 
@@ -47,7 +47,7 @@ end
 CODE
         end
        end
-       say "Initialized template in #{args.first}"
+       say "Initialized template in #{file}"
 		 rescue Exception => e
        abort e
 		 end
