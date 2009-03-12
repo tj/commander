@@ -177,12 +177,14 @@ module Commander
     def switch_to_sym switch
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
     end
+    
+    ##
+    # Return switches and description seperated from the +args+ passed.
 
-    def seperate_switches_from_description *args #:nodoc:
-      # TODO: refactor this goodness
-      switches = args.find_all { |a| a.index('-') == 0 if a.is_a? String } 
-      description = args.last unless !args.last.is_a? String or args.last.index('-') == 0
-      [switches, description]
+    def seperate_switches_from_description *args
+      switches = args.find_all { |arg| arg =~ /^-/ } 
+      description = args.last unless !args.last.is_a? String or args.last.match(/^-/)
+      return switches, description
     end
         
     private 
