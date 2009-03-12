@@ -32,7 +32,6 @@ require 'commander/core_ext'
 require 'commander/runner'
 require 'commander/command'
 require 'commander/help_formatters'
-require 'commander/import'
 
 $command_runner = Commander::Runner.new
 

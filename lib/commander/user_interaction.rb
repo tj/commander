@@ -218,7 +218,8 @@ module Commander
       #
       # === See:
       #
-      # * Kernel#progress
+      # * Object#progress
+      #
 
       def self.progress arr, options = {}, &block
         bar = ProgressBar.new arr.length, options
