@@ -91,8 +91,7 @@ module Commander
     end
     
     ##
-    # Generate a command object instance using a block
-    # evaluated with the command as its scope.
+    # Creates and yields a command instance.
     #
     # === Examples:
     #    
