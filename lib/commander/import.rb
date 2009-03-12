@@ -11,6 +11,9 @@ require "forwardable"
 # * Commander::Runner#program
 # * Commander::UI::ProgressBar#progress
 #
+# Implements method_missing to provide #ask_for_CLASS, which works 
+# much like Highline's #ask method, but reads better.
+#
 
 module Kernel
   extend Forwardable
