@@ -34,7 +34,7 @@ command :init do |c|
         commands.each do |command|
           f.write <<-"...".gsub!(/^ {12}/, '')
             command :#{command} do |c|
-              c.syntax = ''
+              c.syntax = '#{name} #{command} [options]'
               c.summary = ''
               c.description = ''
               c.example 'description', 'command example'
