@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'commander'
+require File.dirname(__FILE__) + '/../lib/commander'
 
 program :name, 'commander'
 program :version, Commander::VERSION

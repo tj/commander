@@ -41,7 +41,7 @@ module Commander
     #
     
     def example description, command 
-      @examples.push description, command
+      @examples << [description, command]
     end
     
     ##
@@ -207,7 +207,7 @@ module Commander
     
     def option_proc switches
       Proc.new do |value|
-        @proxy_options.push [switch_to_sym(switches.last), value]
+        @proxy_options << [switch_to_sym(switches.last), value]
       end 
     end
     
