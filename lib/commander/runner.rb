@@ -121,6 +121,14 @@ module Commander
     end
     
     ##
+    # Default command +name+ to be used when no other
+    # command is found in the arguments.
+    
+    def default_command name
+      @default_command = name
+    end
+    
+    ##
     # Add a command object to this runner.
     
     def add_command command
@@ -145,7 +153,7 @@ module Commander
     # Get active command within arguments passed to this runner.
     
     def active_command
-      @__active_command ||= command(command_name_from_args)
+      @__active_command ||= command(command_name_from_args || @default_command)
     end
     
     ##

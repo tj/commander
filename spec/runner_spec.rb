@@ -143,6 +143,29 @@ describe Commander do
     end
   end
   
+  describe "#default_command" do
+    it "should allow you to default any command when one is not explicitly passed" do
+      new_command_runner '--trace'
+      default_command :test
+      command_runner.active_command.should == command(:test)
+    end
+    
+    it "should not prevent other commands from being used" do
+      new_command_runner 'foo', 'bar', '--trace'
+      default_command :test
+      command(:'foo bar'){ |c| c.when_called { |_, options| options.trace.should be_true } }
+      command_runner.active_command.should == command(:'foo bar')
+    end
+    
+    it "should not prevent longer commands to use the same words as the default" do
+      new_command_runner 'foo', 'bar', 'something'
+      command(:'foo bar'){}
+      command(:'foo bar something'){}
+      default_command :'foo bar'
+      command_runner.active_command.should == command(:'foo bar something')
+    end
+  end
+  
   describe "should function correctly" do
     it "when options are passed before the command name" do
       new_command_runner '--trace', 'test', 'foo', 'bar' do
