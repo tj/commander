@@ -21,4 +21,4 @@ def project_url username, project
   "http://github.com/#{username}/#{project}"
 end
 
-PROJECT_URL = project_url('visionmedia', 'commnder')
+PROJECT_URL = project_url('visionmedia', 'commander')
