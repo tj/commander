@@ -57,6 +57,14 @@ describe Commander do
     end
   end
   
+  describe "#valid_command_names_from" do
+    it "should return array of valid command names" do
+      command('foo bar') {}
+   	  command('foo bar foo') {}
+   	  command_runner.valid_command_names_from('foo', 'bar', 'foo').should == ['foo bar', 'foo bar foo']
+    end
+  end
+  
   describe "#command_name_from_args" do
     it "should locate command within arbitrary arguments passed" do
    	  new_command_runner '--help', '--arbitrary', 'test'
