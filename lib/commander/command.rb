@@ -126,7 +126,7 @@ module Commander
     #
     
     def when_called *args, &block
-      @when_called = args.empty? ? [block] : args
+      @when_called = block ? [block] : args
     end
     
     ##
