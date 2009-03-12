@@ -172,7 +172,7 @@ module Commander
     #   -h                 # => :h
     #   --trace            # => :trace
     #   --some-switch      # => :some_switch
-    #   --[with]-feature   # => :feature
+    #   --[no-]feature     # => :feature
     #   --file FILE        # => :file
     #   --list of,things   # => :list
     
