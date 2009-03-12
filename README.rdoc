@@ -130,19 +130,6 @@ simplify common tasks using the following methods:
   # 'Log' action to stdout
   log "create", "path/to/file.rb"
 
-== FileUtils
-
-The VerboseFileUtils module is automatically included within the main object for
-global usage. These will output 'log' messages such as:
-
-  remove  doc
-  create  path
-  create  path/to/file.rb
-    move  path/to/something path/to/destination
-  
-If you do not wish to use FileUtils in a verbose manor simply call FileUtil's
-methods directly.
-
 == ASCII Tables
 
 For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at
