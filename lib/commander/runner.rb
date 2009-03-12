@@ -26,8 +26,8 @@ module Commander
     # supplying +args+ for mocking, or arbitrary usage.
     
     def initialize args = ARGV
-      @args = args
-      @commands, @options, @program = {}, {}, { 
+      @args, @commands, @options = args, {}, {}
+      @program = { 
         :help_formatter => Commander::HelpFormatter::Terminal,
         :int_message => "\nProcess interrupted",
       }
@@ -47,7 +47,8 @@ module Commander
       end
     rescue InvalidCommandError
       $terminal.say 'invalid command. Use --help for more information'
-    rescue OptionParser::InvalidOption, 
+    rescue \
+      OptionParser::InvalidOption, 
       OptionParser::InvalidArgument,
       OptionParser::MissingArgument => e
       $terminal.say e
