@@ -164,7 +164,7 @@ module Commander
     end
     
     ##
-    # Attempts to generate a method name symbol from _switch_.
+    # Attempts to generate a method name symbol from +switch+.
     # For example:
     # 
     #   -h                 # => :h
@@ -187,11 +187,15 @@ module Commander
       return switches, description
     end
         
-    private 
+    private
     
-    def proxy_option_struct #:nodoc:
-      @proxy_options.inject Options.new do |options, option| 
-        options.send :"#{option[:method]}=", option[:value]
+    ##
+    # Creates an Options instance populated with the option values
+    # collected by the #option_proc.
+    
+    def proxy_option_struct 
+      @proxy_options.inject Options.new do |options, option, value| 
+        options.send :"#{option}=", value
         options
       end
     end
@@ -202,11 +206,8 @@ module Commander
     # and work with option values.
     
     def option_proc switches
-      Proc.new do |args|
-        @proxy_options << {
-          :method => switch_to_sym(switches.last),
-          :value => args,
-        }
+      Proc.new do |value|
+        @proxy_options.push switch_to_sym(switches.last), value
       end 
     end
     
