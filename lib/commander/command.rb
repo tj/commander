@@ -181,10 +181,6 @@ module Commander
       switch.gsub(/\[.*\]/, '').scan(/-([a-z]+)/).join('_').to_sym rescue nil
     end
     
-    def inspect #:nodoc:
-      "#<Commander::Command:#{@name}>"
-    end
-    
     private 
     
     def proxy_option_struct #:nodoc:
