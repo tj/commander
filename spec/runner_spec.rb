@@ -112,36 +112,21 @@ describe Commander do
         end
       end.run!
     end
-
-    it "with multi-word strings as command names" do
-      # TODO: refactor
-      arguments = nil
-      options = nil
-      new_command_runner 'foo', 'bar', 'something', 'i', 'like', '--i-like', 'cookies'
-      command 'foo bar something' do |c|
-        c.option '--i-like WHAT'
-        c.when_called { |args, opts| arguments, options = args, opts } 
-      end
-      command_runner.command_name_from_args.should == 'foo bar something'
-      command_runner.args_without_command.should == ['i', 'like', '--i-like', 'cookies']
-      command_runner.run!
-      arguments.should == ['i', 'like']
-      options.i_like.should == 'cookies'
+    
+    it "when using multi-word commands" do
+      new_command_runner '--trace', 'my', 'command', 'something', 'foo', 'bar' do
+        command('my command') {}
+        command_runner.command_name_from_args.should == 'my command'
+        command_runner.args_without_command.should == ['--trace', 'something', 'foo', 'bar']
+      end.run!
     end
 
-    it "with multi-word strings as command names, and options before command name" do
-      arguments = nil
-      options = nil
-      new_command_runner '--something', 'foo', 'bar', 'random_arg'
-      command 'foo bar' do |c|
-        c.option '--something'
-        c.when_called { |args, opts| arguments, options = args, opts } 
-      end
-      command_runner.command_name_from_args.should == 'foo bar'
-      command_runner.args_without_command.should == ['--something', 'random_arg']
-      command_runner.run!
-      arguments.should == ['random_arg']
-      options.something.should be_true
+    it "when using multi-word commands with parts of the command name as arguments" do
+      new_command_runner '--trace', 'my', 'command', 'something', 'my', 'command' do
+        command('my command') {}
+        command_runner.command_name_from_args.should == 'my command'
+        command_runner.args_without_command.should == ['--trace', 'something', 'my', 'command']
+      end.run!
     end
   end
   
