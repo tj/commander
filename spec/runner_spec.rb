@@ -64,7 +64,7 @@ describe Commander do
   describe "#command_name_from_args" do
     it "should locate command within arbitrary arguments passed" do
    	  new_command_runner '--help', '--arbitrary', 'test'
-   	  command_runner.command_name_from_args.should eql('test')
+   	  command_runner.command_name_from_args.should =='test'
     end
   end
   

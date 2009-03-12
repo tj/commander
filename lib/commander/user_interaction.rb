@@ -41,33 +41,34 @@ module Commander
     # Terminal progress bar utility. In its most basic form
     # requires that the developer specifies when the bar should
     # be incremented. Note that a hash of tokens may be passed to
-    # #increment, (or returned when using Kernel#progress).
+    # #increment, (or returned when using Object#progress).
     #
-    #    uris = %w( 
-    #      http://vision-media.ca
-    #      http://yahoo.com
-    #      http://google.com
-    #      )
+    #   uris = %w( 
+    #     http://vision-media.ca
+    #     http://yahoo.com
+    #     http://google.com
+    #     )
+    #   
+    #   bar = Commander::UI::ProgressBar.new uris.length, options
+    #   threads = []
+    #   uris.each do |uri|
+    #     threads << Thread.new do
+    #       begin
+    #         res = open uri
+    #         bar.increment :uri => uri
+    #       rescue Exception => e
+    #         bar.increment :uri => "#{uri} failed"
+    #       end
+    #     end
+    #   end
+    #   threads.each { |t| t.join }
     #
-    #    bar = Commander::UI::ProgressBar.new uris.length, options
-    #    threads = []
-    #    uris.each do |uri|
-    #      threads << Thread.new do
-    #        begin
-    #          res = open uri
-    #          bar.increment :uri => uri
-    #        rescue Exception => e
-    #          bar.increment :uri => "#{uri} failed"
-    #        end
-    #      end
-    #    end
-    #    threads.each { |t| t.join }
+    # The Object method #progress is also available:
     #
-    # The Kernel method #progress is also available:
-    #
-    #    progress uris, :width => 10 do |uri|
-    #      res = open uri
-    #    end
+    #   progress uris, :width => 10 do |uri|
+    #     res = open uri
+    #     { :uri => uri } # Can now use :uri within :format option
+    #   end
     #
 
     class ProgressBar

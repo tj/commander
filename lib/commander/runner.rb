@@ -153,6 +153,10 @@ module Commander
     # Return arguments without the command name.
     
     def args_without_command
+      p @args.dup
+      p command_name_from_args.split  
+      p @args.dup - command_name_from_args.split
+      puts
       @args.dup - command_name_from_args.split
     end
             
