@@ -33,15 +33,6 @@ require 'commander/command'
 require 'commander/help_formatters'
 
 $command_runner = Commander::Runner.new
-
-# Highline terminal settings
 $terminal.wrap_at = HighLine::SystemExtensions.terminal_size.first - 10 rescue 80
-
-# Display friendly interruption message
-trap 'INT' do 
-  say program(:int_message)
-  exit
-end
-
-# Auto-execute command runner
+trap 'INT' { abort program(:int_message) }
 at_exit { $command_runner.run! } 

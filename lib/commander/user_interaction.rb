@@ -13,12 +13,12 @@ module Commander
     
     ##
     # Ask the user for a password. Specify a custom
-    # _msg_ other than 'Password: ' or override the 
+    # +message+ other than 'Password: ' or override the 
     # default +mask+ of '*'.
     
-    def password msg = 'Password: ', mask = '*'
-      pass = ask(msg) { |q| q.echo = mask }
-      pass = password msg, mask if pass.empty?
+    def password message = 'Password: ', mask = '*'
+      pass = ask(message) { |q| q.echo = mask }
+      pass = password message, mask if pass.empty?
       pass
     end
     
