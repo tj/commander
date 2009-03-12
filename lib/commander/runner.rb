@@ -183,11 +183,10 @@ module Commander
         c.example 'Display global help', 'command help'
         c.example "Display help for 'foo'", 'command help foo'
         c.when_called do |args, options|
-          gen = help_formatter
           if args.empty?
-            $terminal.say gen.render 
+            $terminal.say help_formatter.render 
           else
-            $terminal.say gen.render_command(get_command(args.join(' ')))
+            $terminal.say help_formatter.render_command(get_command(args.join(' ')))
           end
         end
       end
