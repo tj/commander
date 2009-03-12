@@ -17,13 +17,13 @@ module VerboseFileUtils
     end
   end
   
-  log "remove", :rm, :rm_r, :rm_rf, :rmdir
-  log "create", :touch, :mkdir, :mkdir_p
-  log "copy", :cp, :cp_r
-  log "move", :mv
-  log "change", :cd
-  log "link", :ln, :ln_s
-  log "install", :install
+  log 'remove',  :rm, :rm_r, :rm_rf, :rmdir
+  log 'create',  :touch, :mkdir, :mkdir_p
+  log 'copy',    :cp, :cp_r
+  log 'link',    :ln, :ln_s
+  log 'install', :install
+  log 'move',    :mv
+  log 'change',  :cd
 
 end
 
