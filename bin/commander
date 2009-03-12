@@ -27,7 +27,7 @@ command :init do |c|
           require '#{name}'
           
           program :name, '#{name}'
-          program :version, #{name.camelcase}::VERSION
+          program :version, #{name.capitalize}::VERSION
           program :description, '#{description}'
            
         ...
@@ -40,7 +40,7 @@ command :init do |c|
               c.example 'description', 'command example'
               c.option '--some-switch', 'Some switch that does something'
               c.when_called do |args, options|
-                # Do something or c.when_called #{name.camelcase}::Commands::#{command.camelcase}
+                # Do something or c.when_called #{name.capitalize}::Commands::#{command.capitalize}
               end
             end
 
