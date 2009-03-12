@@ -52,12 +52,12 @@ module Commander
     # passed to handle the option, otherwise the _options_ struct seen below 
     # contains the results of this option. This handles common formats such as:
     #
-    #    -h, --help          options.help           # => bool
-    #    --[no-]feature      options.feature        # => bool
-    #    --large-switch      options.large_switch   # => bool
-    #    --file FILE         options.file           # => file passed
-    #    --list WORDS        options.list           # => array
-    #    --date [DATE]       options.date           # => date or nil when optional argument not set
+    #   -h, --help          options.help           # => bool
+    #   --[no-]feature      options.feature        # => bool
+    #   --large-switch      options.large_switch   # => bool
+    #   --file FILE         options.file           # => file passed
+    #   --list WORDS        options.list           # => array
+    #   --date [DATE]       options.date           # => date or nil when optional argument not set
     #
     # === Examples:
     #    
@@ -83,8 +83,9 @@ module Commander
     #
     # === Input Parsing:
     #
-    # Since Commander utilizes OptionParser you can pre-parser and evaluate
-    # option arguments. Simply require 'optparse/time', or 'optparse/date', etc.
+    # Since Commander utilizes OptionParser you can pre-parse and evaluate
+    # option arguments. Simply require 'optparse/time', or 'optparse/date', as these
+    # objects must respond to #parse.
     #
     #   c.option '--time TIME', Time
     #   c.option '--date [DATE]', Date
@@ -107,19 +108,19 @@ module Commander
     #
     # === Examples:
     #    
-    #    # Simple block handling
-    #    c.when_called do |args, options|
-    #       # do something
-    #    end 
-    #    
-    #    # Create inst of Something and pass args / options
-    #    c.when_called MyLib::Command::Something
-    #    
-    #    # Create inst of Something and use arbitrary method
-    #     c.when_called MyLib::Command::Something, :some_method
-    #    
-    #    # Pass an object to handle callback (requires method symbol)
-    #    c.when_called SomeObject, :some_method
+    #   # Simple block handling
+    #   c.when_called do |args, options|
+    #      # do something
+    #   end 
+    #   
+    #   # Create inst of Something and pass args / options
+    #   c.when_called MyLib::Command::Something
+    #   
+    #   # Create inst of Something and use arbitrary method
+    #    c.when_called MyLib::Command::Something, :some_method
+    #   
+    #   # Pass an object to handle callback (requires method symbol)
+    #   c.when_called SomeObject, :some_method
     #
     
     def when_called *args, &block
