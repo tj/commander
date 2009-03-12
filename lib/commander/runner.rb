@@ -36,7 +36,7 @@ module Commander
     end
     
     ##
-    # Run the command parsing and execution process immediately.
+    # Run command parsing and execution process.
     
     def run!
       require_program :name, :version, :description
