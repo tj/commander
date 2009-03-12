@@ -20,19 +20,12 @@ module Commander
     end
         
     ##
-    # Initialize new command with specified _name_.
+    # Initialize new command with specified +name+.
     
     def initialize name
       @name, @examples, @when_called = name.to_s, [], {}
       @options, @proxy_options = [], []
     end
-    
-    #--
-    # Description aliases
-    #++
-    
-    alias :long_description= :description=
-    alias :short_description= :summary=
     
     ##
     # Add a usage example for this command.
