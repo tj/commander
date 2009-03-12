@@ -27,10 +27,7 @@ module Commander
     
     def initialize args = ARGV
       @args, @commands, @options = args, {}, {}
-      @program = { 
-        :help_formatter => Commander::HelpFormatter::Terminal,
-        :int_message => "\nProcess interrupted",
-      }
+      @program = program_defaults
       create_default_commands
       parse_global_options
     end
@@ -161,6 +158,13 @@ module Commander
     end
             
     private
+    
+    ##
+    # Returns hash of program defaults.
+    
+    def program_defaults
+      return :help_formatter => Commander::HelpFormatter::Terminal, :int_message => "\nProcess interrupted"
+    end
     
     ##
     # Creates default commands such as 'help' which is 
