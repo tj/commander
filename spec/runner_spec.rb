@@ -143,11 +143,13 @@ describe Commander do
       command_runner.active_command.should == command(:test)
     end
     
-    it "should not prevent other commands from being used" do
-      new_command_runner 'foo', 'bar', '--trace'
-      default_command :test
-      command(:'foo bar'){ |c| c.when_called { |_, options| options.trace.should be_true } }
-      command_runner.active_command.should == command(:'foo bar')
+    it "should not prevent other commands from being called" do
+      new_command_runner 'foo', 'bar', '--trace' do
+        default_command :test
+        command(:'foo bar'){ |c| c.when_called { |a,b| p a; p b; }} # TODO: remove meeee
+        command(:'foo bar').should_receive(:when_called).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
+        command_runner.active_command.should == command(:'foo bar')
+      end.run!
     end
     
     it "should not prevent longer commands to use the same words as the default" do
