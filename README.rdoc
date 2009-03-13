@@ -177,6 +177,28 @@ as if it was invoked via the command line:
   $ foo update
   # => installing rubygems to some_path
 
+=== Command Defaults
+
+Although working with a sub-command executable framework provides many 
+benefits over a single command implementation, sometimes you still
+want the ability to create a terse syntax for your command. With that
+in mind we may use #default_command to help with this. Considering
+our previous :'install gem' example:
+
+  default_command :update
+
+  $ foo
+  # => installing rubygems to some_path
+
+Keeping in mind that commander searches for the longest possible match
+when considering a sub-command, so if you were to pass arguments to foo
+like below, expecting them to be passed to :update, this would be incorrect,
+and would end up calling :'install gem', so be careful that the users do 
+not need to use command names within the arguments.
+
+  $ foo install gem
+  # => installing  to 
+
 === Additional Global Help
 
 Arbitrary help can be added using the following #program symbol:
