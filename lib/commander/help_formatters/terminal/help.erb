@@ -12,16 +12,14 @@
 	<% unless alias? name %>
     <%= "%-20s %s" % [command.name, command.summary || command.description] -%>
 	<% end -%>
-<% end -%>
+<% end %>
 <% unless @aliases.empty? %>
-
   <%= $terminal.color "ALIASES", :bold %>:
   <% @aliases.each do |alias_name, args| %>
     <%= "%-20s %s %s" % [alias_name, command(alias_name).name, args.join(' ')] -%>
   <% end -%>
-<% end -%>
+<% end %>
 <% if program :help -%>
-
   <% program(:help).each_pair do |title, body| %>
   <%= $terminal.color title.to_s.upcase, :bold %>:
 
