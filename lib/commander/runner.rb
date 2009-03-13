@@ -42,7 +42,7 @@ module Commander
       when options[:help]    ; command(:help).run(*@args[1..-1])
       else
         if alias? command_name_from_args
-          active_command.run *(@aliases[command_name_from_args] + args_without_command_name)
+          active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
         else
           active_command.run *args_without_command_name
         end              
@@ -153,7 +153,7 @@ module Commander
     # Get active command within arguments passed to this runner.
     
     def active_command
-      @__active_command ||= command(command_name_from_args || @default_command)
+      @__active_command ||= command(command_name_from_args)
     end
     
     ##
@@ -161,7 +161,7 @@ module Commander
     # Supports multi-word commands, using the largest possible match.
     
     def command_name_from_args
-      @__command_name_from_args ||= valid_command_names_from(*@args.dup).sort.last
+      @__command_name_from_args ||= (valid_command_names_from(*@args.dup).sort.last || @default_command)
     end
     
     ##

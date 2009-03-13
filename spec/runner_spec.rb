@@ -138,9 +138,9 @@ describe Commander do
   
   describe "#default_command" do
     it "should allow you to default any command when one is not explicitly passed" do
-      new_command_runner '--trace', 'test' do
+      new_command_runner '--trace' do
         default_command :test
-        command(:test).should_receive(:when_called).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
+        command(:test).should_receive(:run).once
         command_runner.active_command.should == command(:test)
       end.run!
     end
@@ -148,18 +148,26 @@ describe Commander do
     it "should not prevent other commands from being called" do
       new_command_runner 'foo', 'bar', '--trace' do
         default_command :test
-        command(:'foo bar'){ |c| c.when_called { |a,b| p a; p b; }} # TODO: remove meeee
-        command(:'foo bar').should_receive(:when_called).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
+        command(:'foo bar'){}
+        command(:'foo bar').should_receive(:run).once
         command_runner.active_command.should == command(:'foo bar')
       end.run!
     end
     
     it "should not prevent longer commands to use the same words as the default" do
       new_command_runner 'foo', 'bar', 'something'
+      default_command :'foo bar'
       command(:'foo bar'){}
       command(:'foo bar something'){}
-      default_command :'foo bar'
       command_runner.active_command.should == command(:'foo bar something')
+    end
+    
+    it "should allow defaulting of command aliases" do
+      new_command_runner '--trace' do
+        default_command :foobar
+        alias_command :foobar, :test
+        command(:test).should_receive(:run).once
+      end.run!
     end
   end
   

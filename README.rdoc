@@ -172,7 +172,7 @@ as if it was invoked via the command line:
     c.option '--dest DIR', String, 'Destination directory'
     c.when_called { |args, options| puts "installing #{args.first} to #{options.dest}" }
   end
-  alias_command :'update', :'install gem', 'rubygems', '--dest', 'some_path'
+  alias_command :update, :'install gem', 'rubygems', '--dest', 'some_path'
 
   $ foo update
   # => installing rubygems to some_path
