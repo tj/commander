@@ -1,4 +1,9 @@
 
+=== 3.0.2 / 2009-03-12
+
+* Added terminal formatter specs
+* Fixed bug preventing command names passed to help from working
+
 === 3.0.1 / 2009-03-12
 
 * Fixed bug in #command_name_from_args preventing the left-most match for a command name to be used

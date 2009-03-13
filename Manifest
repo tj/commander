@@ -22,7 +22,8 @@ spec/command_spec.rb
 spec/core_ext/array_spec.rb
 spec/core_ext/object_spec.rb
 spec/core_ext/string_spec.rb
-spec/help_formatter_spec.rb
+spec/help_formatters/base_spec.rb
+spec/help_formatters/terminal_spec.rb
 spec/runner_spec.rb
 spec/spec_helper.rb
 tasks/docs.rake
