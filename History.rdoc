@@ -1,4 +1,9 @@
 
+=== 3.0.1 / 2009-03-12
+
+* Fixed bug in #command_name_from_args preventing the left-most match for a command name to be used
+* Fixed bug in Command#example preventing the formatter from outputting them correctly
+
 === 3.0.0 / 2009-03-12
 
 * Added sub command help support when using the --help switch
