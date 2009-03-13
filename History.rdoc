@@ -1,4 +1,8 @@
 
+=== 3.0.3 / 2009-03-12
+
+* Added #alias_command
+
 === 3.0.2 / 2009-03-12
 
 * Added terminal formatter specs
