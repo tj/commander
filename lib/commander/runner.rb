@@ -26,7 +26,7 @@ module Commander
     # supplying +args+ for mocking, or arbitrary usage.
     
     def initialize args = ARGV
-      @args, @commands, @options = args, {}, {}
+      @args, @commands, @options, @aliases = args, {}, {}, {}
       @program = program_defaults
       create_default_commands
       parse_global_options
@@ -40,7 +40,12 @@ module Commander
       case 
       when options[:version] ; $terminal.say "#{program(:name)} #{program(:version)}" 
       when options[:help]    ; command(:help).run(*@args[1..-1])
-      else                     active_command.run *args_without_command_name
+      else
+        if alias? command_name_from_args
+          active_command.run *(@aliases[command_name_from_args] + args_without_command_name)
+        else
+          active_command.run *args_without_command_name
+        end              
       end
     rescue InvalidCommandError
       $terminal.say 'invalid command. Use --help for more information'
@@ -107,10 +112,12 @@ module Commander
     end
     
     ##
-    # Alias command +name+ with +alias_name+.
+    # Alias command +name+ with +alias_name+. Optionallry +args+ may be passed
+    # as if they were being passed straight to the original command via the command-line.
     
-    def alias_command alias_name, name
+    def alias_command alias_name, name, *args
       @commands[alias_name.to_s] = command name
+      @aliases[alias_name.to_s] = args
     end
     
     ##
@@ -118,6 +125,13 @@ module Commander
     
     def add_command command
       @commands[command.name] = command
+    end
+    
+    ##
+    # Check if command +name+ is an alias.
+    
+    def alias? name
+      @aliases.include? name.to_s
     end
     
     ##

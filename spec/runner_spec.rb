@@ -35,9 +35,20 @@ describe Commander do
   end
   
   describe "#alias_command" do
-    it "should allow aliasing of any command" do
+    it "should alias a command" do
       alias_command :foo, :test
       command(:foo).should == command(:test)
+    end
+    
+    it "should pass arguments passed to the alias when called" do
+      new_command_runner 'install', 'gem', 'commander' do
+        command :install do |c|
+          c.option '--gem-name NAME', 'Install a gem'
+          c.when_called { |_, options| options.gem_name.should == 'commander' }
+        end 
+        alias_command :'install gem', :install, '--gem-name'
+        command(:install).should_receive(:run).once
+      end.run!
     end
   end
   
