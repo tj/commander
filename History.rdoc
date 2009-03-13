@@ -1,4 +1,8 @@
 
+=== 3.1.1 / 2009-03-13
+
+* Fixed some terminal formatter spacing issues
+
 === 3.1.0 / 2009-03-13
 
 * Added Command#inspect
