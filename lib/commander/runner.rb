@@ -132,19 +132,10 @@ module Commander
     
     ##
     # Attemps to locate a command name from within the arguments.
-    # Supports multi-word commands, using the largest left-most possible match.
+    # Supports multi-word commands, using the largest possible match.
     
     def command_name_from_args
-      @__command_name_from_args ||= begin
-          names = valid_command_names_from *@args.dup
-          if names.length > 1
-            names.first.length == names.last.length ? 
-              names.first :
-              names.last
-          else
-            names.first
-          end
-        end
+      @__command_name_from_args ||= valid_command_names_from(*@args.dup).sort.last
     end
     
     ##
@@ -152,7 +143,7 @@ module Commander
     
     def valid_command_names_from *args
       arg_string = args.delete_switches.join ' '
-      commands.keys.map { |key| key if arg_string.include? key }.compact
+      commands.keys.find_all { |name| name if /^#{name}/.match arg_string }
     end
     
     ##

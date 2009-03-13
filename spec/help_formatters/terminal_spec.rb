@@ -52,8 +52,8 @@ describe Commander::HelpFormatter::Terminal do
       
       it "all examples" do
         @command_help.should include('# one')
-        @command_help.should include('# two')
-        @command_help.should include('three')
+        @command_help.should include('two')
+        @command_help.should include('# three')
         @command_help.should include('four')
       end
       
