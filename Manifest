@@ -29,6 +29,7 @@ spec/spec_helper.rb
 tasks/docs.rake
 tasks/gemspec.rake
 tasks/spec.rake
+test/foo
 test/pbar
 test/ui
 Todo.rdoc

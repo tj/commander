@@ -1,4 +1,11 @@
 
+=== 3.1.0 / 2009-03-13
+
+* Added Command#inspect
+* Added displaying of aliases in global help
+* Added support for alias args
+* Added #default_command
+
 === 3.0.3 / 2009-03-12
 
 * Added #alias_command
