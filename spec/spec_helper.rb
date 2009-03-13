@@ -35,6 +35,6 @@ def new_command_runner *args, &block
   program :version, '1.2.3'
   program :description, 'something'
   create_test_command
-  yield if block_given?
+  yield if block
   command_runner
 end
