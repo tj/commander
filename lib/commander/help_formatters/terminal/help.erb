@@ -8,8 +8,10 @@
     <%= program :description %>
 
   <%= $terminal.color "SUB-COMMANDS", :bold %>:
-<% @commands.each_pair do |name, command| %>
-    <%= "%-20s %s" % [name, command.summary || command.description] -%>
+<% @commands.each_pair do |name, command| -%>
+<% unless alias? name %>
+    <%= "%-20s %s" % [command.name, command.summary || command.description] -%>
+<% end -%>
 <% end %>
 <% if program :help -%>
   <% program(:help).each_pair do |title, body| %>
