@@ -101,6 +101,11 @@ describe Commander do
    	  command('foo bar foo') {}
    	  command_runner.command_name_from_args.should == 'foo bar foo'      
     end
+    
+    it "should use the left-most command name when multiple are present" do
+   	  new_command_runner 'help', 'test'
+   	  command_runner.command_name_from_args.should == 'help'      
+    end
   end
   
   describe "#active_command" do
