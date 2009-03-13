@@ -16,7 +16,7 @@ class Object
   extend Forwardable
   include Commander::UI
   
-  def_delegators :$command_runner, :add_command, :command, :program, :run!, :commands
+  def_delegators :$command_runner, :add_command, :command, :program, :run!, :commands, :alias_command
   def_delegators Commander::UI::ProgressBar, :progress
 
   ##

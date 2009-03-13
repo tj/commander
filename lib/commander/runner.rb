@@ -110,6 +110,13 @@ module Commander
     end
     
     ##
+    # Alias command +name+ with +alias_name+.
+    
+    def alias_command alias_name, name
+      @commands[alias_name.to_s] = command name
+    end
+    
+    ##
     # Add a command object to this runner.
     
     def add_command command

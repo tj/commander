@@ -34,6 +34,13 @@ describe Commander do
     end
   end
   
+  describe "#alias_command" do
+    it "should allow aliasing of any command" do
+      alias_command :foo, :test
+      command(:foo).should == command(:test)
+    end
+  end
+  
   describe "--version" do
     it "should output program version" do
       new_command_runner '--version' do
