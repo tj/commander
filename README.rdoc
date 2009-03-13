@@ -164,6 +164,19 @@ Aliases can be created using the #alias_command method like below:
   end
   alias_command :'gem install', :'install gem'
 
+Or more complicated aliases can be made, passing any arguments
+as if it was invoked via the command line:
+
+  command :'install gem' do |c|
+    c.syntax = 'install gem <name> [options]'
+    c.option '--dest DIR', String, 'Destination directory'
+    c.when_called { |args, options| puts "installing #{args.first} to #{options.dest}" }
+  end
+  alias_command :'update', :'install gem', 'rubygems', '--dest', 'some_path'
+
+  $ foo update
+  # => installing rubygems to some_path
+
 === Additional Global Help
 
 Arbitrary help can be added using the following #program symbol:
