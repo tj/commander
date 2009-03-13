@@ -138,7 +138,7 @@ simplify common tasks using the following methods:
   # 'Log' action to stdout
   log "create", "path/to/file.rb"
 
-== Extras
+== Commander Goodies
 
 === Option Defaults
 
