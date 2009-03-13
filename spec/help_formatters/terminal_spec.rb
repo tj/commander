@@ -29,7 +29,7 @@ describe Commander::HelpFormatter::Terminal do
   
   describe "sub-command help" do
     before :each do
-      new_command_runner 'help install gem' do
+      new_command_runner 'help', 'install', 'gem' do
         command :'install gem' do |c|
           c.syntax = 'foo install gem [options]'
           c.summary = 'Install some gem'
@@ -38,27 +38,27 @@ describe Commander::HelpFormatter::Terminal do
           c.example 'three', 'four'
         end
       end.run!
-      @global_help = @output.string
+      @command_help = @output.string
     end
     
     describe "should display" do
       it "the sub-command name" do
-        @global_help.should include('install gem')
+        @command_help.should include('install gem')
       end
       
       it "the description" do
-        @global_help.should include('Install some gem, blah blah blah')
+        @command_help.should include('Install some gem, blah blah blah')
       end
       
       it "all examples" do
-        @global_help.should include('# one')
-        @global_help.should include('# two')
-        @global_help.should include('three')
-        @global_help.should include('four')
+        @command_help.should include('# one')
+        @command_help.should include('# two')
+        @command_help.should include('three')
+        @command_help.should include('four')
       end
       
       it "the syntax" do
-        @global_help.should include('foo install gem [options]')
+        @command_help.should include('foo install gem [options]')
       end
     end
   end

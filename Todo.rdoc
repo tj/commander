@@ -1,7 +1,6 @@
 
 == Major
 
-* make sure help works with multi-word
 * Rough out some formatter specs using include?
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
