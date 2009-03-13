@@ -184,7 +184,7 @@ module Commander
     
     def args_without_command_name
       removed = []
-      parts = command_name_from_args.split
+      parts = command_name_from_args.split rescue []
       @args.dup.delete_if do |arg|
         removed << arg if parts.include?(arg) and not removed.include?(arg)
       end

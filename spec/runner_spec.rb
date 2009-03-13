@@ -138,9 +138,11 @@ describe Commander do
   
   describe "#default_command" do
     it "should allow you to default any command when one is not explicitly passed" do
-      new_command_runner '--trace'
-      default_command :test
-      command_runner.active_command.should == command(:test)
+      new_command_runner '--trace', 'test' do
+        default_command :test
+        command(:test).should_receive(:when_called).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
+        command_runner.active_command.should == command(:test)
+      end.run!
     end
     
     it "should not prevent other commands from being called" do
