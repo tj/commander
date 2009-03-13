@@ -102,11 +102,8 @@ module Commander
     #
     
     def command name, &block
-      if block
-        yield add_command(Commander::Command.new(name))
-      else
-        @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
-      end
+      yield add_command(Commander::Command.new(name)) if block
+      @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
     end
     
     ##
