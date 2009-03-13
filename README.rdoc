@@ -164,6 +164,18 @@ Aliases can be created using the #alias_command method like below:
   end
   alias_command :'gem install', :'install gem'
 
+=== Additional Global Help
+
+Arbitrary help can be added using the following #program symbol:
+
+  program :help, 'Author', 'TJ Holowaychuk <tj@vision-media.ca>'
+
+Which will output the rest of the help doc, along with:
+
+  AUTHOR:
+
+    TJ Holowaychuk <tj@vision-media.ca>
+
 == ASCII Tables
 
 For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at

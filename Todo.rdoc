@@ -6,6 +6,7 @@
 
 == Minor
 
+* Add arbitrary help blocks to sub-commands as well
 * Add optional default command when none is present
 * Fix multi-word command template creation via `commander init`
 * Consider global #color method again
