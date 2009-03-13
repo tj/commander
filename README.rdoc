@@ -138,6 +138,32 @@ simplify common tasks using the following methods:
   # 'Log' action to stdout
   log "create", "path/to/file.rb"
 
+== Extras
+
+=== Option Defaults
+
+The options struct passed to #when_called provides a #default method, allowing you
+to set defaults in a clean manor to options which have not been set.
+
+  command :foo do |c|
+    c.option '--interval SECONDS', Integer, 'Interval in seconds'
+    c.option '--timeout SECONDS', Integer, 'Timeout in seconds'
+    c.when_called do |args, options|
+      options.default \
+        :interval => 2,
+        :timeout  => 60
+    end
+  end
+
+=== Command Aliasing
+
+Aliases can be created using the #alias_command method like below:
+
+  command :'install gem' do |c|
+    c.when_called { puts 'foo' }
+  end
+  alias_command :'gem install', :'install gem'
+
 == ASCII Tables
 
 For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at
