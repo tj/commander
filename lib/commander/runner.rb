@@ -226,9 +226,9 @@ module Commander
     # global commands such as '--verbose'.
     
     def parse_global_options
-      opts = OptionParser.new
-      options.each  { |args, proc| opts.on *args, &proc } 
-      opts.parse! @args.dup
+      options.inject OptionParser.new do |options, (args, proc)|
+        options.on *args, &proc
+      end.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 
       # parsed by our sub commands.
