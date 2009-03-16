@@ -211,6 +211,16 @@ Which will output the rest of the help doc, along with:
 
     TJ Holowaychuk <tj@vision-media.ca>
 
+=== Global Options
+
+Although most switches will be at the sub-command level, several are available
+by default at the global level, such as --version, and --help. Using #global_option
+you can add additional global options:
+
+  global_option('-c', '--config FILE', 'Load config data for your commands to use') { |file| ... }
+
+This method accepts the same syntax as Commander::Command#option so check it out for documentation.
+
 == ASCII Tables
 
 For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at

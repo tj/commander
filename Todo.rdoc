@@ -2,6 +2,7 @@
 == Major
 
 * Prevent global options from overriding sub-command level options
+* Display global options in help output
 * Finish global --trace
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
