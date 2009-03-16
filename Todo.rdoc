@@ -2,6 +2,7 @@
 == Major
 
 * Prevent global options from overriding sub-command level options
+* Finish global --trace
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
 
@@ -26,7 +27,6 @@
 
 == Brainstorming
 
-* Add global --trace method
 * Add global trapping of INT to end process with less ugly output
 * Add global --options switch for loading options from a filepath
 * Add argument parser / defaults
