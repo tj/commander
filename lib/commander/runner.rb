@@ -28,14 +28,8 @@ module Commander
     
     def run!
       require_program :name, :version, :description
-      global_option '--help' do
-        command(:help).run *@args[1..-1]
-        return
-      end
-      global_option '--version' do 
-        say "#{program(:name)} #{program(:version)}"
-        return
-      end
+      global_option('-h', '--help') { command(:help).run *@args[1..-1]; return }
+      global_option('-v', '--version') { say version; return } 
       parse_global_options
       call_active_command
     rescue InvalidCommandError
@@ -45,6 +39,13 @@ module Commander
       OptionParser::InvalidArgument,
       OptionParser::MissingArgument => e
       say e
+    end
+    
+    ##
+    # Return program version.
+    
+    def version
+      '%s %s' % [program(:name), program(:version)]
     end
     
     ##
