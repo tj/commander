@@ -28,21 +28,34 @@ module Commander
     
     def run!
       require_program :name, :version, :description
-      global_option('--help') { command(:help).run *@args[1..-1]; return }
-      global_option('--version') { $terminal.say "#{program(:name)} #{program(:version)}"; return }
-      parse_global_options
-      if alias? command_name_from_args
-        active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
-      else
-        active_command.run *args_without_command_name
+      global_option '--help' do
+        command(:help).run *@args[1..-1]
+        return
       end
+      global_option '--version' do 
+        say "#{program(:name)} #{program(:version)}"
+        return
+      end
+      parse_global_options
+      call_active_command
     rescue InvalidCommandError
-      $terminal.say 'invalid command. Use --help for more information'
+      say 'invalid command. Use --help for more information'
     rescue \
       OptionParser::InvalidOption, 
       OptionParser::InvalidArgument,
       OptionParser::MissingArgument => e
-      $terminal.say e
+      say e
+    end
+    
+    ##
+    # Invoke the active command.
+    
+    def call_active_command
+      if alias? command_name_from_args
+        active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
+      else
+        active_command.run *args_without_command_name
+      end      
     end
     
     ##
@@ -210,9 +223,9 @@ module Commander
         c.example "Display help for 'foo'", 'command help foo'
         c.when_called do |args, options|
           if args.empty?
-            $terminal.say help_formatter.render 
+            say help_formatter.render 
           else
-            $terminal.say help_formatter.render_command(command(args.join(' ')))
+            say help_formatter.render_command(command(args.join(' ')))
           end
         end
       end
@@ -241,6 +254,12 @@ module Commander
       keys.each do |key|
         raise CommandError, "program #{key} required" if program(key).nil? or program(key).empty?
       end
+    end
+    
+    private
+    
+    def say *args #:nodoc: 
+      $termina.say *args
     end
     
   end

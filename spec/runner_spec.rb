@@ -62,6 +62,23 @@ describe Commander do
     end
   end
   
+  # describe "--trace" do
+  #   it "should display pretty errors by default" do
+  #     new_command_runner 'test' do
+  #       raise 'cookies!'
+  #     end.run!
+  #     @output.should == 'error: cookies!. use --trace to view backtrace'
+  #   end
+  #   
+  #   it "should display callstack when using this switch" do
+  #     lambda { 
+  #       new_command_runner 'test', '--trace' do
+  #         raise 'cookies!'
+  #       end.run!
+  #     }.should raise_error
+  #   end
+  # end
+  
   describe "--version" do
     it "should output program version" do
       run('--version').should == "test 1.2.3\n"
