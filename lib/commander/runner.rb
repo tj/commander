@@ -11,15 +11,14 @@ module Commander
     class CommandError < StandardError; end
     class InvalidCommandError < CommandError; end
     
-    attr_reader :commands, :options, :global_options
+    attr_reader :commands, :options
 
     ##
     # Initialize a new command runner. Optionally
     # supplying +args+ for mocking, or arbitrary usage.
     
     def initialize args = ARGV
-      @args, @commands, @aliases = args, {}, {}
-      @global_options, @options = [], {}
+      @args, @commands, @aliases, @options = args, {}, {}, []
       @program = program_defaults
       create_default_commands
     end
@@ -29,16 +28,13 @@ module Commander
     
     def run!
       require_program :name, :version, :description
+      global_option('--help') { command(:help).run *@args[1..-1]; return }
+      global_option('--version') { $terminal.say "#{program(:name)} #{program(:version)}"; return }
       parse_global_options
-      case 
-      when options[:version] ; $terminal.say "#{program(:name)} #{program(:version)}" 
-      when options[:help]    ; command(:help).run(*@args[1..-1])
+      if alias? command_name_from_args
+        active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
       else
-        if alias? command_name_from_args
-          active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
-        else
-          active_command.run *args_without_command_name
-        end              
+        active_command.run *args_without_command_name
       end
     rescue InvalidCommandError
       $terminal.say 'invalid command. Use --help for more information'
@@ -110,7 +106,7 @@ module Commander
     # as --version, --trace, etc.
     
     def global_option *args, &block
-      @global_options << [args, block]
+      @options << [args, block]
     end
     
     ##
@@ -231,9 +227,7 @@ module Commander
     
     def parse_global_options
       opts = OptionParser.new
-      opts.on('--help')    { @options[:help] = true }
-      opts.on('--version') { @options[:version] = true }
-      global_options.each  { |args, proc| opts.on *args, &proc } 
+      options.each  { |args, proc| opts.on *args, &proc } 
       opts.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 

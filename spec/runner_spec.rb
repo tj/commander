@@ -53,11 +53,6 @@ describe Commander do
   end
   
   describe "#global_option" do
-    it "should add a global option" do
-      global_option('-t', '--trace') {}
-      command_runner.should have(1).global_options
-    end
-    
     it "should be invoked when used in the args list" do
       file = ''
       new_command_runner 'test', '--config', 'foo' do
