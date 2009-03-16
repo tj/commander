@@ -1,4 +1,10 @@
 
+=== 3.1.2 / 2009-03-16
+
+* Added support for global options via #global_option
+* Added #call_active_command and #say to clean things up internally
+* Misc refactoring
+
 === 3.1.1 / 2009-03-13
 
 * Fixed some terminal formatter spacing issues
