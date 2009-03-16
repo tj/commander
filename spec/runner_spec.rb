@@ -52,6 +52,21 @@ describe Commander do
     end
   end
   
+  describe "#global_option" do
+    it "should add a global option" do
+      global_option('-t', '--trace') {}
+      command_runner.should have(1).global_options
+    end
+    
+    it "should be invoked when used in the args list" do
+      file = ''
+      new_command_runner 'test', '--config', 'foo' do
+        global_option('--config FILE') { |f| file = f }
+      end.run!
+      file.should == 'foo'
+    end
+  end
+  
   describe "--version" do
     it "should output program version" do
       run('--version').should == "test 1.2.3\n"

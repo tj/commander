@@ -11,25 +11,17 @@ module Commander
     class CommandError < StandardError; end
     class InvalidCommandError < CommandError; end
     
-    ##
-    # Commands within the runner.
-    
-    attr_reader :commands
-    
-    ##
-    # Global options.
-    
-    attr_reader :options
-    
+    attr_reader :commands, :options, :global_options
+
     ##
     # Initialize a new command runner. Optionally
     # supplying +args+ for mocking, or arbitrary usage.
     
     def initialize args = ARGV
-      @args, @commands, @options, @aliases = args, {}, {}, {}
+      @args, @commands, @aliases = args, {}, {}
+      @global_options, @options = [], {}
       @program = program_defaults
       create_default_commands
-      parse_global_options
     end
     
     ##
@@ -37,6 +29,7 @@ module Commander
     
     def run!
       require_program :name, :version, :description
+      parse_global_options
       case 
       when options[:version] ; $terminal.say "#{program(:name)} #{program(:version)}" 
       when options[:help]    ; command(:help).run(*@args[1..-1])
@@ -109,6 +102,15 @@ module Commander
     def command name, &block
       yield add_command(Commander::Command.new(name)) if block
       @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
+    end
+    
+    ##
+    # Add a global option; follows the same syntax as
+    # Command#option. This would be used for switches such
+    # as --version, --trace, etc.
+    
+    def global_option *args, &block
+      @global_options << [args, block]
     end
     
     ##
@@ -229,8 +231,9 @@ module Commander
     
     def parse_global_options
       opts = OptionParser.new
-      opts.on('--help') { @options[:help] = true }
+      opts.on('--help')    { @options[:help] = true }
       opts.on('--version') { @options[:version] = true }
+      global_options.each  { |args, proc| opts.on *args, &proc } 
       opts.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 
