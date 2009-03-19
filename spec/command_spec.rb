@@ -23,6 +23,12 @@ describe Commander::Command do
       @command.option('--recursive') { |recursive| recursive.should be_true }
       @command.run '--recursive'
     end
+    
+    it "should allow usage of common method names" do
+      @command.option '--password STRING'
+      @command.when_called { |_, options| options.password.should == 'foo' }  
+      @command.run '--password', 'foo'
+    end
   end
     
   describe "#options" do

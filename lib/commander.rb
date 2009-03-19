@@ -21,9 +21,6 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
-$:.unshift File.dirname(__FILE__)
-
-require 'rubygems'
 require 'highline/import'
 require 'commander/version'
 require 'commander/user_interaction'

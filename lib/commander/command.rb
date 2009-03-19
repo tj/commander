@@ -195,7 +195,7 @@ module Commander
     
     def proxy_option_struct
       @proxy_options.inject Options.new do |options, (option, value)|
-        options.send :"#{option}=", value if option
+        options.__send__ :"#{option}=", value if option
         options
       end
     end
