@@ -17,6 +17,12 @@
   <%= $terminal.color "ALIASES", :bold %>:
   <% @aliases.each do |alias_name, args| %>
     <%= "%-20s %s %s" % [alias_name, command(alias_name).name, args.join(' ')] -%>
+  <% end %>
+<% end %>
+<% unless @options.empty? -%>
+  <%= $terminal.color "GLOBAL OPTIONS", :bold %>:
+  <% @options.each do |(args, proc)| %>
+    <%= "%-20s %s" % [args.shift, args.last.is_a?(String) ? args.last : ''] -%>
   <% end -%>
 <% end %>
 <% if program :help -%>
