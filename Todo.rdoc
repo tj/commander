@@ -1,14 +1,13 @@
 
 == Major
 
-* Fix issue with global options becoming invalid options for sub-commands
-* Prevent global options from overriding sub-command level options
 * Finish global --trace
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
 
 == Minor
 
+* Prevent global options from overriding sub-command level options
 * Add arbitrary help blocks to sub-commands as well
 * Spec for changing out formatters (mock formatter)
 * Add optional default command when none is present
