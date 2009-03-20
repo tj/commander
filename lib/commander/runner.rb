@@ -39,6 +39,7 @@ module Commander
       global_option('--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
       global_option('--version', 'Display version information') { say version; return } 
       parse_global_options
+      remove_global_options
       call_active_command
     rescue InvalidCommandError
       say 'invalid command. Use --help for more information'
@@ -238,6 +239,25 @@ module Commander
           end
         end
       end
+    end
+    
+    ##
+    # Removes global options from args. This prevents an invalid
+    # option error from ocurring when options are parsed
+    # again for the sub-command.
+    
+    def remove_global_options
+      # TODO: finish me with flipflop
+      p @args
+      options.each do |(args, proc)|
+        switch, arg = args.first.split
+        if arg
+          @args.delete_if { |arg| true if (arg == switch)..(arg =~ /^--/) }
+        else
+          @args.delete_if { |arg| arg == switch }
+        end
+      end
+      p @args
     end
             
     ##
