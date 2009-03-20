@@ -15,7 +15,7 @@ module Commander
         if meth.to_s =~ /=$/
           metaclass = class << self; self end
           metaclass.send :define_method, meth.to_s.chop do
-            args.shift
+            args.first
           end
         end
       end
