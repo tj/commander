@@ -19,6 +19,12 @@ module Commander
           end
         end
       end
+      
+      def default defaults = {}
+        defaults.each do |key, value|
+          __send__ :"#{key}=", value if __send__(key).nil?
+        end
+      end
     end
         
     ##
