@@ -21,8 +21,6 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
-$:.unshift File.dirname(__FILE__) unless $:.include? File.dirname(__FILE__)
-
 require 'highline/import'
 require 'commander/version'
 require 'commander/blank'

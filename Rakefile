@@ -1,8 +1,9 @@
 
+$:.unshift 'lib'
+require 'commander'
 require 'rubygems'
 require 'rake'
 require 'echoe'
-require 'lib/commander.rb'
 
 Echoe.new "commander", Commander::VERSION do |p|
   p.author = "TJ Holowaychuk"
