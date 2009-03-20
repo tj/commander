@@ -247,17 +247,22 @@ module Commander
     # again for the sub-command.
     
     def remove_global_options
-      # TODO: finish me with flipflop
-      p @args
+      # TODO: refactor with flipflop
       options.each do |(args, proc)|
-        switch, arg = args.first.split
-        if arg
-          @args.delete_if { |arg| true if (arg == switch)..(arg =~ /^--/) }
-        else
-          @args.delete_if { |arg| arg == switch }
+        switch, has_arg = args.first.split
+        past_switch, arg_removed = false, false
+        @args.delete_if do |arg|
+          if arg == switch
+            past_switch, arg_removed = true, false
+            true
+          elsif past_switch && !arg_removed && arg !~ /^-/ 
+            arg_removed = true
+          else
+            arg_removed = true
+            false
+          end
         end
       end
-      p @args
     end
             
     ##
