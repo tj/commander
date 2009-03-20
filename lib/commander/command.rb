@@ -1,6 +1,5 @@
 
 require 'optparse'
-require 'ostruct'
 
 module Commander
   class Command
@@ -10,11 +9,14 @@ module Commander
     
     ##
     # Options struct.
-    
-    class Options < OpenStruct
-      def default defaults = {}
-        defaults.each do |key, value|
-          send "#{key}=", value if send(key).nil?
+
+    class Options < BlankSlate
+      def method_missing meth, *args, &block
+        if meth.to_s =~ /=$/
+          metaclass = class << self; self end
+          metaclass.send :define_method, meth.to_s.chop do
+            args.shift
+          end
         end
       end
     end
