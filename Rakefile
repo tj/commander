@@ -10,7 +10,7 @@ Echoe.new "commander", Commander::VERSION do |p|
   p.email = "tj@vision-media.ca"
   p.summary = "The complete solution for Ruby command-line executables"
   p.url = "http://visionmedia.github.com/commander"
-  p.runtime_dependencies << ["highline >=1.5.0"]
+  p.runtime_dependencies << "highline >=1.5.0"
 end
 
 Dir['tasks/**/*.rake'].sort.each { |lib| load lib }
