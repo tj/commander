@@ -4,7 +4,7 @@ require 'rake'
 require 'echoe'
 require 'lib/commander.rb'
 
-Echoe.new("commander", Commander::VERSION) do |p|
+Echoe.new "commander", Commander::VERSION do |p|
   p.author = "TJ Holowaychuk"
   p.email = "tj@vision-media.ca"
   p.summary = "The complete solution for Ruby command-line executables"
