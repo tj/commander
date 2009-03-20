@@ -1,4 +1,15 @@
 
+=== 3.1.3 / 2009-03-20
+
+* Added #remove_global_options
+* Added core global option descriptions
+* Added display of global options
+* Removed small core switches (-v, -h) because they are implicitly set
+* Fixed issue with option switchs failing when named as common methods like --send, or --password
+* Fixed bug causing InvalidOption error when global options do not abort the process.
+  This was due to these options remaining in the arguments array, in turn being parsed
+  by the sub-command's option parser, issuing the error. This is fixed by #remove_global_options.
+
 === 3.1.2 / 2009-03-16
 
 * Added support for global options via #global_option
