@@ -239,9 +239,7 @@ http://visionmedia.lighthouseapp.com/projects/27643-commander
 
 == Known Issues
   
-* At the moment options such as --send or --password
-  do not work, as they do not override the struct methods,
-  this will be fixed soon, and will allow any option name.
+* None
 
 == License
 
