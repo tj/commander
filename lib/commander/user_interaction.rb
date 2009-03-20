@@ -78,24 +78,24 @@ module Commander
       #
       # === Options:
       #    
-      #    :title              Title, defaults to "Progress"
-      #    :width              Width of :progress_bar
-      #    :progress_str       Progress string, defaults to "="
-      #    :incomplete_str     Incomplete bar string, defaults to '.'
-      #    :format             Defaults to ":title |:progress_bar| :percent_complete% complete "
-      #    :tokens             Additional tokens replaced within the format string
-      #    :complete_message   Defaults to "Process complete"
+      #   :title              Title, defaults to "Progress"
+      #   :width              Width of :progress_bar
+      #   :progress_str       Progress string, defaults to "="
+      #   :incomplete_str     Incomplete bar string, defaults to '.'
+      #   :format             Defaults to ":title |:progress_bar| :percent_complete% complete "
+      #   :tokens             Additional tokens replaced within the format string
+      #   :complete_message   Defaults to "Process complete"
       #
       # === Tokens:
       #
-      #    :title 
-      #    :percent_complete
-      #    :progress_bar
-      #    :step
-      #    :steps_remaining
-      #    :total_steps
-      #    :time_elapsed
-      #    :time_remaining
+      #   :title 
+      #   :percent_complete
+      #   :progress_bar
+      #   :step
+      #   :steps_remaining
+      #   :total_steps
+      #   :time_elapsed
+      #   :time_remaining
       #
 
       def initialize total, options = {}
@@ -212,10 +212,10 @@ module Commander
       #
       # === Example:
       #
-      #    uris = %w( http://vision-media.ca http://google.com )
-      #    ProgressBar.progress uris, :format => "Remaining: :time_remaining" do |uri|
-      #      res = open uri
-      #    end
+      #   uris = %w( http://vision-media.ca http://google.com )
+      #   ProgressBar.progress uris, :format => "Remaining: :time_remaining" do |uri|
+      #     res = open uri
+      #   end
       #
       # === See:
       #
