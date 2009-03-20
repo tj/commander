@@ -6,6 +6,16 @@ describe Commander::Command do
     create_test_command
   end
   
+  describe 'Options' do
+    it "should act like an open struct" do
+      options = Commander::Command::Options.new
+      options.send = 'mail'
+      options.password = 'foobar'
+      options.send.should == 'mail'
+      options.password.should == 'foobar'
+    end
+  end
+  
   describe "#seperate_switches_from_description" do
     it "should seperate switches and description returning both" do
       switches, description = *@command.seperate_switches_from_description('-h', '--help', 'display help')
