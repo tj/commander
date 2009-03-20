@@ -7,12 +7,20 @@ describe Commander::Command do
   end
   
   describe 'Options' do
+    before :each do
+      @options = Commander::Command::Options.new  
+    end
+    
     it "should act like an open struct" do
-      options = Commander::Command::Options.new
-      options.send = 'mail'
-      options.password = 'foobar'
-      options.send.should == 'mail'
-      options.password.should == 'foobar'
+      @options.send = 'mail'
+      @options.password = 'foobar'
+      @options.send.should == 'mail'
+      @options.password.should == 'foobar'
+    end
+    
+    it "should allow __send__ to function as always" do
+      @options.send = 'foo'
+      @options.__send__(:send).should == 'foo'
     end
   end
   
