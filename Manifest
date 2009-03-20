@@ -1,6 +1,7 @@
 bin/commander
 commander.gemspec
 History.rdoc
+lib/commander/blank.rb
 lib/commander/command.rb
 lib/commander/core_ext/array.rb
 lib/commander/core_ext/object.rb

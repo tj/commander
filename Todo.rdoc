@@ -1,7 +1,6 @@
 
 == Major
 
-* wipe option struct so that foo.password etc can be an option
 * fix help spacing
 * Prevent global options from overriding sub-command level options
 * Display global options in help output

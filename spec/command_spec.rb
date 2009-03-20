@@ -6,6 +6,24 @@ describe Commander::Command do
     create_test_command
   end
   
+  describe 'Options' do
+    before :each do
+      @options = Commander::Command::Options.new  
+    end
+    
+    it "should act like an open struct" do
+      @options.send = 'mail'
+      @options.password = 'foobar'
+      @options.send.should == 'mail'
+      @options.password.should == 'foobar'
+    end
+    
+    it "should allow __send__ to function as always" do
+      @options.send = 'foo'
+      @options.__send__(:send).should == 'foo'
+    end
+  end
+  
   describe "#seperate_switches_from_description" do
     it "should seperate switches and description returning both" do
       switches, description = *@command.seperate_switches_from_description('-h', '--help', 'display help')
@@ -22,6 +40,12 @@ describe Commander::Command do
     it "should allow procs as option handlers" do
       @command.option('--recursive') { |recursive| recursive.should be_true }
       @command.run '--recursive'
+    end
+    
+    it "should allow usage of common method names" do
+      @command.option '--password STRING'
+      @command.when_called { |_, options| options.password.should == 'foo' }  
+      @command.run '--password', 'foo'
     end
   end
     
@@ -53,14 +77,14 @@ describe Commander::Command do
       
       it "calling the #call method by default when an object is called" do
         object = mock 'Object'
-        object.should_receive(:call).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
+        object.should_receive(:call).once
         @command.when_called object
         @command.run 'foo'        
       end
             
       it "calling an arbitrary method when an object is called" do
         object = mock 'Object'
-        object.should_receive(:foo).with(an_instance_of(Array), an_instance_of(Commander::Command::Options)).once
+        object.should_receive(:foo).once
         @command.when_called object, :foo
         @command.run 'foo'        
       end

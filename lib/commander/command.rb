@@ -1,6 +1,5 @@
 
 require 'optparse'
-require 'ostruct'
 
 module Commander
   class Command
@@ -10,11 +9,20 @@ module Commander
     
     ##
     # Options struct.
-    
-    class Options < OpenStruct
+
+    class Options < BlankSlate
+      def method_missing meth, *args, &block
+        if meth.to_s =~ /=$/
+          metaclass = class << self; self end
+          metaclass.send :define_method, meth.to_s.chop do
+            args.first
+          end
+        end
+      end
+      
       def default defaults = {}
         defaults.each do |key, value|
-          send "#{key}=", value if send(key).nil?
+          __send__ :"#{key}=", value if __send__(key).nil?
         end
       end
     end
@@ -195,7 +203,7 @@ module Commander
     
     def proxy_option_struct
       @proxy_options.inject Options.new do |options, (option, value)|
-        options.send :"#{option}=", value if option
+        options.__send__ :"#{option}=", value
         options
       end
     end

@@ -1,4 +1,5 @@
 
+require 'rubygems'
 require 'commander'
 require 'stringio'
 

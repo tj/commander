@@ -232,6 +232,11 @@ http://github.com/visionmedia/terminal-table
    |          |       |    |        | get it while its hot! |
    +----------+-------+----+--------+-----------------------+
 
+== Contrib
+
+Feel free to fork and request a pull, or submit a ticket
+http://visionmedia.lighthouseapp.com/projects/27643-commander
+
 == Known Issues
   
 * At the moment options such as --send or --password
