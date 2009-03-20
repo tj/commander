@@ -234,7 +234,9 @@ http://github.com/visionmedia/terminal-table
 
 == Known Issues
   
-* none
+* At the moment options such as --send or --password
+  do not work, as they do not override the struct methods,
+  this will be fixed soon, and will allow any option name.
 
 == License
 
