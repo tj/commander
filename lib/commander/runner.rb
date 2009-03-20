@@ -242,10 +242,6 @@ module Commander
             
     ##
     # Parse global command options.
-    #
-    # These options are used by commander itself 
-    # as well as allowing your program to specify 
-    # global commands such as '--verbose'.
     
     def parse_global_options
       options.inject OptionParser.new do |options, (args, proc)|
