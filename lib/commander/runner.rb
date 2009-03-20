@@ -36,8 +36,8 @@ module Commander
     
     def run!
       require_program :name, :version, :description
-      global_option('-h', '--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
-      global_option('-v', '--version', 'Display version information') { say version; return } 
+      global_option('--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
+      global_option('--version', 'Display version information') { say version; return } 
       parse_global_options
       call_active_command
     rescue InvalidCommandError
