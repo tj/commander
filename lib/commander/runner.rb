@@ -11,7 +11,15 @@ module Commander
     class CommandError < StandardError; end
     class InvalidCommandError < CommandError; end
     
-    attr_reader :commands, :options
+    ##
+    # Array of commands.
+    
+    attr_reader :commands
+    
+    ##
+    # Global options.
+    
+    attr_reader :options
 
     ##
     # Initialize a new command runner. Optionally
