@@ -1,7 +1,6 @@
 
 == Major
 
-* fix help spacing
 * Prevent global options from overriding sub-command level options
 * Display global options in help output
 * Finish global --trace
