@@ -1,4 +1,8 @@
 
+=== 3.1.6 / 2009-03-22
+
+* Changed Options struct to always use symbols
+
 === 3.1.5 / 2009-03-22
 
 * Added Options#__hash__ to access the internal hash table
