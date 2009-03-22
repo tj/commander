@@ -22,7 +22,7 @@ module Commander
       end
       
       def method_missing meth, *args, &block
-        meth.to_s =~ /=$/ ? @table[meth.to_s.chop] = args.first : @table[meth.to_s]
+        meth.to_s =~ /=$/ ? @table[meth.to_s.chop.to_sym] = args.first : @table[meth]
       end
       
       def default defaults = {}
