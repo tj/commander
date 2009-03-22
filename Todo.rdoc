@@ -1,12 +1,15 @@
 
 == Major
 
+* Change Options to use hash @table ... open struct
+* Add to_hash or __hash__ method to Options, revise rbind
 * Finish global --trace
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
 
 == Minor
 
+* Better custom shell support ... Highline stuff is not very nice
 * Prevent global options from overriding sub-command level options
 * Add arbitrary help blocks to sub-commands as well
 * Spec for changing out formatters (mock formatter)

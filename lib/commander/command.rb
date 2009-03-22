@@ -10,14 +10,19 @@ module Commander
     ##
     # Options struct.
 
-    class Options < BlankSlate
+    class Options
+      include Blank
+      
+      def initialize
+        @table = {}
+      end
+      
+      def __hash__
+        @table
+      end
+      
       def method_missing meth, *args, &block
-        if meth.to_s =~ /=$/
-          metaclass = class << self; self end
-          metaclass.send :define_method, meth.to_s.chop do
-            args.first
-          end
-        end
+        meth.to_s =~ /=$/ ? @table[meth.to_s.chop] = args.first : @table[meth.to_s]
       end
       
       def default defaults = {}
