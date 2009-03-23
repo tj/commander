@@ -1,8 +1,6 @@
 
 == Major
 
-* Change Options to use hash @table ... open struct
-* Add to_hash or __hash__ method to Options, revise rbind
 * Finish global --trace
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
