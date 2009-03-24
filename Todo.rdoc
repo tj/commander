@@ -1,7 +1,7 @@
 
 == Major
 
-* Finish global --trace
+* Add inspect back to Command::Options for debugging
 * 1.9.x compatability
 * Publish RDoc on mini page / screencasts
 
