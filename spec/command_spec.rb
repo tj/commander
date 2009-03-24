@@ -34,7 +34,7 @@ describe Commander::Command do
     
   describe "#option" do
     it "should add options" do
-      lambda { @command.option '--recursive' }.should change(@command.options, :length).from(2).to(3)
+      lambda { @command.option '--recursive' }.should change(@command.options, :length).from(1).to(2)
     end
     
     it "should allow procs as option handlers" do
@@ -47,14 +47,6 @@ describe Commander::Command do
       @command.when_called { |_, options| options.password.should == 'foo' }  
       @command.run '--password', 'foo'
     end
-  end
-    
-  describe "#options" do
-  	it "should distinguish between switches and descriptions" do
-  	  @command.option '-t', '--trace', 'some description'
-  	  @command.options[2][:description].should == 'some description'
-  	  @command.options[2][:switches].should == ['-t', '--trace']
-  	end
   end
   
   describe "#switch_to_sym" do
@@ -72,7 +64,7 @@ describe Commander::Command do
     describe "should invoke #when_called" do
       it "with arguments seperated from options" do
         @command.when_called { |args, options| args.join(' ').should == 'just some args' }  
-        @command.run '--trace', 'just', 'some', 'args'
+        @command.run '--verbose', 'just', 'some', 'args'
       end
       
       it "calling the #call method by default when an object is called" do

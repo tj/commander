@@ -62,22 +62,22 @@ describe Commander do
     end
   end
   
-  # describe "--trace" do
-  #   it "should display pretty errors by default" do
-  #     new_command_runner 'test' do
-  #       raise 'cookies!'
-  #     end.run!
-  #     @output.should == 'error: cookies!. use --trace to view backtrace'
-  #   end
-  #   
-  #   it "should display callstack when using this switch" do
-  #     lambda { 
-  #       new_command_runner 'test', '--trace' do
-  #         raise 'cookies!'
-  #       end.run!
-  #     }.should raise_error
-  #   end
-  # end
+  describe "--trace" do
+    it "should display pretty errors by default" do
+      new_command_runner 'foo' do
+        command(:foo) { |c| c.when_called { raise 'cookies!' } }
+      end.run!
+      @output.string.should == "error: cookies!. Use --trace to view backtrace\n"
+    end
+    
+    it "should display callstack when using this switch" do
+      lambda {
+        new_command_runner 'foo', '--trace' do
+          command(:foo) { |c| c.when_called { raise 'cookies!' } }
+        end.run!  
+      }.should raise_error(RuntimeError)
+    end
+  end
   
   describe "--version" do
     it "should output program version" do
@@ -200,28 +200,28 @@ describe Commander do
   
   describe "should function correctly" do
     it "when options are passed before the command name" do
-      new_command_runner '--trace', 'test', 'foo', 'bar' do
+      new_command_runner '--verbose', 'test', 'foo', 'bar' do
         @command.when_called do |args, options|
           args.should == ['foo', 'bar']
-          options.trace.should be_true
+          options.verbose.should be_true
         end
       end.run!
     end
 
     it "when options are passed after the command name" do
-      new_command_runner 'test', '--trace', 'foo', 'bar' do
+      new_command_runner 'test', '--verbose', 'foo', 'bar' do
         @command.when_called do |args, options|
           args.should == ['foo', 'bar']
-          options.trace.should be_true
+          options.verbose.should be_true
         end
       end.run!
     end
 
     it "when an argument passed is the same name as the command" do
-      new_command_runner 'test', '--trace', 'foo', 'test', 'bar' do
+      new_command_runner 'test', '--verbose', 'foo', 'test', 'bar' do
         @command.when_called do |args, options|
           args.should == ['foo', 'test', 'bar']
-          options.trace.should be_true
+          options.verbose.should be_true
         end
       end.run!
     end

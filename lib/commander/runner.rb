@@ -35,19 +35,29 @@ module Commander
     # Run command parsing and execution process.
     
     def run!
+      trace = false
       require_program :name, :version, :description
       global_option('--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
       global_option('--version', 'Display version information') { say version; return } 
+      global_option('--trace', 'Display backtrace when an error occurs') { trace = true }
       parse_global_options
       remove_global_options
-      call_active_command
-    rescue InvalidCommandError
-      say 'invalid command. Use --help for more information'
-    rescue \
-      OptionParser::InvalidOption, 
-      OptionParser::InvalidArgument,
-      OptionParser::MissingArgument => e
-      say e
+      unless trace
+        begin
+          call_active_command
+        rescue InvalidCommandError
+          say 'invalid command. Use --help for more information'
+        rescue \
+          OptionParser::InvalidOption, 
+          OptionParser::InvalidArgument,
+          OptionParser::MissingArgument => e
+          say e
+        rescue Exception => e
+          say "error: #{e}. Use --trace to view backtrace"
+        end
+      else
+        call_active_command
+      end
     end
     
     ##
