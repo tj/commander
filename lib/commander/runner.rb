@@ -37,6 +37,7 @@ module Commander
     def run!
       trace = false
       require_program :name, :version, :description
+      trap('INT') { abort program(:int_message) }
       global_option('--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
       global_option('--version', 'Display version information') { say version; return } 
       global_option('--trace', 'Display backtrace when an error occurs') { trace = true }
@@ -52,7 +53,7 @@ module Commander
           OptionParser::InvalidArgument,
           OptionParser::MissingArgument => e
           say e
-        rescue Exception => e
+        rescue => e
           say "error: #{e}. Use --trace to view backtrace"
         end
       else
