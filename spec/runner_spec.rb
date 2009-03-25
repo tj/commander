@@ -2,6 +2,7 @@
 describe Commander do
   
 	before :each do
+	  $stderr = StringIO.new
     mock_terminal
 	  create_test_command
 	end
@@ -64,10 +65,11 @@ describe Commander do
   
   describe "--trace" do
     it "should display pretty errors by default" do
-      new_command_runner 'foo' do
-        command(:foo) { |c| c.when_called { raise 'cookies!' } }
-      end.run!
-      @output.string.should == "error: cookies!. Use --trace to view backtrace\n"
+      lambda {
+        new_command_runner 'foo' do
+          command(:foo) { |c| c.when_called { raise 'cookies!' } }
+        end.run!
+      }.should raise_error(SystemExit, /error: cookies!. Use --trace/)
     end
     
     it "should display callstack when using this switch" do
@@ -93,19 +95,25 @@ describe Commander do
   
   describe "with invalid options" do
     it "should output an invalid option message" do
-      run('test', '--invalid-option').should == "invalid option: --invalid-option\n"
+      lambda {
+        run('test', '--invalid-option')  
+      }.should raise_error(SystemExit, /invalid option: --invalid-option/)
     end
   end
   
   describe "with invalid sub-command passed" do
     it "should output an invalid command message" do
-      run('foo').should == "invalid command. Use --help for more information\n"
+      lambda {
+        run('foo')  
+      }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
     end
   end
   
   describe "with invalid sub-command passed to help" do
     it "should output an invalid command message" do
-      run('help', 'does_not_exist').should == "invalid command. Use --help for more information\n"
+      lambda {
+        run('help', 'does_not_exist')
+      }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
     end
   end
   

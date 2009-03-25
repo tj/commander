@@ -47,14 +47,14 @@ module Commander
         begin
           call_active_command
         rescue InvalidCommandError
-          say 'invalid command. Use --help for more information'
+          abort 'invalid command. Use --help for more information'
         rescue \
           OptionParser::InvalidOption, 
           OptionParser::InvalidArgument,
           OptionParser::MissingArgument => e
-          say e
+          abort e
         rescue => e
-          say "error: #{e}. Use --trace to view backtrace"
+          abort "error: #{e}. Use --trace to view backtrace"
         end
       else
         call_active_command
@@ -300,7 +300,7 @@ module Commander
     private
     
     def say *args #:nodoc: 
-      $termina.say *args
+      $terminal.say *args
     end
     
   end
