@@ -32,5 +32,5 @@ tasks/gemspec.rake
 tasks/spec.rake
 test/foo
 test/pbar
+test/re
 test/ui
-Todo.rdoc

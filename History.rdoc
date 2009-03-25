@@ -1,4 +1,11 @@
 
+=== 3.1.8 / 2009-03-25
+
+* Utilizing abort and $stderr instead of using #say [#16]
+* Fixed INT trapping issue (purely cosmetic) [#14]
+* Removed todo, use lighthouse now for commander at:
+  http://visionmedia.lighthouseapp.com/projects/27643-commander/overview
+
 === 3.1.7 / 2009-03-24
 
 * Added global --trace option
