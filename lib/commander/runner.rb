@@ -45,7 +45,7 @@ module Commander
       remove_global_options
       unless trace
         begin
-          call_active_command
+          run_active_command
         rescue InvalidCommandError
           abort 'invalid command. Use --help for more information'
         rescue \
@@ -57,7 +57,7 @@ module Commander
           abort "error: #{e}. Use --trace to view backtrace"
         end
       else
-        call_active_command
+        run_active_command
       end
     end
     
@@ -69,9 +69,9 @@ module Commander
     end
     
     ##
-    # Invoke the active command.
+    # Run the active command.
     
-    def call_active_command
+    def run_active_command
       if alias? command_name_from_args
         active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
       else
