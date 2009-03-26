@@ -46,8 +46,8 @@ module Commander
       unless trace
         begin
           run_active_command
-        rescue InvalidCommandError
-          abort 'invalid command. Use --help for more information'
+        rescue InvalidCommandError => e
+          abort "#{e}. Use --help for more information"
         rescue \
           OptionParser::InvalidOption, 
           OptionParser::InvalidArgument,
@@ -72,6 +72,7 @@ module Commander
     # Run the active command.
     
     def run_active_command
+      require_valid_command
       if alias? command_name_from_args
         active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
       else
@@ -131,7 +132,7 @@ module Commander
     
     def command name, &block
       yield add_command(Commander::Command.new(name)) if block
-      @commands[name.to_s] or raise InvalidCommandError, "invalid command '#{ name || 'nil' }'", caller
+      @commands[name.to_s]
     end
     
     ##
@@ -245,10 +246,19 @@ module Commander
           if args.empty?
             say help_formatter.render 
           else
-            say help_formatter.render_command(command(args.join(' ')))
+            command = command args.join(' ')
+            require_valid_command command
+            say help_formatter.render_command(command)
           end
         end
       end
+    end
+    
+    ##
+    # Raises InvalidCommandError when a +command+ is not found.
+    
+    def require_valid_command command = active_command
+      raise InvalidCommandError, 'invalid command', caller if command.nil?
     end
     
     ##

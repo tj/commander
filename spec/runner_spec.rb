@@ -30,8 +30,8 @@ describe Commander do
   	  command(:test).should be_instance_of(Commander::Command)
   	end
     
-    it "should raise InvalidCommandError when the command does not exist" do
-      lambda { command(:im_not_real) }.should raise_error(Commander::Runner::InvalidCommandError)
+    it "should return nil when the command does not exist" do
+      command(:im_not_real).should be_nil
     end
   end
   
@@ -194,9 +194,9 @@ describe Commander do
       command_runner.active_command.should be_instance_of(Commander::Command)
     end
     
-    it "should raise invalid command error when the command is not found" do
+    it "should return nil when the command is not found" do
       new_command_runner 'foo'
-      lambda { command_runner.active_command }.should raise_error(Commander::Runner::InvalidCommandError)
+      command_runner.active_command.should be_nil
     end
   end
   
