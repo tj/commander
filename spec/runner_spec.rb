@@ -61,6 +61,16 @@ describe Commander do
       end.run!
       file.should == 'foo'
     end
+    
+    it "should be inherited by sub-commands" do
+      new_command_runner 'install', 'gem', '--verbose' do
+        global_option('--verbose')
+        command :'install gem' do |c|
+          c.when_called { |_, options| options.verbose.should be_true } 
+        end
+        command(:'install gem').should_receive(:run).once
+      end
+    end
   end
   
   describe "--trace" do
