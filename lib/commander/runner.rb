@@ -297,6 +297,12 @@ module Commander
       # parsed by our sub commands.
     end
     
+    ##
+    # Returns a proc allowing for sub-commands to inherit global options.
+    # This functionality works weither a block is present for the global
+    # option or not, so simple switches such as --verbose can be used
+    # without a block, and used throughout all sub-commands.
+    
     def global_option_proc *args, &block
       switches, description = Runner.seperate_switches_from_description *args
       lambda do |value|
