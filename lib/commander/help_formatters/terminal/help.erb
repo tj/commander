@@ -26,7 +26,7 @@
     <%= option[:switches].join ', ' %> 
         <%= option[:description] %>
 	<% end -%>
-<% end %>
+<% end -%>
 <% if program :help -%>
   <% program(:help).each_pair do |title, body| %>
   <%= $terminal.color title.to_s.upcase, :bold %>:
