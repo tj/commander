@@ -21,9 +21,11 @@
 <% end %>
 <% unless @options.empty? -%>
   <%= $terminal.color "GLOBAL OPTIONS", :bold %>:
-  <% @options.each do |(args, proc)| %>
-    <%= "%-20s %s" % [args.shift, args.last.is_a?(String) ? args.last : ''] -%>
-  <% end -%>
+	<% @options.each do |option| -%>
+
+    <%= option[:switches].join ', ' %> 
+        <%= option[:description] %>
+	<% end -%>
 <% end %>
 <% if program :help -%>
   <% program(:help).each_pair do |title, body| %>

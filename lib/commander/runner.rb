@@ -140,7 +140,13 @@ module Commander
     # This would be used for switches such as --version, --trace, etc.
     
     def global_option *args, &block
-      @options << [args, block]
+      switches, description = Runner.seperate_switches_from_description *args
+      @options << {
+        :args => args,
+        :proc => block,
+        :switches => switches,
+        :description => description,
+      }
     end
     
     ##
@@ -270,8 +276,8 @@ module Commander
     
     def remove_global_options
       # TODO: refactor with flipflop
-      options.each do |(args, proc)|
-        switch, has_arg = args.first.split
+      options.each do |option|
+        switch, has_arg = option[:args].first.split
         past_switch, arg_removed = false, false
         @args.delete_if do |arg|
           if arg == switch
@@ -291,8 +297,8 @@ module Commander
     # Parse global command options.
     
     def parse_global_options
-      options.inject OptionParser.new do |options, (args, proc)|
-        options.on *args, &global_option_proc(*args, &proc)
+      options.inject OptionParser.new do |options, option|
+        options.on *option[:args], &global_option_proc(option[:switches], &option[:proc])
       end.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 
@@ -305,8 +311,7 @@ module Commander
     # option or not, so simple switches such as --verbose can be used
     # without a block, and used throughout all sub-commands.
     
-    def global_option_proc *args, &block
-      switches, description = Runner.seperate_switches_from_description *args
+    def global_option_proc switches, &block
       lambda do |value|
         unless active_command.nil?
           active_command.proxy_options << [Runner.switch_to_sym(switches.last), value]
