@@ -38,9 +38,9 @@ module Commander
       trace = false
       require_program :version, :description
       trap('INT') { abort program(:int_message) }
-      global_option('--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
-      global_option('--version', 'Display version information') { say version; return } 
-      global_option('--trace', 'Display backtrace when an error occurs') { trace = true }
+      global_option('-h', '--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
+      global_option('-v', '--version', 'Display version information') { say version; return } 
+      global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true }
       parse_global_options
       remove_global_options
       unless trace
