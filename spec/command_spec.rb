@@ -41,17 +41,6 @@ describe Commander::Command do
     end
   end
   
-  describe "#switch_to_sym" do
-    it "should return a symbol based on the switch name" do
-      @command.switch_to_sym('--trace').should == :trace
-      @command.switch_to_sym('--foo-bar').should == :foo_bar
-      @command.switch_to_sym('--[no-]feature"').should == :feature
-      @command.switch_to_sym('--[no-]feature ARG').should == :feature
-      @command.switch_to_sym('--file [ARG]').should == :file
-      @command.switch_to_sym('--colors colors').should == :colors
-    end
-  end
-  
   describe "#run" do
     describe "should invoke #when_called" do
       it "with arguments seperated from options" do

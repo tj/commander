@@ -305,6 +305,21 @@ module Commander
       return switches, description
     end
     
+    ##
+    # Attempts to generate a method name symbol from +switch+.
+    # For example:
+    # 
+    #   -h                 # => :h
+    #   --trace            # => :trace
+    #   --some-switch      # => :some_switch
+    #   --[no-]feature     # => :feature
+    #   --file FILE        # => :file
+    #   --list of,things   # => :list
+    
+    def self.switch_to_sym switch
+      switch.scan(/[\-\]](\w+)/).join('_').to_sym rescue nil
+    end
+    
     private
     
     def say *args #:nodoc: 

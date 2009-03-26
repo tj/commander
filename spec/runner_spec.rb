@@ -43,6 +43,17 @@ describe Commander do
     end
   end
   
+  describe "#switch_to_sym" do
+    it "should return a symbol based on the switch name" do
+     Commander::Runner.switch_to_sym('--trace').should == :trace
+     Commander::Runner.switch_to_sym('--foo-bar').should == :foo_bar
+     Commander::Runner.switch_to_sym('--[no-]feature"').should == :feature
+     Commander::Runner.switch_to_sym('--[no-]feature ARG').should == :feature
+     Commander::Runner.switch_to_sym('--file [ARG]').should == :file
+     Commander::Runner.switch_to_sym('--colors colors').should == :colors
+    end
+  end
+  
   describe "#alias_command" do
     it "should alias a command" do
       alias_command :foo, :test
