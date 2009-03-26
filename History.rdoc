@@ -1,4 +1,17 @@
 
+=== 3.2.0 / 2009-03-26
+
+* Added implied small switches so they appear in help (-h, -v, etc)
+* Added #inspect back to Commander::Command::Options [#1]
+* Added inheritance of global options for sub-commands [#7]
+* Added #require_valid_command 
+* Renamed #call_active_command to #run_active_command
+* Changed; using same option format as sub-command options for globals [#18]
+* Changed; program :name is now optional, and is auto-defined when not specified [#21]
+* Moved #switch_to_sym from Command to Commander::Runner
+* Moved #seperate_switches_from_description into Commander::Runner [#22]
+* Removed program :name from commander init template since its not required anymore
+
 === 3.1.8 / 2009-03-25
 
 * Utilizing abort and $stderr instead of using #say [#16]
