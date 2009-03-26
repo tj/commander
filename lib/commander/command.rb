@@ -28,6 +28,10 @@ module Commander
       def default defaults = {}
         @table = defaults.merge! @table
       end
+      
+      def inspect
+        "<Commander::Command::Options #{ __hash__.map { |k,v| "#{k}=#{v.inspect}" }.join(', ') }>"
+      end
     end
         
     ##
