@@ -20,7 +20,7 @@ describe Commander do
     
     it "should raise an error when required info has not been set" do
       new_command_runner '--help'
-  	  program :name, ''
+  	  program :version, ''
       lambda { run! }.should raise_error(Commander::Runner::CommandError)
     end
   end

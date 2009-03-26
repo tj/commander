@@ -36,7 +36,7 @@ module Commander
     
     def run!
       trace = false
-      require_program :name, :version, :description
+      require_program :version, :description
       trap('INT') { abort program(:int_message) }
       global_option('--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
       global_option('--version', 'Display version information') { say version; return } 
@@ -228,7 +228,9 @@ module Commander
     # Returns hash of program defaults.
     
     def program_defaults
-      return :help_formatter => HelpFormatter::Terminal, :int_message => "\nProcess interrupted"
+      return :help_formatter => HelpFormatter::Terminal, 
+             :int_message => "\nProcess interrupted",
+             :name => File.basename($0)
     end
     
     ##
