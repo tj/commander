@@ -135,9 +135,8 @@ module Commander
     end
     
     ##
-    # Add a global option; follows the same syntax as
-    # Command#option. This would be used for switches such
-    # as --version, --trace, etc.
+    # Add a global option; follows the same syntax as Command#option
+    # This would be used for switches such as --version, --trace, etc.
     
     def global_option *args, &block
       @options << [args, block]
