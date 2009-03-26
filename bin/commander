@@ -27,7 +27,6 @@ command :init do |c|
           require 'commander'
           require '#{name}'
           
-          program :name, '#{name}'
           program :version, #{name.capitalize}::VERSION
           program :description, '#{description}'
            
