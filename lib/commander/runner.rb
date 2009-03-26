@@ -296,6 +296,15 @@ module Commander
       end
     end
     
+    ##
+    # Return switches and description seperated from the +args+ passed.
+
+    def self.seperate_switches_from_description *args
+      switches = args.find_all { |arg| arg.to_s =~ /^-/ } 
+      description = args.last unless !args.last.is_a? String or args.last.match(/^-/)
+      return switches, description
+    end
+    
     private
     
     def say *args #:nodoc: 

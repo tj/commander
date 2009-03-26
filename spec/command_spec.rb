@@ -24,14 +24,6 @@ describe Commander::Command do
     end
   end
   
-  describe "#seperate_switches_from_description" do
-    it "should seperate switches and description returning both" do
-      switches, description = *@command.seperate_switches_from_description('-h', '--help', 'display help')
-      switches.should == ['-h', '--help']
-      description.should == 'display help'
-    end
-  end
-    
   describe "#option" do
     it "should add options" do
       lambda { @command.option '--recursive' }.should change(@command.options, :length).from(1).to(2)

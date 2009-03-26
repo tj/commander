@@ -103,7 +103,7 @@ module Commander
     #
     
     def option *args, &block
-      switches, description = seperate_switches_from_description *args
+      switches, description = Runner.seperate_switches_from_description *args
       proc = block || option_proc(switches)
       @options << {
         :args => args,
@@ -191,15 +191,6 @@ module Commander
       switch.scan(/[\-\]](\w+)/).join('_').to_sym rescue nil
     end
     
-    ##
-    # Return switches and description seperated from the +args+ passed.
-
-    def seperate_switches_from_description *args
-      switches = args.find_all { |arg| arg.to_s =~ /^-/ } 
-      description = args.last unless !args.last.is_a? String or args.last.match(/^-/)
-      return switches, description
-    end
-        
     ##
     # Creates an Options instance populated with the option values
     # collected by the #option_proc.
