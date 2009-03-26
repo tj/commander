@@ -98,9 +98,9 @@ module Commander
     #
     # === Keys:
     #
-    #   :name            (required) Program name
     #   :version         (required) Program version triple, ex: '0.0.1'
     #   :description     (required) Program description
+    #   :name            Program name, defaults to basename of executable
     #   :help_formatter  Defaults to Commander::HelpFormatter::Terminal
     #   :help            Allows addition of arbitrary global help blocks
     #   :int_message     Message to display when interrupted (CTRL + C)
