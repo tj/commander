@@ -4,8 +4,8 @@ require 'optparse'
 module Commander
   class Command
     
-    attr_reader :name, :examples, :options, :proxy_options
-    attr_accessor :syntax, :description, :summary
+    attr_accessor :name, :examples, :syntax, :description
+    attr_accessor :summary, :proxy_options, :options
     
     ##
     # Options struct.
@@ -181,7 +181,7 @@ module Commander
     # collected by the #option_proc.
     
     def proxy_option_struct
-      @proxy_options.inject Options.new do |options, (option, value)|
+      proxy_options.inject Options.new do |options, (option, value)|
         options.__send__ :"#{option}=", value
         options
       end
@@ -193,7 +193,7 @@ module Commander
     # and work with option values.
     
     def option_proc switches
-      lambda { |value| @proxy_options << [Runner.switch_to_sym(switches.last), value] } 
+      lambda { |value| proxy_options << [Runner.switch_to_sym(switches.last), value] } 
     end
     
     def inspect #:nodoc:

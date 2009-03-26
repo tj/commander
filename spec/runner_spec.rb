@@ -61,14 +61,15 @@ describe Commander do
     end
     
     it "should pass arguments passed to the alias when called" do
+      gem_name = ''
       new_command_runner 'install', 'gem', 'commander' do
         command :install do |c|
           c.option '--gem-name NAME', 'Install a gem'
-          c.when_called { |_, options| options.gem_name.should == 'commander' }
+          c.when_called { |_, options| gem_name = options.gem_name }
         end 
         alias_command :'install gem', :install, '--gem-name'
-        command(:install).should_receive(:run).once
       end.run!
+      gem_name.should == 'commander'
     end
   end
   
@@ -82,13 +83,25 @@ describe Commander do
     end
     
     it "should be inherited by sub-commands" do
-      new_command_runner 'install', 'gem', '--verbose' do
-        global_option('--verbose')
-        command :'install gem' do |c|
-          c.when_called { |_, options| options.verbose.should be_true } 
+      quiet = nil
+      new_command_runner 'foo', '--quiet' do
+        global_option('--quiet', 'Suppress output')
+        command :foo do |c|
+          c.when_called { |_, options| quiet = options.quiet } 
         end
-        command(:'install gem').should_receive(:run).once
-      end
+      end.run!
+      quiet.should be_true
+    end
+    
+    it "should be inherited by sub-commands even when a block is present" do
+      quiet = nil
+      new_command_runner 'foo', '--quiet' do
+        global_option('--quiet', 'Suppress output') {}
+        command :foo do |c|
+          c.when_called { |_, options| quiet = options.quiet } 
+        end
+      end.run!
+      quiet.should be_true      
     end
   end
   

@@ -290,11 +290,21 @@ module Commander
     
     def parse_global_options
       options.inject OptionParser.new do |options, (args, proc)|
-        options.on *args, &proc
+        options.on *args, &global_option_proc(*args, &proc)
       end.parse! @args.dup
     rescue OptionParser::InvalidOption
       # Ignore invalid options since options will be further 
       # parsed by our sub commands.
+    end
+    
+    def global_option_proc *args, &block
+      switches, description = Runner.seperate_switches_from_description *args
+      lambda do |value|
+        unless active_command.nil?
+          active_command.proxy_options << [Runner.switch_to_sym(switches.last), value]
+        end
+        yield value if block and !value.nil?
+      end
     end
     
     ##
