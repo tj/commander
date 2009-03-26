@@ -217,9 +217,7 @@ module Commander
     # and work with option values.
     
     def option_proc switches
-      Proc.new do |value|
-        @proxy_options << [switch_to_sym(switches.last), value]
-      end 
+      lambda { |value| @proxy_options << [switch_to_sym(switches.last), value] } 
     end
     
     def inspect #:nodoc:
