@@ -27,6 +27,7 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
    require 'rubygems'
    require 'commander'
 
+   # :name is optional, otherwise uses the basename of this executable
    program :name, 'Foo Bar'
    program :version, '1.0.0'
    program :description, 'Stupid command that prints foo or bar.'
@@ -220,6 +221,23 @@ you can add additional global options:
   global_option('-c', '--config FILE', 'Load config data for your commands to use') { |file| ... }
 
 This method accepts the same syntax as Commander::Command#option so check it out for documentation.
+
+All global options regardless of providing a block are accessable at the sub-command level. This
+means that instead of the following:
+
+  global_option('--verbose') { $verbose = true }
+  ...
+  c.when_called do |args, options|
+    say 'foo' if $verbose
+  ...
+
+You may:
+
+  global_option '--verbose'
+  ...
+  c.when_called do |args, options|
+    say 'foo' if options.verbose
+  ...
 
 == ASCII Tables
 
