@@ -239,6 +239,15 @@ You may:
     say 'foo' if options.verbose
   ...
 
+== Tips
+
+When adding a global or sub-command option, OptionParser implicitly adds a small
+switch even when not explicitly created, for example -c will be the same as --config
+in both examples:
+
+  global_option '-c', '--config FILE'
+  global_option '--config FILE'
+
 == ASCII Tables
 
 For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at
