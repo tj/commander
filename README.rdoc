@@ -17,6 +17,9 @@ features, and an elegant API.
 * Highly customizable progress bar with intuative, simple usage
 * Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
 * Use the 'commander' executable to initialize a commander driven program
+* Optional default sub-command when none is present
+* Global / Sub-command level options
+* Sub-command aliasing (very powerful, as both switches and arguments can be used)
 
 == Example
 
