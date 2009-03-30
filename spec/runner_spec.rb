@@ -277,27 +277,27 @@ describe Commander do
     end
     
     it "when using multi-word commands" do
-      new_command_runner '--trace', 'my', 'command', 'something', 'foo', 'bar' do
-        command('my command') {}
+      new_command_runner '--verbose', 'my', 'command', 'something', 'foo', 'bar' do
+        command('my command') { |c| c.option('--verbose') }
         command_runner.command_name_from_args.should == 'my command'
-        command_runner.args_without_command_name.should == ['--trace', 'something', 'foo', 'bar']
+        command_runner.args_without_command_name.should == ['--verbose', 'something', 'foo', 'bar']
       end.run!
     end
 
     it "when using multi-word commands with parts of the command name as arguments" do
-      new_command_runner '--trace', 'my', 'command', 'something', 'my', 'command' do
-        command('my command') {}
+      new_command_runner '--verbose', 'my', 'command', 'something', 'my', 'command' do
+        command('my command') { |c| c.option('--verbose') }
         command_runner.command_name_from_args.should == 'my command'
-        command_runner.args_without_command_name.should == ['--trace', 'something', 'my', 'command']
+        command_runner.args_without_command_name.should == ['--verbose', 'something', 'my', 'command']
       end.run!
     end
     
     it "when using multi-word commands with other commands using the same words" do
-      new_command_runner '--trace', 'my', 'command', 'something', 'my', 'command' do
+      new_command_runner '--verbose', 'my', 'command', 'something', 'my', 'command' do
         command('my command') {}
-        command('my command something') {}
+        command('my command something') { |c| c.option('--verbose') }
         command_runner.command_name_from_args.should == 'my command something'
-        command_runner.args_without_command_name.should == ['--trace', 'my', 'command']
+        command_runner.args_without_command_name.should == ['--verbose', 'my', 'command']
       end.run!
     end
   end
