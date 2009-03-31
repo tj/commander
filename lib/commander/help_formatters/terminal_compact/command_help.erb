@@ -1,0 +1,23 @@
+
+  <%= @name %>
+
+<% if @syntax -%>
+  Usage: <%= @syntax %>
+<% end -%>
+<% unless @examples.empty? -%>
+
+  Examples:
+	<% for description, command in @examples -%>
+
+    # <%= description %>
+    <%= command %>
+	<% end -%>
+<% end -%>
+<% unless @options.empty? -%>
+
+  Options:
+<% for option in @options -%>
+    <%= "%-20s %s" % [option[:switches].join(', '), option[:description]] %> 
+<% end -%>
+<% end -%>
+
