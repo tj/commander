@@ -1,11 +1,7 @@
 
-require 'erb'
-
 module Commander
   module HelpFormatter
     class Terminal < Base
-      TEMPLATE_DIR = File.expand_path File.join(File.dirname(__FILE__), 'terminal')
-      
       def render
         template(:help).result @runner.get_binding
       end
@@ -15,7 +11,7 @@ module Commander
       end
       
       def template name
-        ERB.new(File.read(File.join(TEMPLATE_DIR, "#{name}.erb")), nil, '-')
+        ERB.new(File.read(File.join(File.dirname(__FILE__), 'terminal', "#{name}.erb")), nil, '-')
       end
     end
   end
