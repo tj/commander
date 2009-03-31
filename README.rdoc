@@ -250,11 +250,14 @@ as TerminalCompact. To utilize a different formatter simply use :help_formatter 
 
   program :help_formatter, Commander::HelpFormatter::TerminalCompact
 
+This abstraction could be utilized to generate HTML documentation for your executable.
+
 == Tips
 
 When adding a global or sub-command option, OptionParser implicitly adds a small
 switch even when not explicitly created, for example -c will be the same as --config
-in both examples:
+in both examples, however '-c' will only appear in the documentation when explicitly
+assigning it.
 
   global_option '-c', '--config FILE'
   global_option '--config FILE'
