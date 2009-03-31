@@ -1,7 +1,11 @@
 
   <%= @name %>
+<% if @description || @summary -%>
 
+  <%= @description || @summary %>
+<% end -%>
 <% if @syntax -%>
+
   Usage: <%= @syntax %>
 <% end -%>
 <% unless @examples.empty? -%>
