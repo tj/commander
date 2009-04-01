@@ -11,6 +11,9 @@ lib/commander/help_formatters/base.rb
 lib/commander/help_formatters/terminal/command_help.erb
 lib/commander/help_formatters/terminal/help.erb
 lib/commander/help_formatters/terminal.rb
+lib/commander/help_formatters/terminal_compact/command_help.erb
+lib/commander/help_formatters/terminal_compact/help.erb
+lib/commander/help_formatters/terminal_compact.rb
 lib/commander/help_formatters.rb
 lib/commander/runner.rb
 lib/commander/user_interaction.rb
@@ -30,7 +33,3 @@ spec/spec_helper.rb
 tasks/docs.rake
 tasks/gemspec.rake
 tasks/spec.rake
-test/foo
-test/pbar
-test/re
-test/ui
