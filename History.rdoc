@@ -1,4 +1,9 @@
 
+=== 3.2.1 / 2009-04-01
+
+* Added Commander::HelpFormatter::TerminalCompact
+* Fix; updated gemspec / manifest removing test/* causing issue [#26]
+
 === 3.2.0 / 2009-03-26
 
 * Added implied small switches so they appear in help (-h, -v, etc)
