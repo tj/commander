@@ -1,4 +1,8 @@
 
+=== 3.2.3 / 2009-04-01
+
+* Added new pager using less [#9]
+
 === 3.2.2 / 2009-04-01
 
 * Github's gem builder timed out ? ...
