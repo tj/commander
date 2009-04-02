@@ -1,4 +1,8 @@
 
+=== 3.2.4 / 2009-04-02
+
+* Added #enable_paging [#9]
+
 === 3.2.3 / 2009-04-01
 
 * Added new pager using less [#9]
