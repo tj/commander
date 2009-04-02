@@ -144,6 +144,9 @@ simplify common tasks using the following methods:
   # 'Log' action to stdout
   log "create", "path/to/file.rb"
 
+  # Enable paging of output after this point
+  enable_paging
+
 == Commander Goodies
 
 === Option Defaults

@@ -251,6 +251,7 @@ module Commander
         c.example 'Display global help', 'command help'
         c.example "Display help for 'foo'", 'command help foo'
         c.when_called do |args, options|
+          enable_paging
           if args.empty?
             say help_formatter.render 
           else

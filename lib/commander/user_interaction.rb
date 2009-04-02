@@ -36,6 +36,28 @@ module Commander
     end
     
     ##
+    # Enable paging of output after called.
+    
+    def enable_paging
+      return unless $stdout.tty?
+      read, write = IO.pipe
+
+      if Kernel.fork
+        $stdin.reopen read
+        read.close; write.close
+        Kernel.select [$stdin]
+        ENV['LESS'] = 'FSRX'
+        pager = ENV['PAGER'] || 'less'
+        exec pager rescue exec '/bin/sh', '-c', pager
+      else
+        $stdout.reopen write
+        $stderr.reopen write if $stderr.tty?
+        read.close; write.close
+        return
+      end
+    end
+    
+    ##
     # = Progress Bar
     #
     # Terminal progress bar utility. In its most basic form
