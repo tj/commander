@@ -36,6 +36,28 @@ module Commander
     end
     
     ##
+    # Prompt +editor+ for input. Optionally supply initial
+    # +input+ which is written to the editor.
+    #
+    # The +editor+ defaults to the EDITOR environment variable
+    # when present, or 'mate' for TextMate. 
+    #
+    # === Examples
+    #
+    #   ask_editor                # => prompts EDITOR with no input
+    #   ask_editor('foo')         # => prompts EDITOR with default text of 'foo'
+    #   ask_editor('foo', :mate)  # => prompts TextMate with default text of 'foo'
+    #
+       
+    def ask_editor input = nil, editor = ENV['EDITOR'] || 'mate'
+      IO.popen(editor.to_s, 'w+') do |pipe|
+        pipe.puts input.to_s unless input.nil?
+        pipe.close_write
+        pipe.read
+      end
+    end
+    
+    ##
     # Enable paging of output after called.
     
     def enable_paging

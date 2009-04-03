@@ -147,6 +147,12 @@ simplify common tasks using the following methods:
   # Enable paging of output after this point
   enable_paging
 
+  # Ask editor for input (EDITOR or TextMate by default)
+  ask_editor
+
+  # Ask editor, supplying initial text
+  ask_editor 'previous data to update'
+
 == Commander Goodies
 
 === Option Defaults
@@ -284,7 +290,7 @@ http://visionmedia.lighthouseapp.com/projects/27643-commander
 
 == Known Issues
   
-* None
+* ask_editor has been tested with TextMate only
 
 == License
 
