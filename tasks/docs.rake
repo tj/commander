@@ -1,4 +1,9 @@
 
+desc 'Build docs with sdoc gem'
+task :docs do
+  sh 'sdoc -N lib/commander'
+end
+
 namespace :docs do
   
   desc 'Remove rdoc products'
