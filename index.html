@@ -32,10 +32,15 @@
       <li>Parses options using OptionParser</li>
       <li>Auto-populates struct with options ( no more { |v| options[:recursive] = v } )</li>
       <li>Auto-generates help documentation via pluggable help formatters</li>
+      <li>Optional default sub-command when none is present</li>
+      <li>Global / Sub-command level options</li>
+      <li>Packaged with two help formatters (Terminal, TerminalCompact)</li>
       <li>Imports the highline gem for interacting with the terminal</li>
       <li>Adds additional user interaction functionality</li>
       <li>Highly customizable progress bar with intuative, simple usage</li>
-      <li>Multi-word sub-command support</li>
+      <li>Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'</li>
+      <li>Sexy paging for long bodies of text</li>
+      <li>Sub-command aliasing (very powerful, as both switches and arguments can be used)</li>
       <li>Use the 'commander' executable to initialize a commander driven program</li>
     </ul>
     <h2>Example</h2>
@@ -43,24 +48,33 @@
       require <span class="string">'rubygems'</span>
       require <span class="string">'commander'</span>
       
-      program <span class="string symbol">:name</span>, <span class="string">'Foo Bar'</span>
+      <span class="comment"># :name is optional, otherwise uses the basename of this executable
+      </span>program <span class="string symbol">:name</span>, <span class="string">'Foo Bar'</span>
       program <span class="string symbol">:version</span>, <span class="string">'1.0.0'</span>
       program <span class="string symbol">:description</span>, <span class="string">'Stupid command that prints foo or bar.'</span>
       
       command <span class="string symbol">:foo</span><span class="keyword">do</span><span class="params">|c|</span>
-        c.syntax = <span class="string">&quot;foobar foo&quot;</span>
-        c.description = <span class="string">&quot;Displays foo&quot;</span>
+        c.syntax = <span class="string">'foobar foo'</span>
+        c.description = <span class="string">'Displays foo'</span>
         c.when_called<span class="keyword">do</span><span class="params">|args, options|</span>
-          say <span class="string">&quot;foo&quot;</span>
+          say <span class="string">'foo'</span>
        <span class="keyword">end</span>end
       
       command <span class="string symbol">:bar</span><span class="keyword">do</span><span class="params">|c|</span>
-        c.syntax = <span class="string">&quot;foobar [options] bar&quot;</span>
-        c.description = <span class="string">&quot;Display bar with optional prefix&quot;</span>
-        c.option <span class="string">&quot;--prefix STRING&quot;</span>
+        c.syntax = <span class="string">'foobar bar [options]'</span>
+        c.description = <span class="string">'Display bar with optional prefix and suffix'</span>
+        c.option <span class="string">'--prefix STRING'</span>, <span class="constant">String</span>, <span class="string">'Adds a prefix to bar'</span>
+        c.option <span class="string">'--suffix STRING'</span>, <span class="constant">String</span>, <span class="string">'Adds a suffix to bar'</span>
         c.when_called<span class="keyword">do</span><span class="params">|args, options|</span>
-          say <span class="string">&quot;#{options.prefix} bar&quot;</span>
+          options.default <span class="string symbol">:prefix</span> => <span class="string">'('</span>, <span class="string symbol">:suffix</span> => <span class="string">')'</span>
+          say <span class="string">&quot;#{options.prefix}bar#{options.suffix}&quot;</span>
        <span class="keyword">end</span>end
+      
+      <span class="variable global">$ foobar bar
+      # =&gt; (bar)
+      
+      $ foobar bar --suffix '{' --prefix '}'
+      # =&gt; {bar}</span>
     </code>
     <h2>User Interaction</h2>
     <code class='highlight'>
@@ -108,26 +122,19 @@
        <span class="comment"># Do something with response
       </span>end
       
-      <span class="comment"># Provide a menu for users to choose from
-      </span>choose<span class="keyword">do</span><span class="params">|menu|</span>
-        menu.index = <span class="string symbol">:letter</span>
-        menu.index_suffix = <span class="string">&quot;) &quot;</span>
-        menu.prompt = <span class="string">&quot;Please choose your favorite programming language?  &quot;</span>
-        menu.choice <span class="string symbol">:ruby</span><span class="keyword">do</span>say(<span class="string">&quot;Good choice!&quot;</span>)<span class="keyword">end</span>  menu.choices(<span class="string symbol">:python</span>, <span class="string symbol">:perl</span>)<span class="keyword">do</span>say(<span class="string">&quot;Not from around here, are you?&quot;</span>)<span class="keyword">end</span>end
+      <span class="comment"># Enable paging of output after this point
+      </span>enable_paging
       
-      <span class="comment"># Custom shell
-      </span>loop<span class="keyword">do</span>  choose<span class="keyword">do</span><span class="params">|menu|</span>
-          menu.layout = <span class="string symbol">:menu_only</span>
-          menu.shell =<span class="keyword">true</span>    menu.choice(<span class="string symbol">:load</span>, <span class="string">&quot;Load a file.&quot;</span>)<span class="keyword">do</span><span class="params">|command, details|</span>
-            say(<span class="string">&quot;Loading file with options:  #{details}...&quot;</span>)
-         <span class="keyword">end</span>    menu.choice(<span class="string symbol">:save</span>, <span class="string">&quot;Save a file.&quot;</span>)<span class="keyword">do</span><span class="params">|command, details|</span>
-            say(<span class="string">&quot;Saving file with options:  #{details}...&quot;</span>)
-         <span class="keyword">end</span>    menu.choice(<span class="string symbol">:quit</span>, <span class="string">&quot;Exit program.&quot;</span>) { exit }
-       <span class="keyword">end</span>end
+      <span class="comment"># Ask editor for input (EDITOR or TextMate by default)
+      </span>ask_editor
+      
+      <span class="comment"># Ask editor, supplying initial text
+      </span>ask_editor <span class="string">'previous data to update'</span>
     </code>
     <h2>API Documentation</h2>
     <a href='doc/index.html'>Click to view</a>
-    the most recent SDoc generated (may not be up to date)
+    the most recent SDoc generated. For a more up-to-date look at what the Commander gem has to offer view the
+    <a href='http://github.com/visionmedia/commander/blob/5f88790717e7c0d1cf874370f15af4e1fd08d44e/README.rdoc'>README.</a>
     <div class='footer'>
       this mini site brought to you by :
       <a href='http://github.com/visionmedia/mini'>visionmedia/mini</a>

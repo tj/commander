@@ -30,10 +30,15 @@
       %li Parses options using OptionParser
       %li Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
       %li Auto-generates help documentation via pluggable help formatters
+      %li Optional default sub-command when none is present
+      %li Global / Sub-command level options
+      %li Packaged with two help formatters (Terminal, TerminalCompact)
       %li Imports the highline gem for interacting with the terminal
       %li Adds additional user interaction functionality
       %li Highly customizable progress bar with intuative, simple usage
-      %li Multi-word sub-command support
+      %li Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
+      %li Sexy paging for long bodies of text
+      %li Sub-command aliasing (very powerful, as both switches and arguments can be used)
       %li Use the 'commander' executable to initialize a commander driven program
 
     %h2 Example
@@ -44,7 +49,8 @@
 
     %h2 API Documentation
     %a{ :href => 'doc/index.html' } Click to view 
-    the most recent SDoc generated (may not be up to date)
+    the most recent SDoc generated. For a more up-to-date look at what the Commander gem has to offer view the 
+    %a{ :href => 'http://github.com/visionmedia/commander/blob/5f88790717e7c0d1cf874370f15af4e1fd08d44e/README.rdoc' } README.
 
     .footer
       this mini site brought to you by : 

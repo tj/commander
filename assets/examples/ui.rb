@@ -42,27 +42,11 @@ progress uris do |uri|
  # Do something with response
 end
 
-# Provide a menu for users to choose from
-choose do |menu|
-  menu.index = :letter
-  menu.index_suffix = ") "
-  menu.prompt = "Please choose your favorite programming language?  "
-  menu.choice :ruby do say("Good choice!") end
-  menu.choices(:python, :perl) do say("Not from around here, are you?") end
-end
+# Enable paging of output after this point
+enable_paging
 
-# Custom shell
-loop do
-  choose do |menu|
-    menu.layout = :menu_only
-    menu.shell = true
-    menu.choice(:load, "Load a file.") do |command, details|
-      say("Loading file with options:  #{details}...")
-    end
-    menu.choice(:save, "Save a file.") do |command, details|
-      say("Saving file with options:  #{details}...")
-    end
-    menu.choice(:quit, "Exit program.") { exit }
-  end
-end
+# Ask editor for input (EDITOR or TextMate by default)
+ask_editor
 
+# Ask editor, supplying initial text
+ask_editor 'previous data to update'
