@@ -6,11 +6,8 @@ def example file
   File.read "assets/examples/#{file}"
 end
 
-def highlight file, type
-  case type
-  when :ruby ; Lightr::Ruby.parse(example(file))
-  else
-  end
+def highlight string
+  Lightr::Ruby.parse(string).to_s
 end
 
 def title title, subheading
