@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="%charset%"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>command_help.erb</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=%charset%" />
+    <link rel="stylesheet" href="../../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table border='0' cellpadding='0' cellspacing='0' width="100%" class='banner'>
+      <tr><td>
+        <table width="100%" border='0' cellpadding='0' cellspacing='0'><tr>
+          <td class="file-title" colspan="2"><span class="file-title-prefix">File</span><br />command_help.erb</td>
+          <td align="right">
+            <table border='0' cellspacing="0" cellpadding="2">
+              <tr>
+                <td>Path:</td>
+                <td>lib/commander/help_formatters/terminal_compact/command_help.erb</td>
+              </tr>
+              <tr>
+                <td>Modified:</td>
+                <td>Mon Apr 06 15:37:12 -0700 2009</td>
+              </tr>
+            </table>
+          </td></tr>
+        </table>
+      </td></tr>
+    </table><br />
+
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><pre>
+  &lt;%= @name %&gt;
+</pre>
+<p>
+<% if @description || @summary -%>
+</p>
+<pre>
+  &lt;%= @description || @summary %&gt;
+</pre>
+<p>
+<% end -%> <% if @syntax -%>
+</p>
+<pre>
+  Usage: &lt;%= @syntax %&gt;
+</pre>
+<p>
+<% end -%> <% unless @examples.empty? -%>
+</p>
+<pre>
+  Examples:
+        &lt;% for description, command in @examples -%&gt;
+
+    # &lt;%= description %&gt;
+    &lt;%= command %&gt;
+        &lt;% end -%&gt;
+</pre>
+<p>
+<% end -%> <% unless @options.empty? -%>
+</p>
+<pre>
+  Options:
+</pre>
+<p>
+<% for option in @options -%>
+</p>
+<pre>
+    &lt;%= &quot;%-20s %s&quot; % [option[:switches].join(', '), option[:description]] %&gt;
+</pre>
+<p>
+<% end -%> <% end -%>
+</p>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+</html>

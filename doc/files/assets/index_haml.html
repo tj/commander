@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="%charset%"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>index.haml</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=%charset%" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table border='0' cellpadding='0' cellspacing='0' width="100%" class='banner'>
+      <tr><td>
+        <table width="100%" border='0' cellpadding='0' cellspacing='0'><tr>
+          <td class="file-title" colspan="2"><span class="file-title-prefix">File</span><br />index.haml</td>
+          <td align="right">
+            <table border='0' cellspacing="0" cellpadding="2">
+              <tr>
+                <td>Path:</td>
+                <td>assets/index.haml</td>
+              </tr>
+              <tr>
+                <td>Modified:</td>
+                <td>Mon Apr 06 15:09:32 -0700 2009</td>
+              </tr>
+            </table>
+          </td></tr>
+        </table>
+      </td></tr>
+    </table><br />
+
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><p>
+!!! %html
+</p>
+<pre>
+  %head
+    %title Commander - Complete solution for Ruby command-line executables
+    %link{ :rel =&gt; 'stylesheet', :href =&gt; 'style.css' }
+    %link{ :rel =&gt; 'stylesheet', :href =&gt; 'lightr.css' }
+  %body
+    %a{ :href =&gt; PROJECT_URL }
+      %img#ribbon{ :src =&gt; 'http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png', :alt =&gt; 'Fork me on GitHub' }
+
+  #container
+    #download
+      %a{ :href =&gt; PROJECT_URL + '/downloads' }
+        %img{ :src =&gt; 'http://github.com/images/modules/download/zip.png' }
+      %a{ :href =&gt; PROJECT_URL + '/downloads' }
+        %img{ :src =&gt; 'http://github.com/images/modules/download/tar.png' }
+
+    = title 'Commander', ''
+
+    %p
+      The complete solution for Ruby command-line executables.
+      Commander bridges the gap between other terminal related libraries
+      you know and love (OptionParser, HighLine), while providing many new
+      features, all packed in one simple, elegant API.
+
+    %h2 Features
+
+    %ul
+      %li Easier than baking cookies
+      %li Parses options using OptionParser
+      %li Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
+      %li Auto-generates help documentation via pluggable help formatters
+      %li Imports the highline gem for interacting with the terminal
+      %li Adds additional user interaction functionality
+      %li Highly customizable progress bar with intuative, simple usage
+      %li Multi-word sub-command support
+      %li Use the 'commander' executable to initialize a commander driven program
+
+    %h2 Example
+    %code.highlight= highlight('example-1.rb', :ruby)
+
+    %h2 User Interaction
+    %code.highlight= highlight('ui.rb', :ruby)
+
+    .footer
+      this mini site brought to you by :
+      %a{ :href =&gt; project_url('visionmedia', 'mini') } visionmedia/mini
+</pre>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+</html>

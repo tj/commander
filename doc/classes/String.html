@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="%charset%"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>String</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=%charset%" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />String</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../files/lib/commander/core_ext/string_rb.html">lib/commander/core_ext/string.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            <a href="Object.html">Object</a>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000023">tokenize</a></li>
+        
+        <li><a href="#M000022">tokenize!</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000023"></a><b>tokenize</b>(hash = {})
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Replace <tt>hash</tt> keys with associated values.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000023_source')" id="l_M000023_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/b3ce57a1b2acac50ba37214a930c28fa9a425978/lib/commander/core_ext/string.rb#L15" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000023_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File lib/commander/core_ext/string.rb, line 15</span>
+15:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tokenize</span> <span class="ruby-identifier">hash</span> = {}
+16:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tokenize!</span> <span class="ruby-identifier">hash</span>
+17:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000022"></a><b>tokenize!</b>(hash = {})
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Replace <tt>hash</tt> keys with associated values.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000022_source')" id="l_M000022_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/b3ce57a1b2acac50ba37214a930c28fa9a425978/lib/commander/core_ext/string.rb#L7" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000022_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File lib/commander/core_ext/string.rb, line 7</span>
+ 7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tokenize!</span> <span class="ruby-identifier">hash</span> = {}
+ 8:     <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">gsub!</span> <span class="ruby-node">/:#{key}/</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span> }
+ 9:     <span class="ruby-keyword kw">self</span>
+10:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    
