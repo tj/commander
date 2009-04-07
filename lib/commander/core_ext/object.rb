@@ -17,9 +17,19 @@ class Object
   include Commander::UI
   include Commander::UI::AskForClass
   
+  #--
+  # UI related delegation.
+  #++
+  
   def_delegators Commander::UI::ProgressBar, :progress
-  def_delegators :$command_runner, :add_command, :command, :program, :run!,
-                 :commands, :alias_command, :default_command, :global_option
+  
+  #--
+  # Command runner delegation.
+  #++
+  
+  def_delegators :$command_runner, 
+    :add_command, :command, :program, :run!, :global_option,
+    :commands, :alias_command, :default_command
 
   ##
   # Return the current binding.
