@@ -80,6 +80,18 @@ module Commander
     end
     
     ##
+    # Implements ask_for_CLASS methods.
+    
+    module AskForClass
+      def method_missing meth, *args, &block
+        case meth.to_s
+        when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, eval($1.capitalize))
+        else super
+        end
+      end
+    end
+    
+    ##
     # = Progress Bar
     #
     # Terminal progress bar utility. In its most basic form
