@@ -6,7 +6,7 @@ class Array
   # conjunection with Highline's ask, or ask_for_array
   # methods, which must respond to #parse.
   #
-  # === Highline example:
+  # === Highline example
   #  
   #   # ask invokes Array#parse
   #   list = ask 'Favorite cookies:', Array
