@@ -21,6 +21,7 @@ features, and an elegant API.
 * Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
 * Sexy paging for long bodies of text
 * Sub-command aliasing (very powerful, as both switches and arguments can be used)
+* Support for MacOS Growl notifications
 * Use the 'commander' executable to initialize a commander driven program
 
 == Example
@@ -153,6 +154,21 @@ simplify common tasks using the following methods:
   # Ask editor, supplying initial text
   ask_editor 'previous data to update'
 
+  # Display a generic Growl notification r 
+  notify 'Something happened'
+
+  # Display an 'info' status notification
+  notify_info 'You have #{emails.length} new email(s)'
+
+  # Display an 'ok' status notification
+  notify_ok 'Gems updated'
+
+  # Display a 'warning' status notification 
+  notify_warning '1 gem failed installation'
+
+  # Display an 'error' status notification
+  notify_error "Gem #{name} failed"
+
 == Commander Goodies
 
 === Option Defaults
@@ -282,6 +298,11 @@ http://github.com/visionmedia/terminal-table
    +----------+-------+----+--------+-----------------------+
    |          |       |    |        | get it while its hot! |
    +----------+-------+----+--------+-----------------------+
+
+== Growl Notifications
+
+To utilize the #notify and #notify_STATUS methods you need to install
+http://github.com/visionmedia/growl which utilizes the 'growlnotify' executable.
 
 == Contrib
 
