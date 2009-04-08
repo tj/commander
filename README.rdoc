@@ -154,7 +154,7 @@ simplify common tasks using the following methods:
   # Ask editor, supplying initial text
   ask_editor 'previous data to update'
 
-  # Display a generic Growl notification r 
+  # Display a generic Growl notification
   notify 'Something happened'
 
   # Display an 'info' status notification
