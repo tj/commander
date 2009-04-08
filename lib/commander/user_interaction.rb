@@ -97,10 +97,10 @@ module Commander
       Growl({ :message => message.to_s, :title => program(:name) }.merge(options))
     end
     
-    %w( ok warning error ).each do |status|
-      define_method :"notify_#{status}" do |message, *args|
+    %w( ok info warning error ).each do |type|
+      define_method :"notify_#{type}" do |message, *args|
         options = args.first || {}
-        image = File.expand_path File.join(File.dirname(__FILE__), 'images', "#{status}.png")
+        image = File.join File.expand_path(File.dirname(__FILE__)), 'images', "#{type}.png"
         notify message, options.merge(:image => image)
       end
     end
