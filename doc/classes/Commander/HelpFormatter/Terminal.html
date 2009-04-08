@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="%charset%"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Commander::HelpFormatter::Terminal</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=%charset%" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />Commander::HelpFormatter::Terminal</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/commander/help_formatters/terminal_rb.html">lib/commander/help_formatters/terminal.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            Base
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000025">render</a></li>
+        
+        <li><a href="#M000026">render_command</a></li>
+        
+        <li><a href="#M000027">template</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000025"></a><b>render</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000025_source')" id="l_M000025_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/8b0687bc14fd355ea199247516971806d9ae3e2d/lib/commander/help_formatters/terminal.rb#L5" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000025_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File lib/commander/help_formatters/terminal.rb, line 5</span>
+5:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>
+6:         <span class="ruby-identifier">template</span>(<span class="ruby-identifier">:help</span>).<span class="ruby-identifier">result</span> <span class="ruby-ivar">@runner</span>.<span class="ruby-identifier">get_binding</span>
+7:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000026"></a><b>render_command</b>(command)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000026_source')" id="l_M000026_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/8b0687bc14fd355ea199247516971806d9ae3e2d/lib/commander/help_formatters/terminal.rb#L9" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000026_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File lib/commander/help_formatters/terminal.rb, line 9</span>
+ 9:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_command</span> <span class="ruby-identifier">command</span>
+10:         <span class="ruby-identifier">template</span>(<span class="ruby-identifier">:command_help</span>).<span class="ruby-identifier">result</span> <span class="ruby-identifier">command</span>.<span class="ruby-identifier">get_binding</span>
+11:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000027"></a><b>template</b>(name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000027_source')" id="l_M000027_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/8b0687bc14fd355ea199247516971806d9ae3e2d/lib/commander/help_formatters/terminal.rb#L13" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000027_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File lib/commander/help_formatters/terminal.rb, line 13</span>
+13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">template</span> <span class="ruby-identifier">name</span>
+14:         <span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-keyword kw">__FILE__</span>), <span class="ruby-value str">'terminal'</span>, <span class="ruby-node">&quot;#{name}.erb&quot;</span>)), <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'-'</span>)
+15:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

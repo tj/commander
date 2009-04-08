@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="%charset%"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Commander::UI::ProgressBar</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=%charset%" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
+        <tr>
+            <td class="file-title"><span class="file-title-prefix">Class</span><br />Commander::UI::ProgressBar</td>
+            <td align="right">
+                <table cellspacing="0" cellpadding="2">
+                    <tr valign="top">
+                        <td>In:</td>
+                        <td>
+                            
+                            <a href="../../../files/lib/commander/user_interaction_rb.html">lib/commander/user_interaction.rb</a>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Parent:</td>
+                        <td>
+                            
+                            <a href="../../Object.html">Object</a>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description"><h1>Progress Bar</h1>
+<p>
+Terminal progress bar utility. In its most basic form requires that the
+developer specifies when the bar should be incremented. Note that a hash of
+tokens may be passed to <a href="ProgressBar.html#M000066">increment</a>,
+(or returned when using Object#progress).
+</p>
+<pre>
+  uris = %w(
+    http://vision-media.ca
+    http://yahoo.com
+    http://google.com
+    )
+
+  bar = Commander::UI::ProgressBar.new uris.length, options
+  threads = []
+  uris.each do |uri|
+    threads &lt;&lt; Thread.new do
+      begin
+        res = open uri
+        bar.increment :uri =&gt; uri
+      rescue Exception =&gt; e
+        bar.increment :uri =&gt; &quot;#{uri} failed&quot;
+      end
+    end
+  end
+  threads.each { |t| t.join }
+</pre>
+<p>
+The <a href="../../Object.html">Object</a> method <a
+href="ProgressBar.html#M000069">progress</a> is also available:
+</p>
+<pre>
+  progress uris, :width =&gt; 10 do |uri|
+    res = open uri
+    { :uri =&gt; uri } # Can now use :uri within :format option
+  end
+</pre>
+</div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <ul>
+        
+        <li><a href="#M000065">completed?</a></li>
+        
+        <li><a href="#M000067">erase_line</a></li>
+        
+        <li><a href="#M000064">finished?</a></li>
+        
+        <li><a href="#M000060">generate_tokens</a></li>
+        
+        <li><a href="#M000066">increment</a></li>
+        
+        <li><a href="#M000050">new</a></li>
+        
+        <li><a href="#M000053">percent_complete</a></li>
+        
+        <li><a href="#M000069">progress</a></li>
+        
+        <li><a href="#M000059">progress_bar</a></li>
+        
+        <li><a href="#M000063">show</a></li>
+        
+        <li><a href="#M000058">steps_remaining</a></li>
+        
+        <li><a href="#M000054">time_elapsed</a></li>
+        
+        <li><a href="#M000055">time_remaining</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000050"></a><b>new</b>(total, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Creates a new progress bar.
+</p>
+<h3>Options:</h3>
+<pre>
+  :title              Title, defaults to &quot;Progress&quot;
+  :width              Width of :progress_bar
+  :progress_str       Progress string, defaults to &quot;=&quot;
+  :incomplete_str     Incomplete bar string, defaults to '.'
+  :format             Defaults to &quot;:title |:progress_bar| :percent_complete% complete &quot;
+  :tokens             Additional tokens replaced within the format string
+  :complete_message   Defaults to &quot;Process complete&quot;
+</pre>
+<h3>Tokens:</h3>
+<pre>
+  :title
+  :percent_complete
+  :progress_bar
+  :step
+  :steps_remaining
+  :total_steps
+  :time_elapsed
+  :time_remaining
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000050_source')" id="l_M000050_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L183" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000050_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 183</span>
+183:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">total</span>, <span class="ruby-identifier">options</span> = {}
+184:         <span class="ruby-ivar">@total_steps</span>, <span class="ruby-ivar">@step</span>, <span class="ruby-ivar">@start_time</span> = <span class="ruby-identifier">total</span>, <span class="ruby-value">0</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+185:         <span class="ruby-ivar">@title</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-identifier">:title</span>, <span class="ruby-value str">'Progress'</span>
+186:         <span class="ruby-ivar">@width</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-identifier">:width</span>, <span class="ruby-value">25</span>
+187:         <span class="ruby-ivar">@progress_str</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-identifier">:progress_str</span>, <span class="ruby-value str">'='</span>
+188:         <span class="ruby-ivar">@incomplete_str</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-identifier">:incomplete_str</span>, <span class="ruby-value str">'.'</span>
+189:         <span class="ruby-ivar">@complete_message</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-identifier">:complete_message</span>, <span class="ruby-value str">'Process complete'</span>
+190:         <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-identifier">:format</span>, <span class="ruby-value str">':title |:progress_bar| :percent_complete% complete '</span>
+191:         <span class="ruby-ivar">@tokens</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-identifier">:tokens</span>, {}
+192:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000069"></a><b>progress</b>(arr, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Output progress while iterating <em>arr</em>.
+</p>
+<h3>Example:</h3>
+<pre>
+  uris = %w( http://vision-media.ca http://google.com )
+  ProgressBar.progress uris, :format =&gt; &quot;Remaining: :time_remaining&quot; do |uri|
+    res = open uri
+  end
+</pre>
+<h3>See:</h3>
+<ul>
+<li>Object#progress
+
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000069_source')" id="l_M000069_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L307" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000069_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 307</span>
+307:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">progress</span> <span class="ruby-identifier">arr</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+308:         <span class="ruby-identifier">bar</span> = <span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">options</span>
+309:         <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">bar</span>.<span class="ruby-identifier">increment</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">v</span>) }
+310:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000065"></a><b>completed?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Weither or not the operation has completed.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000065_source')" id="l_M000065_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L270" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000065_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 270</span>
+270:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">completed?</span>
+271:         <span class="ruby-ivar">@step</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@total_steps</span>
+272:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000067"></a><b>erase_line</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Erase previous terminal line.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000067_source')" id="l_M000067_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L287" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000067_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 287</span>
+287:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">erase_line</span>
+288:         <span class="ruby-comment cmt"># highline does not expose the output stream</span>
+289:         <span class="ruby-identifier">$terminal</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value str">'@output'</span>).<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;\r\e[K&quot;</span>
+290:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000064"></a><b>finished?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Weither or not the operation is complete, and we have finished.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000064_source')" id="l_M000064_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L263" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000064_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 263</span>
+263:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finished?</span>
+264:         <span class="ruby-ivar">@step</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@total_steps</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+265:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000060"></a><b>generate_tokens</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Generates tokens for this step.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000060_source')" id="l_M000060_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L232" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000060_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 232</span>
+232:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_tokens</span>
+233:         {
+234:           <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@title</span>,
+235:           <span class="ruby-identifier">:percent_complete</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">percent_complete</span>,
+236:           <span class="ruby-identifier">:progress_bar</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">progress_bar</span>, 
+237:           <span class="ruby-identifier">:step</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@step</span>,
+238:           <span class="ruby-identifier">:steps_remaining</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">steps_remaining</span>,
+239:           <span class="ruby-identifier">:total_steps</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@total_steps</span>, 
+240:           <span class="ruby-identifier">:time_elapsed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%0.2fs&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">time_elapsed</span>,
+241:           <span class="ruby-identifier">:time_remaining</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;%0.2fs&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">time_remaining</span>,
+242:         }.
+243:         <span class="ruby-identifier">merge!</span> <span class="ruby-ivar">@tokens</span>
+244:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000066"></a><b>increment</b>(tokens = {})
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Increment progress. Optionally pass <em>tokens</em> which can be displayed
+in the output format.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000066_source')" id="l_M000066_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L278" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000066_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 278</span>
+278:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment</span> <span class="ruby-identifier">tokens</span> = {}
+279:         <span class="ruby-ivar">@step</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+280:         <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">merge!</span> <span class="ruby-identifier">tokens</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tokens</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+281:         <span class="ruby-identifier">show</span>
+282:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000053"></a><b>percent_complete</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Completion percentage.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000053_source')" id="l_M000053_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L197" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000053_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 197</span>
+197:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">percent_complete</span>
+198:         <span class="ruby-ivar">@step</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@total_steps</span>
+199:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000059"></a><b>progress_bar</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Formatted progress bar.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000059_source')" id="l_M000059_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L225" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000059_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 225</span>
+225:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">progress_bar</span>
+226:         (<span class="ruby-ivar">@progress_str</span> <span class="ruby-operator">*</span> (<span class="ruby-ivar">@width</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">percent_complete</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>)).<span class="ruby-identifier">ljust</span> <span class="ruby-ivar">@width</span>, <span class="ruby-ivar">@incomplete_str</span>
+227:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000063"></a><b>show</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Output the progress bar.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000063_source')" id="l_M000063_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L249" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000063_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 249</span>
+249:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+250:         <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">finished?</span>
+251:           <span class="ruby-identifier">erase_line</span>
+252:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">completed?</span>
+253:             <span class="ruby-identifier">$terminal</span>.<span class="ruby-identifier">say</span> <span class="ruby-ivar">@complete_message</span>.<span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">generate_tokens</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@complete_message</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">String</span>
+254:           <span class="ruby-keyword kw">else</span>
+255:             <span class="ruby-identifier">$terminal</span>.<span class="ruby-identifier">say</span> <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">generate_tokens</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">' '</span>
+256:           <span class="ruby-keyword kw">end</span>
+257:         <span class="ruby-keyword kw">end</span>
+258:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000058"></a><b>steps_remaining</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Number of steps left.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000058_source')" id="l_M000058_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L218" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000058_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 218</span>
+218:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">steps_remaining</span>
+219:         <span class="ruby-ivar">@total_steps</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@step</span>
+220:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000054"></a><b>time_elapsed</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Time that has elapsed since the operation started.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000054_source')" id="l_M000054_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L204" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000054_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 204</span>
+204:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">time_elapsed</span>
+205:         <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_time</span>
+206:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title">
+                    
+                    <a name="M000055"></a><b>time_remaining</b>()
+                    
+                </div>
+                
+                <div class="description">
+                    <p>
+Estimated time remaining.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000055_source')" id="l_M000055_source">show</a>
+                        
+                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L211" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000055_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 211</span>
+211:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">time_remaining</span>
+212:         (<span class="ruby-identifier">time_elapsed</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@step</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">steps_remaining</span>
+213:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    
