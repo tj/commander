@@ -50,3 +50,18 @@ ask_editor
 
 # Ask editor, supplying initial text
 ask_editor 'previous data to update'
+
+# Display a generic Growl notification
+notify 'Something happened'
+
+# Display an 'info' status notification
+notify_info 'You have #{emails.length} new email(s)'
+
+# Display an 'ok' status notification
+notify_ok 'Gems updated'
+
+# Display a 'warning' status notification 
+notify_warning '1 gem failed installation'
+
+# Display an 'error' status notification
+notify_error "Gem #{name} failed"

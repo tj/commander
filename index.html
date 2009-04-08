@@ -40,6 +40,7 @@
       <li>Highly customizable progress bar with intuative, simple usage</li>
       <li>Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'</li>
       <li>Sexy paging for long bodies of text</li>
+      <li>Growl notification support for MacOS</li>
       <li>Sub-command aliasing (very powerful, as both switches and arguments can be used)</li>
       <li>Use the 'commander' executable to initialize a commander driven program</li>
     </ul>
@@ -130,6 +131,21 @@
       
       <span class="comment"># Ask editor, supplying initial text
       </span>ask_editor <span class="string">'previous data to update'</span>
+      
+      <span class="comment"># Display a generic Growl notification
+      </span>notify <span class="string">'Something happened'</span>
+      
+      <span class="comment"># Display an 'info' status notification
+      </span>notify_info <span class="string">'You have #{emails.length} new email(s)'</span>
+      
+      <span class="comment"># Display an 'ok' status notification
+      </span>notify_ok <span class="string">'Gems updated'</span>
+      
+      <span class="comment"># Display a 'warning' status notification 
+      </span>notify_warning <span class="string">'1 gem failed installation'</span>
+      
+      <span class="comment"># Display an 'error' status notification
+      </span>notify_error <span class="string">&quot;Gem #{name} failed&quot;</span>
     </code>
     <h2>API Documentation</h2>
     <a href='doc/index.html'>Click to view</a>
