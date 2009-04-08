@@ -21,7 +21,7 @@ features, and an elegant API.
 * Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
 * Sexy paging for long bodies of text
 * Sub-command aliasing (very powerful, as both switches and arguments can be used)
-* Support for MacOS Growl notifications
+* Growl notification support for MacOS
 * Use the 'commander' executable to initialize a commander driven program
 
 == Example
