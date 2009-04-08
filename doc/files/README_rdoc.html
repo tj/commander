@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Wed Apr 08 15:59:49 -0700 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/Commander.html">Commander</a></h1>
+<p>
+The complete solution for Ruby command-line executables. <a
+href="../classes/Commander.html">Commander</a> bridges the gap between
+other terminal related libraries you know and love (OptionParser,
+HighLine), while providing many new features, and an elegant API.
+</p>
+<h2>Features</h2>
+<ul>
+<li>Easier than baking cookies
+
+</li>
+<li>Parses options using OptionParser
+
+</li>
+<li>Auto-populates struct with options ( no more { |v| options[:recursive] = v
+} )
+
+</li>
+<li>Auto-generates help documentation via pluggable help formatters
+
+</li>
+<li>Optional default sub-command when none is present
+
+</li>
+<li>Global / Sub-command level options
+
+</li>
+<li>Packaged with two help formatters (Terminal, TerminalCompact)
+
+</li>
+<li>Imports the highline gem for interacting with the terminal
+
+</li>
+<li>Adds additional user interaction functionality
+
+</li>
+<li>Highly customizable progress bar with intuative, simple usage
+
+</li>
+<li>Multi-word command name support such as &#8216;drupal module install
+MOD&#8217;, rather than &#8216;drupal module_install MOD&#8216;
+
+</li>
+<li>Sexy paging for long bodies of text
+
+</li>
+<li>Sub-command aliasing (very powerful, as both switches and arguments can be
+used)
+
+</li>
+<li>Growl notification support for MacOS
+
+</li>
+<li>Use the &#8216;commander&#8217; executable to initialize a commander driven
+program
+
+</li>
+</ul>
+<h2>Example</h2>
+<p>
+For more option examples view the Commander::Command#option method. Also an
+important feature to note is that when_called may be a class to
+instantiate, as well as an object, specifying a method to call, so view the
+RDoc for more information.
+</p>
+<pre>
+   require 'rubygems'
+   require 'commander'
+
+   # :name is optional, otherwise uses the basename of this executable
+   program :name, 'Foo Bar'
+   program :version, '1.0.0'
+   program :description, 'Stupid command that prints foo or bar.'
+
+   command :foo do |c|
+     c.syntax = 'foobar foo'
+     c.description = 'Displays foo'
+     c.when_called do |args, options|
+       say 'foo'
+     end
+   end
+
+   command :bar do |c|
+     c.syntax = 'foobar bar [options]'
+     c.description = 'Display bar with optional prefix and suffix'
+     c.option '--prefix STRING', String, 'Adds a prefix to bar'
+     c.option '--suffix STRING', String, 'Adds a suffix to bar'
+     c.when_called do |args, options|
+       options.default :prefix =&gt; '(', :suffix =&gt; ')'
+       say &quot;#{options.prefix}bar#{options.suffix}&quot;
+     end
+   end
+
+   $ foobar bar
+   # =&gt; (bar)
+
+   $ foobar bar --suffix '{' --prefix '}'
+   # =&gt; {bar}
+</pre>
+<h2>HighLine</h2>
+<p>
+As mentioned above the highline gem is imported into &#8216;global
+scope&#8217;, below are some quick examples for how to utilize highline in
+your command(s):
+</p>
+<pre>
+   # Ask for password masked with '*' character
+   ask(&quot;Password:  &quot;) { |q| q.echo = &quot;*&quot; }
+
+   # Ask for password
+   ask(&quot;Password:  &quot;) { |q| q.echo = false }
+
+   # Ask if the user agrees (yes or no)
+   agree(&quot;Do something?&quot;)
+
+   # Asks on a single line (note the space after ':')
+   ask(&quot;Name: &quot;)
+
+   # Asks with new line after &quot;Description:&quot;
+   ask(&quot;Description:&quot;)
+
+   # Calls Date#parse to parse the date string passed
+   ask(&quot;Birthday? &quot;, Date)
+
+   # Ensures Integer is within the range specified
+   ask(&quot;Age? &quot;, Integer) { |q| q.in = 0..105 }
+
+   # Asks for a list of strings, converts to array
+   ask(&quot;Fav colors?&quot;, Array)
+
+   # Provide a menu for users to choose from
+   choose do |menu|
+     menu.index = :letter
+     menu.index_suffix = &quot;) &quot;
+     menu.prompt = &quot;Please choose your favorite programming language?  &quot;
+     menu.choice :ruby do say(&quot;Good choice!&quot;) end
+     menu.choices(:python, :perl) do say(&quot;Not from around here, are you?&quot;) end
+   end
+
+   # Custom shell
+   loop do
+     choose do |menu|
+       menu.layout = :menu_only
+       menu.shell = true
+       menu.choice(:load, &quot;Load a file.&quot;) do |command, details|
+         say(&quot;Loading file with options:  #{details}...&quot;)
+       end
+       menu.choice(:save, &quot;Save a file.&quot;) do |command, details|
+         say(&quot;Saving file with options:  #{details}...&quot;)
+       end
+       menu.choice(:quit, &quot;Exit program.&quot;) { exit }
+     end
+   end
+</pre>
+<h2>HighLine &amp; Interaction Additions</h2>
+<p>
+In addition to highline&#8216;s fantastic choice of methods we will
+continue to simplify common tasks using the following methods:
+</p>
+<pre>
+   # Ask for password
+   password
+
+   # Ask for password with specific message and mask character
+   password &quot;Enter your password please:&quot;, '-'
+
+   # Ask for CLASS, which may be any valid class responding to #parse. Date, Time, Array, etc
+   names = ask_for_array 'Names: '
+   bday = ask_for_date 'Birthday?: '
+
+   # Simple progress bar (Commander::UI::ProgressBar)
+   uris = %w[
+     http://vision-media.ca
+     http://google.com
+     http://yahoo.com
+     ]
+   progress uris do |uri|
+     res = open uri
+     # Do something with response
+   end
+
+  # 'Log' action to stdout
+  log &quot;create&quot;, &quot;path/to/file.rb&quot;
+
+  # Enable paging of output after this point
+  enable_paging
+
+  # Ask editor for input (EDITOR or TextMate by default)
+  ask_editor
+
+  # Ask editor, supplying initial text
+  ask_editor 'previous data to update'
+
+  # Display a generic Growl notification
+  notify 'Something happened'
+
+  # Display an 'info' status notification
+  notify_info 'You have #{emails.length} new email(s)'
+
+  # Display an 'ok' status notification
+  notify_ok 'Gems updated'
+
+  # Display a 'warning' status notification
+  notify_warning '1 gem failed installation'
+
+  # Display an 'error' status notification
+  notify_error &quot;Gem #{name} failed&quot;
+</pre>
+<h2><a href="../classes/Commander.html">Commander</a> Goodies</h2>
+<h3>Option Defaults</h3>
+<p>
+The options struct passed to when_called provides a default method,
+allowing you to set defaults in a clean manor to options which have not
+been set.
+</p>
+<pre>
+  command :foo do |c|
+    c.option '--interval SECONDS', Integer, 'Interval in seconds'
+    c.option '--timeout SECONDS', Integer, 'Timeout in seconds'
+    c.when_called do |args, options|
+      options.default \
+        :interval =&gt; 2,
+        :timeout  =&gt; 60
+    end
+  end
+</pre>
+<h3>Command Aliasing</h3>
+<p>
+Aliases can be created using the alias_command method like below:
+</p>
+<pre>
+  command :'install gem' do |c|
+    c.when_called { puts 'foo' }
+  end
+  alias_command :'gem install', :'install gem'
+</pre>
+<p>
+Or more complicated aliases can be made, passing any arguments as if it was
+invoked via the command line:
+</p>
+<pre>
+  command :'install gem' do |c|
+    c.syntax = 'install gem &lt;name&gt; [options]'
+    c.option '--dest DIR', String, 'Destination directory'
+    c.when_called { |args, options| puts &quot;installing #{args.first} to #{options.dest}&quot; }
+  end
+  alias_command :update, :'install gem', 'rubygems', '--dest', 'some_path'
+
+  $ foo update
+  # =&gt; installing rubygems to some_path
+</pre>
+<h3>Command Defaults</h3>
+<p>
+Although working with a sub-command executable framework provides many
+benefits over a single command implementation, sometimes you still want the
+ability to create a terse syntax for your command. With that in mind we may
+use default_command to help with this. Considering our previous
+:&#8217;install gem&#8217; example:
+</p>
+<pre>
+  default_command :update
+
+  $ foo
+  # =&gt; installing rubygems to some_path
+</pre>
+<p>
+Keeping in mind that commander searches for the longest possible match when
+considering a sub-command, so if you were to pass arguments to foo like
+below, expecting them to be passed to :update, this would be incorrect, and
+would end up calling :&#8217;install gem&#8217;, so be careful that the
+users do not need to use command names within the arguments.
+</p>
+<pre>
+  $ foo install gem
+  # =&gt; installing  to
+</pre>
+<h3>Additional Global Help</h3>
+<p>
+Arbitrary help can be added using the following program symbol:
+</p>
+<pre>
+  program :help, 'Author', 'TJ Holowaychuk &lt;tj@vision-media.ca&gt;'
+</pre>
+<p>
+Which will output the rest of the help doc, along with:
+</p>
+<pre>
+  AUTHOR:
+
+    TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+</pre>
+<h3>Global Options</h3>
+<p>
+Although most switches will be at the sub-command level, several are
+available by default at the global level, such as &#8212;version, and
+&#8212;help. Using global_option you can add additional global options:
+</p>
+<pre>
+  global_option('-c', '--config FILE', 'Load config data for your commands to use') { |file| ... }
+</pre>
+<p>
+This method accepts the same syntax as Commander::Command#option so check
+it out for documentation.
+</p>
+<p>
+All global options regardless of providing a block are accessable at the
+sub-command level. This means that instead of the following:
+</p>
+<pre>
+  global_option('--verbose') { $verbose = true }
+  ...
+  c.when_called do |args, options|
+    say 'foo' if $verbose
+  ...
+</pre>
+<p>
+You may:
+</p>
+<pre>
+  global_option '--verbose'
+  ...
+  c.when_called do |args, options|
+    say 'foo' if options.verbose
+  ...
+</pre>
+<h3>Formatters</h3>
+<p>
+Two core formatters are currently available, the default Terminal formatter
+as well as TerminalCompact. To utilize a different formatter simply use
+:help_formatter like below:
+</p>
+<pre>
+  program :help_formatter, Commander::HelpFormatter::TerminalCompact
+</pre>
+<p>
+This abstraction could be utilized to generate HTML documentation for your
+executable.
+</p>
+<h2>Tips</h2>
+<p>
+When adding a global or sub-command option, OptionParser implicitly adds a
+small switch even when not explicitly created, for example -c will be the
+same as &#8212;config in both examples, however &#8217;-c&#8217; will only
+appear in the documentation when explicitly assigning it.
+</p>
+<pre>
+  global_option '-c', '--config FILE'
+  global_option '--config FILE'
+</pre>
+<h2>ASCII Tables</h2>
+<p>
+For feature rich ASCII tables for your terminal app check out
+visionmedia&#8216;s terminal-table gem at <a
+href="http://github.com/visionmedia/terminal-table">github.com/visionmedia/terminal-table</a>
+</p>
+<pre>
+   +----------+-------+----+--------+-----------------------+
+   | Terminal | Table | Is | Wicked | Awesome               |
+   +----------+-------+----+--------+-----------------------+
+   |          |       |    |        | get it while its hot! |
+   +----------+-------+----+--------+-----------------------+
+</pre>
+<h2>Growl Notifications</h2>
+<p>
+To utilize the notify and notify_STATUS methods you need to install <a
+href="http://github.com/visionmedia/growl">github.com/visionmedia/growl</a>
+which utilizes the &#8216;growlnotify&#8217; executable.
+</p>
+<h2>Contrib</h2>
+<p>
+Feel free to fork and request a pull, or submit a ticket <a
+href="http://visionmedia.lighthouseapp.com/projects/27643-commander">visionmedia.lighthouseapp.com/projects/27643-commander</a>
+</p>
+<h2>Known Issues</h2>
+<ul>
+<li>ask_editor has been tested with TextMate only
+
+</li>
+</ul>
+<h2>License</h2>
+<p>
+(The MIT License)
+</p>
+<p>
+Copyright (c) 2008-2009 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+</p>
+<p>
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+&#8216;Software&#8217;), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+</p>
+<p>
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+</p>
+<p>
+THE SOFTWARE IS PROVIDED &#8216;AS IS&#8217;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
