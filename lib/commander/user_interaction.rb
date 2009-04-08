@@ -80,6 +80,32 @@ module Commander
     end
     
     ##
+    # Send a Growl notification +message+. This method
+    # requires that visionmedia-growl is installed and in the
+    # loadpath stack.
+    #
+    # === Examples
+    #
+    #  notify 'You have a new email', :title => 'Email'
+    #  notify_ok 'Gems updated'
+    #  notify_warning "Gem #{name} failed to install"
+    #  notify_error 'Failed to update gems'
+    #
+    
+    def notify message, options = {}
+      require 'growl'
+      Growl({ :message => message.to_s, :title => program(:name) }.merge(options))
+    end
+    
+    %w( ok warning error ).each do |status|
+      define_method :"notify_#{status}" do |message, *args|
+        options = args.first || {}
+        image = File.expand_path File.join(File.dirname(__FILE__), 'images', "#{status}.png")
+        notify message, options.merge(:image => image)
+      end
+    end
+    
+    ##
     # Implements ask_for_CLASS methods.
     
     module AskForClass
