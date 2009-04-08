@@ -278,10 +278,10 @@ module Commander
     def remove_global_options
       # TODO: refactor with flipflop
       options.each do |option|
-        switch, has_arg = option[:args].first.split
+        switches = option[:switches]
         past_switch, arg_removed = false, false
         @args.delete_if do |arg|
-          if arg == switch
+          if switches.include? arg
             past_switch, arg_removed = true, false
             true
           elsif past_switch && !arg_removed && arg !~ /^-/ 
