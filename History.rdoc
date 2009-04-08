@@ -1,4 +1,9 @@
 
+=== 3.2.7 / 2009-04-08
+
+* Added #notify, #notify_ok, #notify_warning, #notify_info and #notify_error
+  These methods all utilize the MacOS growlnotify binary, very cool stuff check it out!
+
 === 3.2.6 / 2009-04-08
 
 * Added Commander::UI::AskForClass
