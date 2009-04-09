@@ -114,10 +114,8 @@ describe Commander do
       args << '-t'
       args << '--help'
       args << '--sub-command'
-      args << '--sub-command-with-arg'
-      args << 'rawr'
-      args << '--paths'
-      args << '"lib/**/*.js","spec/**/*.js"'
+      args << '--sub-command-with-arg' << 'rawr'
+      args << '--paths' << '"lib/**/*.js","spec/**/*.js"'
       command_runner.remove_global_options options, args
       args.should == ['--sub-command', '--sub-command-with-arg', 'rawr']
     end
