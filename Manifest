@@ -15,10 +15,6 @@ lib/commander/help_formatters/terminal_compact/command_help.erb
 lib/commander/help_formatters/terminal_compact/help.erb
 lib/commander/help_formatters/terminal_compact.rb
 lib/commander/help_formatters.rb
-lib/commander/images/error.png
-lib/commander/images/info.png
-lib/commander/images/ok.png
-lib/commander/images/warning.png
 lib/commander/runner.rb
 lib/commander/user_interaction.rb
 lib/commander/version.rb

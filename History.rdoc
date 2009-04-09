@@ -1,4 +1,10 @@
 
+=== 3.2.8 / 2009-04-09
+
+* Added auto-loading support of visionmedia-growl convenience methods when the gem is available
+* Changed; growl related methods are now part of visionmedia-growl
+* Fixed doc typos
+
 === 3.2.7 / 2009-04-08
 
 * Added #notify, #notify_ok, #notify_warning, #notify_info and #notify_error
