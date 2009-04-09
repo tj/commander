@@ -7,8 +7,7 @@ module Commander
   #
   # Commander's user interaction module mixes in common
   # methods which extend HighLine's functionality such 
-  # as a unified +password+ method rather than calling
-  # +ask+ directly.
+  # as a +password+ method rather than calling +ask+ directly.
   
   module UI
     
