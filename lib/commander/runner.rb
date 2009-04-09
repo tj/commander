@@ -281,7 +281,8 @@ module Commander
         switches = option[:switches]
         past_switch, arg_removed = false, false
         @args.delete_if do |arg|
-          if switches.any? { |switch| switch =~ /^#{arg}/ }
+          # TODO: clean this up, no rescuing ;)
+          if switches.any? { |switch| switch.match(/^#{arg}/) rescue false }
             past_switch, arg_removed = true, false
             true
           elsif past_switch && !arg_removed && arg !~ /^-/ 
