@@ -4,7 +4,7 @@ module Commander
   ##
   # = User Interaction
   #
-  # Commander's user interacton module mixes in common
+  # Commander's user interaction module mixes in common
   # methods which extend HighLine's functionality such 
   # as a unified +password+ method rather than calling
   # +ask+ directly.
@@ -258,14 +258,14 @@ module Commander
       end
       
       ##
-      # Weither or not the operation is complete, and we have finished.
+      # Whether or not the operation is complete, and we have finished.
       
       def finished?
         @step == @total_steps + 1
       end
 
       ##
-      # Weither or not the operation has completed.
+      # Whether or not the operation has completed.
 
       def completed?
         @step == @total_steps

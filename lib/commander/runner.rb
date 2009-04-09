@@ -118,7 +118,7 @@ module Commander
     
     ##
     # Creates and yields a command instance when a block is passed.
-    # Otherise attempts to return the command, raising InvalidCommandError when
+    # Otherwise attempts to return the command, raising InvalidCommandError when
     # it does not exist.
     #
     # === Examples:
@@ -150,7 +150,7 @@ module Commander
     end
     
     ##
-    # Alias command +name+ with +alias_name+. Optionallry +args+ may be passed
+    # Alias command +name+ with +alias_name+. Optionally +args+ may be passed
     # as if they were being passed straight to the original command via the command-line.
     
     def alias_command alias_name, name, *args
@@ -195,7 +195,7 @@ module Commander
     end
     
     ##
-    # Attemps to locate a command name from within the arguments.
+    # Attempts to locate a command name from within the arguments.
     # Supports multi-word commands, using the largest possible match.
     
     def command_name_from_args
@@ -272,7 +272,7 @@ module Commander
     
     ##
     # Removes global options from args. This prevents an invalid
-    # option error from ocurring when options are parsed
+    # option error from occurring when options are parsed
     # again for the sub-command.
     
     def remove_global_options
@@ -308,7 +308,7 @@ module Commander
     
     ##
     # Returns a proc allowing for sub-commands to inherit global options.
-    # This functionality works weither a block is present for the global
+    # This functionality works whether a block is present for the global
     # option or not, so simple switches such as --verbose can be used
     # without a block, and used throughout all sub-commands.
     
@@ -331,7 +331,7 @@ module Commander
     end
     
     ##
-    # Return switches and description seperated from the +args+ passed.
+    # Return switches and description separated from the +args+ passed.
 
     def self.seperate_switches_from_description *args
       switches = args.find_all { |arg| arg.to_s =~ /^-/ } 
