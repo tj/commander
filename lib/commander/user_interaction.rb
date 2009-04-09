@@ -1,4 +1,5 @@
 
+
 module Commander
   
   ##
@@ -10,6 +11,18 @@ module Commander
   # +ask+ directly.
   
   module UI
+    
+    #--
+    # Auto include growl when available.
+    #++
+    
+    begin
+      require 'growl'
+    rescue LoadError
+      # Do nothing
+    else
+      include Growl
+    end
     
     ##
     # Ask the user for a password. Specify a custom
@@ -76,32 +89,6 @@ module Commander
         $stderr.reopen write if $stderr.tty?
         read.close; write.close
         return
-      end
-    end
-    
-    ##
-    # Send a Growl notification +message+. This method
-    # requires that visionmedia-growl is installed and in the
-    # loadpath stack.
-    #
-    # === Examples
-    #
-    #  notify 'You have a new email', :title => 'Email'
-    #  notify_ok 'Gems updated'
-    #  notify_warning "Gem #{name} failed to install"
-    #  notify_error 'Failed to update gems'
-    #
-    
-    def notify message, options = {}
-      require 'growl'
-      Growl({ :message => message.to_s, :title => program(:name) }.merge(options))
-    end
-    
-    %w( ok info warning error ).each do |type|
-      define_method :"notify_#{type}" do |message, *args|
-        options = args.first || {}
-        image = File.join File.expand_path(File.dirname(__FILE__)), 'images', "#{type}.png"
-        notify message, options.merge(:image => image)
       end
     end
     
