@@ -1,4 +1,8 @@
 
+=== 3.2.9 / 2009-04-09
+
+* Fixed bug in removal of global options
+
 === 3.2.8 / 2009-04-09
 
 * Added auto-loading support of visionmedia-growl convenience methods when the gem is available
