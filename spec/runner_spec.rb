@@ -105,6 +105,24 @@ describe Commander do
     end
   end
   
+  describe "#remove_global_options" do
+    it "should description" do
+      options, args = [], []
+      options << { :switches => ['-t', '--trace'] }
+      options << { :switches => ['--help'] }
+      options << { :switches => ['--paths PATHS'] }
+      args << '-t'
+      args << '--help'
+      args << '--sub-command'
+      args << '--sub-command-with-arg'
+      args << 'rawr'
+      args << '--paths'
+      args << '"lib/**/*.js","spec/**/*.js"'
+      command_runner.remove_global_options options, args
+      args.should == ['--sub-command', '--sub-command-with-arg', 'rawr']
+    end
+  end
+  
   describe "--trace" do
     it "should display pretty errors by default" do
       lambda {

@@ -42,7 +42,7 @@ module Commander
       global_option('-v', '--version', 'Display version information') { say version; return } 
       global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true }
       parse_global_options
-      remove_global_options
+      remove_global_options options, @args
       unless trace
         begin
           run_active_command
@@ -227,8 +227,6 @@ module Commander
         removed << arg if parts.include?(arg) and not removed.include?(arg)
       end
     end
-            
-    private
     
     ##
     # Returns hash of program defaults.
@@ -271,16 +269,16 @@ module Commander
     end
     
     ##
-    # Removes global options from args. This prevents an invalid
+    # Removes global +options+ from +args+. This prevents an invalid
     # option error from occurring when options are parsed
     # again for the sub-command.
     
-    def remove_global_options
+    def remove_global_options options, args
       # TODO: refactor with flipflop
       options.each do |option|
         switches = option[:switches]
         past_switch, arg_removed = false, false
-        @args.delete_if do |arg|
+        args.delete_if do |arg|
           # TODO: clean this up, no rescuing ;)
           if switches.any? { |switch| switch.match(/^#{arg}/) rescue false }
             past_switch, arg_removed = true, false
@@ -354,8 +352,6 @@ module Commander
     def self.switch_to_sym switch
       switch.scan(/[\-\]](\w+)/).join('_').to_sym rescue nil
     end
-    
-    private
     
     def say *args #:nodoc: 
       $terminal.say *args
