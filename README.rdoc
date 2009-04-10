@@ -92,30 +92,6 @@ are some quick examples for how to utilize highline in your command(s):
    # Asks for a list of strings, converts to array
    ask("Fav colors?", Array)
 
-   # Provide a menu for users to choose from
-   choose do |menu|
-     menu.index = :letter
-     menu.index_suffix = ") "
-     menu.prompt = "Please choose your favorite programming language?  "
-     menu.choice :ruby do say("Good choice!") end
-     menu.choices(:python, :perl) do say("Not from around here, are you?") end
-   end
-   
-   # Custom shell
-   loop do
-     choose do |menu|
-       menu.layout = :menu_only
-       menu.shell = true
-       menu.choice(:load, "Load a file.") do |command, details|
-         say("Loading file with options:  #{details}...")
-       end
-       menu.choice(:save, "Save a file.") do |command, details|
-         say("Saving file with options:  #{details}...")
-       end
-       menu.choice(:quit, "Exit program.") { exit }
-     end
-   end
-
 == HighLine & Interaction Additions
 
 In addition to highline's fantastic choice of methods we will continue to
