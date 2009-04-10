@@ -35,6 +35,14 @@ module Commander
     end
     
     ##
+    # Choose from a set array of +choices+.
+    
+    def choose message, *choices
+      say message
+      super *choices
+    end
+    
+    ##
     # 'Log' an _action_ to the terminal. This is typically used
     # for verbose output regarding actions performed. For example:
     #
