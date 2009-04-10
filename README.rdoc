@@ -92,6 +92,9 @@ are some quick examples for how to utilize highline in your command(s):
    # Asks for a list of strings, converts to array
    ask("Fav colors?", Array)
 
+   # Choose from an array of elements
+   choice = choose("Favorite language?", :ruby, :perl, :js)
+
 == HighLine & Interaction Additions
 
 In addition to highline's fantastic choice of methods we will continue to
