@@ -289,7 +289,7 @@ Feel free to fork and request a pull, or submit a ticket
 http://visionmedia.lighthouseapp.com/projects/27643-commander
 
 == Known Issues
-  
+ 
 * ask_editor has been tested with TextMate only
 
 == License

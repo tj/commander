@@ -31,5 +31,5 @@ require 'commander/command'
 require 'commander/help_formatters'
 
 $command_runner = Commander::Runner.new
-$terminal.wrap_at = HighLine::SystemExtensions.terminal_size.first - 10 rescue 80
+$terminal.wrap_at = HighLine::SystemExtensions.terminal_size.first - 5 rescue 80
 at_exit { run! } 
