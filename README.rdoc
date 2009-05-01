@@ -255,6 +255,10 @@ as TerminalCompact. To utilize a different formatter simply use :help_formatter 
 
   program :help_formatter, Commander::HelpFormatter::TerminalCompact
 
+Or utilize the help formatter aliases:
+
+  program :help_formatter, :compact
+
 This abstraction could be utilized to generate HTML documentation for your executable.
 
 == Tips

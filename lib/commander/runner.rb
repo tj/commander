@@ -98,6 +98,8 @@ module Commander
     #   program :help, 'Copyright', '2008 TJ Holowaychuk'
     #   program :help, 'Anything', 'You want'
     #   program :int_message 'Bye bye!'
+    #   program :help_formatter, :compact
+    #   program :help_formatter, Commander::HelpFormatter::TerminalCompact
     #   
     #   # Get data
     #   program :name # => 'Commander'
