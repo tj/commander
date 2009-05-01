@@ -20,6 +20,11 @@ module Commander
     # Global options.
     
     attr_reader :options
+    
+    ##
+    # Hash of help formatter aliases.
+    
+    attr_reader :help_formatter_aliases
 
     ##
     # Initialize a new command runner. Optionally
@@ -27,6 +32,7 @@ module Commander
     
     def initialize args = ARGV
       @args, @commands, @aliases, @options = args, {}, {}, []
+      @help_formatter_aliases = help_formatter_alias_defaults
       @program = program_defaults
       create_default_commands
     end
@@ -110,6 +116,8 @@ module Commander
       if key == :help and !args.empty?
         @program[:help] ||= {}
         @program[:help][args.first] = args[1]
+      elsif key == :help_formatter && !args.empty?
+        @program[key] = (@help_formatter_aliases[args.first] || args.first)
       else
         @program[key] = *args unless args.empty?
         @program[key]
@@ -226,6 +234,13 @@ module Commander
       @args.dup.delete_if do |arg|
         removed << arg if parts.include?(arg) and not removed.include?(arg)
       end
+    end
+    
+    ##
+    # Returns hash of help formatter alias defaults.
+    
+    def help_formatter_alias_defaults
+      return :compact => HelpFormatter::TerminalCompact
     end
     
     ##

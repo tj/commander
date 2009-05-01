@@ -23,6 +23,11 @@ describe Commander do
   	  program :version, ''
       lambda { run! }.should raise_error(Commander::Runner::CommandError)
     end
+    
+    it "should allow aliases of help formatters" do
+      program :help_formatter, :compact
+      program(:help_formatter).should == Commander::HelpFormatter::TerminalCompact
+    end
   end
   
   describe "#command" do
