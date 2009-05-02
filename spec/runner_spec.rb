@@ -118,11 +118,11 @@ describe Commander do
       options << { :switches => ['--paths PATHS'] }
       args << '-t'
       args << '--help'
-      args << '--sub-command'
-      args << '--sub-command-with-arg' << 'rawr'
+      args << '--command'
+      args << '--command-with-arg' << 'rawr'
       args << '--paths' << '"lib/**/*.js","spec/**/*.js"'
       command_runner.remove_global_options options, args
-      args.should == ['--sub-command', '--sub-command-with-arg', 'rawr']
+      args.should == ['--command', '--command-with-arg', 'rawr']
     end
   end
   
@@ -164,7 +164,7 @@ describe Commander do
     end
   end
   
-  describe "with invalid sub-command passed" do
+  describe "with invalid command passed" do
     it "should output an invalid command message" do
       lambda {
         run('foo')  
@@ -172,7 +172,7 @@ describe Commander do
     end
   end
   
-  describe "with invalid sub-command passed to help" do
+  describe "with invalid command passed to help" do
     it "should output an invalid command message" do
       lambda {
         run('help', 'does_not_exist')

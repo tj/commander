@@ -46,10 +46,10 @@
 
 * Added implied small switches so they appear in help (-h, -v, etc)
 * Added #inspect back to Commander::Command::Options [#1]
-* Added inheritance of global options for sub-commands [#7]
+* Added inheritance of global options for commands [#7]
 * Added #require_valid_command 
 * Renamed #call_active_command to #run_active_command
-* Changed; using same option format as sub-command options for globals [#18]
+* Changed; using same option format as command options for globals [#18]
 * Changed; program :name is now optional, and is auto-defined when not specified [#21]
 * Moved #switch_to_sym from Command to Commander::Runner
 * Moved #separate_switches_from_description into Commander::Runner [#22]
@@ -89,7 +89,7 @@
 * Fixed issue with option switchs failing when named as common methods like --send, or --password
 * Fixed bug causing InvalidOption error when global options do not abort the process.
   This was due to these options remaining in the arguments array, in turn being parsed
-  by the sub-command's option parser, issuing the error. This is fixed by #remove_global_options.
+  by the command's option parser, issuing the error. This is fixed by #remove_global_options.
 
 === 3.1.2 / 2009-03-16
 
@@ -214,7 +214,7 @@
 * Added progress bar
 * Added auto-inclusion of FileUtils module
 * Added stdout logging method
-* Fixed issue with options placed before sub-command
+* Fixed issue with options placed before command
 
 === 2.0.1 / 2008-11-24
 
