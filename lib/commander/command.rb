@@ -107,7 +107,7 @@ module Commander
     #
     
     def option *args, &block
-      switches, description = Runner.seperate_switches_from_description *args
+      switches, description = Runner.separate_switches_from_description *args
       proc = block || option_proc(switches)
       @options << {
         :args => args,

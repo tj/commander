@@ -140,7 +140,7 @@ module Commander
     # This would be used for switches such as --version, --trace, etc.
     
     def global_option *args, &block
-      switches, description = Runner.seperate_switches_from_description *args
+      switches, description = Runner.separate_switches_from_description *args
       @options << {
         :args => args,
         :proc => block,
@@ -333,7 +333,7 @@ module Commander
     ##
     # Return switches and description separated from the +args+ passed.
 
-    def self.seperate_switches_from_description *args
+    def self.separate_switches_from_description *args
       switches = args.find_all { |arg| arg.to_s =~ /^-/ } 
       description = args.last unless !args.last.is_a? String or args.last.match(/^-/)
       return switches, description

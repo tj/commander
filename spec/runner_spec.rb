@@ -35,9 +35,9 @@ describe Commander do
     end
   end
   
-  describe "#seperate_switches_from_description" do
+  describe "#separate_switches_from_description" do
     it "should seperate switches and description returning both" do
-      switches, description = *Commander::Runner.seperate_switches_from_description('-h', '--help', 'display help')
+      switches, description = *Commander::Runner.separate_switches_from_description('-h', '--help', 'display help')
       switches.should == ['-h', '--help']
       description.should == 'display help'
     end
