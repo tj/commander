@@ -17,7 +17,7 @@ command :init do |c|
 	  file = args.shift || abort('file argument required.')
 		name = ask 'Machine name of program: '
 		description = ask 'Describe your program: '
-		commands = ask_for_array 'List the sub-commands you wish to create: '
+		commands = ask_for_array 'List the commands you wish to create: '
 		begin
       File.open(file, 'w') do |f|
         f.write <<-"...".gsub!(/^ {10}/, '')

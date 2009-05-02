@@ -150,7 +150,7 @@ module Commander
     # This would be used for switches such as --version, --trace, etc.
     
     def global_option *args, &block
-      switches, description = Runner.seperate_switches_from_description *args
+      switches, description = Runner.separate_switches_from_description *args
       @options << {
         :args => args,
         :proc => block,
@@ -216,7 +216,7 @@ module Commander
     # Returns array of valid command names found within +args+.
     
     def valid_command_names_from *args
-      arg_string = args.delete_switches.join ' '
+      arg_string = args.delete_if { |value| value =~ /^-/ }.join ' '
       commands.keys.find_all { |name| name if /^#{name}/.match arg_string }
     end
     
@@ -323,10 +323,10 @@ module Commander
     end
     
     ##
-    # Returns a proc allowing for sub-commands to inherit global options.
+    # Returns a proc allowing for commands to inherit global options.
     # This functionality works whether a block is present for the global
     # option or not, so simple switches such as --verbose can be used
-    # without a block, and used throughout all sub-commands.
+    # without a block, and used throughout all commands.
     
     def global_option_proc switches, &block
       lambda do |value|
@@ -349,7 +349,7 @@ module Commander
     ##
     # Return switches and description separated from the +args+ passed.
 
-    def self.seperate_switches_from_description *args
+    def self.separate_switches_from_description *args
       switches = args.find_all { |arg| arg.to_s =~ /^-/ } 
       description = args.last unless !args.last.is_a? String or args.last.match(/^-/)
       return switches, description

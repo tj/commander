@@ -40,9 +40,9 @@ describe Commander do
     end
   end
   
-  describe "#seperate_switches_from_description" do
+  describe "#separate_switches_from_description" do
     it "should seperate switches and description returning both" do
-      switches, description = *Commander::Runner.seperate_switches_from_description('-h', '--help', 'display help')
+      switches, description = *Commander::Runner.separate_switches_from_description('-h', '--help', 'display help')
       switches.should == ['-h', '--help']
       description.should == 'display help'
     end
@@ -87,7 +87,7 @@ describe Commander do
       file.should == 'foo'
     end
     
-    it "should be inherited by sub-commands" do
+    it "should be inherited by commands" do
       quiet = nil
       new_command_runner 'foo', '--quiet' do
         global_option('--quiet', 'Suppress output')
@@ -98,7 +98,7 @@ describe Commander do
       quiet.should be_true
     end
     
-    it "should be inherited by sub-commands even when a block is present" do
+    it "should be inherited by commands even when a block is present" do
       quiet = nil
       new_command_runner 'foo', '--quiet' do
         global_option('--quiet', 'Suppress output') {}

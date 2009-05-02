@@ -18,12 +18,5 @@ class Array
   def self.parse string
     eval "%w(#{string})"
   end
-  
-  ##
-  # Delete switches such as -h or --help. Mutative.
-  
-  def delete_switches
-    self.delete_if { |value| value.to_s =~ /^-/ } 
-  end
-  
+    
 end

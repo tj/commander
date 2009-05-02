@@ -52,7 +52,7 @@
 * Changed; using same option format as sub-command options for globals [#18]
 * Changed; program :name is now optional, and is auto-defined when not specified [#21]
 * Moved #switch_to_sym from Command to Commander::Runner
-* Moved #seperate_switches_from_description into Commander::Runner [#22]
+* Moved #separate_switches_from_description into Commander::Runner [#22]
 * Removed program :name from commander init template since its not required anymore
 
 === 3.1.8 / 2009-03-25
