@@ -38,6 +38,13 @@ module Commander
     end
     
     ##
+    # Return singleton Runner instance.
+    
+    def self.instance
+      @singleton ||= new
+    end
+    
+    ##
     # Run command parsing and execution process.
     
     def run!

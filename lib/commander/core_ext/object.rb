@@ -27,7 +27,7 @@ class Object
   # Command runner delegation.
   #++
   
-  def_delegators :$command_runner, 
+  def_delegators :'Commander::Runner.instance', 
     :add_command, :command, :program, :run!, :global_option,
     :commands, :alias_command, :default_command
 
@@ -36,13 +36,6 @@ class Object
   
   def get_binding
     binding
-  end
-
-  ##
-  # Return the current command runner.
-  
-  def command_runner
-    $command_runner
   end
 
 end

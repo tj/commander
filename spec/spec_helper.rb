@@ -27,16 +27,22 @@ def create_test_command
   @command = command :test
 end
 
-# Create a new global command runner
+# Create a new command runner
 
 def new_command_runner *args, &block
-  $command_runner = Commander::Runner.new args
+  Commander::Runner.instance_variable_set :"@singleton", Commander::Runner.new(args)
   program :name, 'test'
   program :version, '1.2.3'
   program :description, 'something'
   create_test_command
   yield if block
-  command_runner
+  Commander::Runner.instance
+end
+
+# Comply with how specs were previously written
+
+def command_runner
+  Commander::Runner.instance
 end
 
 def run *args

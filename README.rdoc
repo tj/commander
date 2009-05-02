@@ -31,7 +31,7 @@ an important feature to note is that when_called may be a class to instantiate,
 as well as an object, specifying a method to call, so view the RDoc for more information.
 
    require 'rubygems'
-   require 'commander'
+   require 'commander/import'
 
    # :name is optional, otherwise uses the basename of this executable
    program :name, 'Foo Bar'
