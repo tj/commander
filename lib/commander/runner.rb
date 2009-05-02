@@ -307,10 +307,10 @@ module Commander
     end
     
     ##
-    # Returns a proc allowing for sub-commands to inherit global options.
+    # Returns a proc allowing for commands to inherit global options.
     # This functionality works whether a block is present for the global
     # option or not, so simple switches such as --verbose can be used
-    # without a block, and used throughout all sub-commands.
+    # without a block, and used throughout all commands.
     
     def global_option_proc switches, &block
       lambda do |value|

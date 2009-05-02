@@ -13,14 +13,14 @@ features, and an elegant API.
 * Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
 * Auto-generates help documentation via pluggable help formatters
 * Optional default sub-command when none is present
-* Global / Sub-command level options
+* Global / Command level options
 * Packaged with two help formatters (Terminal, TerminalCompact)
 * Imports the highline gem for interacting with the terminal
 * Adds additional user interaction functionality
 * Highly customizable progress bar with intuative, simple usage
 * Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
 * Sexy paging for long bodies of text
-* Sub-command aliasing (very powerful, as both switches and arguments can be used)
+* Command aliasing (very powerful, as both switches and arguments can be used)
 * Growl notification support for MacOS
 * Use the 'commander' executable to initialize a commander driven program
 
