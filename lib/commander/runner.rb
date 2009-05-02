@@ -206,7 +206,7 @@ module Commander
     # Returns array of valid command names found within +args+.
     
     def valid_command_names_from *args
-      arg_string = args.delete_switches.join ' '
+      arg_string = args.delete_if { |value| value =~ /^-/ }.join ' '
       commands.keys.find_all { |name| name if /^#{name}/.match arg_string }
     end
     
