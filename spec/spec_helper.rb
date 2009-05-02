@@ -1,6 +1,6 @@
 
 require 'rubygems'
-require 'commander'
+require 'commander/import'
 require 'stringio'
 
 # Mock terminal IO streams so we can spec against them

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'commander'
+require 'commander/import'
 
 program :name, 'commander'
 program :version, Commander::VERSION
