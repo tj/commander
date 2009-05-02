@@ -35,7 +35,7 @@ module Commander
     end
         
     ##
-    # Initialize new command with specified +name+.
+    # Initialize new command with specified _name_.
     
     def initialize name
       @name, @examples, @when_called = name.to_s, [], []
@@ -48,7 +48,7 @@ module Commander
     # Usage examples are later displayed in help documentation
     # created by the help formatters.
     #
-    # === Examples:
+    # === Examples
     #    
     #   command :something do |c|
     #     c.example "Should do something", "my_command something"
@@ -74,7 +74,7 @@ module Commander
     #   --list WORDS        options.list           # => array
     #   --date [DATE]       options.date           # => date or nil when optional argument not set
     #
-    # === Examples:
+    # === Examples
     #    
     #   command :something do |c|
     #     c.option '--recursive', 'Do something recursively'
@@ -89,14 +89,14 @@ module Commander
     #     end 
     #   end
     #
-    # === Help Formatters:
+    # === Help Formatters
     #
     # This method also parses the arguments passed in order to determine
     # which were switches, and which were descriptions for the
     # option which can later be used within help formatters
     # using option[:switches] and option[:description].
     #
-    # === Input Parsing:
+    # === Input Parsing
     #
     # Since Commander utilizes OptionParser you can pre-parse and evaluate
     # option arguments. Simply require 'optparse/time', or 'optparse/date', as these
@@ -121,7 +121,7 @@ module Commander
     # Handle execution of command. The handler may be a class, 
     # object, or block (see examples below).
     #
-    # === Examples:
+    # === Examples
     #    
     #   # Simple block handling
     #   c.when_called do |args, options|
@@ -167,7 +167,7 @@ module Commander
     end
     
     ##
-    # Call the commands when_called block with +args+.
+    # Call the commands when_called block with _args_.
     
     def call args = []
       object = @when_called.shift

@@ -1,4 +1,6 @@
 
+require 'erb'
+
 module Commander
   module HelpFormatter
     class Terminal < Base
