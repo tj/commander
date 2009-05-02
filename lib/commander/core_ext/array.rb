@@ -6,6 +6,9 @@ class Array
   # conjunction with Highline's ask, or ask_for_array
   # methods, which must respond to #parse.
   #
+  # This method allows escaping of whitespace. For example
+  # the arguments foo bar\ baz will become ['foo', 'bar baz']
+  #
   # === Highline example
   #  
   #   # ask invokes Array#parse
