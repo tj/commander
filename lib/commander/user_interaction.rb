@@ -42,7 +42,7 @@ module Commander
     end
     
     ##
-    # 'Log' an _action_ to the terminal. This is typically used
+    # 'Log' an +action+ to the terminal. This is typically used
     # for verbose output regarding actions performed. For example:
     #
     #   create  path/to/file.rb
@@ -247,9 +247,9 @@ module Commander
         unless finished?
           erase_line
           if completed?
-            $terminal.say UI::replace_tokens(@complete_message, generate_tokens) if @complete_message.is_a? String
+            $terminal.say UI.replace_tokens(@complete_message, generate_tokens) if @complete_message.is_a? String
           else
-            $terminal.say UI::replace_tokens(@format.tokenize, generate_tokens) << ' '
+            $terminal.say UI.replace_tokens(@format, generate_tokens) << ' '
           end
         end
       end
