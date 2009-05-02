@@ -117,6 +117,10 @@ module Commander
       end
     end
     
+    def self.replace_tokens(str, hash)
+      hash.inject(str.dup) { |str, (key, value)| str.gsub /:#{key}/, value.to_s }
+    end
+    
     ##
     # = Progress Bar
     #
@@ -250,9 +254,9 @@ module Commander
         unless finished?
           erase_line
           if completed?
-            $terminal.say @complete_message.tokenize(generate_tokens) if @complete_message.is_a? String
+            $terminal.say UI::replace_tokens(@complete_message, generate_tokens) if @complete_message.is_a? String
           else
-            $terminal.say @format.tokenize(generate_tokens) << ' '
+            $terminal.say UI::replace_tokens(@format.tokenize, generate_tokens) << ' '
           end
         end
       end
