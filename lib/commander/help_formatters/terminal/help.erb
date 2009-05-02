@@ -7,7 +7,7 @@
 
     <%= program :description %>
 
-  <%= $terminal.color "SUB-COMMANDS", :bold %>:
+  <%= $terminal.color "COMMANDS", :bold %>:
 <% for name, command in @commands -%>
 	<% unless alias? name %>
     <%= "%-20s %s" % [command.name, command.summary || command.description] -%>

@@ -17,7 +17,7 @@ describe Commander::HelpFormatter::Terminal do
     end
     
     describe "should display" do
-      it "the sub-command name" do
+      it "the command name" do
         @global_help.should include('install gem')
       end
       
@@ -27,7 +27,7 @@ describe Commander::HelpFormatter::Terminal do
     end
   end
   
-  describe "sub-command help" do
+  describe "command help" do
     before :each do
       new_command_runner 'help', 'install', 'gem' do
         command :'install gem' do |c|
@@ -42,7 +42,7 @@ describe Commander::HelpFormatter::Terminal do
     end
     
     describe "should display" do
-      it "the sub-command name" do
+      it "the command name" do
         @command_help.should include('install gem')
       end
       

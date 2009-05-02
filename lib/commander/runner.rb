@@ -294,7 +294,7 @@ module Commander
     ##
     # Removes global _options_ from _args_. This prevents an invalid
     # option error from occurring when options are parsed
-    # again for the sub-command.
+    # again for the command.
     
     def remove_global_options options, args
       # TODO: refactor with flipflop, please TJ ! have time to refactor me !

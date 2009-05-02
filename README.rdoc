@@ -12,7 +12,7 @@ features, and an elegant API.
 * Parses options using OptionParser
 * Auto-populates struct with options ( no more { |v| options[:recursive] = v } )
 * Auto-generates help documentation via pluggable help formatters
-* Optional default sub-command when none is present
+* Optional default command when none is present
 * Global / Command level options
 * Packaged with two help formatters (Terminal, TerminalCompact)
 * Imports the highline gem for interacting with the terminal
@@ -189,7 +189,7 @@ as if it was invoked via the command line:
 
 === Command Defaults
 
-Although working with a sub-command executable framework provides many 
+Although working with a command executable framework provides many 
 benefits over a single command implementation, sometimes you still
 want the ability to create a terse syntax for your command. With that
 in mind we may use #default_command to help with this. Considering
@@ -201,7 +201,7 @@ our previous :'install gem' example:
   # => installing rubygems to some_path
 
 Keeping in mind that commander searches for the longest possible match
-when considering a sub-command, so if you were to pass arguments to foo
+when considering a command, so if you were to pass arguments to foo
 like below, expecting them to be passed to :update, this would be incorrect,
 and would end up calling :'install gem', so be careful that the users do 
 not need to use command names within the arguments.
@@ -223,7 +223,7 @@ Which will output the rest of the help doc, along with:
 
 === Global Options
 
-Although most switches will be at the sub-command level, several are available
+Although most switches will be at the command level, several are available
 by default at the global level, such as --version, and --help. Using #global_option
 you can add additional global options:
 
@@ -231,7 +231,7 @@ you can add additional global options:
 
 This method accepts the same syntax as Commander::Command#option so check it out for documentation.
 
-All global options regardless of providing a block are accessable at the sub-command level. This
+All global options regardless of providing a block are accessable at the command level. This
 means that instead of the following:
 
   global_option('--verbose') { $verbose = true }
@@ -263,7 +263,7 @@ This abstraction could be utilized to generate HTML documentation for your execu
 
 == Tips
 
-When adding a global or sub-command option, OptionParser implicitly adds a small
+When adding a global or command option, OptionParser implicitly adds a small
 switch even when not explicitly created, for example -c will be the same as --config
 in both examples, however '-c' will only appear in the documentation when explicitly
 assigning it.
