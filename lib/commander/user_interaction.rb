@@ -56,6 +56,47 @@ module Commander
     end
     
     ##
+    # Normalize IO streams, allowing for redirection of
+    # +input+ and/or +output+, for example:
+    #
+    #   $ foo              # => read from terminal I/O
+    #   $ foo in           # => read from 'in' file, output to terminal output stream
+    #   $ foo in out       # => read from 'in' file, output to 'out' file
+    #   $ foo < in > out   # => equivalent to above (essentially)
+    #
+    # Optionall a +block+ may be supplied, in which case
+    # IO will be reset once the block has executed.
+    #
+    # === Examples
+    #
+    #   command :foo do |c|
+    #     c.syntax = 'foo [input] [output]'
+    #     c.when_called do |args, options|
+    #       # or io(args.shift, args.shift)
+    #       io *args
+    #       str = $stdin.gets
+    #       puts 'input was: ' + str.inspect
+    #     end
+    #   end
+    #
+    
+    def io input = nil, output = nil, &block
+      $stdin = File.new(input) if input
+      $stdout = File.new(output, 'r+') if output
+      if block
+        yield
+        reset_io
+      end
+    end
+    
+    ##
+    # Reset IO to initial constant streams.
+    
+    def reset_io
+      $stdin, $stdout = STDIN, STDOUT
+    end
+    
+    ##
     # Prompt _editor_ for input. Optionally supply initial
     # _input_ which is written to the editor.
     #
