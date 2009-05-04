@@ -113,7 +113,7 @@ module Commander
     ##
     # Substitute _hash_'s keys with their associated values in _str_.
     
-    def self.replace_tokens str, hash
+    def self.replace_tokens str, hash #:nodoc:
       hash.inject(str) { |str, (key, value)| str.gsub ":#{key}", value.to_s }
     end
     
@@ -158,7 +158,7 @@ module Commander
       ##
       # Creates a new progress bar.
       #
-      # === Options:
+      # === Options
       #    
       #   :title              Title, defaults to "Progress"
       #   :width              Width of :progress_bar
@@ -168,7 +168,7 @@ module Commander
       #   :tokens             Additional tokens replaced within the format string
       #   :complete_message   Defaults to "Process complete"
       #
-      # === Tokens:
+      # === Tokens
       #
       #   :title 
       #   :percent_complete

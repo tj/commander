@@ -82,18 +82,6 @@ module Commander
     end
     
     ##
-    # Run the active command.
-    
-    def run_active_command
-      require_valid_command
-      if alias? command_name_from_args
-        active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
-      else
-        active_command.run *args_without_command_name
-      end      
-    end
-    
-    ##
     # Assign program information.
     #
     # === Examples
@@ -203,6 +191,8 @@ module Commander
     def command_exists? name
       @commands[name.to_s]
     end
+    
+    #:stopdoc:
     
     ##
     # Get active command within arguments passed to this runner.
@@ -377,6 +367,18 @@ module Commander
       switch.scan(/[\-\]](\w+)/).join('_').to_sym rescue nil
     end
     
+    ##
+    # Run the active command.
+    
+    def run_active_command
+      require_valid_command
+      if alias? command_name_from_args
+        active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
+      else
+        active_command.run *args_without_command_name
+      end      
+    end
+     
     def say *args #:nodoc: 
       $terminal.say *args
     end

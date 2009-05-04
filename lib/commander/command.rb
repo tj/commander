@@ -154,6 +154,8 @@ module Commander
       call parse_options_and_call_procs(*args)
     end
     
+    #:stopdoc:
+    
     ##
     # Parses options and calls associated procs, 
     # returning the arguments remaining.
@@ -200,7 +202,7 @@ module Commander
       lambda { |value| proxy_options << [Runner.switch_to_sym(switches.last), value] } 
     end
     
-    def inspect #:nodoc:
+    def inspect 
       "<Commander::Command:#{name}>"
     end
     
