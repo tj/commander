@@ -148,6 +148,13 @@ simplify common tasks using the following methods:
   # Choose from an array of elements
   choice = choose("Favorite language?", :ruby, :perl, :js)
 
+  # Alter IO for the duration of the block
+  io new_input, new_output do
+    new_input_contents = $stdin.read
+    puts new_input_contents # outputs to new_output stream
+  end
+  # $stdin / $stdout reset back to original streams
+
 == Commander Goodies
 
 === Option Defaults
