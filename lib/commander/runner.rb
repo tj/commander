@@ -382,6 +382,6 @@ module Commander
     def say *args #:nodoc: 
       $terminal.say *args
     end
-    
+
   end
 end

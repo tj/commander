@@ -29,7 +29,7 @@ module Commander
     
     def password message = 'Password: ', mask = '*'
       pass = ask(message) { |q| q.echo = mask }
-      pass = password message, mask if pass.empty?
+      pass = password message, mask if pass.nil? || pass.empty?
       pass
     end
     
@@ -207,6 +207,22 @@ module Commander
       end
     end
     
+    ##
+    # Output progress while iterating _arr_.
+    #
+    # === Examples
+    #
+    #   uris = %w( http://vision-media.ca http://google.com )
+    #   progress uris, :format => "Remaining: :time_remaining" do |uri|
+    #     res = open uri
+    #   end
+    #
+
+    def progress arr, options = {}, &block
+      bar = ProgressBar.new arr.length, options
+      arr.each { |v| bar.increment yield(v) }
+    end
+        
     ##
     # Implements ask_for_CLASS methods.
     
@@ -398,22 +414,6 @@ module Commander
         $terminal.instance_variable_get('@output').print "\r\e[K"
       end
 
-      ##
-      # Output progress while iterating _arr_.
-      #
-      # === Examples
-      #
-      #   uris = %w( http://vision-media.ca http://google.com )
-      #   ProgressBar.progress uris, :format => "Remaining: :time_remaining" do |uri|
-      #     res = open uri
-      #   end
-      #
-
-      def self.progress arr, options = {}, &block
-        bar = ProgressBar.new arr.length, options
-        arr.each { |v| bar.increment yield(v) }
-      end
-      
     end
   end
 end

@@ -13,9 +13,9 @@ describe Commander::Command do
     
     it "should act like an open struct" do
       @options.send = 'mail'
-      @options.password = 'foobar'
+      @options.call = true
       @options.send.should == 'mail'
-      @options.password.should == 'foobar'
+      @options.call.should == true
     end
     
     it "should allow __send__ to function as always" do
@@ -35,9 +35,9 @@ describe Commander::Command do
     end
     
     it "should allow usage of common method names" do
-      @command.option '--password STRING'
-      @command.when_called { |_, options| options.password.should == 'foo' }  
-      @command.run '--password', 'foo'
+      @command.option '--open file'
+      @command.when_called { |_, options| options.open.should == 'foo' }  
+      @command.run '--open', 'foo'
     end
   end
   
