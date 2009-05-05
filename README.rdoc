@@ -20,6 +20,7 @@ features, and an elegant API.
 * Highly customizable progress bar with intuative, simple usage
 * Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
 * Sexy paging for long bodies of text
+* Support for MacOS text-to-speech
 * Command aliasing (very powerful, as both switches and arguments can be used)
 * Growl notification support for MacOS
 * Use the 'commander' executable to initialize a commander driven program
@@ -154,6 +155,11 @@ simplify common tasks using the following methods:
     puts new_input_contents # outputs to new_output stream
   end
   # $stdin / $stdout reset back to original streams
+
+  # Speech synthesis 
+  speak 'What is your favorite food? '
+  food = ask 'favorite food?: '
+  speak "wow, I like #{food} too. We have so much alike." 
 
 == Commander Goodies
 
