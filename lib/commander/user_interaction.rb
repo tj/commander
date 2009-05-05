@@ -55,6 +55,25 @@ module Commander
     end
     
     ##
+    # Speak +message+ using +voice+ which defaults
+    # to 'Alex', which is one of the better voices.
+    #
+    # === Examples
+    #    
+    #   speak 'What is your favorite food? '
+    #   food = ask 'favorite food?: '
+    #   speak "wow, I like #{food} too. We have so much alike." 
+    #
+    # === Notes
+    #
+    # * MacOS only
+    #
+    
+    def speak message, voice = :Alex
+      Thread.new { `osascript -e 'say #{message.inspect} using #{voice.to_s.inspect}'` }
+    end
+    
+    ##
     # Normalize IO streams, allowing for redirection of
     # +input+ and/or +output+, for example:
     #
