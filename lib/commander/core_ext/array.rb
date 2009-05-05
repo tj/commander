@@ -3,13 +3,13 @@ class Array
   
   ##
   # Split _string_ into an array. Used in
-  # conjunction with Highline's ask, or ask_for_array
+  # conjunction with Highline's #ask, or #ask_for_array
   # methods, which must respond to #parse.
   #
   # This method allows escaping of whitespace. For example
   # the arguments foo bar\ baz will become ['foo', 'bar baz']
   #
-  # === Highline example
+  # === Example
   #  
   #   # ask invokes Array#parse
   #   list = ask 'Favorite cookies:', Array
