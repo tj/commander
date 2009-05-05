@@ -100,7 +100,6 @@ module Commander
     #
     
     def converse prompt, responses = {}
-      # TODO: quick applescript DSL would be nice
       i, commands = 0, responses.map { |key, value| value.inspect }.join(',')
       statement = responses.inject '' do |statement, (key, value)|
         statement << (((i += 1) == 1 ? 
