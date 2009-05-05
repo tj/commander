@@ -55,7 +55,7 @@ module Commander
     end
     
     ##
-    # Speak +message+ using +voice+ which defaults
+    # Speak _message_ using _voice_ which defaults
     # to 'Alex', which is one of the better voices.
     #
     # === Examples
@@ -70,7 +70,57 @@ module Commander
     #
     
     def speak message, voice = :Alex
-      Thread.new { `osascript -e 'say #{message.inspect} using #{voice.to_s.inspect}'` }
+      Thread.new { applescript "say #{message.inspect} using #{voice.to_s.inspect}" }
+    end
+    
+    ##
+    # Converse with speech recognition. 
+    #
+    # Currently a "poorman's" DSL to utilize applescript and
+    # the MacOS speech recognition server.
+    #
+    # === Examples
+    #
+    #   case converse 'What is the best food?', :cookies => 'Cookies', :unknown => 'Nothing'
+    #   when :cookies 
+    #     speak 'o.m.g. you are awesome!'
+    #   else
+    #     case converse 'That is lame, shall I convince you cookies are the best?', :yes => 'Ok', :no => 'No', :maybe => 'Maybe another time'
+    #     when :yes
+    #       speak 'Well you see, cookies are just fantastic.'
+    #     else
+    #       speak 'Ok then, bye.'
+    #     end
+    #   end
+    #
+    # === Notes
+    #
+    # * MacOS only
+    #
+    
+    def converse prompt, responses = {}
+      # TODO: quick applescript DSL would be nice
+      i, commands = 0, responses.map { |key, value| value.inspect }.join(',')
+      statement = responses.inject '' do |statement, (key, value)|
+        statement << (((i += 1) == 1 ? 
+          %(if response is "#{value}" then\n):
+            %(else if response is "#{value}" then\n))) <<
+              %(do shell script "echo #{key}"\n)
+      end
+      applescript(%(
+        tell application "SpeechRecognitionServer" 
+          set response to listen for {#{commands}} with prompt "#{prompt}"
+          #{statement}
+          end if
+        end tell
+      )).strip.to_sym
+    end
+    
+    ##
+    # Execute apple _script_.
+    
+    def applescript script
+      `osascript -e "#{ script.gsub('"', '\"') }"`
     end
     
     ##
