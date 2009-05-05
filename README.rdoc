@@ -161,6 +161,22 @@ simplify common tasks using the following methods:
   food = ask 'favorite food?: '
   speak "wow, I like #{food} too. We have so much alike." 
 
+  # Execute arbitrary applescript
+  applescript 'foo'
+
+  # Converse with speech recognition server
+  case converse 'What is the best food?', :cookies => 'Cookies', :unknown => 'Nothing'
+  when :cookies 
+    speak 'o.m.g. you are awesome!'
+  else
+    case converse 'That is lame, shall I convince you cookies are the best?', :yes => 'Ok', :no => 'No', :maybe => 'Maybe another time'
+    when :yes
+      speak 'Well you see, cookies are just fantastic, they melt in your mouth.'
+    else
+      speak 'Ok then, bye.'
+    end
+  end
+
 == Commander Goodies
 
 === Option Defaults
