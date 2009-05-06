@@ -241,9 +241,8 @@ module Commander
     # Substitute _hash_'s keys with their associated values in _str_.
     
     def replace_tokens str, hash #:nodoc:
-      hash.inject str.dup do |str, (key, value)|
-        str.gsub! ":#{key}", value.to_s
-        str
+      hash.inject str do |str, (key, value)|
+        str.gsub ":#{key}", value.to_s
       end
     end
     
