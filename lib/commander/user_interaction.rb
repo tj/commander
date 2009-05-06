@@ -10,6 +10,8 @@ module Commander
   
   module UI
     
+    module_function
+    
     #--
     # Auto include growl when available.
     #++
@@ -238,7 +240,7 @@ module Commander
     ##
     # Substitute _hash_'s keys with their associated values in _str_.
     
-    def self.replace_tokens str, hash #:nodoc:
+    def replace_tokens str, hash #:nodoc:
       hash.inject str.dup do |str, (key, value)|
         str.gsub! ":#{key}", value.to_s
         str
