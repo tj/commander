@@ -117,7 +117,7 @@ module Commander
     def program key, *args
       if key == :help and !args.empty?
         @program[:help] ||= {}
-        @program[:help][args.first] = args[1]
+        @program[:help][args.first] = args.at(1)
       elsif key == :help_formatter && !args.empty?
         @program[key] = (@help_formatter_aliases[args.first] || args.first)
       else
