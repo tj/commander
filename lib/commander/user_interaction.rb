@@ -106,7 +106,7 @@ module Commander
         statement << (((i += 1) == 1 ? 
           %(if response is "#{value}" then\n):
             %(else if response is "#{value}" then\n))) <<
-              %(do shell script "echo #{key}"\n)
+              %(do shell script "echo '#{key}'"\n)
       end
       applescript(%(
         tell application "SpeechRecognitionServer" 
