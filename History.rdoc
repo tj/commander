@@ -1,4 +1,17 @@
 
+=== 3.3.0 / 2009-05-12
+
+* Added #choose
+* Added aliasing for help formatters [#24]
+* Added UI.replace_tokens
+* Added #converse
+* Added #speak
+* Added #applescript
+* Added #reset_io
+* Added #io
+* Removed String#tokenize
+* Removed #delete_switches
+
 === 3.2.9 / 2009-04-09
 
 * Fixed bug in removal of global options
