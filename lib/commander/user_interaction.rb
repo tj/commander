@@ -133,7 +133,7 @@ module Commander
     #   $ foo in out       # => read from 'in' file, output to 'out' file
     #   $ foo < in > out   # => equivalent to above (essentially)
     #
-    # Optionall a +block+ may be supplied, in which case
+    # Optionally a +block+ may be supplied, in which case
     # IO will be reset once the block has executed.
     #
     # === Examples
@@ -417,7 +417,6 @@ module Commander
         # highline does not expose the output stream
         $terminal.instance_variable_get('@output').print "\r\e[K"
       end
-
     end
   end
 end
