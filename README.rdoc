@@ -25,6 +25,11 @@ features, and an elegant API.
 * Growl notification support for MacOS
 * Use the 'commander' executable to initialize a commander driven program
 
+== Installation
+
+Due to issues with Github and supporting previous releases, until 4.0 you must:
+  sudo gem install visionmedia-commander --version 3.2.9
+
 == Example
 
 For more option examples view the Commander::Command#option method. Also
