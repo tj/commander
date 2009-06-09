@@ -231,7 +231,7 @@ module Commander
     module AskForClass
       def method_missing meth, *args, &block
         case meth.to_s
-        when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, eval($1.capitalize))
+        when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, Kernel.const_get($1.capitalize))
         else super
         end
       end
