@@ -1,4 +1,3 @@
-
   <%= $terminal.color "NAME", :bold %>:
 
     <%= program :name %>
@@ -8,7 +7,7 @@
     <%= program :description %>
 
   <%= $terminal.color "COMMANDS", :bold %>:
-<% for name, command in @commands -%>
+<% for name, command in @commands.sort -%>
 	<% unless alias? name %>
     <%= "%-20s %s" % [command.name, command.summary || command.description] -%>
 	<% end -%>
