@@ -14,7 +14,7 @@
 <% end %>
 <% unless @aliases.empty? %>
   <%= $terminal.color "ALIASES", :bold %>:
-  <% for alias_name, args in @aliases %>
+  <% for alias_name, args in @aliases.sort %>
     <%= "%-20s %s %s" % [alias_name, command(alias_name).name, args.join(' ')] -%>
   <% end %>
 <% end %>
