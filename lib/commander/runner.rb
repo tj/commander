@@ -50,7 +50,7 @@ module Commander
     def run!
       trace = false
       require_program :version, :description
-      trap('INT') { abort program(:int_message) }
+      trap('INT') { abort program(:int_message) } if program(:int_message)
       global_option('-h', '--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
       global_option('-v', '--version', 'Display version information') { say version; return } 
       global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true }
@@ -247,7 +247,6 @@ module Commander
     
     def program_defaults
       return :help_formatter => HelpFormatter::Terminal, 
-             :int_message => "\nProcess interrupted",
              :name => File.basename($0)
     end
     
