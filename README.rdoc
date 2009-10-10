@@ -33,7 +33,7 @@ Install [Gemcutter](http://gemcutter.org) and execute:
 == Example
 
 For more option examples view the Commander::Command#option method. Also
-an important feature to note is that when_called may be a class to instantiate,
+an important feature to note is that action may be a class to instantiate,
 as well as an object, specifying a method to call, so view the RDoc for more information.
 
    require 'rubygems'
@@ -47,7 +47,7 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
    command :foo do |c|
      c.syntax = 'foobar foo'
      c.description = 'Displays foo'
-     c.when_called do |args, options|
+     c.action do |args, options|
        say 'foo'
      end
    end
@@ -57,7 +57,7 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
      c.description = 'Display bar with optional prefix and suffix'
      c.option '--prefix STRING', String, 'Adds a prefix to bar'
      c.option '--suffix STRING', String, 'Adds a suffix to bar'
-     c.when_called do |args, options|
+     c.action do |args, options|
        options.default :prefix => '(', :suffix => ')'
        say "#{options.prefix}bar#{options.suffix}"
      end
@@ -186,13 +186,13 @@ simplify common tasks using the following methods:
 
 === Option Defaults
 
-The options struct passed to #when_called provides a #default method, allowing you
+The options struct passed to #action provides a #default method, allowing you
 to set defaults in a clean manor to options which have not been set.
 
   command :foo do |c|
     c.option '--interval SECONDS', Integer, 'Interval in seconds'
     c.option '--timeout SECONDS', Integer, 'Timeout in seconds'
-    c.when_called do |args, options|
+    c.action do |args, options|
       options.default \
         :interval => 2,
         :timeout  => 60
@@ -204,7 +204,7 @@ to set defaults in a clean manor to options which have not been set.
 Aliases can be created using the #alias_command method like below:
 
   command :'install gem' do |c|
-    c.when_called { puts 'foo' }
+    c.action { puts 'foo' }
   end
   alias_command :'gem install', :'install gem'
 
@@ -214,7 +214,7 @@ as if it was invoked via the command line:
   command :'install gem' do |c|
     c.syntax = 'install gem <name> [options]'
     c.option '--dest DIR', String, 'Destination directory'
-    c.when_called { |args, options| puts "installing #{args.first} to #{options.dest}" }
+    c.action { |args, options| puts "installing #{args.first} to #{options.dest}" }
   end
   alias_command :update, :'install gem', 'rubygems', '--dest', 'some_path'
 
@@ -270,7 +270,7 @@ means that instead of the following:
 
   global_option('--verbose') { $verbose = true }
   ...
-  c.when_called do |args, options|
+  c.action do |args, options|
     say 'foo' if $verbose
   ...
 
@@ -278,7 +278,7 @@ You may:
 
   global_option '--verbose'
   ...
-  c.when_called do |args, options|
+  c.action do |args, options|
     say 'foo' if options.verbose
   ...
 
