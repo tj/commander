@@ -27,8 +27,8 @@ features, and an elegant API.
 
 == Installation
 
-Due to issues with Github and supporting previous releases, until 4.0 you must:
-  sudo gem install visionmedia-commander --version 3.2.9
+Install [Gemcutter](http://gemcutter.org) and execute:
+  $ sudo gem install commander
 
 == Example
 
