@@ -285,13 +285,13 @@ You may:
 === Formatters
 
 Two core formatters are currently available, the default Terminal formatter as well
-as TerminalCompact. To utilize a different formatter simply use :help_formatter like below:
+as TerminalCompact. To utilize a different formatter simply use :formatter like below:
 
-  program :help_formatter, Commander::HelpFormatter::TerminalCompact
+  program :formatter, Commander::HelpFormatter::TerminalCompact
 
 Or utilize the help formatter aliases:
 
-  program :help_formatter, :compact
+  program :formatter, :compact
 
 This abstraction could be utilized to generate HTML documentation for your executable.
 
@@ -333,7 +333,7 @@ OR
 == Contrib
 
 Feel free to fork and request a pull, or submit a ticket
-http://visionmedia.lighthouseapp.com/projects/27643-commander
+http://github.com/visionmedia/commander/issues
 
 == Known Issues
  

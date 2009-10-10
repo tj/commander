@@ -13,7 +13,7 @@ command :init do |c|
 	c.description = 'Initialize an empty <file> with a commander template, 
     allowing very quick creation of commander executables.'
 	c.example 'Create a new file with a commander template.', 'commander init bin/my_executable'
-	c.when_called do |args, options|
+	c.action do |args, options|
 	  file = args.shift || abort('file argument required.')
 		name = ask 'Machine name of program: '
 		description = ask 'Describe your program: '
@@ -39,7 +39,7 @@ command :init do |c|
               c.description = ''
               c.example 'description', 'command example'
               c.option '--some-switch', 'Some switch that does something'
-              c.when_called do |args, options|
+              c.action do |args, options|
                 # Do something or c.when_called #{name.capitalize}::Commands::#{command.capitalize}
               end
             end
