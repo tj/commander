@@ -1,4 +1,6 @@
 
+require File.dirname(__FILE__) + '/spec_helper'
+
 describe Commander::Command do
   
   before :each do

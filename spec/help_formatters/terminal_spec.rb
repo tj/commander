@@ -1,4 +1,6 @@
 
+require File.dirname(__FILE__) + '/../spec_helper'
+
 describe Commander::HelpFormatter::Terminal do
   
   before :each do

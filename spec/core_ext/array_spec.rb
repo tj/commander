@@ -1,4 +1,6 @@
 
+require File.dirname(__FILE__) + '/../spec_helper'
+
 describe Array do
   
   describe "#parse" do
