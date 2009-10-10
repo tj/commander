@@ -1,4 +1,16 @@
 
+=== 4.0.0 / 2009-10-10
+
+* Changed; Aliased #when_called as #action [#9]
+* Changed; Sort commands and aliases alphabetically.
+* Changed; Sort aliases alphabetically
+* Changed; Sort commands alphabetically.
+* Changed; require user to require 'commander/import' for dsl
+* Fixed broken regexp; Changed :int_message, only traps INT when available
+* Fixed Ruby 1.9 warning caused by removing object_id from Object
+* Removed #eval const hack
+* Moving to Gemcutter (GRRRR Github)
+
 === 3.3.0 / 2009-05-12
 
 * Added #choose

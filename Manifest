@@ -29,8 +29,8 @@ spec/core_ext/object_spec.rb
 spec/help_formatters/base_spec.rb
 spec/help_formatters/terminal_spec.rb
 spec/runner_spec.rb
+spec/spec.opts
 spec/spec_helper.rb
 spec/ui_spec.rb
 tasks/docs.rake
 tasks/gemspec.rake
-tasks/spec.rake
