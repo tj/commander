@@ -56,6 +56,13 @@ describe Commander::Command do
         @command.when_called object
         @command.run 'foo'        
       end
+      
+      it "should allow #action as an alias to #when_called" do
+        object = mock 'Object'
+        object.should_receive(:call).once
+        @command.action object
+        @command.run 'foo'
+      end
             
       it "calling an arbitrary method when an object is called" do
         object = mock 'Object'

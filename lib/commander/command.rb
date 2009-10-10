@@ -142,6 +142,7 @@ module Commander
       raise ArgumentError, 'must pass an object, class, or block.' if args.empty? and !block
       @when_called = block ? [block] : args
     end
+    alias :action :when_called
     
     ##
     # Run the command with _args_.
