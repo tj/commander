@@ -322,6 +322,14 @@ To utilize the #notify and #notify_STATUS methods you need to install
 http://github.com/visionmedia/growl which utilizes the 'growlnotify' executable.
 Note that growl is auto-imported by Commander when available, no need to require.
 
+== Running Specifications
+
+  $ autospec
+  
+OR 
+
+  $ spec --color spec
+
 == Contrib
 
 Feel free to fork and request a pull, or submit a ticket
