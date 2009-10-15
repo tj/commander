@@ -24,7 +24,7 @@ command :init do |c|
           #!/usr/bin/env ruby
           
           require 'rubygems'
-          require 'commander'
+          require 'commander/import'
           require '#{name}'
           
           program :version, #{name.capitalize}::VERSION
