@@ -192,7 +192,7 @@ module Commander
     
     def enable_paging
       return unless $stdout.tty?
-      return if RUBY_ENGINE && RUBY_ENGINE=='jruby' # Fork is not supported by JRuby
+      return if is_jruby # Fork is not supported by JRuby
       read, write = IO.pipe
 
       if Kernel.fork
@@ -208,6 +208,10 @@ module Commander
         read.close; write.close
         return
       end
+    end
+
+    def is_jruby
+      defined? RUBY_ENGINE && RUBY_ENGINE=='jruby'
     end
     
     ##
