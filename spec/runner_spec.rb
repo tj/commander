@@ -2,12 +2,11 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
 describe Commander do
-  
-	before :each do
-	  $stderr = StringIO.new
+  before :each do
+    $stderr = StringIO.new
     mock_terminal
-	  create_test_command
-	end
+    create_test_command
+  end
 	
   describe "#program" do
     it "should set / get program information" do
@@ -130,6 +129,7 @@ describe Commander do
   
   describe "--trace" do
     it "should display pretty errors by default" do
+      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
       lambda {
         new_command_runner 'foo' do
           command(:foo) { |c| c.when_called { raise 'cookies!' } }
@@ -160,6 +160,7 @@ describe Commander do
   
   describe "with invalid options" do
     it "should output an invalid option message" do
+      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
       lambda {
         run('test', '--invalid-option')  
       }.should raise_error(SystemExit, /invalid option: --invalid-option/)
@@ -168,6 +169,7 @@ describe Commander do
   
   describe "with invalid command passed" do
     it "should output an invalid command message" do
+      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
       lambda {
         run('foo')  
       }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
@@ -176,6 +178,7 @@ describe Commander do
   
   describe "with invalid command passed to help" do
     it "should output an invalid command message" do
+      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
       lambda {
         run('help', 'does_not_exist')
       }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
