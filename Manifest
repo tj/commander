@@ -20,13 +20,13 @@ lib/commander/help_formatters/terminal_compact.rb
 lib/commander/help_formatters/terminal_compact/command_help.erb
 lib/commander/help_formatters/terminal_compact/help.erb
 lib/commander/import.rb
+lib/commander/platform.rb
 lib/commander/runner.rb
 lib/commander/user_interaction.rb
 lib/commander/version.rb
 spec/command_spec.rb
 spec/core_ext/array_spec.rb
 spec/core_ext/object_spec.rb
-spec/help_formatters/base_spec.rb
 spec/help_formatters/terminal_spec.rb
 spec/runner_spec.rb
 spec/spec.opts

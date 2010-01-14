@@ -1,4 +1,10 @@
 
+4.0.1 / 2010-01-14
+==================
+
+  * Fixed commander when using JRuby
+  * Fixed template; should require "commander/import"
+
 === 4.0.0 / 2009-10-10
 
 * Changed; Aliased #when_called as #action [#9]
