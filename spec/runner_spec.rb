@@ -189,7 +189,7 @@ describe Commander do
     it "should return array of valid command names" do
       command('foo bar') {}
    	  command('foo bar foo') {}
-   	  command_runner.valid_command_names_from('foo', 'bar', 'foo').should == ['foo bar', 'foo bar foo']
+   	  command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should == ['foo bar', 'foo bar foo']
     end
     
     it "should return empty array when no possible command names exist" do
