@@ -1,4 +1,10 @@
 
+4.0.2 / 2010-01-19
+==================
+
+  * Added program(:int_block) to allow a block to be run on interrupt.
+  * Fixed; ProgressBar immediately shows, and doesn't die on empty lists.
+
 4.0.1 / 2010-01-14
 ==================
 
