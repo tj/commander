@@ -110,14 +110,14 @@ module Commander
     #   :int_message     Message to display when interrupted (CTRL + C)
     #
     
-    def program key, *args, &blk
+    def program key, *args, &block
       if key == :help and !args.empty?
         @program[:help] ||= {}
         @program[:help][args.first] = args.at(1)
       elsif key == :help_formatter && !args.empty?
         @program[key] = (@help_formatter_aliases[args.first] || args.first)
-      elsif !blk.nil?
-        @program[key] = blk
+      elsif block
+        @program[key] = block
       else
         @program[key] = *args unless args.empty?
         @program[key]
