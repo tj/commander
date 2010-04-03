@@ -112,7 +112,7 @@ describe Commander do
   end
   
   describe "#remove_global_options" do
-    it "should description" do
+    it "should remove only specified switches" do
       options, args = [], []
       options << { :switches => ['-t', '--trace'] }
       options << { :switches => ['--help'] }
@@ -124,6 +124,19 @@ describe Commander do
       args << '--paths' << '"lib/**/*.js","spec/**/*.js"'
       command_runner.remove_global_options options, args
       args.should == ['--command', '--command-with-arg', 'rawr']
+    end
+
+    it "should not swallow an argument unless it expects an argument" do
+      options, args = [], []
+      options << { :switches => ['-n', '--no-arg'] }
+      options << { :switches => ['-y', '--yes ARG'] }
+      options << { :switches => ['-a', '--alternative=ARG'] }
+      args << '-n' << 'alpha'
+      args << '--yes' << 'deleted'
+      args << '-a' << 'deleted'
+      args << 'beta'
+      command_runner.remove_global_options options, args
+      args.should == ['alpha', 'beta']
     end
   end
   

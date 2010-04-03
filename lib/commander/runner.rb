@@ -291,14 +291,19 @@ module Commander
     def remove_global_options options, args
       # TODO: refactor with flipflop, please TJ ! have time to refactor me !
       options.each do |option|
-        switches = option[:switches]
+        switches = option[:switches].dup
+        next if switches.empty?
+
+        if switchHasArg = switches.any? { |s| s =~ /[ =]/ }
+          switches.map! { |s| s[0, s.index('=') || s.index(' ') || s.length] }
+        end
+
         past_switch, arg_removed = false, false
         args.delete_if do |arg|
-          # TODO: clean this up, no rescuing ;)
-          if switches.any? { |switch| switch.match(/^#{arg}/) rescue false }
-            past_switch, arg_removed = true, false
-            true
-          elsif past_switch && !arg_removed && arg !~ /^-/ 
+          if switches.any? { |s| arg[0, s.length] == s }
+            arg_removed = !switchHasArg
+            past_switch = true
+          elsif past_switch && !arg_removed && arg !~ /^-/
             arg_removed = true
           else
             arg_removed = true
