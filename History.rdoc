@@ -1,4 +1,9 @@
 
+4.0.3 / 2010-04-06
+==================
+
+  * Fixed global_option which was consuming arguments when not expected. Closes #22
+
 4.0.2 / 2010-01-19
 ==================
 
