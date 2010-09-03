@@ -119,7 +119,9 @@ module Commander
       elsif block
         @program[key] = block
       else
-        @program[key] = *args unless args.empty?
+        unless args.empty?
+			@program[key] = (args.count == 1 && args[0]) || args
+        end
         @program[key]
       end
     end
