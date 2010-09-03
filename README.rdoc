@@ -286,11 +286,11 @@ You may:
 Two core formatters are currently available, the default Terminal formatter as well
 as TerminalCompact. To utilize a different formatter simply use :formatter like below:
 
-  program :formatter, Commander::HelpFormatter::TerminalCompact
+  program :help_formatter, Commander::HelpFormatter::TerminalCompact
 
 Or utilize the help formatter aliases:
 
-  program :formatter, :compact
+  program :help_formatter, :compact
 
 This abstraction could be utilized to generate HTML documentation for your executable.
 
