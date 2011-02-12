@@ -1,4 +1,3 @@
-
 = Commander
 
 The complete solution for Ruby command-line executables. 
@@ -17,7 +16,7 @@ features, and an elegant API.
 * Packaged with two help formatters (Terminal, TerminalCompact)
 * Imports the highline gem for interacting with the terminal
 * Adds additional user interaction functionality
-* Highly customizable progress bar with intuative, simple usage
+* Highly customizable progress bar with intuitive, simple usage
 * Multi-word command name support such as 'drupal module install MOD', rather than 'drupal module_install MOD'
 * Sexy paging for long bodies of text
 * Support for MacOS text-to-speech
@@ -164,7 +163,7 @@ simplify common tasks using the following methods:
   # Speech synthesis 
   speak 'What is your favorite food? '
   food = ask 'favorite food?: '
-  speak "wow, I like #{food} too. We have so much alike." 
+  speak "Wow, I like #{food} too. We have so much in common." 
 
   # Execute arbitrary applescript
   applescript 'foo'
