@@ -120,7 +120,7 @@ module Commander
         @program[key] = block
       else
         unless args.empty?
-			@program[key] = (args.count == 1 && args[0]) || args
+          @program[key] = (args.count == 1 && args[0]) || args
         end
         @program[key]
       end
