@@ -284,7 +284,7 @@ You may:
 === Formatters
 
 Two core formatters are currently available, the default Terminal formatter as well
-as TerminalCompact. To utilize a different formatter simply use :formatter like below:
+as TerminalCompact. To utilize a different formatter simply use :help_formatter like below:
 
   program :help_formatter, Commander::HelpFormatter::TerminalCompact
 

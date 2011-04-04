@@ -48,7 +48,7 @@ end
 
 def run *args
   new_command_runner *args do
-    program :formatter, Commander::HelpFormatter::Base
+    program :help_formatter, Commander::HelpFormatter::Base
   end.run!    
   @output.string
 end
