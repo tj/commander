@@ -1,3 +1,8 @@
+4.0.4 / 2011-04-04
+==================
+
+  * Fixed program(:key) behavior for non-Array keys like name, version, description under Ruby 1.9
+  * All specs should pass under Ruby 1.9 now
 
 4.0.3 / 2010-04-06
 ==================

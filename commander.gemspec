@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
+  require File.join(File.dirname(__FILE__), 'lib', 'commander', 'version')
   s.name = %q{commander}
-  s.version = "4.0.2"
+  s.version = Commander::VERSION
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2010-01-19}
   s.default_executable = %q{commander}
   s.description = %q{The complete solution for Ruby command-line executables}
   s.email = %q{tj@vision-media.ca}
