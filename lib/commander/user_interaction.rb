@@ -291,10 +291,9 @@ module Commander
     # Implements ask_for_CLASS methods.
     
     module AskForClass
-      def method_missing meth, *args, &block
-        case meth.to_s
-        when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, Kernel.const_get($1.capitalize))
-        else super
+      [Array].each do |klass|
+        define_method "ask_for_#{klass.to_s.downcase}" do |prompt|
+          $terminal.ask(prompt, klass)
         end
       end
     end
