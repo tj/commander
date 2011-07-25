@@ -26,8 +26,7 @@ features, and an elegant API.
 
 == Installation
 
-Install [Gemcutter](http://gemcutter.org) and execute:
-  $ sudo gem install commander
+  $ gem install commander
 
 == Example
 
@@ -170,7 +169,7 @@ following methods to simplify common tasks:
 
 Commander provides methods for displaying Growl notifications. To use 
 these methods you need to install http://github.com/visionmedia/growl which 
-utilizes the ['growlnotify'](http://growl.info/extras.php#growlnotify) executable.
+utilizes the {'growlnotify'}[http://growl.info/extras.php#growlnotify] executable.
 Note that growl is auto-imported by Commander when available, no need to require.
 
   # Display a generic Growl notification
