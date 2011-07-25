@@ -99,8 +99,8 @@ are some quick examples for how to utilize highline in your command(s):
 
 == HighLine & Interaction Additions
 
-In addition to highline's fantastic choice of methods we will continue to
-simplify common tasks using the following methods:
+In addition to highline's fantastic choice of methods, commander adds the 
+following methods to simplify common tasks:
 
    # Ask for password 
    password
@@ -135,21 +135,6 @@ simplify common tasks using the following methods:
   # Ask editor, supplying initial text
   ask_editor 'previous data to update'
 
-  # Display a generic Growl notification
-  notify 'Something happened'
-
-  # Display an 'info' status notification
-  notify_info 'You have #{emails.length} new email(s)'
-
-  # Display an 'ok' status notification
-  notify_ok 'Gems updated'
-
-  # Display a 'warning' status notification 
-  notify_warning '1 gem failed installation'
-
-  # Display an 'error' status notification
-  notify_error "Gem #{name} failed"
-
   # Choose from an array of elements
   choice = choose("Favorite language?", :ruby, :perl, :js)
 
@@ -180,6 +165,28 @@ simplify common tasks using the following methods:
       speak 'Ok then, bye.'
     end
   end
+
+== Growl Notifications
+
+Commander provides methods for displaying Growl notifications. To use 
+these methods you need to install http://github.com/visionmedia/growl which 
+utilizes the ['growlnotify'](http://growl.info/extras.php#growlnotify) executable.
+Note that growl is auto-imported by Commander when available, no need to require.
+
+  # Display a generic Growl notification
+  notify 'Something happened'
+
+  # Display an 'info' status notification
+  notify_info 'You have #{emails.length} new email(s)'
+
+  # Display an 'ok' status notification
+  notify_ok 'Gems updated'
+
+  # Display a 'warning' status notification 
+  notify_warning '1 gem failed installation'
+
+  # Display an 'error' status notification
+  notify_error "Gem #{name} failed"
 
 == Commander Goodies
 
@@ -314,12 +321,6 @@ http://github.com/visionmedia/terminal-table
    +----------+-------+----+--------+-----------------------+
    |          |       |    |        | get it while its hot! |
    +----------+-------+----+--------+-----------------------+
-
-== Growl Notifications
-
-To utilize the #notify and #notify_STATUS methods you need to install
-http://github.com/visionmedia/growl which utilizes the 'growlnotify' executable.
-Note that growl is auto-imported by Commander when available, no need to require.
 
 == Running Specifications
 
