@@ -66,7 +66,7 @@ module Commander
           OptionParser::InvalidOption, 
           OptionParser::InvalidArgument,
           OptionParser::MissingArgument => e
-          abort e
+          abort e.to_s
         rescue => e
           abort "error: #{e}. Use --trace to view backtrace"
         end
