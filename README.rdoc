@@ -167,10 +167,10 @@ following methods to simplify common tasks:
 
 == Growl Notifications
 
-Commander provides methods for displaying Growl notifications. To use 
-these methods you need to install http://github.com/visionmedia/growl which 
-utilizes the {'growlnotify'}[http://growl.info/extras.php#growlnotify] executable.
-Note that growl is auto-imported by Commander when available, no need to require.
+Commander provides methods for displaying Growl notifications. To use these
+methods you need to install http://github.com/visionmedia/growl which utilizes
+the growlnotify[http://growl.info/extras.php#growlnotify] executable. Note that
+growl is auto-imported by Commander when available, no need to require.
 
   # Display a generic Growl notification
   notify 'Something happened'
@@ -186,6 +186,10 @@ Note that growl is auto-imported by Commander when available, no need to require
 
   # Display an 'error' status notification
   notify_error "Gem #{name} failed"
+
+growlnotify can also be installed via homebrew[http://mxcl.github.com/homebrew/]:
+
+  $ brew install growlnotify
 
 == Commander Goodies
 
