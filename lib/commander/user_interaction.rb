@@ -55,7 +55,49 @@ module Commander
     def log action, *args
       say '%15s  %s' % [action, args.join(' ')]
     end
-    
+
+    ##
+    # 'Say' something using the OK color (green).
+    #
+    # === Examples
+    #   say_ok 'Everything is fine'
+    #   say_ok 'It is ok', 'This is ok too'
+    #
+
+    def say_ok *args
+      args.each do |arg|
+        say $terminal.color(arg, :green)
+      end
+    end
+
+    ##
+    # 'Say' something using the WARNING color (yellow).
+    #
+    # === Examples
+    #   say_warning 'This is a warning'
+    #   say_warning 'Be careful', 'Think about it'
+    #
+
+    def say_warning *args
+      args.each do |arg|
+        say $terminal.color(arg, :yellow)
+      end
+    end
+
+    ##
+    # 'Say' something using the ERROR color (red).
+    #
+    # === Examples
+    #   say_error 'Everything is not fine'
+    #   say_error 'It is not ok', 'This is not ok too'
+    #
+
+    def say_error *args
+      args.each do |arg|
+        say $terminal.color(arg, :red)
+      end
+    end
+
     ##
     # Speak _message_ using _voice_ which defaults
     # to 'Alex', which is one of the better voices.
