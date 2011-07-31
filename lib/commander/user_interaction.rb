@@ -99,6 +99,24 @@ module Commander
     end
 
     ##
+    # 'Say' something using the specified color
+    #
+    # === Examples
+    #   color 'I am blue', :blue
+    #   color 'I am bold', :bold
+    #   color 'White on Red', :white, :on_red
+    #
+    # === Notes
+    #   You may use:
+    #   * color:    black blue cyan green magenta red white yellow
+    #   * style:    blink bold clear underline
+    #   * highligh: on_<color>
+
+    def color(*args)
+      say $terminal.color(*args)
+    end
+
+    ##
     # Speak _message_ using _voice_ which defaults
     # to 'Alex', which is one of the better voices.
     #
