@@ -327,7 +327,7 @@ http://github.com/visionmedia/terminal-table
 
 == Running Specifications
 
-  $ autospec
+  $ rake spec
   
 OR 
 
