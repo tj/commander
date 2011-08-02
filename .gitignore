@@ -4,3 +4,4 @@ doc
 test
 .DS_Store
 *.cache
+*.gem
