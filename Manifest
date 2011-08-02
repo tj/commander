@@ -1,9 +1,9 @@
+DEVELOPMENT
 History.rdoc
 Manifest
 README.rdoc
 Rakefile
 bin/commander
-commander.gemspec
 lib/commander.rb
 lib/commander/blank.rb
 lib/commander/command.rb
@@ -32,5 +32,6 @@ spec/runner_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 spec/ui_spec.rb
+tasks/dev_setup.rake
 tasks/docs.rake
 tasks/gemspec.rake
