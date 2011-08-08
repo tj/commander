@@ -109,6 +109,122 @@ describe Commander do
       quiet.should be_true      
     end
   end
+
+  describe "#parse_global_options" do
+    it 'should parse global options before command' do
+      global_option = nil
+      new_command_runner('--testing-global', 'foo') do
+        global_option('--testing-global') { global_option = 'MAGIC' }
+
+        command :foo do |c|
+          c.when_called {}
+        end
+      end.run!
+      global_option.should == 'MAGIC'
+    end
+
+    it 'should parse global options after command' do
+      global_option = nil
+      new_command_runner('foo','--testing-global') do
+        global_option('--testing-global') { global_option = 'MAGIC' }
+
+        command :foo do |c|
+          c.when_called {}
+        end
+      end.run!
+      global_option.should == 'MAGIC'
+    end
+
+    it 'should parse global options placed before command options' do
+      global_option = nil
+      new_command_runner('foo', '--testing-global', '--testing-command') do
+        global_option('--testing-global') { global_option = 'MAGIC' }
+
+        command :foo do |c|
+          c.option('--testing-command') {}
+          c.when_called {}
+        end
+      end.run!
+
+      global_option.should == 'MAGIC'
+    end
+
+    it 'should parse global options placed after command options' do
+      global_option = nil
+      new_command_runner('foo', '--testing-command', '--testing-global') do
+        global_option('--testing-global') { global_option = 'MAGIC' }
+
+        command :foo do |c|
+          c.option('--testing-command') {}
+          c.when_called {}
+        end
+      end.run!
+
+      global_option.should == 'MAGIC'
+    end
+
+    it 'should parse global options surrounded by command options' do
+      global_option = nil
+      new_command_runner('foo', '--testing-command', '--testing-global', '--other-command') do
+        global_option('--testing-global') { global_option = 'MAGIC' }
+
+        command :foo do |c|
+          c.option('--testing-command') {}
+          c.option('--other-command') {}
+          c.when_called {}
+        end
+      end.run!
+
+      global_option.should == 'MAGIC'
+    end
+
+    it 'should not parse command options' do
+      global_option = nil
+      command_option = nil
+      new_command_runner('foo', '--testing-command', '--testing-global') do
+        global_option('--testing-global') { global_option = 'MAGIC' }
+
+        command :foo do |c|
+          c.option('--testing-command') { command_option = 'NO!' }
+          c.when_called {}
+        end
+      end.parse_global_options
+
+      command_option.should be_nil
+      global_option.should == 'MAGIC'
+    end
+
+    it 'should not effect command arguments with values' do
+      global_option = nil
+      command_option = nil
+      new_command_runner('foo', '--testing-command', 'bar', '--testing-global') do
+        global_option('--testing-global') { global_option = 'MAGIC' }
+
+        command :foo do |c|
+          c.option('--testing-command VALUE') { |v| command_option = v }
+          c.when_called {}
+        end
+      end.run!
+
+      command_option.should == 'bar'
+      global_option.should == 'MAGIC'
+    end
+
+    it 'should not effect global arguments with values' do
+      global_option = nil
+      new_command_runner('foo', '--testing-command', '--testing-global', 'bar') do
+        global_option('--testing-global VALUE') { |v| global_option = v }
+
+        command :foo do |c|
+          c.option('--testing-command') { }
+          c.when_called {}
+        end
+      end.run!
+
+      global_option.should == 'bar'
+    end
+  end
+
   
   describe "#remove_global_options" do
     it "should remove only specified switches" do
