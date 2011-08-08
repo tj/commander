@@ -12,7 +12,7 @@ Echoe.new "commander", Commander::VERSION do |p|
   p.runtime_dependencies << "highline >=1.5.0"
   p.development_dependencies << "echoe >=4.0.0"
   p.development_dependencies << "sdoc >=0.2.20"
-  p.development_dependencies << "rspec <2"
+  p.development_dependencies << "rspec ~>1.3"
   
   p.eval = Proc.new do
     self.authors = ["TJ Holowaychuk", "Gabriel Gilder"]
