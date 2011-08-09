@@ -1,9 +1,19 @@
-
 $:.unshift 'lib'
-require 'commander'
+
 require 'rubygems'
+
+load_errors = ['highline', 'echoe'].map do |g|
+  begin
+    require g
+    nil
+  rescue LoadError
+    "The #{g} gem is not installed. Please run:\n\tgem install #{g}"
+  end
+end.compact
+abort "Missing dependencies!\n" + load_errors.join("\n") unless load_errors.empty?
+
+require 'commander'
 require 'rake'
-require 'echoe'
 
 Echoe.new "commander", Commander::VERSION do |p|
   p.email = "ggilder@tractionco.com"
