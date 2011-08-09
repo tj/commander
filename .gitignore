@@ -5,3 +5,4 @@ test
 .DS_Store
 *.cache
 *.gem
+/.rvmrc
