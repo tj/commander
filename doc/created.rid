@@ -1,1 +1,16 @@
-Wed, 08 Apr 2009 16:30:00 -0700
+Tue, 09 Aug 2011 02:50:55 -0700
+lib/commander/version.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/help_formatters/terminal_compact.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/import.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/platform.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/help_formatters/terminal.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/help_formatters.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/blank.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/runner.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/help_formatters/base.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/delegates.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/core_ext/object.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/core_ext.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/user_interaction.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/core_ext/array.rb	Tue, 09 Aug 2011 02:50:50 -0700
+lib/commander/command.rb	Tue, 09 Aug 2011 02:50:50 -0700

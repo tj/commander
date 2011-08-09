@@ -1,42 +1,36 @@
-<?xml version="1.0" encoding="%charset%"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title>Array</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=%charset%" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>     
-    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
-        <tr>
-            <td class="file-title"><span class="file-title-prefix">Class</span><br />Array</td>
-            <td align="right">
-                <table cellspacing="0" cellpadding="2">
-                    <tr valign="top">
-                        <td>In:</td>
-                        <td>
-                            
-                            <a href="../files/lib/commander/core_ext/array_rb.html">lib/commander/core_ext/array.rb</a>
-                            
-                        </td>
-                    </tr>
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Array 
+            
+                <span class="parent">&lt; 
                     
-                    <tr>
-                        <td>Parent:</td>
-                        <td>
-                            
-                            <a href="Object.html">Object</a>
-                            
-                        </td>
-                    </tr>
+                    <a href="Object.html">Object</a>
                     
-                </table>
-            </td>
-        </tr>
-    </table>
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/lib/commander/core_ext/array_rb.html">lib/commander/core_ext/array.rb</a></li>
+            
+        </ul>
+    </div>
     <div id="bodyContent">
         <div id="content">
     
@@ -49,13 +43,18 @@
     
     
     <div class="sectiontitle">Methods</div>
-    <ul>
-        
-        <li><a href="#M000010">delete_switches</a></li>
-        
-        <li><a href="#M000009">parse</a></li>
-        
-    </ul>
+    <dl class="methods">
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#method-c-parse">parse</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
     
 
     
@@ -72,26 +71,27 @@
             <div class="sectiontitle">Class Public methods</div>
             
             <div class="method">
-                <div class="title">
+                <div class="title" id="method-c-parse">
                     
-                    <a name="M000009"></a><b>parse</b>(string)
+                    <a name="method-c-parse"></a><b>parse</b>(string)
                     
                 </div>
                 
                 <div class="description">
-                    <p>
-Split <tt>string</tt> into an array. Used in conjunection with
-Highline&#8217;s ask, or ask_for_array methods, which must respond to <a
-href="Array.html#M000009">parse</a>.
-</p>
-<h3>Highline example</h3>
-<pre>
-  # ask invokes Array#parse
-  list = ask 'Favorite cookies:', Array
+                  
+<p>Split <em>string</em> into an array. Used in conjunction with Highline’s
+ask, or ask_for_array methods, which must respond to parse.</p>
 
-  # or use ask_for_CLASS
-  list = ask_for_array 'Favorite cookies: '
-</pre>
+<p>This method allows escaping of whitespace. For example the arguments foo
+bar\ baz will become [‘foo’, ‘bar baz’]</p>
+
+<h3>Example</h3>
+
+<pre># ask invokes Array#parse
+list = ask 'Favorite cookies:', Array
+
+# or use ask_for_CLASS
+list = ask_for_array 'Favorite cookies: '</pre>
 
                 </div>
                 
@@ -100,52 +100,14 @@ href="Array.html#M000009">parse</a>.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000009_source')" id="l_M000009_source">show</a>
-                        
-                        | <a href="http://github.com/visionmedia/commander/blob/e6ced4ffed6a34cc8f13dae6414fca124922b01d/lib/commander/core_ext/array.rb#L18" target="_blank" class="github_url">on GitHub</a>
+                        Source: <a href="javascript:toggleSource('method-c-parse_source')" id="l_method-c-parse_source">show</a>
                         
                     </p>
-                    <div id="M000009_source" class="dyn-source">
-                        <pre>    <span class="ruby-comment cmt"># File lib/commander/core_ext/array.rb, line 18</span>
-18:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">string</span>
-19:     <span class="ruby-identifier">eval</span> <span class="ruby-node">&quot;%w(#{string})&quot;</span>
-20:   <span class="ruby-keyword kw">end</span></pre>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="sectiontitle">Instance Public methods</div>
-            
-            <div class="method">
-                <div class="title">
-                    
-                    <a name="M000010"></a><b>delete_switches</b>()
-                    
-                </div>
-                
-                <div class="description">
-                    <p>
-Delete switches such as -h or &#8212;help. Mutative.
-</p>
-
-                </div>
-                
-                
-                
-                
-                <div class="sourcecode">
-                    <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000010_source')" id="l_M000010_source">show</a>
-                        
-                        | <a href="http://github.com/visionmedia/commander/blob/e6ced4ffed6a34cc8f13dae6414fca124922b01d/lib/commander/core_ext/array.rb#L25" target="_blank" class="github_url">on GitHub</a>
-                        
-                    </p>
-                    <div id="M000010_source" class="dyn-source">
-                        <pre>    <span class="ruby-comment cmt"># File lib/commander/core_ext/array.rb, line 25</span>
-25:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete_switches</span>
-26:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^-/</span> } 
-27:   <span class="ruby-keyword kw">end</span></pre>
+                    <div id="method-c-parse_source" class="dyn-source">
+                        <pre><span class="ruby-comment"># File lib/commander/core_ext/array.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse</span> <span class="ruby-identifier">string</span>
+  <span class="ruby-identifier">eval</span> <span class="ruby-node">&quot;%w(#{string})&quot;</span>
+<span class="ruby-keyword">end</span></pre>
                     </div>
                 </div>
                 

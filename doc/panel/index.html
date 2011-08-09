@@ -12,6 +12,7 @@
 	<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/searchdoc.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
+		//<![CDATA[
 	    function placeholder() {
  	       if (jQuery.browser.safari) return;
  	       $('#search-label').click(function() {
@@ -27,14 +28,23 @@
  	       });
 
  	       $('#search')[0].value == '' && $('#search-label').show();
- 	       
- 	       setInterval(function() { $('#search')[0].value != '' && $('#search-label').hide() }, 100)
 	    }
 	   $(function() {
-	       placeholder();
-	       new Searchdoc.Panel($('#panel'), search_data, tree, top.frames[1]);
-	       $('#search').focus();
+           placeholder();
+           var panel = new Searchdoc.Panel($('#panel'), search_data, tree, top.frames[1]);
+           $('#search').focus();
+
+           var s = window.parent.location.search.match(/\?q=([^&]+)/);
+           if (s) {
+               s = decodeURIComponent(s[1]).replace(/\+/g, ' ');
+               if (s.length > 0)
+               {
+                   $('#search').val(s);
+                   panel.search(s, true);
+               }
+           }
 	   })
+		//]]>
 	</script>
 </head>
 <body>

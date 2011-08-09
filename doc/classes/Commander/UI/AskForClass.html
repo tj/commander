@@ -1,40 +1,38 @@
-<?xml version="1.0" encoding="%charset%"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title>Commander::UI::AskForClass</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=%charset%" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>     
-    <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'>
-        <tr>
-            <td class="file-title"><span class="file-title-prefix">Module</span><br />Commander::UI::AskForClass</td>
-            <td align="right">
-                <table cellspacing="0" cellpadding="2">
-                    <tr valign="top">
-                        <td>In:</td>
-                        <td>
-                            
-                            <a href="../../../files/lib/commander/user_interaction_rb.html">lib/commander/user_interaction.rb</a>
-                            
-                        </td>
-                    </tr>
-                    
-                </table>
-            </td>
-        </tr>
-    </table>
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            Commander::UI::AskForClass 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/lib/commander/user_interaction_rb.html">lib/commander/user_interaction.rb</a></li>
+            
+        </ul>
+    </div>
     <div id="bodyContent">
         <div id="content">
     
-    <div class="description"><p>
-Implements ask_for_CLASS methods.
-</p>
-</div>
+    <div class="description">
+        
+<p>Implements ask_for_CLASS methods.</p>
+
+    </div>
     
 
     
@@ -45,11 +43,18 @@ Implements ask_for_CLASS methods.
     
     
     <div class="sectiontitle">Methods</div>
-    <ul>
-        
-        <li><a href="#M000041">method_missing</a></li>
-        
-    </ul>
+    <dl class="methods">
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#method-i-method_missing">method_missing</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
     
 
     
@@ -66,9 +71,9 @@ Implements ask_for_CLASS methods.
             <div class="sectiontitle">Instance Public methods</div>
             
             <div class="method">
-                <div class="title">
+                <div class="title" id="method-i-method_missing">
                     
-                    <a name="M000041"></a><b>method_missing</b>(meth, *args, &amp;block)
+                    <a name="method-i-method_missing"></a><b>method_missing</b>(meth, *args, &amp;block)
                     
                 </div>
                 
@@ -77,19 +82,17 @@ Implements ask_for_CLASS methods.
                 
                 <div class="sourcecode">
                     <p class="source-link">
-                        Source: <a href="javascript:toggleSource('M000041_source')" id="l_M000041_source">show</a>
-                        
-                        | <a href="http://github.com/visionmedia/commander/blob/41e93e390ceb56374dc99d463577f0877bbe9f1d/lib/commander/user_interaction.rb#L112" target="_blank" class="github_url">on GitHub</a>
+                        Source: <a href="javascript:toggleSource('method-i-method_missing_source')" id="l_method-i-method_missing_source">show</a>
                         
                     </p>
-                    <div id="M000041_source" class="dyn-source">
-                        <pre>     <span class="ruby-comment cmt"># File lib/commander/user_interaction.rb, line 112</span>
-112:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span> <span class="ruby-identifier">meth</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
-113:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">to_s</span>
-114:         <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/^ask_for_([\w]+)/</span> ; <span class="ruby-identifier">$terminal</span>.<span class="ruby-identifier">ask</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>, <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">$1</span>.<span class="ruby-identifier">capitalize</span>))
-115:         <span class="ruby-keyword kw">else</span> <span class="ruby-keyword kw">super</span>
-116:         <span class="ruby-keyword kw">end</span>
-117:       <span class="ruby-keyword kw">end</span></pre>
+                    <div id="method-i-method_missing_source" class="dyn-source">
+                        <pre><span class="ruby-comment"># File lib/commander/user_interaction.rb, line 294</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span> <span class="ruby-identifier">meth</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">meth</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^ask_for_([\w]+)/</span> ; <span class="ruby-identifier">$terminal</span>.<span class="ruby-identifier">ask</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>, <span class="ruby-constant">Kernel</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-node">$1</span>.<span class="ruby-identifier">capitalize</span>))
+  <span class="ruby-keyword">else</span> <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
                     </div>
                 </div>
                 

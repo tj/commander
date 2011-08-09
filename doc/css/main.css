@@ -1,24 +1,173 @@
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #FFF;
+  color: #000;
+  margin: 0px;
+  font-size: 0.82em;
+  line-height: 1.25em;
+}
+
 a {
   color: #00F;
   text-decoration: none;
 }
 
 a:hover {
-  color: #77F;
-  text-decoration: underline;
-}
-
-body, td, p {
-  font-family: "Bitstream Vera Sans", Verdana, Arial, Helvetica, sans-serif;
-  background: #FFF;
-  color: #000;
-  margin: 0px;
-  font-size: small;
+  color: #333;
+  background: #FE8;
 }
 
 p {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
+h1 {
+    font-size: 2.1em;
+    font-weight: normal;
+    line-height: 1.2em;
+    margin: 1.4em 0 0.7em 0;
+}
+
+h2 {
+    font-size: 1.6em;
+    margin: 1.8em 0 0.8em 0;
+    font-weight: normal;
+    line-height: 1.2em;
+}
+
+h3 {
+    font-size: 1.4em;
+    color:#555;
+    margin: 1.4em 0 0.7em 0;
+    font-weight: normal;
+}
+
+h4 {
+    margin: 1.4em 0 0.5em 0;
+    font-size: 1em;
+}
+
+table
+{
+    margin-bottom: 1em;
+}
+
+td, th
+{
+    padding: 0 0.7em 0.3em 0;
+}
+
+th
+{
+    font-weight: bold;
+}
+
+.clear
+{
+    clear: both;
+    width: 0; height: 0;
+}
+
+dt
+{
+    margin-bottom: 0.3em;
+    font-weight: bold;
+}
+
+dd
+{
+    margin-left: 2em;
+    margin-bottom: 1em;
+}
+
+dd p
+{
+    margin-top: 0.6em;
+}
+
+li
+{
+    margin: 0 0 0.5em 2em;
+}
+
+ul li
+{
+    list-style: disc;
+}
+
+ol li
+{
+    list-style: decimal;
+}
+
+.banner
+{
+    background: #EDF3FE;
+    border-bottom: 1px solid #ccc;
+    padding: 1em 2em 0.5em 2em;
+}
+.banner h1
+{
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.banner h1 .type
+{
+    font-size: 0.833em;
+    display:block;
+}
+
+.banner h1 .type,
+.banner h1 .parent
+{
+    color: #666;
+}
+
+.banner ul
+{
+    margin-top: 0.3em;
+    margin-bottom: 0;
+    font-size: 0.85em;
+}
+
+.banner li
+{
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+pre 
+{
+    margin-bottom: 1em;
+}
+
+.methods dt
+{
+    width: 1em;
+    font-size: 1.5em;
+    color:#AAA;
+    position: absolute;
+    font-weight: normal;
+    margin: 0;
+}
+
+.methods dd
+{
+    margin-left: 2.5em;
+    min-height: 1.8em;
+    -height: 1.8em;
+    padding-bottom: 0.8em;
+}
+
+
+.methods ul li
+{
+    margin-right: 0.7em;
+    margin-left: 0;
+    list-style: none;
+    display: inline;
 }
 
 #content {
@@ -27,22 +176,18 @@ p {
   margin-right: 3.5em;
 }
 
-#description p {
-  margin-bottom: 0.5em;
-}
 
 .sectiontitle {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  padding: 0.5em;
-  padding-left: 2em;
-  background: #005;
-  color: #FFF;
+  margin-top: 2em;
+  margin-bottom: 1.3em;
+  margin-left: -1.2em;
+  font-size: 1.2em;
+  padding: 0 0 0.25em 0;
   font-weight: bold;
+  border-bottom: 1px solid #000;
 }
 
 .attr-rw {
-  padding-left: 1em;
   padding-right: 1em;
   text-align: center;
   color: #055;
@@ -50,48 +195,20 @@ p {
 
 .attr-name {
   font-weight: bold;
+  padding-right: 1em;
 }
 
 .attr-desc {
 }
 
-.attr-desc p {
-    margin-top: 0;
+tt {
+  font-size: 1.15em;
 }
 
 .attr-value {
   font-family: monospace;
-}
-
-.file-title-prefix {
-  font-size: large;
-}
-
-.file-title {
-  font-size: large;
-  font-weight: bold;
-  background: #005;
-  color: #FFF;
-}
-
-.banner {
-  background: #005;
-  color: #FFF;
-  border: 1px solid black;
-  padding: 1em;
-}
-
-.banner td {
-  background: transparent;
-  color: #FFF;
-}
-
-h1 a, h2 a, .sectiontitle a, .banner a {
-  color: #FF0;
-}
-
-h1 a:hover, h2 a:hover, .sectiontitle a:hover, .banner a:hover {
-  color: #FF7;
+  padding-left: 1em;
+  font-size: 1.15em;
 }
 
 .dyn-source {
@@ -99,7 +216,7 @@ h1 a:hover, h2 a:hover, .sectiontitle a:hover, .banner a:hover {
   background: #fffde8;
   color: #000;
   border: #ffe0bb dotted 1px;
-  margin: 0.5em 2em 0.5em 2em;
+  margin: 0.5em 2em 0.5em 0;
   padding: 0.5em;
 }
 
@@ -113,32 +230,34 @@ h1 a:hover, h2 a:hover, .sectiontitle a:hover, .banner a:hover {
   font-weight: bold;
 }
 
-.method {
-  margin-left: 1em;
-  margin-right: 1em;
-  margin-bottom: 1em;
-}
-
 .description pre {
   padding: 0.5em;
   border: #ffe0bb dotted 1px;
   background: #fffde8;
 }
 
+.method {
+    margin-bottom: 2em;
+}
+.method .description,
+.method .sourcecode
+{
+    margin-left: 1.2em;
+}
+.method h4
+{
+    border-bottom: 1px dotted #999;
+    padding: 0 0 0.2em 0;
+    margin-bottom: 0.8em;
+    font-size: 1.1em;
+    color:#333;
+}
 .method .title {
-  font-family: monospace;
-  font-size: large;
-  border-bottom: 1px dashed black;
-  margin-bottom: 0.3em;
-  padding-bottom: 0.1em;
-}
-
-.method .description, .method .sourcecode {
-  margin-left: 1em;
-}
-
-.description p, .sourcecode p {
-  margin-bottom: 0.5em;
+    border-bottom: 1px dotted #666;
+    padding: 0 0 0.15em 0;
+    margin: 0 0 0.5em 0;
+    font-size: 1.2em;
+    line-height: 1.25em;
 }
 
 .method .sourcecode p.source-link {
@@ -153,39 +272,7 @@ h1 a:hover, h2 a:hover, .sectiontitle a:hover, .banner a:hover {
   text-indent: 2em;
 }
 
-h1 {
-  padding: 1em;
-  margin-left: -1.5em;
-  font-size: x-large;
-  font-weight: bold;
-  color: #FFF;
-  background: #007;
-}
-
-h2 {
-  padding: 0.5em 1em 0.5em 1em;
-  margin-left: -1.5em;
-  font-size: large;
-  font-weight: bold;
-  color: #FFF;
-  background: #009;
-}
-
-h3, h4, h5, h6 {
-  color: #220088;
-  border-bottom: #5522bb solid 1px;
-}
-
-.sourcecode > pre {
-  padding: 0.5em;
-  border: 1px dotted black;
-  background: #FFE;
-}
-
-dt {
-  font-weight: bold
-}
-
-dd {
-  margin-bottom: 0.7em;
+.method .source-link
+{
+    font-size: 0.85em;
 }

@@ -28,6 +28,14 @@ Searchdoc.Navigation = new function() {
             case 38: //Event.KEY_UP:
             case 39: //Event.KEY_RIGHT:
             case 40: //Event.KEY_DOWN:
+            case 73: // i - qwerty
+            case 74: // j
+            case 75: // k
+            case 76: // l
+            case 67: // c - dvorak
+            case 72: // h 
+            case 84: // t
+            case 78: // n
                 this.clearMoveTimeout();
                 break;
             }
@@ -37,28 +45,37 @@ Searchdoc.Navigation = new function() {
         if (!this.navigationActive) return;
         switch(e.keyCode) {
             case 37: //Event.KEY_LEFT:
-                if (this.moveLeft())
-                    e.preventDefault();
+            case 74: // j (qwerty)
+            case 72: // h (dvorak)
+                if (this.moveLeft()) e.preventDefault();
                 break;
             case 38: //Event.KEY_UP:
-                if (this.moveUp())
-                    e.preventDefault();
-                this.startMoveTimeout(false);
+            case 73: // i (qwerty)
+            case 67: // c (dvorak)
+                if (e.keyCode == 38 || e.ctrlKey) {
+                    if (this.moveUp()) e.preventDefault();
+                    this.startMoveTimeout(false);
+                }
                 break;
             case 39: //Event.KEY_RIGHT:
-                if (this.moveRight())
-                    e.preventDefault();
+            case 76: // l (qwerty)
+            case 78: // n (dvorak)
+                if (this.moveRight()) e.preventDefault();
                 break;
             case 40: //Event.KEY_DOWN:
-                if (this.moveDown())
-                    e.preventDefault();
-                this.startMoveTimeout(true);
+            case 75: // k (qwerty)
+            case 84: // t (dvorak)
+                if (e.keyCode == 40 || e.ctrlKey) {
+                    if (this.moveDown()) e.preventDefault();
+                    this.startMoveTimeout(true);
+                }
                 break;
             case 9: //Event.KEY_TAB:
             case 13: //Event.KEY_RETURN:
                 if (this.$current) this.select(this.$current);
                 break;
         }
+        if (e.ctrlKey && e.shiftKey) this.select(this.$current);
     }
 
     this.clearMoveTimeout = function() {
@@ -342,8 +359,9 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
         this.setNavigationActive(false);
     }
 
-    this.search = function(value) {
+    this.search = function(value, selectFirstMatch) {
         value = jQuery.trim(value).toLowerCase();
+        this.selectFirstMatch = selectFirstMatch;
         if (value) {
             this.$element.removeClass('panel_tree').addClass('panel_results');
             this.tree.setNavigationActive(false);
@@ -373,6 +391,7 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
             this.firstRun = false;
             this.$current = $(target.firstChild);
             this.$current.addClass('current');
+            if (this.selectFirstMatch) this.select();
             scrollIntoView(this.$current[0], this.$view[0])
         }
         if (jQuery.browser.msie) this.$element[0].className += '';
@@ -403,11 +422,11 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
         var li = document.createElement('li'),
             html = '', badge = result.badge;
         html += '<h1>' + hlt(result.title);
-        if (result.params) html += '<i>' + result.params + '</i></h1>';
+        if (result.params) html += '<i>' + result.params + '</i>';
+        html += '</h1>';
         html += '<p>';
         if (typeof badge != 'undefined') {
-            badge = badge % 6;
-            html += '<span class="badge badge_' + (badge + 1) + '">' + escapeHTML(this.data.badges[badge] || 'unknown') + '</span>';
+            html += '<span class="badge badge_' + (badge % 6 + 1) + '">' + escapeHTML(this.data.badges[badge] || 'unknown') + '</span>';
         }
         html += hlt(result.namespace) + '</p>';
         if (result.snippet) html += '<p class="snippet">' + escapeHTML(result.snippet) + '</p>';
@@ -462,10 +481,14 @@ Searchdoc.Tree.prototype = $.extend({}, Searchdoc.Navigation, new function() {
     }
 
     this.select = function($li) {
+        this.highlight($li);
         var path = $li[0].searchdoc_tree_data.path;
+        if (path) this.panel.open(path);
+    }
+    
+    this.highlight = function($li) {
         if (this.$current) this.$current.removeClass('current');
         this.$current = $li.addClass('current');
-        if (path) this.panel.open(path);
     }
 
     this.toggle = function($li) {
@@ -479,7 +502,7 @@ Searchdoc.Tree.prototype = $.extend({}, Searchdoc.Navigation, new function() {
 
     this.moveRight = function() {
         if (!this.$current) {
-            this.select(this.$list.find('li:first'));
+            this.highlight(this.$list.find('li:first'));
             return;
         }
         if (this.$current.hasClass('closed')) {
@@ -489,7 +512,7 @@ Searchdoc.Tree.prototype = $.extend({}, Searchdoc.Navigation, new function() {
     
     this.moveLeft = function() {
         if (!this.$current) {
-            this.select(this.$list.find('li:first'));
+            this.highlight(this.$list.find('li:first'));
             return;
         }
         if (!this.$current.hasClass('closed')) {
@@ -507,7 +530,7 @@ Searchdoc.Tree.prototype = $.extend({}, Searchdoc.Navigation, new function() {
 
     this.move = function(isDown) {
         if (!this.$current) {
-            this.select(this.$list.find('li:first'));
+            this.highlight(this.$list.find('li:first'));
             return true;
         }        
         var next = this.$current[0];
