@@ -223,6 +223,22 @@ describe Commander do
 
       global_option.should == 'bar'
     end
+    
+    it 'should allow global arguments with values before command arguments (github issue #8)' do
+      global_option = nil
+      command_option = nil
+      new_command_runner('foo', '--config', 'path', 'bar') do
+        global_option('--config VALUE') { |v| global_option = v }
+
+        command :foo do |c|
+          c.option('bar') { command_option = 'bar' }
+          c.when_called {}
+        end
+      end.run!
+
+      global_option.should == 'path'
+      command_option.should == 'bar'
+    end
   end
 
   
