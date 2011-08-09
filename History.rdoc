@@ -1,3 +1,14 @@
+4.0.5 / 2011-08-09
+==================
+
+  * Updated documentation to fix inaccuracies and unclear information.
+  * Improved rake tasks for gem development.
+  * Added say_ok, say_warning and say_error methods to print messages in green, yellow or red. (thanks to Simon Courtois)
+  * Fixed; Allow global options to be passed in any order, even mixed with command options. (thanks to Rich Grundy)
+  * Fixed; Global options can be passed before or after the command, they can even be mixed with command options. Closes #8. (thanks to Rich Grundy)
+  * Fixed; Platform test should now correctly identify JRuby. (thanks to Justin Lynn)
+  * Fixed; Add to_s to exceptions as option parser no longer does implicit conversion. (thanks to Justin Lynn)
+
 4.0.4 / 2011-04-04
 ==================
 
