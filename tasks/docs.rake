@@ -1,6 +1,7 @@
 
 desc 'Build docs with sdoc gem'
 task :docs do
+  require "sdoc"
   sh 'sdoc -N lib/commander'
 end
 
