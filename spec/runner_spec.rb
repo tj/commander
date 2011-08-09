@@ -194,7 +194,7 @@ describe Commander do
       global_option.should == 'MAGIC'
     end
 
-    it 'should not effect command arguments with values' do
+    it 'should not affect command arguments with values' do
       global_option = nil
       command_option = nil
       new_command_runner('foo', '--testing-command', 'bar', '--testing-global') do
@@ -210,7 +210,7 @@ describe Commander do
       global_option.should == 'MAGIC'
     end
 
-    it 'should not effect global arguments with values' do
+    it 'should not affect global arguments with values' do
       global_option = nil
       new_command_runner('foo', '--testing-command', '--testing-global', 'bar') do
         global_option('--testing-global VALUE') { |v| global_option = v }
