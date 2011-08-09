@@ -319,12 +319,19 @@ module Commander
     # Parse global command options.
     
     def parse_global_options
-      options.inject OptionParser.new do |options, option|
+
+      parser = options.inject(OptionParser.new) do |options, option|
         options.on *option[:args], &global_option_proc(option[:switches], &option[:proc])
-      end.parse! @args.dup
-    rescue OptionParser::InvalidOption
-      # Ignore invalid options since options will be further 
-      # parsed by our sub commands.
+      end
+
+      options = @args.dup
+      begin
+        parser.parse!(options)
+      rescue OptionParser::InvalidOption => e
+        # Remove the offending args and retry.
+        options = options.reject { |o| e.args.include?(o) }
+        retry
+      end
     end
     
     ##
