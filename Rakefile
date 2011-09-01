@@ -1,5 +1,6 @@
 $:.unshift 'lib'
 
+require 'psych'
 require 'rubygems'
 
 load_errors = ['highline', 'echoe'].map do |g|
