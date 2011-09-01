@@ -1,6 +1,6 @@
 $:.unshift 'lib'
 
-require 'psych'
+require 'psych' if RUBY_VERSION >= "1.9.2"
 require 'rubygems'
 
 load_errors = ['highline', 'echoe'].map do |g|
