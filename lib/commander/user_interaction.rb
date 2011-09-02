@@ -291,7 +291,14 @@ module Commander
     # Implements ask_for_CLASS methods.
     
     module AskForClass
-      [Array].each do |klass|
+      # All special cases in HighLine::Question#convert
+      # All Classes that respond to #parse
+      ([Float, Integer, String, Symbol, Regexp, Array, File, Pathname] + # Date, DateTime
+      Object.constants.map do |const|
+        Module.const_get(const)
+      end.select do |const|
+        const.is_a? Class and const.respond_to? :parse
+      end).each do |klass|
         define_method "ask_for_#{klass.to_s.downcase}" do |prompt|
           $terminal.ask(prompt, klass)
         end
