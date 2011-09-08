@@ -291,11 +291,12 @@ module Commander
     # Implements ask_for_CLASS methods.
     
     module AskForClass
-      # All special cases in HighLine::Question#convert
+      # All special cases in HighLine::Question#convert, except those that implement #parse
+      ([Float, Integer, String, Symbol, Regexp, Array, File, Pathname] +
       # All Classes that respond to #parse
-      ([Float, Integer, String, Symbol, Regexp, Array, File, Pathname] + # Date, DateTime
       Object.constants.map do |const|
-        Module.const_get(const)
+        # const_get(:Config) issues a deprecation warning on ruby 1.8.7
+        Object.const_get(const) unless const == :Config
       end.select do |const|
         const.is_a? Class and const.respond_to? :parse
       end).each do |klass|
