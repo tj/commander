@@ -291,10 +291,17 @@ module Commander
     # Implements ask_for_CLASS methods.
     
     module AskForClass
-      def method_missing meth, *args, &block
-        case meth.to_s
-        when /^ask_for_([\w]+)/ ; $terminal.ask(args.first, Kernel.const_get($1.capitalize))
-        else super
+      # All special cases in HighLine::Question#convert, except those that implement #parse
+      ([Float, Integer, String, Symbol, Regexp, Array, File, Pathname] +
+      # All Classes that respond to #parse
+      Object.constants.map do |const|
+        # const_get(:Config) issues a deprecation warning on ruby 1.8.7
+        Object.const_get(const) unless const == :Config
+      end.select do |const|
+        const.is_a? Class and const.respond_to? :parse
+      end).each do |klass|
+        define_method "ask_for_#{klass.to_s.downcase}" do |prompt|
+          $terminal.ask(prompt, klass)
         end
       end
     end
