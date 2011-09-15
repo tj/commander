@@ -84,7 +84,7 @@ describe Commander::Command do
         @command.run '--no-toggle'
       end
 
-      it "manditory arguments" do
+      it "mandatory arguments" do
         @command.option '--file FILE'
         @command.when_called { |_, options| options.file.should == 'foo' }  
         @command.run '--file', 'foo'
