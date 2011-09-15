@@ -21,4 +21,3 @@ To build a new version of the gem:
   $ rake build
   $ rake gem
 
-(NOTE: there currently seem to be some bugs in our development dependencies that prevent building the gem or docs on Ruby 1.9.2.)
