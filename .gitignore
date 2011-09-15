@@ -1,3 +1,4 @@
-doc
-test
+/doc
+/test
+/pkg
 /.rvmrc
