@@ -28,6 +28,12 @@ features, and an elegant API.
 
   $ gem install commander
 
+== Quick Start
+
+To generate a quick template for a commander app, run:
+
+  $ commander init yourfile.rb
+
 == Example
 
 For more option examples view the Commander::Command#option method. Also
