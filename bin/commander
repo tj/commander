@@ -8,17 +8,17 @@ program :version, Commander::VERSION
 program :description, 'Commander utility program.'
 
 command :init do |c|
-	c.syntax = 'commander init <file>'
-	c.summary = 'Initialize a commander template'
-	c.description = 'Initialize an empty <file> with a commander template, 
+  c.syntax = 'commander init <file>'
+  c.summary = 'Initialize a commander template'
+  c.description = 'Initialize an empty <file> with a commander template, 
     allowing very quick creation of commander executables.'
-	c.example 'Create a new file with a commander template.', 'commander init bin/my_executable'
-	c.action do |args, options|
-	  file = args.shift || abort('file argument required.')
-		name = ask 'Machine name of program: '
-		description = ask 'Describe your program: '
-		commands = ask_for_array 'List the commands you wish to create: '
-		begin
+  c.example 'Create a new file with a commander template.', 'commander init bin/my_executable'
+  c.action do |args, options|
+    file = args.shift || abort('file argument required.')
+    name = ask 'Machine name of program: '
+    description = ask 'Describe your program: '
+    commands = ask_for_array 'List the commands you wish to create: '
+    begin
       File.open(file, 'w') do |f|
         f.write <<-"...".gsub!(/^ {10}/, '')
           #!/usr/bin/env ruby
@@ -48,8 +48,8 @@ command :init do |c|
         end
        end
        say "Initialized template in #{file}"
-		 rescue Exception => e
+     rescue Exception => e
        abort e
-		 end
-	end
+     end
+  end
 end
