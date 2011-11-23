@@ -1,8 +1,5 @@
-old
-pkg
-doc
-test
-.DS_Store
-*.cache
 *.gem
-/.rvmrc
+.bundle
+Gemfile.lock
+pkg/*
+.rvmrc

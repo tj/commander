@@ -1,28 +1,15 @@
-To run the development rake tasks, you need rake and echoe gems installed.
-
-To install the rest of the development dependencies:
-
-  $ rake dev_setup
+To run the development rake tasks, you need bundler installed.
 
 Before you push any changes, run the RSpec suite:
 
   $ rake spec
 
-Build the docs:
-
-  $ rake docs
-
-Build and check the docs:
-
-  $ rake docs:open
-
 To build a new version of the gem:
 
   $ rake build
-  $ rake gem
 
 To push the new version to Rubygems:
 
-  $ gem push pkg/commander-*.gem
+  $ rake release
   
 (http://rubygems.org/gems/commander)
