@@ -202,7 +202,7 @@ growlnotify can also be installed via homebrew[http://mxcl.github.com/homebrew/]
 === Option Defaults
 
 The options struct passed to #action provides a #default method, allowing you
-to set defaults in a clean manor to options which have not been set.
+to set defaults in a clean manner for options which have not been set.
 
   command :foo do |c|
     c.option '--interval SECONDS', Integer, 'Interval in seconds'
