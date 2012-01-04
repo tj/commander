@@ -252,7 +252,7 @@ module Commander
     
     def enable_paging
       return unless $stdout.tty?
-      return if Platform::jruby? # Fork is not supported by JRuby
+      return if Platform::jruby? || Platform::win? # Fork is neither supported by JRuby nor Windows
       read, write = IO.pipe
 
       if Kernel.fork
