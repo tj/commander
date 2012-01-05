@@ -252,20 +252,28 @@ module Commander
     
     def enable_paging
       return unless $stdout.tty?
-      return if Platform::jruby? # Fork is not supported by JRuby
+      return unless Process.respond_to? :fork
       read, write = IO.pipe
 
-      if Kernel.fork
-        $stdin.reopen read
-        read.close; write.close
-        Kernel.select [$stdin]
-        ENV['LESS'] = 'FSRX'
-        pager = ENV['PAGER'] || 'less'
-        exec pager rescue exec '/bin/sh', '-c', pager
-      else
-        $stdout.reopen write
-        $stderr.reopen write if $stderr.tty?
-        read.close; write.close
+      # Kernel.fork is not supported on all platforms and configurations.
+      # As of Ruby 1.9, `Process.respond_to? :fork` should return false on
+      # configurations that don't support it, but versions before 1.9 don't
+      # seem to do this reliably.
+      begin
+        if Kernel.fork
+          $stdin.reopen read
+          read.close; write.close
+          Kernel.select [$stdin]
+          ENV['LESS'] = 'FSRX'
+          pager = ENV['PAGER'] || 'less'
+          exec pager rescue exec '/bin/sh', '-c', pager
+        else
+          $stdout.reopen write
+          $stderr.reopen write if $stderr.tty?
+          read.close; write.close
+          return
+        end
+      rescue NotImplementedError
         return
       end
     end
