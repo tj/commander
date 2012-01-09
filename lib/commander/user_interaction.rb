@@ -258,24 +258,26 @@ module Commander
       # Kernel.fork is not supported on all platforms and configurations.
       # As of Ruby 1.9, `Process.respond_to? :fork` should return false on
       # configurations that don't support it, but versions before 1.9 don't
-      # seem to do this reliably.
-      begin
-        if Kernel.fork
-          $stdin.reopen read
-          read.close; write.close
-          Kernel.select [$stdin]
-          ENV['LESS'] = 'FSRX'
-          pager = ENV['PAGER'] || 'less'
-          exec pager rescue exec '/bin/sh', '-c', pager
-        else
-          $stdout.reopen write
-          $stderr.reopen write if $stderr.tty?
-          read.close; write.close
-          return
-        end
-      rescue NotImplementedError
-        return
+      # seem to do this reliably and instead raise a NotImplementedError
+      # (which is rescued below).
+      
+      if Kernel.fork
+        $stdin.reopen read
+        write.close; read.close
+        Kernel.select [$stdin]
+        ENV['LESS'] = 'FSRX'
+        pager = ENV['PAGER'] || 'less'
+        exec pager rescue exec '/bin/sh', '-c', pager
+      else
+        # subprocess
+        $stdout.reopen write
+        $stderr.reopen write if $stderr.tty?
+        write.close; read.close
       end
+    rescue NotImplementedError
+    ensure
+      write.close unless write.closed?
+      read.close unless read.closed?
     end
 
     ##
