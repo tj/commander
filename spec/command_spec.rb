@@ -15,13 +15,13 @@ describe Commander::Command do
     it "should act like an open struct" do
       @options.send = 'mail'
       @options.call = true
-      @options.send.should == 'mail'
-      @options.call.should == true
+      @options.send.should eq('mail')
+      @options.call.should eq(true)
     end
     
     it "should allow __send__ to function as always" do
       @options.send = 'foo'
-      @options.__send__(:send).should == 'foo'
+      @options.__send__(:send).should eq('foo')
     end
   end
   
@@ -37,7 +37,7 @@ describe Commander::Command do
     
     it "should allow usage of common method names" do
       @command.option '--open file'
-      @command.when_called { |_, options| options.open.should == 'foo' }  
+      @command.when_called { |_, options| options.open.should eq('foo') }  
       @command.run '--open', 'foo'
     end
   end
@@ -45,7 +45,7 @@ describe Commander::Command do
   describe "#run" do
     describe "should invoke #when_called" do
       it "with arguments seperated from options" do
-        @command.when_called { |args, options| args.join(' ').should == 'just some args' }  
+        @command.when_called { |args, options| args.join(' ').should eq('just some args') }  
         @command.run '--verbose', 'just', 'some', 'args'
       end
       
@@ -86,32 +86,32 @@ describe Commander::Command do
 
       it "mandatory arguments" do
         @command.option '--file FILE'
-        @command.when_called { |_, options| options.file.should == 'foo' }  
+        @command.when_called { |_, options| options.file.should eq('foo') }  
         @command.run '--file', 'foo'
         lambda { @command.run '--file' }.should raise_error(OptionParser::MissingArgument)
       end  
 
       it "optional arguments" do
         @command.option '--use-config [file] '
-        @command.when_called { |_, options| options.use_config.should == 'foo' }  
+        @command.when_called { |_, options| options.use_config.should eq('foo') }  
         @command.run '--use-config', 'foo'
         @command.when_called { |_, options| options.use_config.should be_nil }  
         @command.run '--use-config'
         @command.option '--interval N', Integer
-        @command.when_called { |_, options| options.interval.should == 5 }  
+        @command.when_called { |_, options| options.interval.should eq(5) }  
         @command.run '--interval', '5'
         lambda { @command.run '--interval', 'invalid' }.should raise_error(OptionParser::InvalidArgument)
       end
       
       it "lists" do
         @command.option '--fav COLORS', Array
-        @command.when_called { |_, options| options.fav.should == ['red', 'green', 'blue'] }  
+        @command.when_called { |_, options| options.fav.should eq(['red', 'green', 'blue']) }  
         @command.run '--fav', 'red,green,blue'
       end
       
       it "lists with multi-word items" do
         @command.option '--fav MOVIES', Array
-        @command.when_called { |_, options| options.fav.should == ['super\ bad', 'nightmare'] }  
+        @command.when_called { |_, options| options.fav.should eq(['super\ bad', 'nightmare']) }  
         @command.run '--fav', 'super\ bad,nightmare'        
       end
       
@@ -122,8 +122,8 @@ describe Commander::Command do
           options.default \
             :files => ['foo', 'bar'],
             :interval => 5
-          options.files.should == ['foo', 'bar']
-          options.interval.should == 15
+          options.files.should eq(['foo', 'bar'])
+          options.interval.should eq(15)
         end
         @command.run '--interval', '15'
       end

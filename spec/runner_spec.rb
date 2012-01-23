@@ -10,12 +10,12 @@ describe Commander do
   describe "#program" do
     it "should set / get program information" do
       program :name, 'test'
-  	  program(:name).should == 'test'
+  	  program(:name).should eq('test')
     end
     
     it "should allow arbitrary blocks of global help documentation" do
       program :help, 'Copyright', 'TJ Holowaychuk'
-  	  program(:help)['Copyright'].should == 'TJ Holowaychuk'
+  	  program(:help)['Copyright'].should eq('TJ Holowaychuk')
     end
     
     it "should raise an error when required info has not been set" do
@@ -26,7 +26,7 @@ describe Commander do
     
     it "should allow aliases of help formatters" do
       program :help_formatter, :compact
-      program(:help_formatter).should == Commander::HelpFormatter::TerminalCompact
+      program(:help_formatter).should eq(Commander::HelpFormatter::TerminalCompact)
     end
   end
   
@@ -43,26 +43,26 @@ describe Commander do
   describe "#separate_switches_from_description" do
     it "should seperate switches and description returning both" do
       switches, description = *Commander::Runner.separate_switches_from_description('-h', '--help', 'display help')
-      switches.should == ['-h', '--help']
-      description.should == 'display help'
+      switches.should eq(['-h', '--help'])
+      description.should eq('display help')
     end
   end
   
   describe "#switch_to_sym" do
     it "should return a symbol based on the switch name" do
-     Commander::Runner.switch_to_sym('--trace').should == :trace
-     Commander::Runner.switch_to_sym('--foo-bar').should == :foo_bar
-     Commander::Runner.switch_to_sym('--[no-]feature"').should == :feature
-     Commander::Runner.switch_to_sym('--[no-]feature ARG').should == :feature
-     Commander::Runner.switch_to_sym('--file [ARG]').should == :file
-     Commander::Runner.switch_to_sym('--colors colors').should == :colors
+     Commander::Runner.switch_to_sym('--trace').should eq(:trace)
+     Commander::Runner.switch_to_sym('--foo-bar').should eq(:foo_bar)
+     Commander::Runner.switch_to_sym('--[no-]feature"').should eq(:feature)
+     Commander::Runner.switch_to_sym('--[no-]feature ARG').should eq(:feature)
+     Commander::Runner.switch_to_sym('--file [ARG]').should eq(:file)
+     Commander::Runner.switch_to_sym('--colors colors').should eq(:colors)
     end
   end
   
   describe "#alias_command" do
     it "should alias a command" do
       alias_command :foo, :test
-      command(:foo).should == command(:test)
+      command(:foo).should eq(command(:test))
     end
     
     it "should pass arguments passed to the alias when called" do
@@ -74,7 +74,7 @@ describe Commander do
         end 
         alias_command :'install gem', :install, '--gem-name'
       end.run!
-      gem_name.should == 'commander'
+      gem_name.should eq('commander')
     end
   end
   
@@ -84,7 +84,7 @@ describe Commander do
       new_command_runner 'test', '--config', 'foo' do
         global_option('--config FILE') { |f| file = f }
       end.run!
-      file.should == 'foo'
+      file.should eq('foo')
     end
     
     it "should be inherited by commands" do
@@ -120,7 +120,7 @@ describe Commander do
           c.when_called {}
         end
       end.run!
-      global_option.should == 'MAGIC'
+      global_option.should eq('MAGIC')
     end
 
     it 'should parse global options after command' do
@@ -132,7 +132,7 @@ describe Commander do
           c.when_called {}
         end
       end.run!
-      global_option.should == 'MAGIC'
+      global_option.should eq('MAGIC')
     end
 
     it 'should parse global options placed before command options' do
@@ -146,7 +146,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should == 'MAGIC'
+      global_option.should eq('MAGIC')
     end
 
     it 'should parse global options placed after command options' do
@@ -160,7 +160,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should == 'MAGIC'
+      global_option.should eq('MAGIC')
     end
 
     it 'should parse global options surrounded by command options' do
@@ -175,7 +175,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should == 'MAGIC'
+      global_option.should eq('MAGIC')
     end
 
     it 'should not parse command options' do
@@ -191,7 +191,7 @@ describe Commander do
       end.parse_global_options
 
       command_option.should be_nil
-      global_option.should == 'MAGIC'
+      global_option.should eq('MAGIC')
     end
 
     it 'should not affect command arguments with values' do
@@ -206,8 +206,8 @@ describe Commander do
         end
       end.run!
 
-      command_option.should == 'bar'
-      global_option.should == 'MAGIC'
+      command_option.should eq('bar')
+      global_option.should eq('MAGIC')
     end
 
     it 'should not affect global arguments with values' do
@@ -221,7 +221,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should == 'bar'
+      global_option.should eq('bar')
     end
     
     it 'should allow global arguments with values before command arguments (github issue #8)' do
@@ -236,8 +236,8 @@ describe Commander do
         end
       end.run!
 
-      global_option.should == 'path'
-      command_option.should == 'bar'
+      global_option.should eq('path')
+      command_option.should eq('bar')
     end
   end
 
@@ -254,7 +254,7 @@ describe Commander do
       args << '--command-with-arg' << 'rawr'
       args << '--paths' << '"lib/**/*.js","spec/**/*.js"'
       command_runner.remove_global_options options, args
-      args.should == ['--command', '--command-with-arg', 'rawr']
+      args.should eq(['--command', '--command-with-arg', 'rawr'])
     end
 
     it "should not swallow an argument unless it expects an argument" do
@@ -267,7 +267,7 @@ describe Commander do
       args << '-a' << 'deleted'
       args << 'beta'
       command_runner.remove_global_options options, args
-      args.should == ['alpha', 'beta']
+      args.should eq(['alpha', 'beta'])
     end
   end
   
@@ -292,7 +292,7 @@ describe Commander do
   
   describe "--version" do
     it "should output program version" do
-      run('--version').should == "test 1.2.3\n"
+      run('--version').should eq("test 1.2.3\n")
     end
   end
   
@@ -333,36 +333,36 @@ describe Commander do
     it "should return array of valid command names" do
       command('foo bar') {}
    	  command('foo bar foo') {}
-   	  command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should == ['foo bar', 'foo bar foo']
+   	  command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should eq(['foo bar', 'foo bar foo'])
     end
     
     it "should return empty array when no possible command names exist" do
-   	  command_runner.valid_command_names_from('fake', 'command', 'name').should == []
+   	  command_runner.valid_command_names_from('fake', 'command', 'name').should eq([])
     end
   end
   
   describe "#command_name_from_args" do
     it "should locate command within arbitrary arguments passed" do
    	  new_command_runner '--help', '--arbitrary', 'test'
-   	  command_runner.command_name_from_args.should == 'test'
+   	  command_runner.command_name_from_args.should eq('test')
     end
     
     it "should support multi-word commands" do
    	  new_command_runner '--help', '--arbitrary', 'some', 'long', 'command', 'foo'
    	  command('some long command') {}
-   	  command_runner.command_name_from_args.should == 'some long command'
+   	  command_runner.command_name_from_args.should eq('some long command')
     end
     
     it "should match the longest possible command" do
    	  new_command_runner '--help', '--arbitrary', 'foo', 'bar', 'foo'
    	  command('foo bar') {}
    	  command('foo bar foo') {}
-   	  command_runner.command_name_from_args.should == 'foo bar foo'      
+   	  command_runner.command_name_from_args.should eq('foo bar foo'      )
     end
     
     it "should use the left-most command name when multiple are present" do
    	  new_command_runner 'help', 'test'
-   	  command_runner.command_name_from_args.should == 'help'      
+   	  command_runner.command_name_from_args.should eq('help'      )
     end
   end
   
@@ -388,7 +388,7 @@ describe Commander do
       new_command_runner '--trace' do
         default_command :test
         command(:test).should_receive(:run).once
-        command_runner.active_command.should == command(:test)
+        command_runner.active_command.should eq(command(:test))
       end.run!
     end
     
@@ -397,7 +397,7 @@ describe Commander do
         default_command :test
         command(:'foo bar'){}
         command(:'foo bar').should_receive(:run).once
-        command_runner.active_command.should == command(:'foo bar')
+        command_runner.active_command.should eq(command(:'foo bar'))
       end.run!
     end
     
@@ -406,7 +406,7 @@ describe Commander do
       default_command :'foo bar'
       command(:'foo bar'){}
       command(:'foo bar something'){}
-      command_runner.active_command.should == command(:'foo bar something')
+      command_runner.active_command.should eq(command(:'foo bar something'))
     end
     
     it "should allow defaulting of command aliases" do
@@ -422,7 +422,7 @@ describe Commander do
     it "when options are passed before the command name" do
       new_command_runner '--verbose', 'test', 'foo', 'bar' do
         @command.when_called do |args, options|
-          args.should == ['foo', 'bar']
+          args.should eq(['foo', 'bar'])
           options.verbose.should be_true
         end
       end.run!
@@ -431,7 +431,7 @@ describe Commander do
     it "when options are passed after the command name" do
       new_command_runner 'test', '--verbose', 'foo', 'bar' do
         @command.when_called do |args, options|
-          args.should == ['foo', 'bar']
+          args.should eq(['foo', 'bar'])
           options.verbose.should be_true
         end
       end.run!
@@ -440,7 +440,7 @@ describe Commander do
     it "when an argument passed is the same name as the command" do
       new_command_runner 'test', '--verbose', 'foo', 'test', 'bar' do
         @command.when_called do |args, options|
-          args.should == ['foo', 'test', 'bar']
+          args.should eq(['foo', 'test', 'bar'])
           options.verbose.should be_true
         end
       end.run!
@@ -449,16 +449,16 @@ describe Commander do
     it "when using multi-word commands" do
       new_command_runner '--verbose', 'my', 'command', 'something', 'foo', 'bar' do
         command('my command') { |c| c.option('--verbose') }
-        command_runner.command_name_from_args.should == 'my command'
-        command_runner.args_without_command_name.should == ['--verbose', 'something', 'foo', 'bar']
+        command_runner.command_name_from_args.should eq('my command')
+        command_runner.args_without_command_name.should eq(['--verbose', 'something', 'foo', 'bar'])
       end.run!
     end
 
     it "when using multi-word commands with parts of the command name as arguments" do
       new_command_runner '--verbose', 'my', 'command', 'something', 'my', 'command' do
         command('my command') { |c| c.option('--verbose') }
-        command_runner.command_name_from_args.should == 'my command'
-        command_runner.args_without_command_name.should == ['--verbose', 'something', 'my', 'command']
+        command_runner.command_name_from_args.should eq('my command')
+        command_runner.args_without_command_name.should eq(['--verbose', 'something', 'my', 'command'])
       end.run!
     end
     
@@ -466,9 +466,13 @@ describe Commander do
       new_command_runner '--verbose', 'my', 'command', 'something', 'my', 'command' do
         command('my command') {}
         command('my command something') { |c| c.option('--verbose') }
-        command_runner.command_name_from_args.should == 'my command something'
-        command_runner.args_without_command_name.should == ['--verbose', 'my', 'command']
+        command_runner.command_name_from_args.should eq('my command something')
+        command_runner.args_without_command_name.should eq(['--verbose', 'my', 'command'])
       end.run!
+    end
+    
+    it "when using --help option after command" do
+      pending
     end
   end
   
