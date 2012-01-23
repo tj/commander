@@ -1,6 +1,8 @@
+require 'rubygems'
+require 'simplecov'
+SimpleCov.start
 
 $:.unshift File.dirname(__FILE__) + '/../lib'
-require 'rubygems'
 require 'commander/import'
 require 'stringio'
 
