@@ -1,49 +1,42 @@
-4.0.7 / 2012-01-23
-==================
+=== 4.0.7 / 2012-01-23
 
-  * Improved support for JRuby and Windows (and any other platforms that don't support Kernel.fork).
-  * Fixed bug #33 - support `--help` after commands.
-  * Reorganized help output to display synopsis before description (issue #12).
+* Improved support for JRuby and Windows (and any other platforms that don't support Kernel.fork).
+* Fixed bug #33 - support `--help` after commands.
+* Reorganized help output to display synopsis before description (issue #12).
 
-4.0.6 / 2011-09-15
-==================
+=== 4.0.6 / 2011-09-15
 
-  * Improved load time on Ruby 1.9. (thanks to Jonathon M. Abbott)
-  * Updated documentation.
+* Improved load time on Ruby 1.9. (thanks to Jonathon M. Abbott)
+* Updated documentation.
 
-4.0.5 / 2011-08-09
-==================
+=== 4.0.5 / 2011-08-09
 
-  * Updated documentation to fix inaccuracies and unclear information.
-  * Improved rake tasks for gem development.
-  * Added say_ok, say_warning and say_error methods to print messages in green, yellow or red. (thanks to Simon Courtois)
-  * Fixed; Allow global options to be passed in any order, even mixed with command options. (thanks to Rich Grundy)
-  * Fixed; Global options can be passed before or after the command, they can even be mixed with command options. Closes #8. (thanks to Rich Grundy)
-  * Fixed; Platform test should now correctly identify JRuby. (thanks to Justin Lynn)
-  * Fixed; Add to_s to exceptions as option parser no longer does implicit conversion. (thanks to Justin Lynn)
+* Updated documentation to fix inaccuracies and unclear information.
+* Improved rake tasks for gem development.
+* Added say_ok, say_warning and say_error methods to print messages in green, yellow or red. (thanks to Simon Courtois)
+* Fixed; Allow global options to be passed in any order, even mixed with command options. (thanks to Rich Grundy)
+* Fixed; Global options can be passed before or after the command, they can even be mixed with command options. Closes #8. (thanks to Rich Grundy)
+* Fixed; Platform test should now correctly identify JRuby. (thanks to Justin Lynn)
+* Fixed; Add to_s to exceptions as option parser no longer does implicit conversion. (thanks to Justin Lynn)
 
-4.0.4 / 2011-04-04
-==================
+=== 4.0.4 / 2011-04-04
 
-  * Fixed program(:key) behavior for non-Array keys like name, version, description under Ruby 1.9
-  * All specs should pass under Ruby 1.9 now
+* Fixed program(:key) behavior for non-Array keys like name, version, description under Ruby 1.9
+* All specs should pass under Ruby 1.9 now
 
-4.0.3 / 2010-04-06
-==================
+=== 4.0.3 / 2010-04-06
 
-  * Fixed global_option which was consuming arguments when not expected. Closes #22
+* Fixed global_option which was consuming arguments when not expected. Closes #22
 
-4.0.2 / 2010-01-19
-==================
+=== 4.0.2 / 2010-01-19
 
-  * Added program(:int_block) to allow a block to be run on interrupt.
-  * Fixed; ProgressBar immediately shows, and doesn't die on empty lists.
+* Added program(:int_block) to allow a block to be run on interrupt.
+* Fixed; ProgressBar immediately shows, and doesn't die on empty lists.
 
-4.0.1 / 2010-01-14
-==================
+=== 4.0.1 / 2010-01-14
 
-  * Fixed commander when using JRuby
-  * Fixed template; should require "commander/import"
+* Fixed commander when using JRuby
+* Fixed template; should require "commander/import"
 
 === 4.0.0 / 2009-10-10
 
