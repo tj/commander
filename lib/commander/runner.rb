@@ -275,7 +275,11 @@ module Commander
             say help_formatter.render 
           else
             command = command args.join(' ')
-            require_valid_command command
+            begin
+              require_valid_command command
+            rescue InvalidCommandError => e
+              abort "#{e}. Use --help for more information"
+            end
             say help_formatter.render_command(command)
           end
         end

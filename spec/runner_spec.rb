@@ -333,6 +333,24 @@ describe Commander do
     end
   end
   
+  describe "with invalid command passed to --help" do
+    it "should output an invalid command message" do
+      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
+      lambda {
+        run('--help', 'does_not_exist')
+      }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
+    end
+  end
+
+  describe "with invalid option passed to --help" do
+    it "should output an invalid option message" do
+      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
+      lambda {
+        run('--help', 'test', '--invalid-option')
+      }.should raise_error(SystemExit, /invalid option: --invalid-option/)
+    end
+  end
+  
   describe "#valid_command_names_from" do
     it "should return array of valid command names" do
       command('foo bar') {}
