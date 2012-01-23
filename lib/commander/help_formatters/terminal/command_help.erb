@@ -2,11 +2,6 @@
   <%= $terminal.color "NAME", :bold %>:
 
     <%= @name %>
-
-  <%= $terminal.color "DESCRIPTION", :bold %>:
-
-    <%= @description || @summary || 'No description.' -%>
-
 <% if @syntax -%>
 
   <%= $terminal.color "SYNOPSIS", :bold %>:
@@ -14,6 +9,11 @@
     <%= @syntax -%>
 
 <% end -%>
+
+  <%= $terminal.color "DESCRIPTION", :bold %>:
+
+    <%= @description || @summary || 'No description.' -%>
+
 <% unless @examples.empty? -%>
 
   <%= $terminal.color "EXAMPLES", :bold %>:

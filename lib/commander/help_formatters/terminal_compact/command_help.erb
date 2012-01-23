@@ -1,12 +1,12 @@
 
   <%= @name %>
-<% if @description || @summary -%>
-
-  <%= @description || @summary %>
-<% end -%>
 <% if @syntax -%>
 
   Usage: <%= @syntax %>
+<% end -%>
+<% if @description || @summary -%>
+
+  <%= @description || @summary %>
 <% end -%>
 <% unless @examples.empty? -%>
 
