@@ -2,6 +2,9 @@ require 'rubygems'
 require 'simplecov'
 SimpleCov.start
 
+# prevent paging (through less) from actually occurring in test environment
+ENV['PAGER'] = 'cat'
+
 $:.unshift File.dirname(__FILE__) + '/../lib'
 require 'commander/import'
 require 'stringio'
