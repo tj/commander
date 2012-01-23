@@ -276,8 +276,8 @@ module Commander
       end
     rescue NotImplementedError
     ensure
-      write.close unless write.closed?
-      read.close unless read.closed?
+      write.close if write && !write.closed?
+      read.close if read && !read.closed?
     end
 
     ##
