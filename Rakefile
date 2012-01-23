@@ -6,3 +6,5 @@ RSpec::Core::RakeTask.new do |t|
   t.verbose = false
   t.rspec_opts = '--color'
 end
+
+task :default => :spec
