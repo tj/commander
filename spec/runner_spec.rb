@@ -6,21 +6,21 @@ describe Commander do
     mock_terminal
     create_test_command
   end
-	
+  
   describe "#program" do
     it "should set / get program information" do
       program :name, 'test'
-  	  program(:name).should eq('test')
+      program(:name).should eq('test')
     end
     
     it "should allow arbitrary blocks of global help documentation" do
       program :help, 'Copyright', 'TJ Holowaychuk'
-  	  program(:help)['Copyright'].should eq('TJ Holowaychuk')
+      program(:help)['Copyright'].should eq('TJ Holowaychuk')
     end
     
     it "should raise an error when required info has not been set" do
       new_command_runner '--help'
-  	  program :version, ''
+      program :version, ''
       lambda { run! }.should raise_error(Commander::Runner::CommandError)
     end
     
@@ -31,9 +31,9 @@ describe Commander do
   end
   
   describe "#command" do
-  	it "should return a command instance when only the name is passed" do
-  	  command(:test).should be_instance_of(Commander::Command)
-  	end
+    it "should return a command instance when only the name is passed" do
+      command(:test).should be_instance_of(Commander::Command)
+    end
     
     it "should return nil when the command does not exist" do
       command(:im_not_real).should be_nil
@@ -332,37 +332,37 @@ describe Commander do
   describe "#valid_command_names_from" do
     it "should return array of valid command names" do
       command('foo bar') {}
-   	  command('foo bar foo') {}
-   	  command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should eq(['foo bar', 'foo bar foo'])
+      command('foo bar foo') {}
+      command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should eq(['foo bar', 'foo bar foo'])
     end
     
     it "should return empty array when no possible command names exist" do
-   	  command_runner.valid_command_names_from('fake', 'command', 'name').should eq([])
+      command_runner.valid_command_names_from('fake', 'command', 'name').should eq([])
     end
   end
   
   describe "#command_name_from_args" do
     it "should locate command within arbitrary arguments passed" do
-   	  new_command_runner '--help', '--arbitrary', 'test'
-   	  command_runner.command_name_from_args.should eq('test')
+      new_command_runner '--help', '--arbitrary', 'test'
+      command_runner.command_name_from_args.should eq('test')
     end
     
     it "should support multi-word commands" do
-   	  new_command_runner '--help', '--arbitrary', 'some', 'long', 'command', 'foo'
-   	  command('some long command') {}
-   	  command_runner.command_name_from_args.should eq('some long command')
+      new_command_runner '--help', '--arbitrary', 'some', 'long', 'command', 'foo'
+      command('some long command') {}
+      command_runner.command_name_from_args.should eq('some long command')
     end
     
     it "should match the longest possible command" do
-   	  new_command_runner '--help', '--arbitrary', 'foo', 'bar', 'foo'
-   	  command('foo bar') {}
-   	  command('foo bar foo') {}
-   	  command_runner.command_name_from_args.should eq('foo bar foo'      )
+      new_command_runner '--help', '--arbitrary', 'foo', 'bar', 'foo'
+      command('foo bar') {}
+      command('foo bar foo') {}
+      command_runner.command_name_from_args.should eq('foo bar foo'      )
     end
     
     it "should use the left-most command name when multiple are present" do
-   	  new_command_runner 'help', 'test'
-   	  command_runner.command_name_from_args.should eq('help'      )
+      new_command_runner 'help', 'test'
+      command_runner.command_name_from_args.should eq('help'      )
     end
   end
   
