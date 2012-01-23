@@ -52,7 +52,11 @@ module Commander
       require_program :version, :description
       trap('INT') { abort program(:int_message) } if program(:int_message)
       trap('INT') { program(:int_block).call } if program(:int_block)
-      global_option('-h', '--help', 'Display help documentation') { command(:help).run *@args[1..-1]; return }
+      global_option('-h', '--help', 'Display help documentation') do
+        args = @args - %w[-h --help]
+        command(:help).run(*args)
+        return
+      end
       global_option('-v', '--version', 'Display version information') { say version; return } 
       global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true }
       parse_global_options

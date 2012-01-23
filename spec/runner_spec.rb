@@ -300,6 +300,10 @@ describe Commander do
     it "should not output an invalid command message" do
       run('--help').should_not == "invalid command. Use --help for more information\n"
     end
+    
+    it "can be used before or after the command and options" do
+      run('test', '--help').should eq("Implement help for test here\n")
+    end
   end
   
   describe "with invalid options" do
@@ -469,10 +473,6 @@ describe Commander do
         command_runner.command_name_from_args.should eq('my command something')
         command_runner.args_without_command_name.should eq(['--verbose', 'my', 'command'])
       end.run!
-    end
-    
-    it "when using --help option after command" do
-      pending
     end
   end
   
