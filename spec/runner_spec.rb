@@ -493,5 +493,29 @@ describe Commander do
       end.run!
     end
   end
-  
+
+  describe "options with optional arguments" do
+    it "should return the argument when it is specified" do
+      new_command_runner 'foo', '--optional', 'arg1' do
+        command('foo') do |c|
+          c.option('--optional [argument]')
+          c.when_called do |_, options|
+            options.optional.should eq('arg1')
+          end
+        end
+      end.run!
+    end
+
+    it "should return true when no argument is specified for the option" do
+      new_command_runner 'foo', '--optional' do
+        command('foo') do |c|
+          c.option('--optional [argument]')
+          c.when_called do |_, options|
+            options.optional.should be_true
+          end
+        end
+      end.run!
+    end
+  end
+
 end

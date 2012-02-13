@@ -89,20 +89,44 @@ describe Commander::Command do
         @command.when_called { |_, options| options.file.should eq('foo') }  
         @command.run '--file', 'foo'
         lambda { @command.run '--file' }.should raise_error(OptionParser::MissingArgument)
-      end  
-
-      it "optional arguments" do
-        @command.option '--use-config [file] '
-        @command.when_called { |_, options| options.use_config.should eq('foo') }  
-        @command.run '--use-config', 'foo'
-        @command.when_called { |_, options| options.use_config.should be_nil }  
-        @command.run '--use-config'
-        @command.option '--interval N', Integer
-        @command.when_called { |_, options| options.interval.should eq(5) }  
-        @command.run '--interval', '5'
-        lambda { @command.run '--interval', 'invalid' }.should raise_error(OptionParser::InvalidArgument)
       end
-      
+
+      describe "optional arguments" do
+        before do
+          @command.option '--use-config [file] '
+        end
+
+        it "should return the argument when provided" do
+          @command.when_called { |_, options| options.use_config.should eq('foo') }
+          @command.run '--use-config', 'foo'
+        end
+
+        it "should return true when present without an argument" do
+          @command.when_called { |_, options| options.use_config.should be_true }
+          @command.run '--use-config'
+        end
+
+        it "should return nil when not present" do
+          @command.when_called { |_, options| options.use_config.should be_nil }
+          @command.run
+        end
+      end
+
+      describe "typed arguments" do
+        before do
+          @command.option '--interval N', Integer
+        end
+
+        it "should parse valid values" do
+          @command.when_called { |_, options| options.interval.should eq(5) }
+          @command.run '--interval', '5'
+        end
+
+        it "should reject invalid values" do
+          lambda { @command.run '--interval', 'invalid' }.should raise_error(OptionParser::InvalidArgument)
+        end
+      end
+
       it "lists" do
         @command.option '--fav COLORS', Array
         @command.when_called { |_, options| options.fav.should eq(['red', 'green', 'blue']) }  

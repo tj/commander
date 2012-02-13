@@ -189,6 +189,8 @@ module Commander
     
     def proxy_option_struct
       proxy_options.inject Options.new do |options, (option, value)|
+        # options that are present will evaluate to true
+        value = true if value.nil?
         options.__send__ :"#{option}=", value
         options
       end
