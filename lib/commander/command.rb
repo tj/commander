@@ -107,7 +107,7 @@ module Commander
     #
     
     def option *args, &block
-      switches, description = Runner.separate_switches_from_description *args
+      switches, description = Runner.separate_switches_from_description(*args)
       proc = block || option_proc(switches)
       @options << {
         :args => args,
@@ -164,7 +164,7 @@ module Commander
     def parse_options_and_call_procs *args
       return args if args.empty?
       @options.inject OptionParser.new do |opts, option| 
-        opts.on *option[:args], &option[:proc]
+        opts.on(*option[:args], &option[:proc])
         opts
       end.parse! args
     end
