@@ -1,4 +1,6 @@
 
+require 'tempfile'
+
 module Commander
   
   ##
@@ -240,10 +242,14 @@ module Commander
     #
        
     def ask_editor input = nil, editor = ENV['EDITOR'] || 'mate'
-      IO.popen(editor.to_s, 'w+') do |pipe|
-        pipe.puts input.to_s unless input.nil?
-        pipe.close_write
-        pipe.read
+      program = Commander::Runner.instance.program(:name).downcase rescue 'commander'
+      tmpfile = Tempfile.new program
+      begin
+        tmpfile.write input if input
+        tmpfile.close
+        system(editor, tmpfile.path) ? IO.read(tmpfile.path) : nil
+      ensure
+        tmpfile.unlink
       end
     end
     
