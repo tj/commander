@@ -226,13 +226,23 @@ module Commander
     def reset_io
       $stdin, $stdout = STDIN, STDOUT
     end
+
+    ##
+    # Find an editor available in path. Optionally supply the _preferred_
+    # editor. Returns the name as a string, nil if none is available.
+
+    def available_editor preferred = nil
+      [preferred, ENV['EDITOR'], :mate, :vim, :vi, :emacs, :nano, :pico].
+        compact.
+        map(&:to_s).
+        find {|name| system("/usr/bin/which", name, :out => "/dev/null") }
+    end
     
     ##
-    # Prompt _editor_ for input. Optionally supply initial
+    # Prompt an editor for input. Optionally supply initial
     # _input_ which is written to the editor.
     #
-    # The _editor_ defaults to the EDITOR environment variable
-    # when present, or 'mate' for TextMate. 
+    # _preferred_editor_ can be hinted.
     #
     # === Examples
     #
@@ -241,7 +251,8 @@ module Commander
     #   ask_editor('foo', :mate)  # => prompts TextMate with default text of 'foo'
     #
        
-    def ask_editor input = nil, editor = ENV['EDITOR'] || 'mate'
+    def ask_editor input = nil, preferred_editor = nil
+      editor = available_editor preferred_editor
       program = Commander::Runner.instance.program(:name).downcase rescue 'commander'
       tmpfile = Tempfile.new program
       begin
