@@ -134,11 +134,14 @@ following methods to simplify common tasks:
   # Enable paging of output after this point
   enable_paging
 
-  # Ask editor for input (EDITOR or TextMate by default)
+  # Ask editor for input (EDITOR environment variable or whichever is available: TextMate, vim, vi, emacs, nano, pico)
   ask_editor
 
   # Ask editor, supplying initial text
   ask_editor 'previous data to update'
+  
+  # Ask editor, preferring a specific editor
+  ask_editor 'previous data', 'vim'
 
   # Choose from an array of elements
   choice = choose("Favorite language?", :ruby, :perl, :js)
@@ -343,10 +346,6 @@ OR
 
 Feel free to fork and request a pull, or submit a ticket
 http://github.com/visionmedia/commander/issues
-
-== Known Issues
- 
-* ask_editor has been tested with TextMate only
 
 == License
 
