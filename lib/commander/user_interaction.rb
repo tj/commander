@@ -1,3 +1,5 @@
+require 'tempfile'
+require 'shellwords'
 
 module Commander
   
@@ -40,7 +42,7 @@ module Commander
     
     def choose message, *choices
       say message
-      super *choices
+      super(*choices)
     end
     
     ##
@@ -224,26 +226,40 @@ module Commander
     def reset_io
       $stdin, $stdout = STDIN, STDOUT
     end
+
+    ##
+    # Find an editor available in path. Optionally supply the _preferred_
+    # editor. Returns the name as a string, nil if none is available.
+
+    def available_editor preferred = nil
+      [preferred, ENV['EDITOR'], 'mate -w', 'vim', 'vi', 'emacs', 'nano', 'pico'].
+        compact.
+        find {|name| system("/usr/bin/which #{name.split.first} > /dev/null") }
+    end
     
     ##
-    # Prompt _editor_ for input. Optionally supply initial
+    # Prompt an editor for input. Optionally supply initial
     # _input_ which is written to the editor.
     #
-    # The _editor_ defaults to the EDITOR environment variable
-    # when present, or 'mate' for TextMate. 
+    # _preferred_editor_ can be hinted.
     #
     # === Examples
     #
     #   ask_editor                # => prompts EDITOR with no input
     #   ask_editor('foo')         # => prompts EDITOR with default text of 'foo'
-    #   ask_editor('foo', :mate)  # => prompts TextMate with default text of 'foo'
+    #   ask_editor('foo', 'mate -w')  # => prompts TextMate with default text of 'foo'
     #
        
-    def ask_editor input = nil, editor = ENV['EDITOR'] || 'mate'
-      IO.popen(editor.to_s, 'w+') do |pipe|
-        pipe.puts input.to_s unless input.nil?
-        pipe.close_write
-        pipe.read
+    def ask_editor input = nil, preferred_editor = nil
+      editor = available_editor preferred_editor
+      program = Commander::Runner.instance.program(:name).downcase rescue 'commander'
+      tmpfile = Tempfile.new program
+      begin
+        tmpfile.write input if input
+        tmpfile.close
+        system("#{editor} #{tmpfile.path.shellescape} < `tty` > `tty`") ? IO.read(tmpfile.path) : nil
+      ensure
+        tmpfile.unlink
       end
     end
     

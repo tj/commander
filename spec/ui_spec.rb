@@ -20,5 +20,11 @@ describe Commander::UI do
       exception.should_not be_true
     end
   end
+  
+  describe ".available_editor" do
+    it "should not fail on available editors with shell arguments" do
+      Commander::UI.available_editor('sh -c').should eq('sh -c')
+    end
+  end
 
 end
