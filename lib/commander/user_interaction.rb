@@ -42,7 +42,7 @@ module Commander
     
     def choose message, *choices
       say message
-      super *choices
+      super(*choices)
     end
     
     ##
