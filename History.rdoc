@@ -1,3 +1,7 @@
+=== 4.1.1 / 2012-02-16
+
+* Update `ask_editor` to work with any unix editor - emacs, vim, etc. (thanks to Federico Galassi)
+
 === 4.1.0 / 2012-02-12
 
 * Update highline dependency.
