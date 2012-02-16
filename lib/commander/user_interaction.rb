@@ -234,7 +234,7 @@ module Commander
     def available_editor preferred = nil
       [preferred, ENV['EDITOR'], 'mate -w', 'vim', 'vi', 'emacs', 'nano', 'pico'].
         compact.
-        find {|name| system("/usr/bin/which", name.split.first, :out => "/dev/null") }
+        find {|name| system("/usr/bin/which #{name.split.first} > /dev/null") }
     end
     
     ##
