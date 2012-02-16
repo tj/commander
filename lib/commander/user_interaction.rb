@@ -247,7 +247,7 @@ module Commander
     #
     #   ask_editor                # => prompts EDITOR with no input
     #   ask_editor('foo')         # => prompts EDITOR with default text of 'foo'
-    #   ask_editor('foo', 'mate')  # => prompts TextMate with default text of 'foo'
+    #   ask_editor('foo', 'mate -w')  # => prompts TextMate with default text of 'foo'
     #
        
     def ask_editor input = nil, preferred_editor = nil
