@@ -232,9 +232,8 @@ module Commander
     # editor. Returns the name as a string, nil if none is available.
 
     def available_editor preferred = nil
-      [preferred, ENV['EDITOR'], :mate, :vim, :vi, :emacs, :nano, :pico].
+      [preferred, ENV['EDITOR'], 'mate -w', 'vim', 'vi', 'emacs', 'nano', 'pico'].
         compact.
-        map(&:to_s).
         find {|name| system("/usr/bin/which", name, :out => "/dev/null") }
     end
     
@@ -248,7 +247,7 @@ module Commander
     #
     #   ask_editor                # => prompts EDITOR with no input
     #   ask_editor('foo')         # => prompts EDITOR with default text of 'foo'
-    #   ask_editor('foo', :mate)  # => prompts TextMate with default text of 'foo'
+    #   ask_editor('foo', 'mate')  # => prompts TextMate with default text of 'foo'
     #
        
     def ask_editor input = nil, preferred_editor = nil
