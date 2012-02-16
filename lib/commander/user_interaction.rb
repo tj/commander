@@ -257,7 +257,7 @@ module Commander
       begin
         tmpfile.write input if input
         tmpfile.close
-        system("#{editor} #{tmpfile.path.shellescape} < `tty` > `tty`") ? IO.read(tmpfile.path) : nil
+        system("#{editor} #{tmpfile.path.shellescape}") ? IO.read(tmpfile.path) : nil
       ensure
         tmpfile.unlink
       end
