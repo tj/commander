@@ -1,6 +1,10 @@
+=== 4.1.2 / 2012-02-17
+
+* Improvement to `ask_editor` to be more portable across *nix variants. (thanks to Federico Galassi)
+
 === 4.1.1 / 2012-02-16
 
-* Update `ask_editor` to work with any unix editor - emacs, vim, etc. (thanks to Federico Galassi)
+* Update `ask_editor` to work with any *nix editor - emacs, vim, etc. (thanks to Federico Galassi)
 
 === 4.1.0 / 2012-02-12
 
