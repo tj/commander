@@ -361,6 +361,11 @@ describe Commander do
     it "should return empty array when no possible command names exist" do
       command_runner.valid_command_names_from('fake', 'command', 'name').should eq([])
     end
+
+    it "should match exact commands only" do
+      command('foo') {}
+      command_runner.valid_command_names_from('foobar').should eq([])
+    end
   end
   
   describe "#command_name_from_args" do
