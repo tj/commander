@@ -25,9 +25,8 @@ command :init do |c|
           
           require 'rubygems'
           require 'commander/import'
-          require '#{name}'
           
-          program :version, #{name.capitalize}::VERSION
+          program :version, '0.0.1'
           program :description, '#{description}'
            
         ...
