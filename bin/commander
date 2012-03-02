@@ -47,6 +47,7 @@ command :init do |c|
           ...
         end
        end
+       File.chmod 0755, file
        say "Initialized template in #{file}"
      rescue Exception => e
        abort e
