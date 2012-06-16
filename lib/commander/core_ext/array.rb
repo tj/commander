@@ -1,4 +1,3 @@
-
 class Array 
   
   ##
@@ -19,7 +18,7 @@ class Array
   #
   
   def self.parse string
-    eval "%w(#{string})"
+    string.split(/(?<!\\)\s/).map { |s| s.gsub('\\ ', ' ') }
   end
     
 end
