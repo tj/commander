@@ -18,7 +18,7 @@ class Array
   #
   
   def self.parse string
-    string.split ' '
+    string.split(/(?<!\\)\s/).map { |s| s.gsub('\\ ', ' ') }
   end
     
 end
