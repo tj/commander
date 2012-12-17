@@ -72,7 +72,7 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
    $ foobar bar
    # => (bar)
 
-   $ foobar bar --suffix '{' --prefix '}'
+   $ foobar bar --suffix '}' --prefix '{'
    # => {bar}
 
 == HighLine
