@@ -215,7 +215,11 @@ module Commander
     # Supports multi-word commands, using the largest possible match.
     
     def command_name_from_args
-      @__command_name_from_args ||= (valid_command_names_from(*@args.dup).sort.last || @default_command)
+      if all_command_names_from(*@args.dup).empty?
+        @__command_name_from_args ||= (valid_command_names_from(*@args.dup).sort.last || @default_command)
+      else
+        @__command_name_from_args ||= (valid_command_names_from(*@args.dup).sort.last)
+      end
     end
     
     ##
@@ -226,6 +230,13 @@ module Commander
       commands.keys.find_all { |name| name if /^#{name}\b/.match arg_string }
     end
     
+    ##
+    # Returns array of all (valid or invalid) command names found within _args_.
+
+    def all_command_names_from *args
+      args.delete_if { |value| value =~ /^-/ }.join ' '
+    end
+
     ##
     # Help formatter instance.
     
