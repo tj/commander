@@ -418,7 +418,15 @@ describe Commander do
         command_runner.active_command.should eq(command(:test))
       end.run!
     end
-    
+
+    it "should raise error when a command is explicitly passed that does not exist" do
+      lambda {
+        new_command_runner 'foo' do
+          default_command :test
+        end.run!
+      }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
+    end
+
     it "should not prevent other commands from being called" do
       new_command_runner 'foo', 'bar', '--trace' do
         default_command :test
