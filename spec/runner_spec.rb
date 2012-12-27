@@ -353,18 +353,24 @@ describe Commander do
   
   describe "#valid_command_names_from" do
     it "should return array of valid command names" do
-      command('foo bar') {}
-      command('foo bar foo') {}
-      command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should eq(['foo bar', 'foo bar foo'])
+      new_command_runner do
+        command('foo bar') {}
+        command('foo bar foo') {}
+        command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should eq(['foo bar', 'foo bar foo'])
+      end
     end
     
     it "should return empty array when no possible command names exist" do
-      command_runner.valid_command_names_from('fake', 'command', 'name').should eq([])
+      new_command_runner do
+        command_runner.valid_command_names_from('fake', 'command', 'name').should eq([])
+      end
     end
 
     it "should match exact commands only" do
-      command('foo') {}
-      command_runner.valid_command_names_from('foobar').should eq([])
+      new_command_runner do
+        command('foo') {}
+        command_runner.valid_command_names_from('foobar').should eq([])
+      end
     end
   end
   
