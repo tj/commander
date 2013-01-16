@@ -192,15 +192,11 @@ growl is auto-imported by Commander when available, no need to require.
   # Display an 'ok' status notification
   notify_ok 'Gems updated'
 
-  # Display a 'warning' status notification 
+  # Display a 'warning' status notification
   notify_warning '1 gem failed installation'
 
   # Display an 'error' status notification
   notify_error "Gem #{name} failed"
-
-growlnotify can also be installed via homebrew[http://mxcl.github.com/homebrew/]:
-
-  $ brew install growlnotify
 
 == Commander Goodies
 
