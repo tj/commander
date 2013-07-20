@@ -119,22 +119,25 @@ module Commander
     end
 
     ##
-    # Speak _message_ using _voice_ which defaults
-    # to 'Alex', which is one of the better voices.
+    # Speak _message_ using _voice_ at a speaking rate of _rate_
+    # 
+    # Voice defaults to 'Alex', which is one of the better voices.
+    # Speaking rate defaults to 175 words per minute
     #
     # === Examples
     #    
     #   speak 'What is your favorite food? '
     #   food = ask 'favorite food?: '
-    #   speak "wow, I like #{food} too. We have so much alike." 
+    #   speak "Wow, I like #{food} too. We have so much in common." 
+    #   speak "I like #{food} as well!", "Victoria", 190
     #
     # === Notes
     #
     # * MacOS only
     #
     
-    def speak message, voice = :Alex
-      Thread.new { applescript "say #{message.inspect} using #{voice.to_s.inspect}" }
+    def speak message, voice = :Alex, rate = 175
+      Thread.new { applescript "say #{message.inspect} using #{voice.to_s.inspect} speaking rate #{rate}" }
     end
     
     ##

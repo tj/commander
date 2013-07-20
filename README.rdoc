@@ -159,6 +159,7 @@ following methods to simplify common tasks:
   speak 'What is your favorite food? '
   food = ask 'favorite food?: '
   speak "Wow, I like #{food} too. We have so much in common." 
+  speak "I like #{food} as well!", "Victoria", 190
 
   # Execute arbitrary applescript
   applescript 'foo'
