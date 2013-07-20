@@ -129,7 +129,7 @@ module Commander
     #   speak 'What is your favorite food? '
     #   food = ask 'favorite food?: '
     #   speak "Wow, I like #{food} too. We have so much in common." 
-    #   speak "I like #{food} aswell!", "Victoria", 190
+    #   speak "I like #{food} as well!", "Victoria", 190
     #
     # === Notes
     #
