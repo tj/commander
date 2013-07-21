@@ -12,7 +12,7 @@
 
   <%= $terminal.color "DESCRIPTION", :bold %>:
 
-    <%= @description || @summary || 'No description.' -%>
+    <%= Commander::HelpFormatter.indent 4, (@description || @summary || 'No description.') -%>
 
 <% unless @examples.empty? -%>
 

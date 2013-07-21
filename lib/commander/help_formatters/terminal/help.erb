@@ -4,7 +4,7 @@
 
   <%= $terminal.color "DESCRIPTION", :bold %>:
 
-    <%= program :description %>
+    <%= Commander::HelpFormatter.indent 4, program(:description) %>
 
   <%= $terminal.color "COMMANDS", :bold %>:
 <% for name, command in @commands.sort -%>
