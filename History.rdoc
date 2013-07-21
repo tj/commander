@@ -1,3 +1,9 @@
+=== 4.1.4 / 2013-07-21
+
+* Improve help formatting for multiline program and command descriptions
+* Add ability to set speaking rate (@kethomassen)
+* Clean up examples in docs (@parkr)
+
 === 4.1.3 / 2012-12-15
 
 * Remove use of eval in Array.parse
