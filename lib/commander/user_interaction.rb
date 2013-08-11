@@ -327,7 +327,7 @@ module Commander
         # const_get(:Config) issues a deprecation warning on ruby 1.8.7
         Object.const_get(const) unless const == :Config
       end.select do |const|
-        const.is_a? Class and const.respond_to? :parse
+        const.class == Class && const.respond_to?(:parse)
       end).each do |klass|
         define_method "ask_for_#{klass.to_s.downcase}" do |prompt|
           $terminal.ask(prompt, klass)
