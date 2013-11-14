@@ -2,7 +2,7 @@
 
 = Commander
 
-The complete solution for Ruby command-line executables. 
+The complete solution for Ruby command-line executables.
 Commander bridges the gap between other terminal related libraries
 you know and love (OptionParser, HighLine), while providing many new
 features, and an elegant API.
@@ -79,11 +79,11 @@ as well as an object, specifying a method to call, so view the RDoc for more inf
 
 As mentioned above the highline gem is imported into 'global scope', below
 are some quick examples for how to utilize highline in your command(s):
-   
+
    # Ask for password masked with '*' character
    ask("Password:  ") { |q| q.echo = "*" }
-  
-   # Ask for password 
+
+   # Ask for password
    ask("Password:  ") { |q| q.echo = false }
 
    # Ask if the user agrees (yes or no)
@@ -106,12 +106,12 @@ are some quick examples for how to utilize highline in your command(s):
 
 == HighLine & Interaction Additions
 
-In addition to highline's fantastic choice of methods, commander adds the 
+In addition to highline's fantastic choice of methods, commander adds the
 following methods to simplify common tasks:
 
-   # Ask for password 
+   # Ask for password
    password
-   
+
    # Ask for password with specific message and mask character
    password "Enter your password please:", '-'
 
@@ -120,9 +120,9 @@ following methods to simplify common tasks:
    bday = ask_for_date 'Birthday?: '
 
    # Simple progress bar (Commander::UI::ProgressBar)
-   uris = %w[ 
-     http://vision-media.ca 
-     http://google.com 
+   uris = %w[
+     http://vision-media.ca
+     http://google.com
      http://yahoo.com
      ]
    progress uris do |uri|
@@ -141,7 +141,7 @@ following methods to simplify common tasks:
 
   # Ask editor, supplying initial text
   ask_editor 'previous data to update'
-  
+
   # Ask editor, preferring a specific editor
   ask_editor 'previous data', 'vim'
 
@@ -155,10 +155,10 @@ following methods to simplify common tasks:
   end
   # $stdin / $stdout reset back to original streams
 
-  # Speech synthesis 
+  # Speech synthesis
   speak 'What is your favorite food? '
   food = ask 'favorite food?: '
-  speak "Wow, I like #{food} too. We have so much in common." 
+  speak "Wow, I like #{food} too. We have so much in common."
   speak "I like #{food} as well!", "Victoria", 190
 
   # Execute arbitrary applescript
@@ -166,7 +166,7 @@ following methods to simplify common tasks:
 
   # Converse with speech recognition server
   case converse 'What is the best food?', :cookies => 'Cookies', :unknown => 'Nothing'
-  when :cookies 
+  when :cookies
     speak 'o.m.g. you are awesome!'
   else
     case converse 'That is lame, shall I convince you cookies are the best?', :yes => 'Ok', :no => 'No', :maybe => 'Maybe another time'
@@ -240,7 +240,7 @@ as if it was invoked via the command line:
 
 === Command Defaults
 
-Although working with a command executable framework provides many 
+Although working with a command executable framework provides many
 benefits over a single command implementation, sometimes you still
 want the ability to create a terse syntax for your command. With that
 in mind we may use #default_command to help with this. Considering
@@ -254,11 +254,11 @@ our previous :'install gem' example:
 Keeping in mind that commander searches for the longest possible match
 when considering a command, so if you were to pass arguments to foo
 like below, expecting them to be passed to :update, this would be incorrect,
-and would end up calling :'install gem', so be careful that the users do 
+and would end up calling :'install gem', so be careful that the users do
 not need to use command names within the arguments.
 
   $ foo install gem
-  # => installing  to 
+  # => installing  to
 
 === Additional Global Help
 
@@ -336,8 +336,8 @@ http://github.com/visionmedia/terminal-table
 == Running Specifications
 
   $ rake spec
-  
-OR 
+
+OR
 
   $ spec --color spec
 
