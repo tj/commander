@@ -58,7 +58,7 @@ module Commander
         return
       end
       global_option('-v', '--version', 'Display version information') { say version; return } 
-      global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true } unless @hide_trace_help
+      global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true } unless @tracing_disabled
       parse_global_options
       remove_global_options options, @args
       unless trace
@@ -72,7 +72,11 @@ module Commander
           OptionParser::MissingArgument => e
           abort e.to_s
         rescue => e
-          abort "error: #{e}. Use --trace to view backtrace"
+          if @tracing_disabled
+            abort "error: #{e}."
+          else
+            abort "error: #{e}. Use --trace to view backtrace"
+          end
         end
       else
         run_active_command
@@ -94,10 +98,10 @@ module Commander
     end
 
     ##
-    # Hide the trace option from the Help Menus
+    # Hide the trace option from the Help Menus and don't add it as a global option
 
-    def hide_trace_help
-      @hide_trace_help = true
+    def disable_tracing
+      @tracing_disabled = true
     end
     
     ##
