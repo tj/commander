@@ -289,6 +289,18 @@ describe Commander do
       }.should raise_error(RuntimeError)
     end
   end
+
+  describe "#enable_tracing" do
+    it "should enable tracing globally, regardless of whether --trace was passed or not" do
+      enable_tracing.should eq true
+    end
+  end
+
+  describe "#disable_tracing" do
+    it "should disable tracing globally, regardless of whether --trace was passed or not" do
+      disable_tracing.should eq true
+    end
+  end
   
   describe "--version" do
     it "should output program version" do
