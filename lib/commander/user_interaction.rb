@@ -284,7 +284,7 @@ module Commander
         $stdin.reopen read
         write.close; read.close
         Kernel.select [$stdin]
-        ENV['LESS'] = 'FSRX'
+        ENV['LESS'] = 'FSRX' unless ENV.key? 'LESS'
         pager = ENV['PAGER'] || 'less'
         exec pager rescue exec '/bin/sh', '-c', pager
       else
