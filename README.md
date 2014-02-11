@@ -350,6 +350,22 @@ program :help_formatter, :compact
 
 This abstraction could be utilized to generate HTML documentation for your executable.
 
+### Tracing
+
+By default the `-t` and `--trace` global options are provided to allow users to get a backtrace to aid debugging.
+
+You can disable these options:
+
+```ruby
+never_trace!
+```
+
+Or make it always on:
+
+```ruby
+always_trace!
+```
+
 ## Tips
 
 When adding a global or command option, OptionParser implicitly adds a small
