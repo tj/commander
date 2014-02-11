@@ -352,7 +352,19 @@ This abstraction could be utilized to generate HTML documentation for your execu
 
 ### Tracing
 
-By default the -t and --trace global options are set which allow you to get a backtrace to aid debugging. You may not want this in your program though, the ````enable_tracing```` and ````disable_tracing```` symbols allow you to control this behaviour.
+By default the `-t` and `--trace` global options are provided to allow users to get a backtrace to aid debugging.
+
+You can disable these options:
+
+```ruby
+never_trace!
+```
+
+Or make it always on:
+
+```ruby
+always_trace!
+```
 
 ## Tips
 

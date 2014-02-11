@@ -48,7 +48,7 @@ module Commander
     # Run command parsing and execution process.
     
     def run!
-      trace = @tracing_enabled || false
+      trace = @always_trace || false
       require_program :version, :description
       trap('INT') { abort program(:int_message) } if program(:int_message)
       trap('INT') { program(:int_block).call } if program(:int_block)
@@ -58,7 +58,7 @@ module Commander
         return
       end
       global_option('-v', '--version', 'Display version information') { say version; return } 
-      global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true } unless @tracing_disabled
+      global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true } unless @never_trace
       parse_global_options
       remove_global_options options, @args
       unless trace
@@ -72,7 +72,7 @@ module Commander
           OptionParser::MissingArgument => e
           abort e.to_s
         rescue => e
-          if @tracing_disabled
+          if @never_trace
             abort "error: #{e}."
           else
             abort "error: #{e}. Use --trace to view backtrace"
@@ -91,19 +91,21 @@ module Commander
     end
 
     ##
-    # Enabled tracing on all executions (bipasses --trace)
+    # Enable tracing on all executions (bypasses --trace)
 
-    def enable_tracing
-      @tracing_enabled = true
+    def always_trace!
+      @always_trace = true
+      @never_trace = false
     end
 
     ##
-    # Hide the trace option from the Help Menus and don't add it as a global option
+    # Hide the trace option from the help menus and don't add it as a global option
 
-    def disable_tracing
-      @tracing_disabled = true
+    def never_trace!
+      @never_trace = true
+      @always_trace = false
     end
-    
+
     ##
     # Assign program information.
     #

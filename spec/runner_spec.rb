@@ -280,7 +280,7 @@ describe Commander do
         end.run!
       }.should raise_error(SystemExit, /error: cookies!. Use --trace/)
     end
-    
+
     it "should display callstack when using this switch" do
       lambda {
         new_command_runner 'foo', '--trace' do
@@ -290,18 +290,53 @@ describe Commander do
     end
   end
 
-  describe "#enable_tracing" do
+  describe "#always_trace!" do
     it "should enable tracing globally, regardless of whether --trace was passed or not" do
-      enable_tracing.should eq true
+      lambda {
+        new_command_runner 'foo' do
+          always_trace!
+          command(:foo) { |c| c.when_called { raise 'cookies!' } }
+        end.run!
+      }.should raise_error(RuntimeError)
     end
   end
 
-  describe "#disable_tracing" do
+  describe "#never_trace!" do
     it "should disable tracing globally, regardless of whether --trace was passed or not" do
-      disable_tracing.should eq true
+      lambda {
+        new_command_runner 'help', '--trace' do
+          never_trace!
+        end.run!
+      }.should raise_error(SystemExit, /invalid option: --trace/)
+    end
+
+    it "should not prompt to use --trace switch on errors" do
+      msg = nil
+      begin
+        new_command_runner 'foo' do
+          never_trace!
+          command(:foo) { |c| c.when_called { raise 'cookies!' } }
+        end.run!
+      rescue SystemExit => e
+        msg = e.message
+      end
+      msg.should match(/error: cookies!/)
+      msg.should_not match(/--trace/)
     end
   end
-  
+
+  context "conflict between #always_trace! and #never_trace!" do
+    it "respects the last used command" do
+      lambda {
+        new_command_runner 'foo' do
+          never_trace!
+          always_trace!
+          command(:foo) { |c| c.when_called { raise 'cookies!' } }
+        end.run!
+      }.should raise_error(RuntimeError)
+    end
+  end
+
   describe "--version" do
     it "should output program version" do
       run('--version').should eq("test 1.2.3\n")
