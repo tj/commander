@@ -350,6 +350,10 @@ program :help_formatter, :compact
 
 This abstraction could be utilized to generate HTML documentation for your executable.
 
+### Tracing
+
+By default the -t and --trace global options are set which allow you to get a backtrace to aid debugging. You may not want this in your program though, the ````enable_tracing```` and ````disable_tracing```` symbols allow you to control this behaviour.
+
 ## Tips
 
 When adding a global or command option, OptionParser implicitly adds a small
