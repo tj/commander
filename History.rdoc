@@ -1,3 +1,8 @@
+=== 4.1.6 / 2014-02-11
+
+* Respect environment setting for $LESS (@ellemenno)
+* Add ability to hide trace flags and globally enable tracing (#16, #17) (@jamesrwhite)
+
 === 4.1.5 / 2013-08-11
 
 * Prevent deprecation warning when loaded in a Rails 4 environment (#58)
