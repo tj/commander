@@ -103,6 +103,20 @@ end
 MyApplication.new.run if $0 == __FILE__
 ```
 
+### Block style
+```ruby
+require 'rubygems'
+require 'commander/block'
+
+Commander.configure do
+  program :name, 'Foo Bar'
+  program :version, '1.0.0'
+  program :description, 'Stupid command that prints foo or bar.'
+
+  # see classic style example for options
+end
+```
+
 ## HighLine
 
 As mentioned above, the highline gem is imported into the global scope. Here
