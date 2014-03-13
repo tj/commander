@@ -2,8 +2,6 @@ require 'commander'
 require 'commander/methods'
 
 module Commander
-  module_function
-
   def configure(*configuration_opts, &configuration_block)
     configuration_module = Module.new
     configuration_module.extend Commander::Methods
@@ -14,5 +12,7 @@ module Commander
       run!
     end
   end
+
+  module_function :configure
 end
 
