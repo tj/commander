@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Commander::HelpFormatter::Terminal do
+  include Commander::UI
+  include Commander::UI::AskForClass
+  include Commander::Delegates
   
   before :each do
     mock_terminal

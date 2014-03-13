@@ -43,6 +43,8 @@ For more option examples view the `Commander::Command#option` method. Also
 an important feature to note is that action may be a class to instantiate,
 as well as an object, specifying a method to call, so view the RDoc for more information.
 
+### Classic style
+
 ```ruby
 require 'rubygems'
 require 'commander/import'
@@ -79,6 +81,26 @@ $ foobar bar
 
 $ foobar bar --suffix '}' --prefix '{'
 # => {bar}
+```
+
+### Modular style
+```ruby
+require 'rubygems'
+require 'commander/methods'
+
+class MyApplication
+  include Commander::Methods
+
+  def run
+    program :name, 'Foo Bar'
+    program :version, '1.0.0'
+    program :description, 'Stupid command that prints foo or bar.'
+
+    # see classic style example for options
+  end
+end
+
+MyApplication.new.run if $0 == __FILE__
 ```
 
 ## HighLine
