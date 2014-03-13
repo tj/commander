@@ -7,7 +7,7 @@ SimpleCov.start
 $:.unshift File.dirname(__FILE__) + '/../lib'
 
 require 'commander'
-require 'commander/delegates'
+require 'commander/methods'
 
 # prevent paging from actually occurring in test environment
 
