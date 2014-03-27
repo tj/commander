@@ -1,4 +1,3 @@
-
 require 'optparse'
 
 module Commander
@@ -286,7 +285,7 @@ module Commander
     def create_default_commands
       command :help do |c|
         c.syntax = 'commander help [command]'
-        c.description = 'Display global or [command] help documentation.'
+        c.description = 'Display global or [command] help documentation'
         c.example 'Display global help', 'command help'
         c.example "Display help for 'foo'", 'command help foo'
         c.when_called do |args, options|
