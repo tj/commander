@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Commander do
+  include Commander::Methods
+
   before :each do
     $stderr = StringIO.new
     mock_terminal

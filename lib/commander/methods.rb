@@ -1,7 +1,7 @@
 require 'commander'
 require 'commander/delegates'
 
-module Commander::Mixin
+module Commander::Methods
   include Commander::UI
   include Commander::UI::AskForClass
   include Commander::Delegates
