@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'commander/block'
+require 'commander/configure'
 
 describe Commander do
   describe '.configure' do
