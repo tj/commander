@@ -86,7 +86,7 @@ $ foobar bar --suffix '}' --prefix '{'
 ### Modular style
 ```ruby
 require 'rubygems'
-require 'commander/methods'
+require 'commander'
 
 class MyApplication
   include Commander::Methods
@@ -106,7 +106,7 @@ MyApplication.new.run if $0 == __FILE__
 ### Block style
 ```ruby
 require 'rubygems'
-require 'commander/block'
+require 'commander'
 
 Commander.configure do
   program :name, 'Foo Bar'
