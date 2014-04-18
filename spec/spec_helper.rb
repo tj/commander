@@ -6,24 +6,8 @@ SimpleCov.start
 # Unshift so that local files load instead of something in gems
 $:.unshift File.dirname(__FILE__) + '/../lib'
 
-# This basically replicates the behavior of `require 'commander/import'`
-# but without adding an `at_exit` hook, which interferes with exit code
 require 'commander'
-require 'commander/delegates'
-
-include Commander::UI
-include Commander::UI::AskForClass
-include Commander::Delegates
-
-# prevent paging from actually occurring in test environment
-
-module Commander
-  module UI
-    def enable_paging
-      return
-    end
-  end
-end
+require 'commander/methods'
 
 # Mock terminal IO streams so we can spec against them
 
@@ -72,4 +56,10 @@ def run *args
     program :help_formatter, Commander::HelpFormatter::Base
   end.run!    
   @output.string
+end
+
+RSpec.configure do |c|
+  c.before(:each) do
+    allow(Commander::UI).to receive(:enable_paging)
+  end
 end

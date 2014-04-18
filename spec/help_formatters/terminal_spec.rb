@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Commander::HelpFormatter::Terminal do
+  include Commander::Methods
   
   before :each do
     mock_terminal

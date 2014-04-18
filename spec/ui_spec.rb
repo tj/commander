@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Commander::UI do
+  include Commander::Methods
   
   describe ".replace_tokens" do
     it "should replace tokens within a string, with hash values" do
