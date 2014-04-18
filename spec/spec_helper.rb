@@ -13,8 +13,8 @@ require 'commander/methods'
 
 module Commander
   module UI
-    def self.enable_paging
-      return :mocked
+    def enable_paging
+      return
     end
   end
 end
