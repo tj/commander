@@ -269,9 +269,9 @@ module Commander
     ##
     # Enable paging of output after called.
     
-    def enable_paging(options = {})
-      return options.fetch(:on_no_tty)  { lambda { nil } }.call unless $stdout.tty?
-      return options.fetch(:on_no_fork) { lambda { nil } }.call unless Process.respond_to? :fork
+    def enable_paging
+      return unless $stdout.tty?
+      return unless Process.respond_to? :fork
       read, write = IO.pipe
 
       # Kernel.fork is not supported on all platforms and configurations.
