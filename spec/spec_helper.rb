@@ -1,7 +1,9 @@
 require 'rubygems'
 require 'stringio'
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter "/spec/"
+end
 
 # Unshift so that local files load instead of something in gems
 $:.unshift File.dirname(__FILE__) + '/../lib'
