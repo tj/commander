@@ -20,11 +20,11 @@ describe Commander::HelpFormatter::Terminal do
     
     describe "should display" do
       it "the command name" do
-        @global_help.should include('install gem')
+        expect(@global_help).to include('install gem')
       end
       
       it "the summary" do
-        @global_help.should include('Install some gem')
+        expect(@global_help).to include('Install some gem')
       end
     end
   end
@@ -45,22 +45,22 @@ describe Commander::HelpFormatter::Terminal do
     
     describe "should display" do
       it "the command name" do
-        @command_help.should include('install gem')
+        expect(@command_help).to include('install gem')
       end
       
       it "the description" do
-        @command_help.should include('Install some gem, blah blah blah')
+        expect(@command_help).to include('Install some gem, blah blah blah')
       end
       
       it "all examples" do
-        @command_help.should include('# one')
-        @command_help.should include('two')
-        @command_help.should include('# three')
-        @command_help.should include('four')
+        expect(@command_help).to include('# one')
+        expect(@command_help).to include('two')
+        expect(@command_help).to include('# three')
+        expect(@command_help).to include('four')
       end
       
       it "the syntax" do
-        @command_help.should include('foo install gem [options]')
+        expect(@command_help).to include('foo install gem [options]')
       end
     end
   end

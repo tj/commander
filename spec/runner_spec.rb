@@ -12,59 +12,59 @@ describe Commander do
   describe "#program" do
     it "should set / get program information" do
       program :name, 'test'
-      program(:name).should eq('test')
+      expect(program(:name)).to eq('test')
     end
     
     it "should allow arbitrary blocks of global help documentation" do
       program :help, 'Copyright', 'TJ Holowaychuk'
-      program(:help)['Copyright'].should eq('TJ Holowaychuk')
+      expect(program(:help)['Copyright']).to eq('TJ Holowaychuk')
     end
     
     it "should raise an error when required info has not been set" do
       new_command_runner '--help'
       program :version, ''
-      lambda { run! }.should raise_error(Commander::Runner::CommandError)
+      expect { run! }.to raise_error(Commander::Runner::CommandError)
     end
     
     it "should allow aliases of help formatters" do
       program :help_formatter, :compact
-      program(:help_formatter).should eq(Commander::HelpFormatter::TerminalCompact)
+      expect(program(:help_formatter)).to eq(Commander::HelpFormatter::TerminalCompact)
     end
   end
   
   describe "#command" do
     it "should return a command instance when only the name is passed" do
-      command(:test).should be_instance_of(Commander::Command)
+      expect(command(:test)).to be_instance_of(Commander::Command)
     end
     
     it "should return nil when the command does not exist" do
-      command(:im_not_real).should be_nil
+      expect(command(:im_not_real)).to be_nil
     end
   end
   
   describe "#separate_switches_from_description" do
     it "should seperate switches and description returning both" do
       switches, description = *Commander::Runner.separate_switches_from_description('-h', '--help', 'display help')
-      switches.should eq(['-h', '--help'])
-      description.should eq('display help')
+      expect(switches).to eq(['-h', '--help'])
+      expect(description).to eq('display help')
     end
   end
   
   describe "#switch_to_sym" do
     it "should return a symbol based on the switch name" do
-     Commander::Runner.switch_to_sym('--trace').should eq(:trace)
-     Commander::Runner.switch_to_sym('--foo-bar').should eq(:foo_bar)
-     Commander::Runner.switch_to_sym('--[no-]feature"').should eq(:feature)
-     Commander::Runner.switch_to_sym('--[no-]feature ARG').should eq(:feature)
-     Commander::Runner.switch_to_sym('--file [ARG]').should eq(:file)
-     Commander::Runner.switch_to_sym('--colors colors').should eq(:colors)
+     expect(Commander::Runner.switch_to_sym('--trace')).to eq(:trace)
+     expect(Commander::Runner.switch_to_sym('--foo-bar')).to eq(:foo_bar)
+     expect(Commander::Runner.switch_to_sym('--[no-]feature"')).to eq(:feature)
+     expect(Commander::Runner.switch_to_sym('--[no-]feature ARG')).to eq(:feature)
+     expect(Commander::Runner.switch_to_sym('--file [ARG]')).to eq(:file)
+     expect(Commander::Runner.switch_to_sym('--colors colors')).to eq(:colors)
     end
   end
   
   describe "#alias_command" do
     it "should alias a command" do
       alias_command :foo, :test
-      command(:foo).should eq(command(:test))
+      expect(command(:foo)).to eq(command(:test))
     end
     
     it "should pass arguments passed to the alias when called" do
@@ -76,7 +76,7 @@ describe Commander do
         end 
         alias_command :'install gem', :install, '--gem-name'
       end.run!
-      gem_name.should eq('commander')
+      expect(gem_name).to eq('commander')
     end
   end
   
@@ -86,7 +86,7 @@ describe Commander do
       new_command_runner 'test', '--config', 'foo' do
         global_option('--config FILE') { |f| file = f }
       end.run!
-      file.should eq('foo')
+      expect(file).to eq('foo')
     end
     
     it "should be inherited by commands" do
@@ -97,7 +97,7 @@ describe Commander do
           c.when_called { |_, options| quiet = options.quiet } 
         end
       end.run!
-      quiet.should be_true
+      expect(quiet).to be_true
     end
     
     it "should be inherited by commands even when a block is present" do
@@ -108,7 +108,7 @@ describe Commander do
           c.when_called { |_, options| quiet = options.quiet } 
         end
       end.run!
-      quiet.should be_true      
+      expect(quiet).to be_true      
     end
   end
 
@@ -122,7 +122,7 @@ describe Commander do
           c.when_called {}
         end
       end.run!
-      global_option.should eq('MAGIC')
+      expect(global_option).to eq('MAGIC')
     end
 
     it 'should parse global options after command' do
@@ -134,7 +134,7 @@ describe Commander do
           c.when_called {}
         end
       end.run!
-      global_option.should eq('MAGIC')
+      expect(global_option).to eq('MAGIC')
     end
 
     it 'should parse global options placed before command options' do
@@ -148,7 +148,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should eq('MAGIC')
+      expect(global_option).to eq('MAGIC')
     end
 
     it 'should parse global options placed after command options' do
@@ -162,7 +162,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should eq('MAGIC')
+      expect(global_option).to eq('MAGIC')
     end
 
     it 'should parse global options surrounded by command options' do
@@ -177,7 +177,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should eq('MAGIC')
+      expect(global_option).to eq('MAGIC')
     end
 
     it 'should not parse command options' do
@@ -192,8 +192,8 @@ describe Commander do
         end
       end.parse_global_options
 
-      command_option.should be_nil
-      global_option.should eq('MAGIC')
+      expect(command_option).to be_nil
+      expect(global_option).to eq('MAGIC')
     end
 
     it 'should not affect command arguments with values' do
@@ -208,8 +208,8 @@ describe Commander do
         end
       end.run!
 
-      command_option.should eq('bar')
-      global_option.should eq('MAGIC')
+      expect(command_option).to eq('bar')
+      expect(global_option).to eq('MAGIC')
     end
 
     it 'should not affect global arguments with values' do
@@ -223,7 +223,7 @@ describe Commander do
         end
       end.run!
 
-      global_option.should eq('bar')
+      expect(global_option).to eq('bar')
     end
     
     it 'should allow global arguments with values before command arguments (github issue #8)' do
@@ -238,8 +238,8 @@ describe Commander do
         end
       end.run!
 
-      global_option.should eq('path')
-      command_option.should eq('bar')
+      expect(global_option).to eq('path')
+      expect(command_option).to eq('bar')
     end
   end
 
@@ -256,7 +256,7 @@ describe Commander do
       args << '--command-with-arg' << 'rawr'
       args << '--paths' << '"lib/**/*.js","spec/**/*.js"'
       command_runner.remove_global_options options, args
-      args.should eq(['--command', '--command-with-arg', 'rawr'])
+      expect(args).to eq(['--command', '--command-with-arg', 'rawr'])
     end
 
     it "should not swallow an argument unless it expects an argument" do
@@ -269,47 +269,47 @@ describe Commander do
       args << '-a' << 'deleted'
       args << 'beta'
       command_runner.remove_global_options options, args
-      args.should eq(['alpha', 'beta'])
+      expect(args).to eq(['alpha', 'beta'])
     end
   end
   
   describe "--trace" do
     it "should display pretty errors by default" do
       pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
-      lambda {
+      expect {
         new_command_runner 'foo' do
           command(:foo) { |c| c.when_called { raise 'cookies!' } }
         end.run!
-      }.should raise_error(SystemExit, /error: cookies!. Use --trace/)
+      }.to raise_error(SystemExit, /error: cookies!. Use --trace/)
     end
 
     it "should display callstack when using this switch" do
-      lambda {
+      expect {
         new_command_runner 'foo', '--trace' do
           command(:foo) { |c| c.when_called { raise 'cookies!' } }
         end.run!  
-      }.should raise_error(RuntimeError)
+      }.to raise_error(RuntimeError)
     end
   end
 
   describe "#always_trace!" do
     it "should enable tracing globally, regardless of whether --trace was passed or not" do
-      lambda {
+      expect {
         new_command_runner 'foo' do
           always_trace!
           command(:foo) { |c| c.when_called { raise 'cookies!' } }
         end.run!
-      }.should raise_error(RuntimeError)
+      }.to raise_error(RuntimeError)
     end
   end
 
   describe "#never_trace!" do
     it "should disable tracing globally, regardless of whether --trace was passed or not" do
-      lambda {
+      expect {
         new_command_runner 'help', '--trace' do
           never_trace!
         end.run!
-      }.should raise_error(SystemExit, /invalid option: --trace/)
+      }.to raise_error(SystemExit, /invalid option: --trace/)
     end
 
     it "should not prompt to use --trace switch on errors" do
@@ -322,81 +322,81 @@ describe Commander do
       rescue SystemExit => e
         msg = e.message
       end
-      msg.should match(/error: cookies!/)
-      msg.should_not match(/--trace/)
+      expect(msg).to match(/error: cookies!/)
+      expect(msg).not_to match(/--trace/)
     end
   end
 
   context "conflict between #always_trace! and #never_trace!" do
     it "respects the last used command" do
-      lambda {
+      expect {
         new_command_runner 'foo' do
           never_trace!
           always_trace!
           command(:foo) { |c| c.when_called { raise 'cookies!' } }
         end.run!
-      }.should raise_error(RuntimeError)
+      }.to raise_error(RuntimeError)
     end
   end
 
   describe "--version" do
     it "should output program version" do
-      run('--version').should eq("test 1.2.3\n")
+      expect(run('--version')).to eq("test 1.2.3\n")
     end
   end
   
   describe "--help" do
     it "should not output an invalid command message" do
-      run('--help').should_not == "invalid command. Use --help for more information\n"
+      expect(run('--help')).not_to eq("invalid command. Use --help for more information\n")
     end
     
     it "can be used before or after the command and options" do
-      run('test', '--help').should eq("Implement help for test here\n")
+      expect(run('test', '--help')).to eq("Implement help for test here\n")
     end
   end
   
   describe "with invalid options" do
     it "should output an invalid option message" do
       pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
-      lambda {
+      expect {
         run('test', '--invalid-option')  
-      }.should raise_error(SystemExit, /invalid option: --invalid-option/)
+      }.to raise_error(SystemExit, /invalid option: --invalid-option/)
     end
   end
   
   describe "with invalid command passed" do
     it "should output an invalid command message" do
       pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
-      lambda {
+      expect {
         run('foo')  
-      }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
+      }.to raise_error(SystemExit, /invalid command. Use --help for more information/)
     end
   end
   
   describe "with invalid command passed to help" do
     it "should output an invalid command message" do
       pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
-      lambda {
+      expect {
         run('help', 'does_not_exist')
-      }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
+      }.to raise_error(SystemExit, /invalid command. Use --help for more information/)
     end
   end
   
   describe "with invalid command passed to --help" do
     it "should output an invalid command message" do
       pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
-      lambda {
+      expect {
         run('--help', 'does_not_exist')
-      }.should raise_error(SystemExit, /invalid command. Use --help for more information/)
+      }.to raise_error(SystemExit, /invalid command. Use --help for more information/)
     end
   end
 
   describe "with invalid option passed to --help" do
     it "should output an invalid option message" do
       pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform::jruby?
-      lambda {
+      expect {
         run('--help', 'test', '--invalid-option')
-      }.should raise_error(SystemExit, /invalid option: --invalid-option/)
+      }.to raise_error(SystemExit, /invalid option: --invalid-option/)
     end
   end
   
@@ -405,20 +405,20 @@ describe Commander do
       new_command_runner do
         command('foo bar') {}
         command('foo bar foo') {}
-        command_runner.valid_command_names_from('foo', 'bar', 'foo').sort.should eq(['foo bar', 'foo bar foo'])
+        expect(command_runner.valid_command_names_from('foo', 'bar', 'foo').sort).to eq(['foo bar', 'foo bar foo'])
       end
     end
     
     it "should return empty array when no possible command names exist" do
       new_command_runner do
-        command_runner.valid_command_names_from('fake', 'command', 'name').should eq([])
+        expect(command_runner.valid_command_names_from('fake', 'command', 'name')).to eq([])
       end
     end
 
     it "should match exact commands only" do
       new_command_runner do
         command('foo') {}
-        command_runner.valid_command_names_from('foobar').should eq([])
+        expect(command_runner.valid_command_names_from('foobar')).to eq([])
       end
     end
   end
@@ -426,42 +426,42 @@ describe Commander do
   describe "#command_name_from_args" do
     it "should locate command within arbitrary arguments passed" do
       new_command_runner '--help', '--arbitrary', 'test'
-      command_runner.command_name_from_args.should eq('test')
+      expect(command_runner.command_name_from_args).to eq('test')
     end
     
     it "should support multi-word commands" do
       new_command_runner '--help', '--arbitrary', 'some', 'long', 'command', 'foo'
       command('some long command') {}
-      command_runner.command_name_from_args.should eq('some long command')
+      expect(command_runner.command_name_from_args).to eq('some long command')
     end
     
     it "should match the longest possible command" do
       new_command_runner '--help', '--arbitrary', 'foo', 'bar', 'foo'
       command('foo bar') {}
       command('foo bar foo') {}
-      command_runner.command_name_from_args.should eq('foo bar foo'      )
+      expect(command_runner.command_name_from_args).to eq('foo bar foo'      )
     end
     
     it "should use the left-most command name when multiple are present" do
       new_command_runner 'help', 'test'
-      command_runner.command_name_from_args.should eq('help'      )
+      expect(command_runner.command_name_from_args).to eq('help'      )
     end
   end
   
   describe "#active_command" do
     it "should resolve the active command" do
       new_command_runner '--help', 'test'
-      command_runner.active_command.should be_instance_of(Commander::Command)
+      expect(command_runner.active_command).to be_instance_of(Commander::Command)
     end
     
     it "should resolve active command when invalid options are passed" do
       new_command_runner '--help', 'test', '--arbitrary'
-      command_runner.active_command.should be_instance_of(Commander::Command)
+      expect(command_runner.active_command).to be_instance_of(Commander::Command)
     end
     
     it "should return nil when the command is not found" do
       new_command_runner 'foo'
-      command_runner.active_command.should be_nil
+      expect(command_runner.active_command).to be_nil
     end
   end
   
@@ -469,8 +469,8 @@ describe Commander do
     it "should allow you to default any command when one is not explicitly passed" do
       new_command_runner '--trace' do
         default_command :test
-        command(:test).should_receive(:run).once
-        command_runner.active_command.should eq(command(:test))
+        expect(command(:test)).to receive(:run).once
+        expect(command_runner.active_command).to eq(command(:test))
       end.run!
     end
     
@@ -478,8 +478,8 @@ describe Commander do
       new_command_runner 'foo', 'bar', '--trace' do
         default_command :test
         command(:'foo bar'){}
-        command(:'foo bar').should_receive(:run).once
-        command_runner.active_command.should eq(command(:'foo bar'))
+        expect(command(:'foo bar')).to receive(:run).once
+        expect(command_runner.active_command).to eq(command(:'foo bar'))
       end.run!
     end
     
@@ -488,14 +488,14 @@ describe Commander do
       default_command :'foo bar'
       command(:'foo bar'){}
       command(:'foo bar something'){}
-      command_runner.active_command.should eq(command(:'foo bar something'))
+      expect(command_runner.active_command).to eq(command(:'foo bar something'))
     end
     
     it "should allow defaulting of command aliases" do
       new_command_runner '--trace' do
         default_command :foobar
         alias_command :foobar, :test
-        command(:test).should_receive(:run).once
+        expect(command(:test)).to receive(:run).once
       end.run!
     end
   end
@@ -504,8 +504,8 @@ describe Commander do
     it "when options are passed before the command name" do
       new_command_runner '--verbose', 'test', 'foo', 'bar' do
         @command.when_called do |args, options|
-          args.should eq(['foo', 'bar'])
-          options.verbose.should be_true
+          expect(args).to eq(['foo', 'bar'])
+          expect(options.verbose).to be_true
         end
       end.run!
     end
@@ -513,8 +513,8 @@ describe Commander do
     it "when options are passed after the command name" do
       new_command_runner 'test', '--verbose', 'foo', 'bar' do
         @command.when_called do |args, options|
-          args.should eq(['foo', 'bar'])
-          options.verbose.should be_true
+          expect(args).to eq(['foo', 'bar'])
+          expect(options.verbose).to be_true
         end
       end.run!
     end
@@ -522,8 +522,8 @@ describe Commander do
     it "when an argument passed is the same name as the command" do
       new_command_runner 'test', '--verbose', 'foo', 'test', 'bar' do
         @command.when_called do |args, options|
-          args.should eq(['foo', 'test', 'bar'])
-          options.verbose.should be_true
+          expect(args).to eq(['foo', 'test', 'bar'])
+          expect(options.verbose).to be_true
         end
       end.run!
     end
@@ -531,16 +531,16 @@ describe Commander do
     it "when using multi-word commands" do
       new_command_runner '--verbose', 'my', 'command', 'something', 'foo', 'bar' do
         command('my command') { |c| c.option('--verbose') }
-        command_runner.command_name_from_args.should eq('my command')
-        command_runner.args_without_command_name.should eq(['--verbose', 'something', 'foo', 'bar'])
+        expect(command_runner.command_name_from_args).to eq('my command')
+        expect(command_runner.args_without_command_name).to eq(['--verbose', 'something', 'foo', 'bar'])
       end.run!
     end
 
     it "when using multi-word commands with parts of the command name as arguments" do
       new_command_runner '--verbose', 'my', 'command', 'something', 'my', 'command' do
         command('my command') { |c| c.option('--verbose') }
-        command_runner.command_name_from_args.should eq('my command')
-        command_runner.args_without_command_name.should eq(['--verbose', 'something', 'my', 'command'])
+        expect(command_runner.command_name_from_args).to eq('my command')
+        expect(command_runner.args_without_command_name).to eq(['--verbose', 'something', 'my', 'command'])
       end.run!
     end
     
@@ -548,8 +548,8 @@ describe Commander do
       new_command_runner '--verbose', 'my', 'command', 'something', 'my', 'command' do
         command('my command') {}
         command('my command something') { |c| c.option('--verbose') }
-        command_runner.command_name_from_args.should eq('my command something')
-        command_runner.args_without_command_name.should eq(['--verbose', 'my', 'command'])
+        expect(command_runner.command_name_from_args).to eq('my command something')
+        expect(command_runner.args_without_command_name).to eq(['--verbose', 'my', 'command'])
       end.run!
     end
   end
@@ -560,7 +560,7 @@ describe Commander do
         command('foo') do |c|
           c.option('--optional [argument]')
           c.when_called do |_, options|
-            options.optional.should eq('arg1')
+            expect(options.optional).to eq('arg1')
           end
         end
       end.run!
@@ -571,7 +571,7 @@ describe Commander do
         command('foo') do |c|
           c.option('--optional [argument]')
           c.when_called do |_, options|
-            options.optional.should be_true
+            expect(options.optional).to be_true
           end
         end
       end.run!

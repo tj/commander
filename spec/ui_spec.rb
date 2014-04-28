@@ -6,7 +6,7 @@ describe Commander::UI do
   describe ".replace_tokens" do
     it "should replace tokens within a string, with hash values" do
       result = Commander::UI.replace_tokens 'Welcome :name, enjoy your :object'.freeze, :name => 'TJ', :object => 'cookie'
-      result.should eq('Welcome TJ, enjoy your cookie')
+      expect(result).to eq('Welcome TJ, enjoy your cookie')
     end
   end
 
@@ -18,13 +18,13 @@ describe Commander::UI do
       rescue
         exception = true
       end
-      exception.should_not be_true
+      expect(exception).not_to be_true
     end
   end
   
   describe ".available_editor" do
     it "should not fail on available editors with shell arguments" do
-      Commander::UI.available_editor('sh -c').should eq('sh -c')
+      expect(Commander::UI.available_editor('sh -c')).to eq('sh -c')
     end
   end
 
