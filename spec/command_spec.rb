@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Commander::Command do
+  include Commander::Methods
   
   before :each do
     mock_terminal
