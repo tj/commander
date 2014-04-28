@@ -9,11 +9,7 @@ $:.unshift File.dirname(__FILE__) + '/../lib'
 # This basically replicates the behavior of `require 'commander/import'`
 # but without adding an `at_exit` hook, which interferes with exit code
 require 'commander'
-require 'commander/delegates'
-
-include Commander::UI
-include Commander::UI::AskForClass
-include Commander::Delegates
+require 'commander/methods'
 
 # prevent paging from actually occurring in test environment
 
