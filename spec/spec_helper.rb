@@ -11,16 +11,6 @@ $:.unshift File.dirname(__FILE__) + '/../lib'
 require 'commander'
 require 'commander/methods'
 
-# prevent paging from actually occurring in test environment
-
-module Commander
-  module UI
-    def enable_paging
-      return
-    end
-  end
-end
-
 # Mock terminal IO streams so we can spec against them
 
 def mock_terminal
@@ -69,3 +59,10 @@ def run *args
   end.run!    
   @output.string
 end
+
+RSpec.configure do |c|
+  c.before(:each) do
+    allow(Commander::UI).to receive(:enable_paging)
+  end
+end
+
