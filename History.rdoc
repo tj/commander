@@ -1,3 +1,7 @@
+=== 4.2.0 / 2014-04-29
+
+* Add ability to use commander without importing into the global namespace (#61) (@krissi)
+
 === 4.1.6 / 2014-02-11
 
 * Respect environment setting for $LESS (@ellemenno)
