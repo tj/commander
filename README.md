@@ -96,7 +96,15 @@ class MyApplication
     program :version, '1.0.0'
     program :description, 'Stupid command that prints foo or bar.'
 
-    # see classic style example for options
+    command :foo do |c|
+      c.syntax = 'foobar foo'
+      c.description = 'Displays foo'
+      c.action do |args, options|
+        say 'foo'
+      end
+    end
+
+    run!
   end
 end
 
