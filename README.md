@@ -86,8 +86,7 @@ $ foobar bar --suffix '}' --prefix '{'
 ### Modular style
 ```ruby
 require 'rubygems'
-require 'commander/import'
-require 'commander/methods'
+require 'commander'
 
 class MyApplication
   include Commander::Methods
