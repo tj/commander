@@ -315,6 +315,43 @@ our previous `:'install gem'` example:
 default_command :update
 ```
 
+### Composite Commands
+
+Sometimes you want to run many commands at once. Commander lets you do that easily:
+```ruby
+command :foo do |c|
+  c.syntax = 'foobar foo'
+  c.description = 'Displays foo'
+  c.action do |args, options|
+    say 'foo'
+  end
+end
+
+command :bar do |c|
+  c.syntax = 'foobar bar [options]'
+  c.description = 'Display bar with optional prefix and suffix'
+  c.option '--prefix STRING', String, 'Adds a prefix to bar'
+  c.option '--suffix STRING', String, 'Adds a suffix to bar'
+  c.action do |args, options|
+    options.default :prefix => '(', :suffix => ')'
+    say "#{options.prefix}bar#{options.suffix}"
+  end
+end
+
+
+command :foo_bar do |c|
+  c.syntax = 'foobar foo_bar [options]'
+  c.description = Display foo, then bar, each with optional prefixes and suffixes'
+  c.option '--prefix STRING', String, 'Adds a prefix to bar'
+  c.option '--suffix STRING', String, 'Adds a suffix to bar'
+  c.action do |args, options|
+    options.default :prefix => '(', :suffix => ')'
+    Commander::Runner.instance.commands["foo"].run
+    Commander::Runner.instance.commands["bar"].run
+  end
+end
+```
+
 ```
 $ foo
 # => installing rubygems to some_path
