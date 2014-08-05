@@ -97,7 +97,6 @@ class MyApplication
     program :version, '1.0.0'
     program :description, 'Stupid command that prints foo or bar.'
 
-    # same setup methodology as in the "classic" style
     command :foo do |c|
       c.syntax = 'foobar foo'
       c.description = 'Displays foo'
@@ -106,16 +105,7 @@ class MyApplication
       end
     end
 
-    command :bar do |c|
-      c.syntax = 'foobar bar [options]'
-      c.description = 'Display bar with optional prefix and suffix'
-      c.option '--prefix STRING', String, 'Adds a prefix to bar'
-      c.option '--suffix STRING', String, 'Adds a suffix to bar'
-      c.action do |args, options|
-        options.default :prefix => '(', :suffix => ')'
-        say "#{options.prefix}bar#{options.suffix}"
-      end
-    end
+    run!
   end
 end
 
