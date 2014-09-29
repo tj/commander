@@ -40,9 +40,9 @@ module Commander
     ##
     # Choose from a set array of _choices_.
     
-    def choose message, *choices
-      say message
-      super(*choices)
+    def choose message = nil, *choices, &block
+      say message if message
+      super(*choices, &block)
     end
     
     ##
