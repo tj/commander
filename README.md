@@ -75,6 +75,7 @@ end
 ```
 
 Example output:
+
 ```
 $ foobar bar
 # => (bar)
@@ -84,6 +85,9 @@ $ foobar bar --suffix '}' --prefix '{'
 ```
 
 ### Modular style
+
+**NOTE:** Make sure to use `require 'commander'` rather than `require 'commander/import'`, otherwise Commander methods will still be imported into the global namespace.
+
 ```ruby
 require 'rubygems'
 require 'commander'
@@ -112,6 +116,7 @@ MyApplication.new.run if $0 == __FILE__
 ```
 
 ### Block style
+
 ```ruby
 require 'rubygems'
 require 'commander'
