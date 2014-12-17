@@ -1,5 +1,5 @@
 [<img src="https://secure.travis-ci.org/ggilder/commander.png?branch=master" alt="Build Status" />](http://travis-ci.org/ggilder/commander)
-[![Inline docs](http://inch-ci.org/github/visionmedia/commander.png)](http://inch-ci.org/github/visionmedia/commander)
+[![Inline docs](http://inch-ci.org/github/tj/commander.png)](http://inch-ci.org/github/tj/commander)
 
 # Commander
 
@@ -234,7 +234,7 @@ end
 ## Growl Notifications
 
 Commander provides methods for displaying Growl notifications. To use these
-methods you need to install http://github.com/visionmedia/growl which utilizes
+methods you need to install http://github.com/tj/growl which utilizes
 the [growlnotify](http://growl.info/extras.php#growlnotify) executable. Note that
 growl is auto-imported by Commander when available, no need to require.
 
@@ -425,7 +425,7 @@ global_option '--config FILE'
 
 ## ASCII Tables
 
-For feature rich ASCII tables for your terminal app check out visionmedia's terminal-table gem at http://github.com/visionmedia/terminal-table
+For feature rich ASCII tables for your terminal app check out the terminal-table gem at http://github.com/tj/terminal-table
 
     +----------+-------+----+--------+-----------------------+
     | Terminal | Table | Is | Wicked | Awesome               |
@@ -444,7 +444,7 @@ OR
 ## Contrib
 
 Feel free to fork and request a pull, or submit a ticket
-http://github.com/visionmedia/commander/issues
+http://github.com/tj/commander/issues
 
 ## License
 
