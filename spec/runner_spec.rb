@@ -97,7 +97,7 @@ describe Commander do
           c.when_called { |_, options| quiet = options.quiet } 
         end
       end.run!
-      expect(quiet).to be_true
+      expect(quiet).to be true
     end
     
     it "should be inherited by commands even when a block is present" do
@@ -108,7 +108,7 @@ describe Commander do
           c.when_called { |_, options| quiet = options.quiet } 
         end
       end.run!
-      expect(quiet).to be_true      
+      expect(quiet).to be true      
     end
   end
 
@@ -505,7 +505,7 @@ describe Commander do
       new_command_runner '--verbose', 'test', 'foo', 'bar' do
         @command.when_called do |args, options|
           expect(args).to eq(['foo', 'bar'])
-          expect(options.verbose).to be_true
+          expect(options.verbose).to be true
         end
       end.run!
     end
@@ -514,7 +514,7 @@ describe Commander do
       new_command_runner 'test', '--verbose', 'foo', 'bar' do
         @command.when_called do |args, options|
           expect(args).to eq(['foo', 'bar'])
-          expect(options.verbose).to be_true
+          expect(options.verbose).to be true
         end
       end.run!
     end
@@ -523,7 +523,7 @@ describe Commander do
       new_command_runner 'test', '--verbose', 'foo', 'test', 'bar' do
         @command.when_called do |args, options|
           expect(args).to eq(['foo', 'test', 'bar'])
-          expect(options.verbose).to be_true
+          expect(options.verbose).to be true
         end
       end.run!
     end
@@ -571,7 +571,7 @@ describe Commander do
         command('foo') do |c|
           c.option('--optional [argument]')
           c.when_called do |_, options|
-            expect(options.optional).to be_true
+            expect(options.optional).to be true
           end
         end
       end.run!
