@@ -1,6 +1,3 @@
-require 'commander'
-require 'commander/methods'
-
 module Commander
   def configure(*configuration_opts, &configuration_block)
     configuration_module = Module.new
