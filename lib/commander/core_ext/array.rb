@@ -1,6 +1,5 @@
 
 class Array
-
   ##
   # Split _string_ into an array. Used in
   # conjunction with Highline's #ask, or #ask_for_array
@@ -18,9 +17,8 @@ class Array
   #   list = ask_for_array 'Favorite cookies: '
   #
 
-  def self.parse string
+  def self.parse(string)
     # Using reverse + lookahead to work around Ruby 1.8's lack of lookbehind
     string.reverse.split(/\s(?!\\)/).reverse.map { |s| s.reverse.gsub('\\ ', ' ') }
   end
-
 end

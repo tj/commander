@@ -10,10 +10,10 @@ program :description, 'Commander utility program.'
 command :init do |c|
   c.syntax = 'commander init <file>'
   c.summary = 'Initialize a commander template'
-  c.description = 'Initialize an empty <file> with a commander template, 
+  c.description = 'Initialize an empty <file> with a commander template,
     allowing very quick creation of commander executables.'
   c.example 'Create a new file with a commander template.', 'commander init bin/my_executable'
-  c.action do |args, options|
+  c.action do |args, _options|
     file = args.shift || abort('file argument required.')
     name = ask 'Machine name of program: '
     description = ask 'Describe your program: '
@@ -22,13 +22,13 @@ command :init do |c|
       File.open(file, 'w') do |f|
         f.write <<-"...".gsub!(/^ {10}/, '')
           #!/usr/bin/env ruby
-          
+
           require 'rubygems'
           require 'commander/import'
-          
+
           program :version, '0.0.1'
           program :description, '#{description}'
-           
+
         ...
         commands.each do |command|
           f.write <<-"...".gsub!(/^ {12}/, '')
@@ -45,11 +45,11 @@ command :init do |c|
 
           ...
         end
-       end
-       File.chmod 0755, file
-       say "Initialized template in #{file}"
-     rescue Exception => e
-       abort e
-     end
+      end
+      File.chmod 0755, file
+      say "Initialized template in #{file}"
+    rescue Exception => e
+      abort e
+    end
   end
 end
