@@ -32,7 +32,7 @@ describe Commander::Command do
     end
     
     it "should allow procs as option handlers" do
-      @command.option('--recursive') { |recursive| expect(recursive).to be_true }
+      @command.option('--recursive') { |recursive| expect(recursive).to be true }
       @command.run '--recursive'
     end
     
@@ -79,9 +79,9 @@ describe Commander::Command do
     describe "should populate options with" do
       it "boolean values" do
         @command.option '--[no-]toggle'
-        @command.when_called { |_, options| expect(options.toggle).to be_true }  
+        @command.when_called { |_, options| expect(options.toggle).to be true }  
         @command.run '--toggle'
-        @command.when_called { |_, options| expect(options.toggle).to be_false }  
+        @command.when_called { |_, options| expect(options.toggle).to be false }  
         @command.run '--no-toggle'
       end
 
@@ -103,7 +103,7 @@ describe Commander::Command do
         end
 
         it "should return true when present without an argument" do
-          @command.when_called { |_, options| expect(options.use_config).to be_true }
+          @command.when_called { |_, options| expect(options.use_config).to be true }
           @command.run '--use-config'
         end
 

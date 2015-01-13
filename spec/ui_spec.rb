@@ -18,7 +18,7 @@ describe Commander::UI do
       rescue
         exception = true
       end
-      expect(exception).not_to be_true
+      expect(exception).not_to be true
     end
   end
   
