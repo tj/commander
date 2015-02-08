@@ -1,4 +1,4 @@
-inherit_from: rubocop-todo.yml
+inherit_from: .rubocop_todo.yml
 
 # Offense count: 5
 Encoding:
@@ -6,5 +6,5 @@ Encoding:
 
 # Offense count: 1
 LineLength:
-  Max: 120
+  Max: 242
 
