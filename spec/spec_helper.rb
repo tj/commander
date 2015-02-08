@@ -2,11 +2,11 @@ require 'rubygems'
 require 'stringio'
 require 'simplecov'
 SimpleCov.start do
-  add_filter "/spec/"
+  add_filter '/spec/'
 end
 
 # Unshift so that local files load instead of something in gems
-$:.unshift File.dirname(__FILE__) + '/../lib'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 
 # This basically replicates the behavior of `require 'commander/import'`
 # but without adding an `at_exit` hook, which interferes with exit code
@@ -25,13 +25,13 @@ end
 
 def create_test_command
   command :test do |c|
-    c.syntax = "test [options] <file>"
-    c.description = "test description"
-    c.example "description", "command"
-    c.example "description 2", "command 2"
-    c.option '-v', "--verbose", "verbose description"
-    c.when_called do |args, options|
-      "test %s" % args.join
+    c.syntax = 'test [options] <file>'
+    c.description = 'test description'
+    c.example 'description', 'command'
+    c.example 'description 2', 'command 2'
+    c.option '-v', '--verbose', 'verbose description'
+    c.when_called do |args, _options|
+      'test %s' % args.join
     end
   end
   @command = command :test
@@ -39,7 +39,7 @@ end
 
 # Create a new command runner
 
-def new_command_runner *args, &block
+def new_command_runner(*args, &block)
   Commander::Runner.instance_variable_set :"@singleton", Commander::Runner.new(args)
   program :name, 'test'
   program :version, '1.2.3'
@@ -55,10 +55,10 @@ def command_runner
   Commander::Runner.instance
 end
 
-def run *args
+def run(*args)
   new_command_runner(*args) do
     program :help_formatter, Commander::HelpFormatter::Base
-  end.run!    
+  end.run!
   @output.string
 end
 
