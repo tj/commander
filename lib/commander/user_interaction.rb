@@ -322,6 +322,7 @@ module Commander
       # All Classes that respond to #parse
       Object.constants.map do |const|
         # const_get(:Config) issues a deprecation warning on ruby 1.8.7
+        # TODO clean up now that we're not supporting Ruby 1.8
         Object.const_get(const) unless const == :Config
       end.select do |const|
         const.class == Class && const.respond_to?(:parse)
