@@ -2,22 +2,20 @@ require 'tempfile'
 require 'shellwords'
 
 module Commander
-  
   ##
   # = User Interaction
   #
   # Commander's user interaction module mixes in common
-  # methods which extend HighLine's functionality such 
+  # methods which extend HighLine's functionality such
   # as a #password method rather than calling #ask directly.
-  
+
   module UI
-    
     module_function
-    
+
     #--
     # Auto include growl when available.
     #++
-    
+
     begin
       require 'growl'
     rescue LoadError
@@ -25,26 +23,26 @@ module Commander
     else
       include Growl
     end
-    
+
     ##
     # Ask the user for a password. Specify a custom
-    # _message_ other than 'Password: ' or override the 
+    # _message_ other than 'Password: ' or override the
     # default _mask_ of '*'.
-    
-    def password message = 'Password: ', mask = '*'
+
+    def password(message = 'Password: ', mask = '*')
       pass = ask(message) { |q| q.echo = mask }
       pass = password message, mask if pass.nil? || pass.empty?
       pass
     end
-    
+
     ##
     # Choose from a set array of _choices_.
-    
-    def choose message = nil, *choices, &block
+
+    def choose(message = nil, *choices, &block)
       say message if message
       super(*choices, &block)
     end
-    
+
     ##
     # 'Log' an _action_ to the terminal. This is typically used
     # for verbose output regarding actions performed. For example:
@@ -53,8 +51,8 @@ module Commander
     #   remove  path/to/old_file.rb
     #   remove  path/to/old_file2.rb
     #
-    
-    def log action, *args
+
+    def log(action, *args)
       say '%15s  %s' % [action, args.join(' ')]
     end
 
@@ -66,7 +64,7 @@ module Commander
     #   say_ok 'It is ok', 'This is ok too'
     #
 
-    def say_ok *args
+    def say_ok(*args)
       args.each do |arg|
         say $terminal.color(arg, :green)
       end
@@ -80,7 +78,7 @@ module Commander
     #   say_warning 'Be careful', 'Think about it'
     #
 
-    def say_warning *args
+    def say_warning(*args)
       args.each do |arg|
         say $terminal.color(arg, :yellow)
       end
@@ -94,7 +92,7 @@ module Commander
     #   say_error 'It is not ok', 'This is not ok too'
     #
 
-    def say_error *args
+    def say_error(*args)
       args.each do |arg|
         say $terminal.color(arg, :red)
       end
@@ -120,28 +118,28 @@ module Commander
 
     ##
     # Speak _message_ using _voice_ at a speaking rate of _rate_
-    # 
+    #
     # Voice defaults to 'Alex', which is one of the better voices.
     # Speaking rate defaults to 175 words per minute
     #
     # === Examples
-    #    
+    #
     #   speak 'What is your favorite food? '
     #   food = ask 'favorite food?: '
-    #   speak "Wow, I like #{food} too. We have so much in common." 
+    #   speak "Wow, I like #{food} too. We have so much in common."
     #   speak "I like #{food} as well!", "Victoria", 190
     #
     # === Notes
     #
     # * MacOS only
     #
-    
-    def speak message, voice = :Alex, rate = 175
+
+    def speak(message, voice = :Alex, rate = 175)
       Thread.new { applescript "say #{message.inspect} using #{voice.to_s.inspect} speaking rate #{rate}" }
     end
-    
+
     ##
-    # Converse with speech recognition. 
+    # Converse with speech recognition.
     #
     # Currently a "poorman's" DSL to utilize applescript and
     # the MacOS speech recognition server.
@@ -149,7 +147,7 @@ module Commander
     # === Examples
     #
     #   case converse 'What is the best food?', :cookies => 'Cookies', :unknown => 'Nothing'
-    #   when :cookies 
+    #   when :cookies
     #     speak 'o.m.g. you are awesome!'
     #   else
     #     case converse 'That is lame, shall I convince you cookies are the best?', :yes => 'Ok', :no => 'No', :maybe => 'Maybe another time'
@@ -164,31 +162,30 @@ module Commander
     #
     # * MacOS only
     #
-    
-    def converse prompt, responses = {}
-      i, commands = 0, responses.map { |key, value| value.inspect }.join(',')
+
+    def converse(prompt, responses = {})
+      i, commands = 0, responses.map { |_key, value| value.inspect }.join(',')
       statement = responses.inject '' do |statement, (key, value)|
-        statement << (((i += 1) == 1 ? 
-          %(if response is "#{value}" then\n):
-            %(else if response is "#{value}" then\n))) <<
-              %(do shell script "echo '#{key}'"\n)
+        statement << (((i += 1) == 1 ?
+          %(if response is "#{value}" then\n) :             %(else if response is "#{value}" then\n))) <<
+        %(do shell script "echo '#{key}'"\n)
       end
       applescript(%(
-        tell application "SpeechRecognitionServer" 
+        tell application "SpeechRecognitionServer"
           set response to listen for {#{commands}} with prompt "#{prompt}"
           #{statement}
           end if
         end tell
       )).strip.to_sym
     end
-    
+
     ##
     # Execute apple _script_.
-    
-    def applescript script
+
+    def applescript(script)
       `osascript -e "#{ script.gsub('"', '\"') }"`
     end
-    
+
     ##
     # Normalize IO streams, allowing for redirection of
     # +input+ and/or +output+, for example:
@@ -213,8 +210,8 @@ module Commander
     #     end
     #   end
     #
-    
-    def io input = nil, output = nil, &block
+
+    def io(input = nil, output = nil, &block)
       $stdin = File.new(input) if input
       $stdout = File.new(output, 'r+') if output
       if block
@@ -222,10 +219,10 @@ module Commander
         reset_io
       end
     end
-    
+
     ##
     # Reset IO to initial constant streams.
-    
+
     def reset_io
       $stdin, $stdout = STDIN, STDOUT
     end
@@ -234,12 +231,12 @@ module Commander
     # Find an editor available in path. Optionally supply the _preferred_
     # editor. Returns the name as a string, nil if none is available.
 
-    def available_editor preferred = nil
-      [preferred, ENV['EDITOR'], 'mate -w', 'vim', 'vi', 'emacs', 'nano', 'pico'].
-        compact.
-        find {|name| system("hash #{name.split.first} 2>&-") }
+    def available_editor(preferred = nil)
+      [preferred, ENV['EDITOR'], 'mate -w', 'vim', 'vi', 'emacs', 'nano', 'pico']
+        .compact
+        .find { |name| system("hash #{name.split.first} 2>&-") }
     end
-    
+
     ##
     # Prompt an editor for input. Optionally supply initial
     # _input_ which is written to the editor.
@@ -252,8 +249,8 @@ module Commander
     #   ask_editor('foo')         # => prompts EDITOR with default text of 'foo'
     #   ask_editor('foo', 'mate -w')  # => prompts TextMate with default text of 'foo'
     #
-       
-    def ask_editor input = nil, preferred_editor = nil
+
+    def ask_editor(input = nil, preferred_editor = nil)
       editor = available_editor preferred_editor
       program = Commander::Runner.instance.program(:name).downcase rescue 'commander'
       tmpfile = Tempfile.new program
@@ -265,10 +262,10 @@ module Commander
         tmpfile.unlink
       end
     end
-    
+
     ##
     # Enable paging of output after called.
-    
+
     def enable_paging
       return unless $stdout.tty?
       return unless Process.respond_to? :fork
@@ -279,7 +276,7 @@ module Commander
       # configurations that don't support it, but versions before 1.9 don't
       # seem to do this reliably and instead raise a NotImplementedError
       # (which is rescued below).
-      
+
       if Kernel.fork
         $stdin.reopen read
         write.close; read.close
@@ -310,15 +307,15 @@ module Commander
     #   end
     #
 
-    def progress arr, options = {}, &block
+    def progress(arr, options = {}, &_block)
       bar = ProgressBar.new arr.length, options
       bar.show
       arr.each { |v| bar.increment yield(v) }
     end
-        
+
     ##
     # Implements ask_for_CLASS methods.
-    
+
     module AskForClass
       # All special cases in HighLine::Question#convert, except those that implement #parse
       ([Float, Integer, String, Symbol, Regexp, Array, File, Pathname] +
@@ -334,16 +331,16 @@ module Commander
         end
       end
     end
-    
+
     ##
     # Substitute _hash_'s keys with their associated values in _str_.
-    
-    def replace_tokens str, hash #:nodoc:
+
+    def replace_tokens(str, hash) #:nodoc:
       hash.inject str do |str, (key, value)|
         str.gsub ":#{key}", value.to_s
       end
     end
-    
+
     ##
     # = Progress Bar
     #
@@ -352,12 +349,12 @@ module Commander
     # be incremented. Note that a hash of tokens may be passed to
     # #increment, (or returned when using Object#progress).
     #
-    #   uris = %w( 
+    #   uris = %w(
     #     http://vision-media.ca
     #     http://yahoo.com
     #     http://google.com
     #     )
-    #   
+    #
     #   bar = Commander::UI::ProgressBar.new uris.length, options
     #   threads = []
     #   uris.each do |uri|
@@ -381,12 +378,11 @@ module Commander
     #
 
     class ProgressBar
-
       ##
       # Creates a new progress bar.
       #
       # === Options
-      #    
+      #
       #   :title              Title, defaults to "Progress"
       #   :width              Width of :progress_bar
       #   :progress_str       Progress string, defaults to "="
@@ -397,7 +393,7 @@ module Commander
       #
       # === Tokens
       #
-      #   :title 
+      #   :title
       #   :percent_complete
       #   :progress_bar
       #   :step
@@ -407,7 +403,7 @@ module Commander
       #   :time_remaining
       #
 
-      def initialize total, options = {}
+      def initialize(total, options = {})
         @total_steps, @step, @start_time = total, 0, Time.now
         @title = options.fetch :title, 'Progress'
         @width = options.fetch :width, 25
@@ -417,10 +413,10 @@ module Commander
         @format = options.fetch :format, ':title |:progress_bar| :percent_complete% complete '
         @tokens = options.fetch :tokens, {}
       end
-      
+
       ##
       # Completion percentage.
-      
+
       def percent_complete
         if @total_steps.zero?
           100
@@ -428,50 +424,50 @@ module Commander
           @step * 100 / @total_steps
         end
       end
-      
+
       ##
       # Time that has elapsed since the operation started.
-      
+
       def time_elapsed
         Time.now - @start_time
       end
-      
+
       ##
       # Estimated time remaining.
-      
+
       def time_remaining
         (time_elapsed / @step) * steps_remaining
       end
-      
+
       ##
       # Number of steps left.
-      
+
       def steps_remaining
         @total_steps - @step
       end
-      
+
       ##
       # Formatted progress bar.
-      
+
       def progress_bar
         (@progress_str * (@width * percent_complete / 100)).ljust @width, @incomplete_str
       end
-      
+
       ##
       # Generates tokens for this step.
-      
+
       def generate_tokens
         {
-          :title => @title,
-          :percent_complete => percent_complete,
-          :progress_bar => progress_bar, 
-          :step => @step,
-          :steps_remaining => steps_remaining,
-          :total_steps => @total_steps, 
-          :time_elapsed => "%0.2fs" % time_elapsed,
-          :time_remaining => @step > 0 ? "%0.2fs" % time_remaining : '',
-        }.
-        merge! @tokens
+          title: @title,
+          percent_complete: percent_complete,
+          progress_bar: progress_bar,
+          step: @step,
+          steps_remaining: steps_remaining,
+          total_steps: @total_steps,
+          time_elapsed: '%0.2fs' % time_elapsed,
+          time_remaining: @step > 0 ? '%0.2fs' % time_remaining : ''
+        }
+          .merge! @tokens
       end
 
       ##
@@ -487,10 +483,10 @@ module Commander
           end
         end
       end
-      
+
       ##
       # Whether or not the operation is complete, and we have finished.
-      
+
       def finished?
         @step == @total_steps + 1
       end
@@ -506,7 +502,7 @@ module Commander
       # Increment progress. Optionally pass _tokens_ which
       # can be displayed in the output format.
 
-      def increment tokens = {}
+      def increment(tokens = {})
         @step += 1
         @tokens.merge! tokens if tokens.is_a? Hash
         show

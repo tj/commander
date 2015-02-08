@@ -13,17 +13,17 @@ describe Commander do
       end
 
       it 'provides Commander configuration methods' do
-        Commander.configure {
+        Commander.configure do
           program :name, 'test'
-        }
+        end
 
         expect(Commander::Runner.instance.program(:name)).to eq('test')
       end
 
       it 'passes all arguments to the block' do
-        Commander.configure('foo') { |first_arg|
+        Commander.configure('foo') do |first_arg|
           program :name, first_arg
-        }
+        end
 
         expect(Commander::Runner.instance.program(:name)).to eq('foo')
       end

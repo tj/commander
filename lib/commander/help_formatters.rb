@@ -6,7 +6,8 @@ module Commander
     autoload :TerminalCompact, 'commander/help_formatters/terminal_compact'
 
     module_function
-    def indent amount, text
+
+    def indent(amount, text)
       text.gsub("\n", "\n" + (' ' * amount))
     end
   end

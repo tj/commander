@@ -1,0 +1,10 @@
+inherit_from: rubocop-todo.yml
+
+# Offense count: 5
+Encoding:
+  Enabled: false
+
+# Offense count: 1
+LineLength:
+  Max: 120
+
