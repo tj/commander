@@ -1,3 +1,9 @@
+=== 4.3.0 / 2015-02-07
+
+* Drops support for Ruby 1.8. Please use 4.2.1 if you still need Ruby 1.8 compatibility.
+* Fixed a bug with `always_trace` (#91) (@KrauseFx)
+* Renamed `commands` to `defined_commands` for better compatibility with Pry
+
 === 4.2.1 / 2014-09-28
 
 * Improve `choose` compatibility with HighLine's version (#79)
