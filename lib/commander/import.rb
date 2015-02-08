@@ -1,7 +1,4 @@
 
-require 'commander'
-require 'commander/delegates'
-
 include Commander::UI
 include Commander::UI::AskForClass
 include Commander::Delegates

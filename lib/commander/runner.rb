@@ -24,6 +24,14 @@ module Commander
     # Hash of help formatter aliases.
     
     attr_reader :help_formatter_aliases
+    
+    ##
+    # Flag which contains the default value of option: --trace
+    attr_reader :always_trace 
+    
+    ##
+    # Flag which sets the default value of option: --trace in non-happy scenarios
+    attr_reader :never_trace
 
     ##
     # Initialize a new command runner. Optionally
@@ -33,6 +41,8 @@ module Commander
       @args, @commands, @aliases, @options = args, {}, {}, []
       @help_formatter_aliases = help_formatter_alias_defaults
       @program = program_defaults
+      @always_trace = false
+      @never_trace = false
       create_default_commands
     end
     

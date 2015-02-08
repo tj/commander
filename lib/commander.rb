@@ -23,6 +23,7 @@
 
 require 'highline/import'
 require 'commander/version'
+require 'commander/delegates'
 require 'commander/blank'
 require 'commander/user_interaction'
 require 'commander/core_ext'

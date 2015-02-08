@@ -1,6 +1,3 @@
-require 'commander'
-require 'commander/delegates'
-
 module Commander::Methods
   include Commander::UI
   include Commander::UI::AskForClass
