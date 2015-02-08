@@ -57,7 +57,7 @@ module Commander
         return
       end
       global_option('-v', '--version', 'Display version information') { say version; return } 
-      global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true } unless (@never_trace || @always_trace)
+      global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true } unless @never_trace || @always_trace
       parse_global_options
       remove_global_options options, @args
       unless trace
