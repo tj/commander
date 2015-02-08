@@ -19,7 +19,7 @@ class Array
 
   def self.parse(string)
     # Using reverse + lookahead to work around Ruby 1.8's lack of lookbehind
-    # TODO simplify now that we don't support Ruby 1.8
+    # TODO: simplify now that we don't support Ruby 1.8
     string.reverse.split(/\s(?!\\)/).reverse.map { |s| s.reverse.gsub('\\ ', ' ') }
   end
 end
