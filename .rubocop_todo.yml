@@ -37,7 +37,7 @@ Metrics/AbcSize:
 # Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
-  Max: 227
+  Max: 230
 
 # Offense count: 4
 Metrics/CyclomaticComplexity:
@@ -51,7 +51,7 @@ Metrics/LineLength:
 # Offense count: 7
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
-  Max: 33
+  Max: 36
 
 # Offense count: 4
 Metrics/PerceivedComplexity:
@@ -120,12 +120,6 @@ Style/Not:
 
 # Offense count: 5
 Style/RescueModifier:
-  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: AllowAsExpressionSeparator.
-Style/Semicolon:
   Enabled: false
 
 # Offense count: 2

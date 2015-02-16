@@ -285,7 +285,8 @@ module Commander
 
       if Kernel.fork
         $stdin.reopen read
-        write.close; read.close
+        write.close
+        read.close
         Kernel.select [$stdin]
         ENV['LESS'] = 'FSRX' unless ENV.key? 'LESS'
         pager = ENV['PAGER'] || 'less'
@@ -294,7 +295,8 @@ module Commander
         # subprocess
         $stdout.reopen write
         $stderr.reopen write if $stderr.tty?
-        write.close; read.close
+        write.close
+        read.close
       end
     rescue NotImplementedError
     ensure
