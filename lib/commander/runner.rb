@@ -33,6 +33,8 @@ module Commander
       @args, @commands, @aliases, @options = args, {}, {}, []
       @help_formatter_aliases = help_formatter_alias_defaults
       @program = program_defaults
+      @always_trace = false
+      @never_trace = false
       create_default_commands
     end
     
