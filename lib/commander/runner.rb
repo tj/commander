@@ -2,7 +2,6 @@ require 'optparse'
 
 module Commander
   class Runner
-
     #--
     # Exceptions
     #++
