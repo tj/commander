@@ -331,7 +331,7 @@ module Commander
         switches = option[:switches].dup
         next if switches.empty?
 
-        if switchHasArg = switches.any? { |s| s =~ /[ =]/ }
+        if (switchHasArg = switches.any? { |s| s =~ /[ =]/ })
           switches.map! { |s| s[0, s.index('=') || s.index(' ') || s.length] }
         end
 
