@@ -220,10 +220,9 @@ module Commander
     def io(input = nil, output = nil, &block)
       $stdin = File.new(input) if input
       $stdout = File.new(output, 'r+') if output
-      if block
-        yield
-        reset_io
-      end
+      return unless block
+      yield
+      reset_io
     end
 
     ##
@@ -484,13 +483,12 @@ module Commander
       # Output the progress bar.
 
       def show
-        unless finished?
-          erase_line
-          if completed?
-            $terminal.say UI.replace_tokens(@complete_message, generate_tokens) if @complete_message.is_a? String
-          else
-            $terminal.say UI.replace_tokens(@format, generate_tokens) << ' '
-          end
+        return if finished?
+        erase_line
+        if completed?
+          $terminal.say UI.replace_tokens(@complete_message, generate_tokens) if @complete_message.is_a? String
+        else
+          $terminal.say UI.replace_tokens(@format, generate_tokens) << ' '
         end
       end
 
