@@ -317,7 +317,7 @@ module Commander
     # Raises InvalidCommandError when a _command_ is not found.
 
     def require_valid_command(command = active_command)
-      raise InvalidCommandError, 'invalid command', caller if command.nil?
+      fail InvalidCommandError, 'invalid command', caller if command.nil?
     end
 
     ##
@@ -388,7 +388,7 @@ module Commander
 
     def require_program(*keys)
       keys.each do |key|
-        raise CommandError, "program #{key} required" if program(key).nil? || program(key).empty?
+        fail CommandError, "program #{key} required" if program(key).nil? || program(key).empty?
       end
     end
 
