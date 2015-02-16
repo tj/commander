@@ -200,7 +200,7 @@ module Commander
     # and work with option values.
 
     def option_proc(switches)
-      lambda { |value| proxy_options << [Runner.switch_to_sym(switches.last), value] }
+      ->(value) { proxy_options << [Runner.switch_to_sym(switches.last), value] }
     end
 
     def inspect

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Object do
   describe '#get_binding' do
     it 'should return the objects binding' do
-      expect(lambda {}.get_binding).to be_instance_of(Binding)
+      expect(-> {}.get_binding).to be_instance_of(Binding)
     end
   end
 

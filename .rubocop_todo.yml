@@ -99,11 +99,6 @@ Style/GuardClause:
 Style/IfUnlessModifier:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/Lambda:
-  Enabled: false
-
 # Offense count: 17
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
