@@ -111,7 +111,7 @@ module Commander
         args: args,
         proc: proc,
         switches: switches,
-        description: description
+        description: description,
       }
     end
 

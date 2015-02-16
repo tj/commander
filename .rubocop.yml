@@ -8,3 +8,6 @@ Encoding:
 LineLength:
   Max: 242
 
+# Enforce trailing comma after last item of multiline hashes.
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma

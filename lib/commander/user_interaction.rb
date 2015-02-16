@@ -181,7 +181,7 @@ module Commander
           #{statement}
           end if
         end tell
-        )
+        ),
       ).strip.to_sym
     end
 
@@ -476,7 +476,7 @@ module Commander
           steps_remaining: steps_remaining,
           total_steps: @total_steps,
           time_elapsed: '%0.2fs' % time_elapsed,
-          time_remaining: @step > 0 ? '%0.2fs' % time_remaining : ''
+          time_remaining: @step > 0 ? '%0.2fs' % time_remaining : '',
         }.merge! @tokens
       end
 

@@ -122,12 +122,6 @@ Style/Not:
 Style/RescueModifier:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline, SupportedStyles.
-Style/TrailingComma:
-  Enabled: false
-
 # Offense count: 74
 # Cop supports --auto-correct.
 Style/TrailingWhitespace:
