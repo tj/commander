@@ -282,7 +282,7 @@ module Commander
     def program_defaults
       {
         help_formatter: HelpFormatter::Terminal,
-        name: File.basename($0),
+        name: File.basename($PROGRAM_NAME),
       }
     end
 
