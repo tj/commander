@@ -118,12 +118,6 @@ Style/MultilineTernaryOperator:
 Style/Not:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Enabled: false
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: AllowMultipleReturnValues.

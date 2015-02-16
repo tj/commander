@@ -53,7 +53,7 @@ module Commander
       trap('INT') { abort program(:int_message) } if program(:int_message)
       trap('INT') { program(:int_block).call } if program(:int_block)
       global_option('-h', '--help', 'Display help documentation') do
-        args = @args - %w[-h --help]
+        args = @args - %w(-h --help)
         command(:help).run(*args)
         return
       end
