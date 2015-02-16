@@ -395,7 +395,7 @@ module Commander
     def self.separate_switches_from_description(*args)
       switches = args.find_all { |arg| arg.to_s =~ /^-/ }
       description = args.last if args.last.is_a?(String) && !args.last.match(/^-/)
-      return switches, description
+      [switches, description]
     end
 
     ##
