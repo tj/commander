@@ -13,10 +13,6 @@ Lint/Eval:
 Lint/HandleExceptions:
   Enabled: false
 
-# Offense count: 1
-Lint/RescueException:
-  Enabled: false
-
 # Offense count: 5
 Metrics/AbcSize:
   Max: 29
