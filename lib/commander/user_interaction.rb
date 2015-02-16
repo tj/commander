@@ -53,7 +53,7 @@ module Commander
     #
 
     def log(action, *args)
-      say '%15s  %s' % [action, args.join(' ')]
+      say format('%15s  %s', action, args.join(' '))
     end
 
     ##
@@ -475,8 +475,8 @@ module Commander
           step: @step,
           steps_remaining: steps_remaining,
           total_steps: @total_steps,
-          time_elapsed: '%0.2fs' % time_elapsed,
-          time_remaining: @step > 0 ? '%0.2fs' % time_remaining : '',
+          time_elapsed: format('%0.2fs', time_elapsed),
+          time_remaining: @step > 0 ? format('%0.2fs', time_remaining) : '',
         }.merge! @tokens
       end
 

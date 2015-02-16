@@ -31,7 +31,7 @@ def create_test_command
     c.example 'description 2', 'command 2'
     c.option '-v', '--verbose', 'verbose description'
     c.when_called do |args, _options|
-      'test %s' % args.join
+      format('test %s', args.join)
     end
   end
   @command = command :test

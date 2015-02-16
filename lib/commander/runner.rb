@@ -90,7 +90,7 @@ module Commander
     # Return program version.
 
     def version
-      '%s %s' % [program(:name), program(:version)]
+      format('%s %s', program(:name), program(:version))
     end
 
     ##

@@ -43,11 +43,6 @@ Style/AccessorMethodName:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 5
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/FormatString:
-  Enabled: false
-
 # Offense count: 12
 # Configuration parameters: AllowedVariables.
 Style/GlobalVars:
