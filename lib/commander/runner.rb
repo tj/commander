@@ -136,7 +136,7 @@ module Commander
     #
 
     def program key, *args, &block
-      if key == :help and !args.empty?
+      if key == :help && !args.empty?
         @program[:help] ||= {}
         @program[:help][args.first] = args.at(1)
       elsif key == :help_formatter && !args.empty?
@@ -261,7 +261,7 @@ module Commander
       removed = []
       parts = command_name_from_args.split rescue []
       @args.dup.delete_if do |arg|
-        removed << arg if parts.include?(arg) and not removed.include?(arg)
+        removed << arg if parts.include?(arg) && !removed.include?(arg)
       end
     end
 
@@ -377,7 +377,7 @@ module Commander
         unless active_command.nil?
           active_command.proxy_options << [Runner.switch_to_sym(switches.last), value]
         end
-        yield value if block and !value.nil?
+        yield value if block && !value.nil?
       end
     end
 
@@ -386,7 +386,7 @@ module Commander
 
     def require_program *keys
       keys.each do |key|
-        raise CommandError, "program #{key} required" if program(key).nil? or program(key).empty?
+        raise CommandError, "program #{key} required" if program(key).nil? || program(key).empty?
       end
     end
 
@@ -395,7 +395,7 @@ module Commander
 
     def self.separate_switches_from_description *args
       switches = args.find_all { |arg| arg.to_s =~ /^-/ }
-      description = args.last unless !args.last.is_a? String or args.last.match(/^-/)
+      description = args.last if args.last.is_a?(String) && !args.last.match(/^-/)
       return switches, description
     end
 
