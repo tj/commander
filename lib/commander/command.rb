@@ -161,7 +161,7 @@ module Commander
 
     def parse_options_and_call_procs(*args)
       return args if args.empty?
-      @options.inject OptionParser.new do |opts, option|
+      @options.each_with_object(OptionParser.new) do |option, opts|
         opts.on(*option[:args], &option[:proc])
         opts
       end.parse! args
@@ -186,7 +186,7 @@ module Commander
     # collected by the #option_proc.
 
     def proxy_option_struct
-      proxy_options.inject Options.new do |options, (option, value)|
+      proxy_options.each_with_object(Options.new) do |(option, value), options|
         # options that are present will evaluate to true
         value = true if value.nil?
         options.__send__ :"#{option}=", value

@@ -43,10 +43,6 @@ Style/AccessorMethodName:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 2
-Style/EachWithObject:
-  Enabled: false
-
 # Offense count: 5
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/FormatString:
