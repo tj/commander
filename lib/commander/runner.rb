@@ -28,7 +28,7 @@ module Commander
     # Initialize a new command runner. Optionally
     # supplying _args_ for mocking, or arbitrary usage.
 
-    def initialize args = ARGV
+    def initialize(args = ARGV)
       @args, @commands, @aliases, @options = args, {}, {}, []
       @help_formatter_aliases = help_formatter_alias_defaults
       @program = program_defaults
@@ -134,7 +134,7 @@ module Commander
     #   :int_message     Message to display when interrupted (CTRL + C)
     #
 
-    def program key, *args, &block
+    def program(key, *args, &block)
       if key == :help && !args.empty?
         @program[:help] ||= {}
         @program[:help][args.first] = args.at(1)
@@ -164,7 +164,7 @@ module Commander
     #   end
     #
 
-    def command name, &block
+    def command(name, &block)
       yield add_command(Commander::Command.new(name)) if block
       @commands[name.to_s]
     end
@@ -187,7 +187,7 @@ module Commander
     # Alias command _name_ with _alias_name_. Optionally _args_ may be passed
     # as if they were being passed straight to the original command via the command-line.
 
-    def alias_command alias_name, name, *args
+    def alias_command(alias_name, name, *args)
       @commands[alias_name.to_s] = command name
       @aliases[alias_name.to_s] = args
     end
@@ -196,28 +196,28 @@ module Commander
     # Default command _name_ to be used when no other
     # command is found in the arguments.
 
-    def default_command name
+    def default_command(name)
       @default_command = name
     end
 
     ##
     # Add a command object to this runner.
 
-    def add_command command
+    def add_command(command)
       @commands[command.name] = command
     end
 
     ##
     # Check if command _name_ is an alias.
 
-    def alias? name
+    def alias?(name)
       @aliases.include? name.to_s
     end
 
     ##
     # Check if a command _name_ exists.
 
-    def command_exists? name
+    def command_exists?(name)
       @commands[name.to_s]
     end
 
@@ -241,7 +241,7 @@ module Commander
     ##
     # Returns array of valid command names found within _args_.
 
-    def valid_command_names_from *args
+    def valid_command_names_from(*args)
       arg_string = args.delete_if { |value| value =~ /^-/ }.join ' '
       commands.keys.find_all { |name| name if /^#{name}\b/.match arg_string }
     end
@@ -313,7 +313,7 @@ module Commander
     ##
     # Raises InvalidCommandError when a _command_ is not found.
 
-    def require_valid_command command = active_command
+    def require_valid_command(command = active_command)
       raise InvalidCommandError, 'invalid command', caller if command.nil?
     end
 
@@ -322,7 +322,7 @@ module Commander
     # option error from occurring when options are parsed
     # again for the command.
 
-    def remove_global_options options, args
+    def remove_global_options(options, args)
       # TODO: refactor with flipflop, please TJ ! have time to refactor me !
       options.each do |option|
         switches = option[:switches].dup
@@ -371,7 +371,7 @@ module Commander
     # option or not, so simple switches such as --verbose can be used
     # without a block, and used throughout all commands.
 
-    def global_option_proc switches, &block
+    def global_option_proc(switches, &block)
       lambda do |value|
         unless active_command.nil?
           active_command.proxy_options << [Runner.switch_to_sym(switches.last), value]
@@ -383,7 +383,7 @@ module Commander
     ##
     # Raises a CommandError when the program any of the _keys_ are not present, or empty.
 
-    def require_program *keys
+    def require_program(*keys)
       keys.each do |key|
         raise CommandError, "program #{key} required" if program(key).nil? || program(key).empty?
       end
@@ -392,7 +392,7 @@ module Commander
     ##
     # Return switches and description separated from the _args_ passed.
 
-    def self.separate_switches_from_description *args
+    def self.separate_switches_from_description(*args)
       switches = args.find_all { |arg| arg.to_s =~ /^-/ }
       description = args.last if args.last.is_a?(String) && !args.last.match(/^-/)
       return switches, description
@@ -410,7 +410,7 @@ module Commander
     #   --list of,things   # => :list
     #
 
-    def self.switch_to_sym switch
+    def self.switch_to_sym(switch)
       switch.scan(/[\-\]](\w+)/).join('_').to_sym rescue nil
     end
 
