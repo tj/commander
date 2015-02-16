@@ -12,8 +12,8 @@ module Commander
       never_trace!
     ).each do |meth|
       eval <<-END, binding, __FILE__, __LINE__
-        def #{meth} *args, &block
-          ::Commander::Runner.instance.#{meth} *args, &block
+        def #{meth}(*args, &block)
+          ::Commander::Runner.instance.#{meth}(*args, &block)
         end
       END
     end

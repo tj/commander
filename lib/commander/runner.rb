@@ -33,6 +33,8 @@ module Commander
       @args, @commands, @aliases, @options = args, {}, {}, []
       @help_formatter_aliases = help_formatter_alias_defaults
       @program = program_defaults
+      @always_trace = false
+      @never_trace = false
       create_default_commands
     end
     
@@ -172,8 +174,8 @@ module Commander
     # Add a global option; follows the same syntax as Command#option
     # This would be used for switches such as --version, --trace, etc.
     
-    def global_option *args, &block
-      switches, description = Runner.separate_switches_from_description *args
+    def global_option(*args, &block)
+      switches, description = Runner.separate_switches_from_description(*args)
       @options << {
         :args => args,
         :proc => block,
@@ -346,9 +348,8 @@ module Commander
     # Parse global command options.
     
     def parse_global_options
-
       parser = options.inject(OptionParser.new) do |options, option|
-        options.on *option[:args], &global_option_proc(option[:switches], &option[:proc])
+        options.on(*option[:args], &global_option_proc(option[:switches], &option[:proc]))
       end
 
       options = @args.dup
@@ -416,15 +417,14 @@ module Commander
     def run_active_command
       require_valid_command
       if alias? command_name_from_args
-        active_command.run *(@aliases[command_name_from_args.to_s] + args_without_command_name)
+        active_command.run(*(@aliases[command_name_from_args.to_s] + args_without_command_name))
       else
-        active_command.run *args_without_command_name
+        active_command.run(*args_without_command_name)
       end      
     end
      
-    def say *args #:nodoc: 
-      $terminal.say *args
+    def say(*args) #:nodoc:
+      $terminal.say(*args)
     end
-
   end
 end

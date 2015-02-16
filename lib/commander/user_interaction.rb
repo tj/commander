@@ -165,8 +165,8 @@ module Commander
 
     def converse(prompt, responses = {})
       i, commands = 0, responses.map { |_key, value| value.inspect }.join(',')
-      statement = responses.inject '' do |statement, (key, value)|
-        statement << (((i += 1) == 1 ?
+      statement = responses.inject '' do |inner_statement, (key, value)|
+        inner_statement << (((i += 1) == 1 ?
           %(if response is "#{value}" then\n) : %(else if response is "#{value}" then\n))) <<
           %(do shell script "echo '#{key}'"\n)
       end
@@ -337,8 +337,8 @@ module Commander
     # Substitute _hash_'s keys with their associated values in _str_.
 
     def replace_tokens(str, hash) #:nodoc:
-      hash.inject str do |str, (key, value)|
-        str.gsub ":#{key}", value.to_s
+      hash.inject(str) do |string, (key, value)|
+        string.gsub ":#{key}", value.to_s
       end
     end
 
