@@ -1,4 +1,3 @@
-
 class Array
   ##
   # Split _string_ into an array. Used in

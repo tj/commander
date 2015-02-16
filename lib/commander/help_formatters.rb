@@ -1,4 +1,3 @@
-
 module Commander
   module HelpFormatter
     autoload :Base, 'commander/help_formatters/base'

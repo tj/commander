@@ -1,4 +1,3 @@
-
 module Commander
   ##
   # = Help Formatter

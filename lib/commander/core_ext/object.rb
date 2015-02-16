@@ -1,4 +1,3 @@
-
 class Object
   ##
   # Return the current binding.

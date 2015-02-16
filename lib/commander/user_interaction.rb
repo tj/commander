@@ -166,17 +166,23 @@ module Commander
     def converse(prompt, responses = {})
       i, commands = 0, responses.map { |_key, value| value.inspect }.join(',')
       statement = responses.inject '' do |inner_statement, (key, value)|
-        inner_statement << (((i += 1) == 1 ?
-          %(if response is "#{value}" then\n) : %(else if response is "#{value}" then\n))) <<
-          %(do shell script "echo '#{key}'"\n)
+        inner_statement <<
+        (
+          (i += 1) == 1 ?
+          %(if response is "#{value}" then\n) :
+          %(else if response is "#{value}" then\n)
+        ) <<
+        %(do shell script "echo '#{key}'"\n)
       end
-      applescript(%(
+      applescript(
+        %(
         tell application "SpeechRecognitionServer"
           set response to listen for {#{commands}} with prompt "#{prompt}"
           #{statement}
           end if
         end tell
-      )).strip.to_sym
+        )
+      ).strip.to_sym
     end
 
     ##
@@ -318,15 +324,17 @@ module Commander
 
     module AskForClass
       # All special cases in HighLine::Question#convert, except those that implement #parse
-      ([Float, Integer, String, Symbol, Regexp, Array, File, Pathname] +
-      # All Classes that respond to #parse
-      Object.constants.map do |const|
-        # const_get(:Config) issues a deprecation warning on ruby 1.8.7
-        # TODO: clean up now that we're not supporting Ruby 1.8
-        Object.const_get(const) unless const == :Config
-      end.select do |const|
-        const.class == Class && const.respond_to?(:parse)
-      end).each do |klass|
+      (
+        [Float, Integer, String, Symbol, Regexp, Array, File, Pathname] +
+        # All Classes that respond to #parse
+        Object.constants.map do |const|
+          # const_get(:Config) issues a deprecation warning on ruby 1.8.7
+          # TODO: clean up now that we're not supporting Ruby 1.8
+          Object.const_get(const) unless const == :Config
+        end.select do |const|
+          const.class == Class && const.respond_to?(:parse)
+        end
+      ).each do |klass|
         define_method "ask_for_#{klass.to_s.downcase}" do |prompt|
           $terminal.ask(prompt, klass)
         end

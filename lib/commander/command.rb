@@ -1,4 +1,3 @@
-
 require 'optparse'
 
 module Commander

@@ -1,4 +1,3 @@
-
 module Commander
   module Platform
     def self.jruby?
