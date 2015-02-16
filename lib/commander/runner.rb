@@ -176,10 +176,10 @@ module Commander
     def global_option(*args, &block)
       switches, description = Runner.separate_switches_from_description(*args)
       @options << {
-        :args => args,
-        :proc => block,
-        :switches => switches,
-        :description => description,
+        args: args,
+        proc: block,
+        switches: switches,
+        description: description,
       }
     end
 
@@ -269,7 +269,7 @@ module Commander
 
     def help_formatter_alias_defaults
       {
-        :compact => HelpFormatter::TerminalCompact,
+        compact: HelpFormatter::TerminalCompact,
       }
     end
 
@@ -278,8 +278,8 @@ module Commander
 
     def program_defaults
       {
-        :help_formatter => HelpFormatter::Terminal,
-        :name => File.basename($0),
+        help_formatter: HelpFormatter::Terminal,
+        name: File.basename($0),
       }
     end
 
