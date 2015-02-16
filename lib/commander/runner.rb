@@ -294,7 +294,7 @@ module Commander
         c.description = 'Display global or [command] help documentation'
         c.example 'Display global help', 'command help'
         c.example "Display help for 'foo'", 'command help foo'
-        c.when_called do |args, options|
+        c.when_called do |args, _options|
           UI.enable_paging
           if args.empty?
             say help_formatter.render
