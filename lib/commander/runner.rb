@@ -64,7 +64,9 @@ module Commander
       global_option('-t', '--trace', 'Display backtrace when an error occurs') { trace = true } unless @never_trace || @always_trace
       parse_global_options
       remove_global_options options, @args
-      unless trace
+      if trace
+        run_active_command
+      else
         begin
           run_active_command
         rescue InvalidCommandError => e
@@ -81,8 +83,6 @@ module Commander
             abort "error: #{e}. Use --trace to view backtrace"
           end
         end
-      else
-        run_active_command
       end
     end
 

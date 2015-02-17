@@ -72,10 +72,6 @@ Style/TrivialAccessors:
   Enabled: false
 
 # Offense count: 1
-Style/UnlessElse:
-  Enabled: false
-
-# Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/VariableName:
   Enabled: false
