@@ -70,8 +70,3 @@ Style/RescueModifier:
 # Configuration parameters: ExactNameMatch, AllowPredicates, AllowDSLWriters, Whitelist.
 Style/TrivialAccessors:
   Enabled: false
-
-# Offense count: 1
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/VariableName:
-  Enabled: false

@@ -331,14 +331,14 @@ module Commander
         switches = option[:switches].dup
         next if switches.empty?
 
-        if (switchHasArg = switches.any? { |s| s =~ /[ =]/ })
+        if (switch_has_arg = switches.any? { |s| s =~ /[ =]/ })
           switches.map! { |s| s[0, s.index('=') || s.index(' ') || s.length] }
         end
 
         past_switch, arg_removed = false, false
         args.delete_if do |arg|
           if switches.any? { |s| arg[0, s.length] == s }
-            arg_removed = !switchHasArg
+            arg_removed = !switch_has_arg
             past_switch = true
           elsif past_switch && !arg_removed && arg !~ /^-/
             arg_removed = true
