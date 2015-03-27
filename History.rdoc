@@ -1,3 +1,8 @@
+=== 4.3.1 / 2015-03-27
+
+* Fix various Ruby warnings for circular requires, etc.
+* Update to use highline 1.7 (@SkyTrix)
+
 === 4.3.0 / 2015-02-07
 
 * Drops support for Ruby 1.8. Please use 4.2.1 if you still need Ruby 1.8 compatibility.
