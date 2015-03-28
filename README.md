@@ -1,5 +1,5 @@
-[<img src="https://secure.travis-ci.org/ggilder/commander.png?branch=master" alt="Build Status" />](http://travis-ci.org/ggilder/commander)
-[![Inline docs](http://inch-ci.org/github/tj/commander.png)](http://inch-ci.org/github/tj/commander)
+[<img src="https://secure.travis-ci.org/commander-rb/commander.png?branch=master" alt="Build Status" />](http://travis-ci.org/ggilder/commander)
+[![Inline docs](http://inch-ci.org/github/commander-rb/commander.png)](http://inch-ci.org/github/commander-rb/commander)
 
 # Commander
 
@@ -449,7 +449,7 @@ OR
 ## Contrib
 
 Feel free to fork and request a pull, or submit a ticket
-http://github.com/tj/commander/issues
+http://github.com/commander-rb/commander/issues
 
 ## License
 
