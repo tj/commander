@@ -274,7 +274,6 @@ describe Commander do
 
   describe '--trace' do
     it 'should display pretty errors by default' do
-      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform.jruby?
       expect do
         new_command_runner 'foo' do
           command(:foo) { |c| c.when_called { fail 'cookies!' } }
@@ -356,7 +355,6 @@ describe Commander do
 
   describe 'with invalid options' do
     it 'should output an invalid option message' do
-      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform.jruby?
       expect do
         run('test', '--invalid-option')
       end.to raise_error(SystemExit, /invalid option: --invalid-option/)
@@ -365,7 +363,6 @@ describe Commander do
 
   describe 'with invalid command passed' do
     it 'should output an invalid command message' do
-      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform.jruby?
       expect do
         run('foo')
       end.to raise_error(SystemExit, /invalid command. Use --help for more information/)
@@ -374,7 +371,6 @@ describe Commander do
 
   describe 'with invalid command passed to help' do
     it 'should output an invalid command message' do
-      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform.jruby?
       expect do
         run('help', 'does_not_exist')
       end.to raise_error(SystemExit, /invalid command. Use --help for more information/)
@@ -383,7 +379,6 @@ describe Commander do
 
   describe 'with invalid command passed to --help' do
     it 'should output an invalid command message' do
-      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform.jruby?
       expect do
         run('--help', 'does_not_exist')
       end.to raise_error(SystemExit, /invalid command. Use --help for more information/)
@@ -392,7 +387,6 @@ describe Commander do
 
   describe 'with invalid option passed to --help' do
     it 'should output an invalid option message' do
-      pending("JRuby's Kernel.abort implementation is not testable") if Commander::Platform.jruby?
       expect do
         run('--help', 'test', '--invalid-option')
       end.to raise_error(SystemExit, /invalid option: --invalid-option/)
