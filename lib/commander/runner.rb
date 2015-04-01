@@ -65,9 +65,11 @@ module Commander
       parse_global_options
       remove_global_options options, @args
       if trace
+        @after_global_options_hook.call if @after_global_options_hook
         run_active_command
       else
         begin
+          @after_global_options_hook.call if @after_global_options_hook
           run_active_command
         rescue InvalidCommandError => e
           abort "#{e}. Use --help for more information"
@@ -170,6 +172,13 @@ module Commander
     def command(name, &block)
       yield add_command(Commander::Command.new(name)) if block
       @commands[name.to_s]
+    end
+
+    def after_global_options
+      command = Commander::Command.new(:after_global_options_hook)
+      yield command if block_given?
+
+      @after_global_options_hook = command
     end
 
     ##
@@ -378,6 +387,9 @@ module Commander
       lambda do |value|
         unless active_command.nil?
           active_command.proxy_options << [Runner.switch_to_sym(switches.last), value]
+        end
+        unless @after_global_options_hook.nil?
+          @after_global_options_hook.proxy_options << [Runner.switch_to_sym(switches.last), value]
         end
         yield value if block && !value.nil?
       end

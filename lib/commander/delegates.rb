@@ -3,6 +3,7 @@ module Commander
     %w(
       add_command
       command
+      after_global_options
       program
       run!
       global_option
